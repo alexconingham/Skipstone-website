@@ -35,19 +35,19 @@ export default function ImageGallery({
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
   const sizeClasses = {
-    small: "w-16 h-16",           // 64x64px - Small mementos
-    medium: "w-20 h-20",          // 80x80px - Medium items  
-    large: "w-24 h-20",           // 96x80px - Large items
-    "extra-large": "w-32 h-32",   // 128x128px - Extra large items
-    "massive": "w-96 h-80"        // 384x320px - 4x larger for dungeons (4x of 96x80)
+    small: "w-12 h-12",           // 48x48px - Small mementos
+    medium: "w-16 h-16",          // 64x64px - Medium items  
+    large: "w-20 h-16",           // 80x64px - Large items
+    "extra-large": "w-24 h-24",   // 96x96px - Extra large items
+    "massive": "w-64 h-48"        // 256x192px - Smaller dungeons
   }
 
   const containerHeights = {
-    small: "h-20",        // 80px
-    medium: "h-24",       // 96px  
-    large: "h-24",        // 96px
-    "extra-large": "h-36", // 144px
-    "massive": "h-96"     // 384px (4x larger with padding)
+    small: "h-16",        // 64px
+    medium: "h-20",       // 80px  
+    large: "h-20",        // 80px
+    "extra-large": "h-28", // 112px
+    "massive": "h-56"     // 224px
   }
 
   // Rarity color mapping for borders
