@@ -1,0 +1,997 @@
+{
+	"__comment": "Dice",
+	"dice": [
+		{
+			"id": "simple_d6_attack",
+			"name": "Simple Attack Die",
+			"type": "attack",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "common",
+			"quality": "basic",
+			"qual_trigger": false,
+			"qual_potency": true,
+			"roll_sfx": "roll_1d6",
+			"tags": [
+				"basic",
+				"attack"
+			],
+			"effect_description": "Rolls 1-6 damage.",
+			"damage": "roll_value",
+			"effects": [
+				{
+					"type": "attack",
+					"target": "enemy",
+					"use_roll_value": true,
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Direct hit for {potency} damage!",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/simple_d6_attack_icon.png"
+				}
+			],
+			"display_name": "Simple Attack Die",
+			"color": "red"
+		},
+		{
+			"id": "simple_d6_defence",
+			"name": "Simple Defence Die",
+			"type": "defence",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "common",
+			"quality": "basic",
+			"qual_trigger": false,
+			"qual_potency": true,
+			"roll_sfx": "roll_1d6",
+			"tags": [
+				"basic",
+				"defence"
+			],
+			"effect_description": "Blocks 1-6 damage.",
+			"defence": "roll_value",
+			"effects": [
+				{
+					"type": "defence",
+					"target": "self",
+					"use_roll_value": true,
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Blocked {potency} damage!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/simple_d6_defence_icon.png"
+				}
+			],
+			"display_name": "Simple Defence Die",
+			"color": "blue"
+		},
+		{
+			"id": "simple_d12_attack",
+			"name": "Improved Attack Die",
+			"type": "attack",
+			"min_result": 1.0,
+			"max_result": 12.0,
+			"crit_threshold": 12.0,
+			"crit_multiplier": 1.5,
+			"rarity": "common",
+			"quality": "basic",
+			"qual_trigger": false,
+			"qual_potency": true,
+			"roll_sfx": "roll_1d12",
+			"tags": [
+				"basic",
+				"attack"
+			],
+			"effect_description": "Rolls 1-12 damage.",
+			"damage": "roll_value",
+			"effects": [
+				{
+					"type": "attack",
+					"target": "enemy",
+					"use_roll_value": true,
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Direct hit for {potency} damage!",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/simple_d12_attack_icon.png"
+				}
+			],
+			"display_name": "Improved Attack Die",
+			"color": "red"
+		},
+		{
+			"id": "simple_d12_defence",
+			"name": "Improved Defence Die",
+			"type": "defence",
+			"min_result": 1.0,
+			"max_result": 12.0,
+			"crit_threshold": 12.0,
+			"crit_multiplier": 1.5,
+			"rarity": "common",
+			"quality": "basic",
+			"qual_trigger": false,
+			"qual_potency": true,
+			"roll_sfx": "roll_1d12",
+			"tags": [
+				"basic",
+				"defence"
+			],
+			"effect_description": "Blocks 1-12 damage.",
+			"defence": "roll_value",
+			"effects": [
+				{
+					"type": "defence",
+					"target": "self",
+					"use_roll_value": true,
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Blocked {potency} damage!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/simple_d12_defence_icon.png"
+				}
+			],
+			"display_name": "Improved Defence Die",
+			"color": "blue"
+		},
+		{
+			"id": "bleed_die",
+			"name": "Bleed Die",
+			"type": "attack",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "rare",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"tags": [
+				"status",
+				"bleed"
+			],
+			"effect_description": "Roll 4-6: Apply bleed (1) to enemy for 3 rounds.",
+			"damage": "roll_value",
+			"effects": [
+				{
+					"type": "bleed",
+					"min_value": 4.0,
+					"potency": 1.0,
+					"duration": 4.0,
+					"target": "enemy",
+					"effect_log_text": "The enemy is bleeding, taking {potency} damage per round!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/bleed_icon.png"
+				}
+			],
+			"display_name": "Bleed Die",
+			"color": "red",
+			"roll_sfx": "roll_1d6"
+		},
+		{
+			"id": "poison_die",
+			"name": "Poison Die",
+			"type": "attack",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "rare",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"tags": [
+				"status",
+				"poison"
+			],
+			"effect_description": "Roll 4-6: Apply poison (2) to enemy for 2 rounds.",
+			"damage": "roll_value",
+			"effects": [
+				{
+					"type": "poison",
+					"min_value": 4.0,
+					"potency": 2.0,
+					"duration": 3.0,
+					"target": "enemy",
+					"effect_log_text": "The enemy is poisoned, taking {potency} damage per round!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/poison_icon.png"
+				}
+			],
+			"display_name": "Poison Die",
+			"color": "red",
+			"roll_sfx": "roll_1d6"
+		},
+		{
+			"id": "knockback_die",
+			"name": "Knockback Die",
+			"type": "attack",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "rare",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": false,
+			"tags": [
+				"status",
+				"knockback"
+			],
+			"effect_description": "Roll 5-6: Reduce enemy attack by 1 for 2 rounds.",
+			"damage": "roll_value",
+			"effects": [
+				{
+					"type": "reduce_attack",
+					"min_value": 5.0,
+					"potency": 1.0,
+					"duration": 1.0,
+					"target": "enemy",
+					"effect_log_text": "The enemy's attack power is reduced by {potency}!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/knockback_icon.png"
+				}
+			],
+			"display_name": "Knockback Die",
+			"color": "red",
+			"roll_sfx": "roll_1d6"
+		},
+		{
+			"id": "shield_die",
+			"name": "Shield Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "rare",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"tags": [
+				"status",
+				"shield"
+			],
+			"effect_description": "Roll 3-6: Increase max and current HP by roll value for 2 rounds.",
+			"effects": [
+				{
+					"type": "shield",
+					"min_value": 3.0,
+					"potency": "roll_value",
+					"duration": 3.0,
+					"target": "self",
+					"effect_log_text": "You gain a shield, increasing your max and current HP by {potency} for {duration} rounds!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/shield_icon.png"
+				}
+			],
+			"display_name": "Shield Die",
+			"color": "yellow",
+			"roll_sfx": "roll_1d6"
+		},
+		{
+			"id": "stagger_die",
+			"name": "Stagger Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 12.0,
+			"crit_threshold": 12.0,
+			"crit_multiplier": 1.5,
+			"rarity": "rare",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": false,
+			"tags": [
+				"status",
+				"stun"
+			],
+			"effect_description": "Roll 6: Stun the enemy for 1 turn.",
+			"effects": [
+				{
+					"type": "stagger",
+					"value": 11.0,
+					"potency": 1.0,
+					"duration": 1.0,
+					"target": "enemy",
+					"effect_log_text": "The enemy is stunned for {duration} turn!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/stagger_icon.png"
+				}
+			],
+			"display_name": "Stagger Die",
+			"color": "yellow",
+			"roll_sfx": "roll_1d12"
+		},
+		{
+			"id": "piercing_die",
+			"name": "Piercing Die",
+			"type": "attack",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "rare",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": false,
+			"tags": [
+				"status",
+				"ignore-defence"
+			],
+			"effect_description": "Roll 5-6: Attack ignores defence.",
+			"damage": "roll_value",
+			"effects": [
+				{
+					"type": "pierce",
+					"min_value": 5.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"target": "enemy",
+					"effect_log_text": "Your attack pierces through enemy defenses!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/piercing_icon.png"
+				}
+			],
+			"display_name": "Piercing Die",
+			"color": "red",
+			"roll_sfx": "roll_1d6"
+		},
+		{
+			"id": "reflect_die",
+			"name": "Reflect Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 10.0,
+			"crit_threshold": 10.0,
+			"crit_multiplier": 1.5,
+			"rarity": "relic",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": false,
+			"tags": [
+				"status",
+				"reflect"
+			],
+			"effect_description": "Roll 8-10: Reflect all damage taken this round.",
+			"effects": [
+				{
+					"type": "reflect",
+					"min_value": 8.0,
+					"potency": 1.0,
+					"duration": 2.0,
+					"target": "self",
+					"effect_log_text": "You reflect all damage!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/reflect_icon.png"
+				}
+			],
+			"display_name": "Reflect Die",
+			"color": "light blue",
+			"roll_sfx": "roll_1d10"
+		},
+		{
+			"id": "divinity_die",
+			"name": "Divinity Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 10.0,
+			"crit_threshold": 10.0,
+			"crit_multiplier": 1.5,
+			"rarity": "rare",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": false,
+			"tags": [
+				"utility",
+				"divinity"
+			],
+			"effect_description": "Roll 5-10: Become immune to negative effects like bleed and poison for 1 round.",
+			"effects": [
+				{
+					"type": "divinity",
+					"min_value": 5.0,
+					"potency": 1.0,
+					"duration": 1.0,
+					"target": "self",
+					"effect_log_text": "You gain Divinity for {duration} rounds, becoming immune to negative effects like bleed and poison!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/divinity_icon.png"
+				}
+			],
+			"display_name": "Divinity Die",
+			"color": "yellow",
+			"roll_sfx": "roll_1d10"
+		},
+		{
+			"id": "cleanse_die",
+			"name": "Cleanse Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "common",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": false,
+			"tags": [
+				"utility",
+				"cleanse"
+			],
+			"effect_description": "Roll 2-5: Cleanse one random negative effect. Roll 6: Cleanse ALL negative effects!",
+			"effects": [
+				{
+					"type": "cleanse",
+					"min_value": 2.0,
+					"max_value": 5.0,
+					"potency": 1.0,
+					"duration": 0.0,
+					"target": "self",
+					"effect_log_text": "You are cleansed of a negative effect!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/cleanse_icon.png"
+				},
+				{
+					"type": "cleanse_all",
+					"value": 6.0,
+					"potency": 1.0,
+					"duration": 0.0,
+					"target": "self",
+					"effect_log_text": "You are cleansed of all negative effects!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/cleanse_icon.png"
+				}
+			],
+			"display_name": "Cleanse Die",
+			"color": "yellow",
+			"roll_sfx": "roll_1d6"
+		},
+		{
+			"id": "renew_die",
+			"name": "Renew Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "common",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"tags": [
+				"status",
+				"heal",
+				"renew"
+			],
+			"effect_description": "Roll 4-6: Apply renew (2) to self for 3 rounds.",
+			"effects": [
+				{
+					"type": "renew",
+					"min_value": 4.0,
+					"potency": 2.0,
+					"duration": 3.0,
+					"target": "self",
+					"effect_log_text": "You feel renewed, healing {potency} health per round!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/renew_icon.png"
+				}
+			],
+			"display_name": "Renew Die",
+			"color": "green",
+			"roll_sfx": "roll_1d6"
+		},
+				{
+			"id": "advanced_renew_die",
+			"name": "Advanced Renew Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "common",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"tags": [
+				"status",
+				"heal",
+				"renew"
+			],
+			"effect_description": "Roll 3-6: Apply renew (2) to self for 3 rounds.",
+			"effects": [
+				{
+					"type": "renew",
+					"min_value": 3.0,
+					"potency": 4.0,
+					"duration": 3.0,
+					"target": "self",
+					"effect_log_text": "You feel extra renewed, healing {potency} health per round!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/renew_icon.png"
+				}
+			],
+			"display_name": "Advanced Renew Die",
+			"color": "green",
+			"roll_sfx": "roll_1d6"
+		},
+		{
+			"id": "chrono_die",
+			"name": "Chrono Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 20.0,
+			"crit_threshold": 20.0,
+			"crit_multiplier": 1.5,
+			"rarity": "relic",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": false,
+			"tags": [
+				"lifespan"
+			],
+			"effect_description": "Roll 20 to wind the clock back 1 year permanently.",
+			"effects": [
+				{
+					"type": "chrono",
+					"value": 20.0,
+					"potency": 1.0,
+					"duration": 0.0,
+					"target": "self",
+					"effect_log_text": "You feel younger!",
+					"stats_modifier": [],
+					"icon": "res://assets/images/icons/chrono_icon.png"
+				}
+			],
+			"display_name": "Chrono Die",
+			"color": "purple",
+			"roll_sfx": "roll_1d20"
+		},
+		{
+			"id": "razor_die",
+			"name": "Razor Die",
+			"type": "attack",
+			"min_result": 1.0,
+			"max_result": 20.0,
+			"crit_threshold": 18.0,
+			"crit_multiplier": 1.5,
+			"rarity": "relic",
+			"quality": "basic",
+			"qual_trigger": false,
+			"qual_potency": true,
+			"tags": [
+				"attack",
+				"crit"
+			],
+			"effect_description": "High damage potential. Extended crit range.",
+			"damage": "roll_value",
+			"effects": [
+				{
+					"type": "attack",
+					"target": "enemy",
+					"use_roll_value": true,
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Direct hit for {potency} damage!",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/razor_icon.png"
+				}
+			],
+			"display_name": "Razor Die",
+			"color": "red",
+			"roll_sfx": "roll_1d20"
+		},
+		{
+			"id": "thorn_die",
+			"name": "Thorn Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 8.0,
+			"crit_threshold": 8.0,
+			"crit_multiplier": 1.5,
+			"rarity": "rare",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"tags": [
+				"thorns"
+			],
+			"effect_description": "Gain thorns equal to roll.",
+			"effects": [
+				{
+					"type": "thorns",
+					"min_value": 4.0,
+					"use_roll_value": false,
+					"potency": 3.0,
+					"duration": 4.0,
+					"target": "self",
+					"effect_log_text": "Defensive barbs retaliate with {potency} damage!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/thorns_icon.png"
+				}
+			],
+			"display_name": "Thorn Die",
+			"color": "light brown",
+			"roll_sfx": "roll_1d8"
+		},
+		{
+			"id": "burn_die",
+			"name": "Burn Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "rare",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"tags": [
+				"attack",
+				"burn"
+			],
+			"effect_description": "Apply Burn equal to roll value for 3 rounds, reducing shield effectiveness.",
+			"effects": [
+				{
+					"type": "burn",
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 3.0,
+					"target": "enemy",
+					"effect_log_text": "The enemy is Burned, reducing shield effectiveness by {potency} for {duration} rounds!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/burn_icon.png"
+				}
+			],
+			"display_name": "Burn Die",
+			"color": "red",
+			"roll_sfx": "roll_1d6"
+		},
+		{
+			"id": "pain_die",
+			"name": "Pain Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 12.0,
+			"crit_threshold": 10.0,
+			"crit_multiplier": 1.5,
+			"rarity": "relic",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"tags": [
+				"self_damage",
+				"strength_buff",
+				"utility"
+			],
+			"effect_description": "Roll 8-12: Take damage equal to roll, gain Strength.",
+			"effects": [
+				{
+					"type": "attack",
+					"target": "self",
+					"use_roll_value": true,
+					"min_value": 8.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Self damage for {potency}",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/pain_icon.png"
+				},
+				{
+					"type": "stat_buff",
+					"target": "self",
+					"min_value": 8.0,
+					"stat_to_buff": "strength",
+					"potency": 2.0,
+					"duration": 3.0,
+					"icon": "res://assets/images/icons/pain_icon.png",
+					"effect_log_text": "Pain makes you stronger, gaining {potency} Strength for {duration} round!",
+					"stats_modifier": [
+						"strength"
+					]
+				}
+			],
+			"display_name": "Pain Die",
+			"color": "maroon",
+			"roll_sfx": "roll_1d12"
+		},
+		{
+			"id": "simple_d6_heal",
+			"name": "Simple Heal Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "common",
+			"quality": "basic",
+			"qual_trigger": false,
+			"qual_potency": true,
+			"roll_sfx": "roll_1d6",
+			"tags": [
+				"basic",
+				"heal"
+			],
+			"effect_description": "Heals 1-6 HP.",
+			"effects": [
+				{
+					"type": "heal",
+					"target": "self",
+					"use_roll_value": true,
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Healed for {potency} HP!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/heal_icon.png"
+				}
+			],
+			"display_name": "Simple Heal Die",
+			"color": "green"
+		},
+		{
+			"id": "simple_d12_heal",
+			"name": "Improved Heal Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 12.0,
+			"crit_threshold": 12.0,
+			"crit_multiplier": 1.5,
+			"rarity": "relic",
+			"quality": "basic",
+			"qual_trigger": false,
+			"qual_potency": true,
+			"roll_sfx": "roll_1d12",
+			"tags": [
+				"basic",
+				"heal"
+			],
+			"effect_description": "Heals 1-12 HP.",
+			"effects": [
+				{
+					"type": "heal",
+					"target": "self",
+					"use_roll_value": true,
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Healed for {potency} HP!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/heal_icon.png"
+				}
+			],
+			"display_name": "Improved Heal Die",
+			"color": "green"
+		},
+		{
+			"id": "death_die",
+			"name": "Death Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 20.0,
+			"crit_threshold": 21.0,
+			"crit_multiplier": 1.5,
+			"rarity": "relic",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": false,
+			"roll_hidden": true,
+			"roll_sfx": "roll_1d20",
+			"tags": [
+				"utility",
+				"death"
+			],
+			"effect_description": "Roll 1: Death claims you. Roll 18-20: Death claims your enemy.",
+			"effects": [
+				{
+					"type": "instant_death_self",
+					"target": "self",
+					"value": 1.0,
+					"potency": 1.0,
+					"duration": 0.0,
+					"effect_log_text": "Death claims {target_name}! The die has spoken...",
+					"stats_modifier": [],
+					"icon": "res://assets/images/icons/death_icon.png"
+				},
+				{
+					"type": "instant_death_enemy",
+					"target": "enemy",
+					"min_value": 18.0,
+					"potency": 1.0,
+					"duration": 0.0,
+					"effect_log_text": "Death strikes {target_name}! The die has spoken...",
+					"stats_modifier": [],
+					"icon": "res://assets/images/icons/death_icon.png"
+				}
+			],
+			"display_name": "Death Die",
+			"color": "black"
+		},
+				{
+			"id": "life_die",
+			"name": "Life Die",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 20.0,
+			"crit_threshold": 21.0,
+			"crit_multiplier": 1.5,
+			"rarity": "relic",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": false,
+			"roll_hidden": true,
+			"roll_sfx": "roll_1d20",
+			"tags": [
+				"utility",
+				"life"
+			],
+			"effect_description": "Roll 18-20 to fully heal",
+			"effects": [
+				{
+					"type": "heal",
+					"target": "self",
+					"use_roll_value": false,
+					"min_value": 18.0,
+					"potency": 7777,
+					"duration": 0.0,
+					"effect_log_text": "You have been healed...",
+					"stats_modifier": []
+				}
+			],
+			"display_name": "Life Die",
+			"color": "White"
+		},
+		{
+			"id": "brave_heart_die",
+			"name": "Brave Heart Die",
+			"type": "attack",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 6.0,
+			"crit_multiplier": 1.5,
+			"rarity": "rare",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"roll_sfx": "roll_1d6",
+			"tags": [
+				"achievement",
+				"attack",
+				"courage",
+				"buff"
+			],
+			"effect_description": "Attack die (1-6 damage). Rolling 5-6 grants courage, empowering strength by 1.5x for 3 rounds.",
+			"effects": [
+				{
+					"type": "attack",
+					"target": "enemy",
+					"use_roll_value": true,
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Brave strike for {potency} damage!",
+					"stats_modifier": [
+						"strength"
+					]
+				},
+				{
+					"type": "stat_buff_multi",
+					"target": "self",
+					"min_value": 5.0,
+					"stat_to_buff": "strength",
+					"potency": 1.5,
+					"duration": 3.0,
+					"effect_log_text": "Courage fills your heart! Strength increased by {potency}x for {duration} rounds.",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/strength.png"
+				}
+			],
+			"display_name": "Brave Heart Die",
+			"color": "gold"
+		},
+		{
+			"id": "gladiator_die",
+			"name": "Gladiator Die",
+			"type": "attack",
+			"min_result": 1.0,
+			"max_result": 12.0,
+			"crit_threshold": 11.0,
+			"crit_multiplier": 2.0,
+			"rarity": "relic",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"roll_sfx": "roll_1d12",
+			"tags": [
+				"achievement",
+				"attack",
+				"champion",
+				"solitude",
+				"buff"
+			],
+			"effect_description": "Relic attack die (1-12 damage). Rolling 10-12 channels the gladiator's might, granting 2x strength for 3 rounds.",
+			"effects": [
+				{
+					"type": "attack",
+					"target": "enemy",
+					"use_roll_value": true,
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Gladiator's strike for {potency} damage!",
+					"stats_modifier": [
+						"strength"
+					]
+				},
+				{
+					"type": "stat_buff_multi",
+					"target": "self",
+					"min_value": 10.0,
+					"stat_to_buff": "strength",
+					"potency": 2.0,
+					"duration": 3.0,
+					"effect_log_text": "The man smiles back... Strength doubled for {duration} rounds.",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/statbuff_strength.png"
+				}
+			],
+			"display_name": "Solitary Champion Die",
+			"color": "purple"
+		}
+	]
+}

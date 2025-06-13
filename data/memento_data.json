@@ -1,0 +1,1704 @@
+[
+  {
+	"id": "faded_photo",
+	"name": "Faded Photograph",
+	"description": "A worn photograph of happier times. Brings courage in dark moments.",
+	"rarity": "common",
+	"image": "faded_photo.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Resilience by 1"
+  },
+  {
+	"id": "broken_toy",
+	"name": "Broken Toy",
+	"description": "A reminder of childhood innocence. Sharpens focus in battle.",
+	"rarity": "common",
+	"image": "broken_toy_memento.png",
+	"effects": [
+	  {
+		"type": "attack_flat",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases attack damage by 1"
+  },
+  {
+	"id": "dusty_locket",
+	"name": "Dusty Locket",
+	"description": "A locket coated in years of dust. Reminds you of secrets kept.",
+	"rarity": "rare",
+	"image": "dusty_locket.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 2,
+		"trigger": "always"
+	  },
+	  {
+		"type": "combat_start_shield",
+		"value": 1,
+		"duration": 1,
+		"trigger": "combat_start"
+	  }
+	],
+	"lifespan_bonus": 8,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Resilience by 2 • Grants 1 shield at combat start for 1 turns"
+  },
+  {
+	"id": "fathers_watch_memento",
+	"name": "Father's Watch",
+	"description": "An old wristwatch ticking irregularly. He always tried to be on time.",
+	"rarity": "rare",
+	"image": "fathers_watch_memento.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "max_hp",
+		"value": 5,
+		"trigger": "always"
+	  },
+	  {
+		"type": "loot_quality_modifier",
+		"quality": "perfect",
+		"modifier": 0.1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 12,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Max HP by 5 • Increases chance of perfect dice by 0.1%"
+  },
+  {
+	"id": "mums_perfume",
+	"name": "Mum's Perfume",
+	"description": "A faint floral scent that surfaces when fear rises. Comforting but fleeting.",
+	"rarity": "rare",
+	"image": "mums_perfume.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 2,
+		"trigger": "on_low_hp"
+	  },
+	  {
+		"type": "combat_start_shield",
+		"value": 3,
+		"trigger": "combat_start"
+	  }
+	],
+	"lifespan_bonus": 6,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Insight by 2 • Grants 3 shield at combat start for 0 turns"
+  },
+  {
+	"id": "superpower_serum",
+	"name": "Superpower Serum",
+	"description": "A vial of neon liquid that warps memories. How quickly the truth weakens.",
+	"rarity": "relic",
+	"image": "superpower_serum.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "strength",
+		"value": 4,
+		"trigger": "always"
+	  },
+	  {
+		"type": "max_roll_bonus",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "loot_rarity_modifier",
+		"rarity": "rare",
+		"modifier": -0.15,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 15,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Strength by 4 • Increases maximum possible dice roll by 1 • Increases chance of rare loot by -0.15%"
+  },
+  {
+	"id": "bloodied_tenderizer",
+	"name": "Bloodied Tenderizer",
+	"description": "Still sticky. Some stains never wash off.",
+	"rarity": "relic",
+	"image": "bloodied_tenderizer.png",
+	"effects": [
+	  {
+		"type": "attack_flat",
+		"value": 3,
+		"trigger": "always"
+	  },
+	  {
+		"type": "bleed_on_crit",
+		"value": 2,
+		"duration": 3,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 20,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases attack damage by 3 • Critical hits inflict 2 bleed for 3 turns • Increases Insight by -1"
+  },
+  {
+	"id": "empty_lunchbox",
+	"name": "Empty Lunchbox",
+	"description": "Hungry for second chances. Hunger of a different kind.",
+	"rarity": "rare",
+	"image": "empty_lunchbox.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "max_hp",
+		"value": 3,
+		"trigger": "always"
+	  },
+	  {
+		"type": "dice_reroll_chance",
+		"value": 0.15,
+		"target": "enemy",
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 8,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Max HP by 3 • Gives 0.15% chance to force enemy dice rerolls"
+  },
+  {
+	"id": "juice_stained_yearbook",
+	"name": "Juice-Stained Yearbook",
+	"description": "Pages stick together, memories do not. Everyone signed it, nobody knew you.",
+	"rarity": "rare",
+	"image": "juice_stained_yearbook.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 2,
+		"trigger": "on_low_hp"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 10,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Resilience by 2 • Increases Insight by 1"
+  },
+  {
+	"id": "intimidating_presence",
+	"name": "Intimidating Presence",
+	"description": "A feeling that makes foes tremble. Strength is blinding when false.",
+	"rarity": "relic",
+	"image": "intimidating_presence.png",
+	"effects": [
+	  {
+		"type": "attack_flat",
+		"value": 2,
+		"trigger": "always"
+	  },
+	  {
+		"type": "crit_band",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "loot_rarity_modifier",
+		"rarity": "rare",
+		"modifier": -0.1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 15,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases attack damage by 2 • Expands critical hit range by 1 (more rolls become critical) • Increases chance of rare loot by -0.1%"
+  },
+  {
+	"id": "engraved_pen",
+	"name": "Engraved Pen",
+	"description": "Your name scratched in steel ambition. They finally saw your worth.",
+	"rarity": "rare",
+	"image": "engraved_pen.png",
+	"effects": [
+	  {
+		"type": "guaranteed_first_crit",
+		"trigger": "combat_start"
+	  },
+	  {
+		"type": "loot_quality_modifier",
+		"quality": "perfect",
+		"modifier": 0.08,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 6,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Guarantees the first dice roll each battle is a critical hit • Increases chance of perfect dice by 0.08%"
+  },
+  {
+	"id": "framed_memo",
+	"name": "Framed Memo",
+	"description": "Recognition behind cracked glass. The frame is cracked. It still hangs.",
+	"rarity": "rare",
+	"image": "framed_memo.png",
+	"effects": [
+	  {
+		"type": "loot_rarity_modifier",
+		"rarity": "relic",
+		"modifier": 0.05,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 8,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases chance of relic loot by 0.05% • Increases Insight by 1"
+  },
+  {
+	"id": "stress_ball",
+	"name": "Stress Ball",
+	"description": "Squeezes out tension—and honesty. You kept it together. For now.",
+	"rarity": "common",
+	"image": "stress_ball.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Insight by 1 • Increases Resilience by -1"
+  },
+  {
+	"id": "hush_money",
+	"name": "Hush Money",
+	"description": "Bills soaked in silence. No one talks about it. Especially you.",
+	"rarity": "relic",
+	"image": "hush_money.png",
+	"effects": [
+	  {
+		"type": "loot_rarity_modifier",
+		"rarity": "rare",
+		"modifier": -0.2,
+		"trigger": "always"
+	  },
+	  {
+		"type": "fragment_cost_reduction",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "strength",
+		"value": 2,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 25,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": -1,
+	"tooltip": "Increases chance of rare loot by -0.2% • Reduces fragment costs by 1 • Increases Strength by 2"
+  },
+  {
+	"id": "electric_blanket",
+	"name": "Electric Blanket",
+	"description": "Warmth without company. You're warm now. Alone.",
+	"rarity": "rare",
+	"image": "electric_blanket.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 3,
+		"trigger": "on_low_hp"
+	  },
+	  {
+		"type": "defence_flat",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 8,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Resilience by 3 • Increases defense by 1"
+  },
+  {
+	"id": "baby_monitor",
+	"name": "Baby Monitor",
+	"description": "Static filled with watchful whispers. You were always listening. Or were you?",
+	"rarity": "rare",
+	"image": "baby_monitor.png",
+	"effects": [
+	  {
+		"type": "combat_start_shield",
+		"value": 2,
+		"duration": 2,
+		"trigger": "combat_start"
+	  },
+	  {
+		"type": "loot_rarity_modifier",
+		"rarity": "rare",
+		"modifier": 0.1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 10,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Grants 2 shield at combat start for 2 turns • Increases chance of rare loot by 0.1%"
+  },
+  {
+	"id": "best_dad_certificate",
+	"name": "Best Dad Certificate",
+	"description": "Awarded ironically. It's the thought that counts. Right?",
+	"rarity": "rare",
+	"image": "best_dad_certificate.png",
+	"effects": [
+	  {
+		"type": "enemy_dice_penalty",
+		"value": 1,
+		"frequency": "once_per_combat",
+		"trigger": "combat_start"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 6,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reduces enemy dice results by 1 • Increases Insight by 1"
+  },
+  {
+	"id": "empty_crib",
+	"name": "Empty Crib",
+	"description": "Rocking gently with absence. No one wakes you.",
+	"rarity": "rare",
+	"image": "empty_crib.png",
+	"effects": [
+	  {
+		"type": "loot_rarity_modifier",
+		"rarity": "rare",
+		"modifier": -0.15,
+		"condition": "high_hp",
+		"trigger": "always"
+	  },
+	  {
+		"type": "passive_healing",
+		"value": 1,
+		"trigger": "turn_start"
+	  }
+	],
+	"lifespan_bonus": 8,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases chance of rare loot by -0.15% • Heals 1 HP at the start of each turn"
+  },
+  {
+	"id": "broken_flask",
+	"name": "Broken Flask",
+	"description": "Smells like escape. Still smells like escape.",
+	"rarity": "rare",
+	"image": "broken_flask.png",
+	"effects": [
+	  {
+		"type": "fragment_cost_reduction",
+		"value": 1,
+		"frequency": "random",
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 12,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reduces fragment costs by 1 • Increases Resilience by 1"
+  },
+  {
+	"id": "unsent_letter",
+	"name": "Unsent Letter",
+	"description": "Folded regrets waiting to speak. Written. Never sent. Still folded in your jacket.",
+	"rarity": "rare",
+	"image": "unsent_letter.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 2,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "strength",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 8,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Insight by 2 • Increases Strength by -1"
+  },
+  {
+	"id": "family_bondo",
+	"name": "Family Bondo",
+	"description": "Holds cracks together—for now. Held together with the wrong stuff.",
+	"rarity": "common",
+	"image": "family_bondo.png",
+	"effects": [
+	  {
+		"type": "damage_reduction_pct",
+		"value": 0.25,
+		"condition": "low_hp",
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reduces incoming damage by 0.25%"
+  },
+  {
+	"id": "obituary_clipping",
+	"name": "Obituary Clipping",
+	"description": "Printed finality lies lightly. They wrote what they were told.",
+	"rarity": "rare",
+	"image": "obituary_clipping.png",
+	"effects": [
+	  {
+		"type": "loot_rarity_modifier",
+		"rarity": "rare",
+		"modifier": -0.1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "strength",
+		"value": 2,
+		"condition": "insight_lowest",
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 6,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases chance of rare loot by -0.1% • Increases Strength by 2"
+  },
+  {
+	"id": "gold_watch_memento",
+	"name": "Gold Watch",
+	"description": "A lifetime engraved in brass. Time finally weighs in your pocket.",
+	"rarity": "relic",
+	"image": "gold_watch_memento.png",
+	"effects": [
+	  {
+		"type": "loot_rarity_modifier",
+		"rarity": "rare",
+		"modifier": 0.2,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 2,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 20,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases chance of rare loot by 0.2% • Increases Insight by 2"
+  },
+  {
+	"id": "shifting_photo",
+	"name": "Shifting Photo",
+	"description": "Subjects vanish when unobserved. One minute he's there, the next a blank space.",
+	"rarity": "rare",
+	"image": "shifting_photo.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 2,
+		"condition": "no_enemies_start",
+		"trigger": "combat_start"
+	  },
+	  {
+		"type": "crit_band",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 8,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Insight by 2 • Expands critical hit range by 1 (more rolls become critical)"
+  },
+  {
+	"id": "empty_chair",
+	"name": "Empty Chair",
+	"description": "Reserved for missing souls. Reserved for someone who never came.",
+	"rarity": "rare",
+	"image": "empty_chair.png",
+	"effects": [
+	  {
+		"type": "fragment_reroll",
+		"value": 1,
+		"frequency": "once_per_floor",
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 10,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Allows rerolling fragment selection 1 times • Increases Resilience by 1"
+  },
+  {
+	"id": "mended_ring",
+	"name": "Mended Ring",
+	"description": "The seam is almost invisible. It's not broken.",
+	"rarity": "rare",
+	"image": "mended_ring.png",
+	"effects": [
+	  {
+		"type": "fragment_cost_reduction",
+		"value": 1,
+		"condition": "corrupted_fragments",
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "max_hp",
+		"value": 3,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 8,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reduces fragment costs by 1 • Increases Max HP by 3"
+  },
+  {
+	"id": "namesake",
+	"name": "Namesake",
+	"description": "A legacy carried in a name. He gave him my name.",
+	"rarity": "relic",
+	"image": "namesake.png",
+	"effects": [
+	  {
+		"type": "loot_rarity_modifier",
+		"rarity": "rare",
+		"modifier": 0.15,
+		"condition": "true_fragments",
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 3,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 25,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases chance of rare loot by 0.15% • Increases Insight by 3"
+  },
+  {
+	"id": "blank_name_badge",
+	"name": "Blank Name Badge",
+	"description": "Identity pending. You weren't forgotten. Just overwritten.",
+	"rarity": "common",
+	"image": "blank_name_badge.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 2,
+		"condition": "one_enemy_remaining",
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Insight by 2"
+  },
+  {
+	"id": "gate_lock",
+	"name": "Gate Lock",
+	"description": "Blocks regret—sometimes. You never spoke again. But he remembered.",
+	"rarity": "common",
+	"image": "gate_lock.png",
+	"effects": [
+	  {
+		"type": "insight_check_reroll",
+		"value": 1,
+		"frequency": "once_per_floor",
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Allows rerolling insight checks 1 times"
+  },
+  {
+	"id": "silver_spoon",
+	"name": "Silver Spoon",
+	"description": "Privilege with a metallic taste. We'll get together then, son.",
+	"rarity": "rare",
+	"image": "silver_spoon.png",
+	"effects": [
+	  {
+		"type": "loot_rarity_modifier",
+		"rarity": "rare",
+		"modifier": -0.1,
+		"condition": "insight_highest",
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "strength",
+		"value": 2,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 8,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases chance of rare loot by -0.1% • Increases Strength by 2"
+  },
+  {
+	"id": "family_album",
+	"name": "Family Album",
+	"description": "Truth bound between covers. It's complete—and sobering.",
+	"rarity": "relic",
+	"image": "family_album.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 3,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 2,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 30,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Resilience by 3 • Increases Insight by 2"
+  },
+  {
+	"id": "unusual_polaroid",
+	"name": "Unusual Polaroid",
+	"description": "Image shifts when unattended. Something seems off...",
+	"rarity": "common",
+	"image": "unusual_polaroid.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 2,
+		"condition": "one_fragment_missing",
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Insight by 2"
+  },
+  {
+	"id": "unfilled_script",
+	"name": "Unfilled Script",
+	"description": "Lines yet to be lived. You left the script blank. But not unread.",
+	"rarity": "rare",
+	"image": "unfilled_script.png",
+	"effects": [
+	  {
+		"type": "fragment_skip",
+		"value": 1,
+		"frequency": "once_per_run",
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 10,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Allows skipping fragment selection 1 times • Increases Insight by 1"
+  },
+  {
+	"id": "key_to_the_city",
+	"name": "Key to the City",
+	"description": "Opens doors to ego. The key unlocks more than doors.",
+	"rarity": "relic",
+	"image": "key_to_the_city.png",
+	"effects": [
+	  {
+		"type": "loot_rarity_modifier",
+		"rarity": "rare",
+		"modifier": -0.25,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "strength",
+		"value": 4,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "max_hp",
+		"value": 10,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 35,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases chance of rare loot by -0.25% • Increases Strength by 4 • Increases Max HP by 10"
+  },
+  {
+	"id": "death_certificate",
+	"name": "Death Certificate",
+	"description": "Ink still drying. The end?",
+	"rarity": "relic",
+	"image": "death_certificate.png",
+	"effects": [
+	  {
+		"type": "fragment_cost_reduction",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 3,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 40,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reduces fragment costs by 1 • Increases Insight by 3"
+  },
+  {
+	"id": "flickering_halo",
+	"name": "Flickering Halo",
+	"description": "Light that doubts itself. You were almost something greater.",
+	"rarity": "rare",
+	"image": "flickering_halo.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 3,
+		"condition": "full_hp",
+		"trigger": "always"
+	  },
+	  {
+		"type": "combat_start_shield",
+		"value": 2,
+		"trigger": "combat_start"
+	  }
+	],
+	"lifespan_bonus": 10,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Insight by 3 • Grants 2 shield at combat start for 0 turns"
+  },
+  {
+	"id": "reunion_tour_ticket",
+	"name": "Reunion Tour Ticket",
+	"description": "One last show for old times. Just one more stop.",
+	"rarity": "rare",
+	"image": "reunion_tour_ticket.png",
+	"effects": [
+	  {
+		"type": "duplicate_memento",
+		"frequency": "run_start",
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 12,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Creates a duplicate of another equipped memento • Increases Resilience by 1"
+  },
+  {
+	"id": "garage_key",
+	"name": "Garage Key",
+	"description": "Smells of oil and nostalgia. Keep digging. The oil never runs out.",
+	"rarity": "relic",
+	"image": "garage_key.png",
+	"effects": [
+	  {
+		"type": "corrupted_level_access",
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "strength",
+		"value": 2,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 2,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 25,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Grants access to corrupted memory levels • Increases Strength by 2 • Increases Insight by 2"
+  },
+  {
+	"id": "clean_slate",
+	"name": "Childhood Eraser",
+	"description": "Pink rubber worn smooth by desperate attempts to undo the past.",
+	"rarity": "common",
+	"image": "clean_slate.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "status_cleanse",
+		"frequency": "once_per_combat",
+		"trigger": "combat_start"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Resilience by 1 • Removes 0 negative status effects at combat start"
+  },
+  {
+	"id": "cremation_ashes",
+	"name": "Cremation Ashes",
+	"description": "A small vial of what remains. Warm to the touch with faded love.",
+	"rarity": "common",
+	"image": "cremation_ashes.png",
+	"effects": [
+	  {
+		"type": "burn_resistance",
+		"value": 0.5,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reduces burn damage by 0.5% • Increases Resilience by 1"
+  },
+  {
+	"id": "strange_key",
+	"name": "Strange Key",
+	"description": "Keys to rooms that echo with absence. Survival lingers in familiar spaces.",
+	"rarity": "common",
+	"image": "strange_key.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "max_hp",
+		"value": 2,
+		"trigger": "always"
+	  },
+	  {
+		"type": "passive_healing",
+		"value": 1,
+		"condition": "low_hp",
+		"trigger": "turn_start"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Max HP by 2 • Heals 1 HP at the start of each turn"
+  },
+  {
+	"id": "reading_glasses",
+	"name": "Reading Glasses",
+	"description": "Cracked lenses that reveal harsh truths—but leave you vulnerable to them.",
+	"rarity": "common",
+	"image": "reading_glasses.png",
+	"effects": [
+	  {
+		"type": "crit_band",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "defence_flat",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Expands critical hit range by 1 (more rolls become critical) • Increases defense by -1"
+  },
+  {
+	"id": "lucky_cin",
+	"name": "Lucky Coin",
+	"description": "Worn smooth by anxious fingers. Cuts through uncertainty.",
+	"rarity": "common",
+	"image": "lucky_coin.png",
+	"effects": [
+	  {
+		"type": "crit_band",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Expands critical hit range by 1 (more rolls become critical)"
+  },
+  {
+	"id": "paper_crown",
+	"name": "Paper Crown",
+	"description": "Paper crown from a childhood party. Glory without consequence.",
+	"rarity": "common",
+	"image": "paper_crown.png",
+	"effects": [
+	  {
+		"type": "crit_multiplier_modifier",
+		"value": 0.25,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases critical hit damage multiplier by 0.25%"
+  },
+  {
+	"id": "tourniquet",
+	"name": "Tourniquet",
+	"description": "Wrapped tight from playground fights. Slows the swing, deepens the wound.",
+	"rarity": "common",
+	"image": "tourniquet.png",
+	"effects": [
+	  {
+		"type": "dot_potency_amp",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "attack_flat",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases damage-over-time effect potency by 1 • Increases attack damage by -1"
+  },
+  {
+	"id": "moldy_bandage",
+	"name": "Moldy Bandage",
+	"description": "From a wound that wouldn't heal. Infections linger longer than they should.",
+	"rarity": "common",
+	"image": "moldy_bandage.png",
+	"effects": [
+	  {
+		"type": "dot_duration_amp",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases damage-over-time effect duration by 1 turns"
+  },
+  {
+	"id": "broken_inhaler",
+	"name": "Broken Inhaler",
+	"description": "Empty when you needed it most. Symptoms hit immediately.",
+	"rarity": "common",
+	"image": "broken_inhaler.png",
+	"effects": [
+	  {
+		"type": "dot_instant_tick",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Damage-over-time effects deal instant damage when applied"
+  },
+  {
+	"id": "heavy_keychain",
+	"name": "Heavy Keychain",
+	"description": "Dad's work keys that weighed down his pocket. Burden shared is burden doubled.",
+	"rarity": "common",
+	"image": "heavy_keychain.png",
+	"effects": [
+	  {
+		"type": "control_duration_amp",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "max_roll_cap",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases crowd control effect duration by 1 turns • Limits maximum dice roll to -1"
+  },
+  {
+	"id": "salt_shells",
+	"name": "Salt Shells",
+	"description": "Riot control rounds from dad's army days. 'Less-lethal' can't say non-lethal anymore...",
+	"rarity": "common",
+	"image": "salt_shells.png",
+	"effects": [
+	  {
+		"type": "control_duration_amp",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases crowd control effect duration by 1 turns"
+  },
+  {
+	"id": "broken_stopwatch",
+	"name": "Broken Stopwatch",
+	"description": "Frozen at the moment of impact. When time stops, opportunity begins.",
+	"rarity": "common",
+	"image": "broken_stopwatch.png",
+	"effects": [
+	  {
+		"type": "extra_die_next_turn_on_stun",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Gain an extra die next turn when stunning an enemy"
+  },
+  {
+	"id": "weighted_die",
+	"name": "Weighted Die",
+	"description": "Loaded for luck, heavy with guilt. Great fortune or great failure.",
+	"rarity": "relic",
+	"image": "weighted_die.png",
+	"effects": [
+	  {
+		"type": "max_roll_bonus",
+		"value": 2,
+		"trigger": "always"
+	  },
+	  {
+		"type": "self_damage_on_one",
+		"value": 2,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 20,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases maximum possible dice roll by 2 • Take 2 damage when rolling a 1"
+  },
+  {
+	"id": "expired_adderall",
+	"name": "Expired Adderall",
+	"description": "From college cramming sessions. Focus that burns out fast and hard.",
+	"rarity": "relic",
+	"image": "expired_adderall.png",
+	"effects": [
+	  {
+		"type": "attack_buff_on_crit",
+		"value": 2,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 18,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Critical hits grant +2 attack for 0 turns"
+  },
+  {
+	"id": "rabbits_foot",
+	"name": "Rabbit's Foot",
+	"description": "From childhood superstitions. Luck comes to those who believe in it.",
+	"rarity": "common",
+	"image": "rabbits_foot.png",
+	"effects": [
+	  {
+		"type": "guaranteed_first_crit",
+		"trigger": "combat_start"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Guarantees the first dice roll each battle is a critical hit"
+  },
+  {
+	"id": "dried_rose",
+	"name": "Dried Rose",
+	"description": "From the bouquet you never gave. Beauty and pain intertwined.",
+	"rarity": "common",
+	"image": "dried_rose.png",
+	"effects": [
+	  {
+		"type": "thorns_flat",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "defence_flat",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reflects 1 damage to attackers • Increases defense by -1"
+  },
+  {
+	"id": "thick_bandage",
+	"name": "Thick Bandage",
+	"description": "From years of hard work. Numb to pain but numb to everything.",
+	"rarity": "common",
+	"image": "thick_bandage.png",
+	"effects": [
+	  {
+		"type": "defence_potency_amp",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases defense effect potency by 1"
+  },
+  {
+	"id": "beauty_mirror",
+	"name": "Beauty Mirror",
+	"description": "Warped reflection from childhood meals. Pain shared is pain doubled.",
+	"rarity": "common",
+	"image": "beauty_mirror.png",
+	"effects": [
+	  {
+		"type": "global_damage_reflect_pct",
+		"value": 0.25,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reflects 0.25% of all damage taken"
+  },
+  {
+	"id": "safety_pin",
+	"name": "Safety Pin",
+	"description": "Bent from nervous fidgeting. Hurts you to hurt them more.",
+	"rarity": "common",
+	"image": "safety_pin.png",
+	"effects": [
+	  {
+		"type": "thorns_potency_amp",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "self_damage_amp",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases thorns damage by 1 • Increases self-damage by 1%"
+  },
+  {
+	"id": "one_armed_scissor",
+	"name": "One-Armed Scissor",
+	"description": "From love letters never sent. Every wound teaches you to wound back.",
+	"rarity": "common",
+	"image": "one_armed_scissor.png",
+	"effects": [
+	  {
+		"type": "gain_thorns_equal_self_damage",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Gain thorns equal to self-damage taken"
+  },
+  {
+	"id": "black_eyeliner",
+	"name": "Black Eyeliner",
+	"description": "Mom's shade, worn to hide the bruises. Pain reflects in every surface.",
+	"rarity": "common",
+	"image": "black_eyeliner.png",
+	"effects": [
+	  {
+		"type": "self_damage_reflect_pct",
+		"value": 1.0,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reflects 1.0% of self-damage to enemies"
+  },
+  {
+	"id": "rosary_beads",
+	"name": "Rosary Beads",
+	"description": "Blown out too soon. Brief protection, briefer hope.",
+	"rarity": "common",
+	"image": "rosary_beads.png",
+	"effects": [
+	  {
+		"type": "self_damage_reduction_pct_during_divinity",
+		"value": 0.5,
+		"trigger": "always"
+	  },
+	  {
+		"type": "divinity_duration_flat",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reduces self-damage by 0.5% during divinity • Increases divinity duration by -1 turns"
+  },
+  {
+	"id": "communion_wafer",
+	"name": "Communion Wafer",
+	"description": "Crystallized on old pillowcases. Sacred suffering shields you.",
+	"rarity": "common",
+	"image": "communion_wafer.png",
+	"effects": [
+	  {
+		"type": "self_damage_block_during_divinity",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Blocks self-damage while divinity is active"
+  },
+  {
+	"id": "holy_water",
+	"name": "Holy Water",
+	"description": "From grandmother's funeral dress. Suffering transforms to grace.",
+	"rarity": "common",
+	"image": "holy_water.png",
+	"effects": [
+	  {
+		"type": "self_damage_to_heal_pct_during_divinity",
+		"value": 1.0,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Converts 1.0% of self-damage to healing during divinity"
+  },
+  {
+	"id": "sack_of_coins",
+	"name": "Sack of Coins",
+	"description": "From every job interview. Nervous energy that spreads and lingers.",
+	"rarity": "common",
+	"image": "sack_of_coins.png",
+	"effects": [
+	  {
+		"type": "dot_duration_on_stun",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "max_roll_cap",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Extend damage-over-time effects by 1 turns when stunning • Limits maximum dice roll to -1"
+  },
+  {
+	"id": "knuckle_dusters",
+	"name": "Knuckle Dusters",
+	"description": "From learning to press shirts alone. Burns that seal shut immediately.",
+	"rarity": "common",
+	"image": "knuckle_dusters.png",
+	"effects": [
+	  {
+		"type": "instant_dot_tick_on_stun",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "DoT effects deal instant damage when target is stunned"
+  },
+  {
+	"id": "ball_gag",
+	"name": "Ball Gag",
+	"description": "Smothering nightmares. Suffocation builds with time.",
+	"rarity": "common",
+	"image": "ball_gag.png",
+	"effects": [
+	  {
+		"type": "dot_potency_each_turn_while_stunned",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increase DoT potency by 1 each turn while stunned"
+  },
+  {
+	"id": "empty_wallet",
+	"name": "Empty Wallet",
+	"description": "After the divorce settlement. Less to find, more to fight for.",
+	"rarity": "common",
+	"image": "empty_wallet.png",
+	"effects": [
+	  {
+		"type": "bleed_on_crit",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "defence_flat",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Critical hits inflict 1 bleed for 0 turns • Increases defense by -1"
+  },
+  {
+	"id": "razor_blade",
+	"name": "Razor Blade",
+	"description": "Hidden in the medicine cabinet. Let the pain flow out.",
+	"rarity": "common",
+	"image": "razor_blade.png",
+	"effects": [
+	  {
+		"type": "bleed_on_crit",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Critical hits inflict 1 bleed for 0 turns"
+  },
+  {
+	"id": "whetstone",
+	"name": "Whetstone",
+	"description": "For sharpening kitchen knives. Edges that cut through everything.",
+	"rarity": "common",
+	"image": "whetstone.png",
+	"effects": [
+	  {
+		"type": "burn_shield_reduction_pct",
+		"value": 0.75,
+		"trigger": "always"
+	  },
+	  {
+		"type": "next_attack_pierce",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "attack_flat",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Burn reduces shield effectiveness by 0.75% • Next attack ignores defense • Increases attack damage by -1"
+  },
+  {
+	"id": "match_head",
+	"name": "Match Head",
+	"description": "Struck in anger, burned in regret. Rotten brimstone of old fights.",
+	"rarity": "common",
+	"image": "match_head.png",
+	"effects": [
+	  {
+		"type": "burn_grants_pierce_this_turn",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Being burned grants pierce for the turn"
+  },
+  {
+	"id": "heartburn",
+	"name": "Heartburn",
+	"description": "Acid reflux from swallowing pride. Shield turns to slag under pressure.",
+	"rarity": "common",
+	"image": "heartburn.png",
+	"effects": [
+	  {
+		"type": "burn_blocks_shield_and_pierced",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Burn prevents shield and makes attacks piercing"
+  },
+  {
+	"id": "thunder_blanket",
+	"name": "Thunder Blanket",
+	"description": "A heavy wool blanket that muffles the storms of memory. Strengthens resolve.",
+	"rarity": "rare",
+	"image": "thunder_blanket.png",
+	"effects": [
+	  {
+		"type": "stat_buff_multi",
+		"stat": "resilience",
+		"value": 1.5,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 8,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Multiplies Resilience by 1.5x"
+  },
+  {
+	"id": "the_remedy",
+	"name": "The Remedy",
+	"description": "A vial of clear liquid that neutralizes all toxins. Some poisons are in the mind.",
+	"rarity": "relic",
+	"image": "the_remedy.png",
+	"effects": [
+	  {
+		"type": "status_immunity",
+		"status_type": "poison",
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 12,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Immunity to poison effects • Increases Insight by 1"
+  },
+  {
+	"id": "introspection",
+	"name": "Introspection",
+	"description": "A polished mirror that reflects not your face, but your understanding. Wisdom doubled.",
+	"rarity": "relic",
+	"image": "introspection.png",
+	"effects": [
+	  {
+		"type": "stat_buff_multi",
+		"stat": "insight",
+		"value": 2.0,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 20,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Multiplies Insight by 2x"
+  },
+  {
+	"id": "the_full_picture",
+	"name": "The Full Picture",
+	"description": "A completed photo album showing life as it truly was. Clarity brings understanding.",
+	"rarity": "rare",
+	"image": "the_full_picture.png",
+	"effects": [
+	  {
+		"type": "stat_buff_multi",
+		"stat": "insight",
+		"value": 1.5,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 2,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 15,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Multiplies Insight by 1.5x • Increases Resilience by 2"
+  },
+  {
+	"id": "extra_life",
+	"name": "Extra Life",
+	"description": "A second chance when all seems lost. Death is not always final.",
+	"rarity": "relic",
+	"image": "extra_life.png",
+	"effects": [
+	  {
+		"type": "death_save",
+		"value": 1,
+		"frequency": "once_per_run",
+		"trigger": "on_death"
+	  },
+	  {
+		"type": "max_hp_bonus",
+		"value": 10,
+		"heal_current": true,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 25,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Revives with full health on death (once per run) • Increases Max HP by 10"
+  }
+]

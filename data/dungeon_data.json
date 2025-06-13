@@ -1,0 +1,194 @@
+{
+  "dungeons": [
+	{
+	  "id": 1,
+	  "dungeon_type": "main",
+	  "name": "The Trunk",
+	  "description": "Playing in your room, you find an old chest. Your father's name is engraved on its heavy lid along with a strange number. The perfect hiding spot... .",
+	  "background": "D1_bg.png",
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D1_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D1_elite"]
+		},
+		"boss": {
+		  "enemies": ["D1_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": 2,
+	  "dungeon_type": "main",
+	  "name": "Bullying",
+	  "description": "Only 17 and already in hell, but dad said if the teachers won't do anything, I should...",
+	  "background": "D2_bg.png",
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D2_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D2_elite"]
+		},
+		"boss": {
+		  "enemies": ["D2_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": 3,
+	  "dungeon_type": "main",
+	  "name": "Graduation",
+	  "description": "Your graduation day arrives. Mother stumbles in late, reeking of alcohol, while father remains conspicuously absent.",
+	  "background": "D3_bg.png",
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D3_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D3_elite"]
+		},
+		"boss": {
+		  "enemies": ["D3_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": 4,
+	  "dungeon_type": "main",
+	  "name": "The Pitch",
+	  "description": "Your first major opportunity at work. You work all night to perfect your presentation, missing your partner's birthday in the process.",
+	  "background": "D4_bg.png",
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D4_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D4_elite"]
+		},
+		"boss": {
+		  "enemies": ["D4_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": 5,
+	  "dungeon_type": "main",
+	  "name": "Fatherhood",
+	  "description": "Your child is born. You're there physically—but distant emotionally. You promise yourself you won't be like your father.",
+	  "background": "D5_bg.png",
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D5_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D5_elite"]
+		},
+		"boss": {
+		  "enemies": ["D5_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": 6,
+	  "dungeon_type": "main",
+	  "name": "The Funeral",
+	  "description": "Your mother dies after years of alcoholism. You plan the funeral alone while your son avoids your calls.",
+	  "background": "D6_bg.png",
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D6_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D6_elite"]
+		},
+		"boss": {
+		  "enemies": ["D6_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": 7,
+	  "dungeon_type": "main",
+	  "name": "Retirement",
+	  "description": "You retire after a long, dutiful career. The ceremony is quiet, like your marriage. Your wife leaves you shortly after.",
+	  "background": "D7_bg.png",
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D7_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D7_elite"]
+		},
+		"boss": {
+		  "enemies": ["D7_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": 8,
+	  "dungeon_type": "main",
+	  "name": "Reconciliation",
+	  "description": "Years after retirement, you decide to drive cross-country to reconnect with your estranged son. You're unsure if he'll even open the door.",
+	  "background": "D8_bg.png",
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D8_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D8_elite"]
+		},
+		"boss": {
+		  "enemies": ["D8_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": 9,
+	  "dungeon_type": "main",
+	  "name": "The Family Album",
+	  "description": "You find an old family photo album in the attic. It's curated—only the happy photos are included. You begin hunting down the missing ones.",
+	  "background": "D9_bg.png",
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D9_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D9_elite"]
+		},
+		"boss": {
+		  "enemies": ["D9_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": 10,
+	  "dungeon_type": "main",
+	  "name": "The Deathbed",
+	  "description": "You're in a hospital bed, breathing slowly. Someone is holding your hand. You can't tell which son it is. The other hand aches with absence.",
+	  "background": "D10_bg.png",
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D10_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D10_elite"]
+		},
+		"boss": {
+		  "enemies": ["D10_boss"],
+		  "count": 1
+		}
+	  }
+	}
+  ]
+} 

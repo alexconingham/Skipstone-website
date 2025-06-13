@@ -36,7 +36,7 @@ Thumbs.db
 
 # Source asset directories (we only use public/ for the website)
 assets/
-data/
+# data/ - Keep this commented out as we need the JSON data files for the website
 
 # Misc
 *.pem

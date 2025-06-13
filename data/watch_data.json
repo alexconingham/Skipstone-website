@@ -1,0 +1,90 @@
+[
+  {
+	"id": "basic_casio",
+	"name": "Basic Casio",
+	"description": "A simple digital watch. Reliable but unremarkable.",
+	"rarity": "common",
+	"image": "basic_casio.png",
+	"effect_description": "Just tells you the time",
+	"effect": {
+	  "type": "none",
+	  "value": 0
+	}
+  },
+  {
+	"id": "silver_watch",
+	"name": "Silver Timepiece",
+	"description": "An elegant silver watch that seems to catch more than just light.",
+	"rarity": "rare",
+	"image": "silver_watch.png",
+	"effect_description": "Increases resilience by 1.5x",
+	"effect": {
+	  "type": "dice_modifier",
+	  "modifier": "defence",
+	  "value": 1
+	}
+  },
+  {
+	"id": "gold_watch",
+	"name": "Golden Chronometer",
+	"description": "Time itself seems to bend around this ancient golden device.",
+	"rarity": "rare",
+	"image": "gold_watch.png",
+	"effect_description": "Increases life by 20 years",
+	"effect": {
+	  "type": "plus_life_expectancy",
+	  "value": 10
+	}
+  },
+  {
+	"id": "dino_watch",
+	"name": "Dinosaur Watch",
+	"description": "The dinosaurs always made you feel strong.",
+	"rarity": "relic",
+	"image": "dino_watch.png",
+	"effect_description": "Increases strength by 1.5x",
+	"effect": {
+	  "type": "stat_buff_multi",
+	  "stat": "strength",
+	  "value": 1.5
+	}
+  },
+  {
+	"id": "unicorn_watch",
+	"name": "Unicorn Watch",
+	"description": "It's pretty. And whispers secrets about your enemies.",
+	"rarity": "relic",
+	"image": "unicorn_watch.png",
+	"effect_description": "Increases insight by 1.5x",
+	"effect": {
+	  "type": "stat_buff_multi",
+	  "stat": "Insight",
+	  "value": 1.5
+	}
+  },
+  {
+	"id": "calcu_watch",
+	"name": "Calcu Watch",
+	"description": "Sometimes the best offence is a calculated defence.",
+	"rarity": "relic",
+	"image": "calculator_watch.png",
+	"effect_description": "Increases resilience by 1.5x",
+	"effect": {
+	  "type": "stat_buff_multi",
+	  "stat": "Resilience",
+	  "value": 1.5
+	}
+  },
+  {
+	"id": "martys_watch",
+	"name": "Marty's Watch",
+	"description": "A ticking timepiece that seems to slow the passage of years. Time saved is time earned.",
+	"rarity": "relic",
+	"image": "martys_watch.png",
+	"effect_description": "Reduces the cost of fragments by 2 years",
+	"effect": {
+	  "type": "fragment_year_reduction",
+	  "value": 2
+	}
+  }
+]
