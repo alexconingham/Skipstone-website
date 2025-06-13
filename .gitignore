@@ -1,20 +1,44 @@
 # Dependencies
-/node_modules
-/.pnp
+node_modules/
+.pnp
 .pnp.js
 
 # Testing
-/coverage
+coverage/
 
 # Next.js
-/.next/
-/out/
+.next/
+out/
 
 # Production
-/build
+build/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Source asset directories (we only use public/ for the website)
+assets/
+data/
 
 # Misc
-.DS_Store
 *.pem
 
 # Debug
@@ -29,7 +53,6 @@ yarn-error.log*
 .vercel
 
 # TypeScript
-*.tsbuildinfo
 next-env.d.ts
 
 # IDE
