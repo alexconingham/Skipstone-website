@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Animations for Seamless Carousel */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-25%); }
+}
+
+@keyframes scroll-right {  
+  0% { transform: translateX(-25%); }
+  100% { transform: translateX(0); }
+}
+
+.gallery-scroll-left {
+  animation: scroll-left 40s linear infinite;
+  transition: animation-duration 0.8s ease-out;
+}
+
+.gallery-scroll-right {
+  animation: scroll-right 35s linear infinite; 
+  transition: animation-duration 0.8s ease-out;
+}
+
+/* Hover slowdown effects - much slower for better viewing */
+.gallery-dungeons:hover .gallery-scroll { 
+  animation-duration: 200s; 
+}
+
+.gallery-enemies:hover .gallery-scroll { 
+  animation-duration: 180s; 
+}
+
+.gallery-dice:hover .gallery-scroll { 
+  animation-duration: 160s; 
+}
+
+.gallery-mementos:hover .gallery-scroll { 
+  animation-duration: 220s; 
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Background gradients */
+body {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+  min-height: 100vh;
+}
+
+/* Tooltip styles */
+.tooltip-container {
+  @apply absolute -top-12 left-1/2 transform -translate-x-1/2;
+  @apply bg-gray-900 text-white px-3 py-2 rounded-lg;
+  @apply text-sm whitespace-nowrap z-20;
+  @apply border border-gray-700 shadow-xl;
+}
+
+.tooltip-arrow {
+  @apply absolute top-full left-1/2 transform -translate-x-1/2;
+  @apply border-4 border-transparent border-t-gray-900;
+}
+
+/* Gallery overflow handling for seamless effect */
+.gallery-scroll {
+  width: max-content;
+} 
