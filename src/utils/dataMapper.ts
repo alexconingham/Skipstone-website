@@ -6,24 +6,52 @@ import watchData from '../../data/watch_data.json'
 
 // Map dice data
 export const getDiceData = () => {
-  const mappedDice = diceData.dice.map((die: any) => ({
-    file: `${die.id}.png`,
-    name: die.display_name || die.name,
-    rarity: die.rarity,
-    description: die.effect_description
-  }))
-
-  // Add the life die manually since it exists as a file but might not be in JSON
-  // Check if it already exists to avoid duplicates
-  const hasLifeDie = mappedDice.some(die => die.file === 'life.png')
-  if (!hasLifeDie) {
-    mappedDice.push({
-      file: 'life.png',
-      name: 'Life Die',
-      rarity: 'rare',
-      description: 'Restores health when rolled.'
-    })
-  }
+  const mappedDice = diceData.dice.map((die: any) => {
+    // Handle special cases for dice filename mapping
+    let filename = `${die.id}.png`
+    
+    // Map JSON IDs to actual image filenames
+    const filenameMap: { [key: string]: string } = {
+      'life': 'life.png',
+      'life_die': 'life.png',
+      'simple_heal': 'simple_d6_heal.png',
+      'simple_d6_heal': 'simple_d6_heal.png',
+      'simple_d12_heal': 'simple_d12_heal.png',
+      'advanced_renew': 'advanced_renew_die.png',
+      'gladiator': 'gladiator_die.png',
+      'brave_heart': 'brave_heart_die.png',
+      'divinity': 'divinity_die.png',
+      'stagger': 'stagger_die.png',
+      'reflect': 'reflect_die.png',
+      'knockback': 'knockback_die.png',
+      'piercing': 'piercing_die.png',
+      'cleanse': 'cleanse_die.png',
+      'death': 'death_die.png',
+      'burn': 'burn_die.png',
+      'heal': 'heal_die.png',
+      'renew': 'renew_die.png',
+      'bleed': 'bleed_die.png',
+      'shield': 'shield_die.png',
+      'poison': 'poison_die.png',
+      'iron': 'iron_die.png',
+      'razor': 'razor_die.png',
+      'pain': 'pain_die.png',
+      'thorn': 'thorn_die.png',
+      'chrono': 'chrono_die.png'
+    }
+    
+    // Use mapped filename if available, otherwise use default
+    if (filenameMap[die.id]) {
+      filename = filenameMap[die.id]
+    }
+    
+    return {
+      file: filename,
+      name: die.display_name || die.name,
+      rarity: die.rarity,
+      description: die.effect_description
+    }
+  })
 
   return mappedDice
 }

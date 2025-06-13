@@ -103,7 +103,7 @@ export default function ImageGallery({
         
         {/* Rarity for dice, mementos, and watches */}
         {item.rarity && (folder === 'dice' || folder === 'mementos' || folder === 'watches') && (
-          <div className={`text-xs font-medium mb-2 ${
+          <div className={`text-sm font-medium mb-2 ${
             item.rarity === 'common' ? 'text-white' :
             item.rarity === 'rare' ? 'text-purple-300' :
             item.rarity === 'relic' ? 'text-yellow-300' : 'text-gray-300'
@@ -114,42 +114,42 @@ export default function ImageGallery({
 
         {/* Stats for enemies */}
         {item.stats && folder === 'portraits' && (
-          <div className="text-xs text-gray-300 mb-1">
+          <div className="text-sm text-gray-300 mb-1">
             <span className="text-red-400">Stats:</span> {item.stats}
           </div>
         )}
 
         {/* Traits for enemies */}
         {item.traits && folder === 'portraits' && (
-          <div className="text-xs text-blue-300 mb-1">
+          <div className="text-sm text-blue-300 mb-1">
             <span className="text-blue-400">Traits:</span> {item.traits}
           </div>
         )}
 
         {/* Effect description for dice */}
         {item.description && folder === 'dice' && (
-          <div className="text-xs text-gray-300 mb-2">
+          <div className="text-sm text-gray-300 mb-2">
             <span className="text-green-400">Effect:</span> {item.description}
           </div>
         )}
 
         {/* Tooltip for mementos */}
         {item.tooltip && folder === 'mementos' && (
-          <div className="text-xs text-gray-300 mb-2">
+          <div className="text-sm text-gray-300 mb-2">
             <span className="text-green-400">Effect:</span> {item.tooltip}
           </div>
         )}
 
         {/* Effect description for watches */}
         {item.effect_description && folder === 'watches' && (
-          <div className="text-xs text-gray-300 mb-2">
+          <div className="text-sm text-gray-300 mb-2">
             <span className="text-green-400">Effect:</span> {item.effect_description}
           </div>
         )}
 
         {/* Description for enemies, mementos, and watches */}
         {item.description && (folder === 'portraits' || folder === 'mementos' || folder === 'watches') && (
-          <div className="text-xs text-gray-400 italic border-t border-gray-600 pt-2 mt-2">
+          <div className="text-sm text-gray-400 italic border-t border-gray-600 pt-2 mt-2">
             "{item.description}"
           </div>
         )}

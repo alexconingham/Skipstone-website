@@ -113,7 +113,7 @@ export default function Home() {
       </section>
 
       {/* Enemies Section */}
-      <section className="py-17 pb-20 px-4">
+      <section className="py-17 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
             A string of haunting faces
@@ -132,7 +132,7 @@ export default function Home() {
       </section>
 
       {/* Dice Section */}
-      <section className="py-17 pb-20 px-4">
+      <section className="py-17 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
             An evolving arsenal
@@ -151,10 +151,10 @@ export default function Home() {
       </section>
 
       {/* Mementos Section */}
-      <section className="py-17 pb-20 px-4">
+      <section className="py-17 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            And a full bag of tricks...
+            And a bagful of tricks...
           </h2>
           <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
             Collect mementos drenched in heartbreaking lore, each with unique effects.
@@ -176,7 +176,7 @@ export default function Home() {
             Time is not on your side...
           </h2>
           <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
-            Each timepiece holds the power to bend reality, slow aging, or unlock hidden potential.
+            Unique watches bend time, and bolster tenacity.
           </p>
           <ImageGallery 
             items={gameAssets.watches} 
@@ -201,7 +201,7 @@ export default function Home() {
           <p className="text-gray-400">
             © 2024 Skipstone Games. All rights reserved.
           </p>
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 text-lg">
             Every roll counts and death is just the beginning.
           </p>
         </div>

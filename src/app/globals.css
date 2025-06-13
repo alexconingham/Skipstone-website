@@ -201,7 +201,7 @@ body {
   color: white;
   padding: 16px;
   border-radius: 12px;
-  font-size: 13px;
+  font-size: 15px;
   z-index: 1000;
   border: 1px solid rgba(75, 85, 99, 0.8);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
@@ -234,7 +234,7 @@ body {
 .tooltip-container {
   @apply absolute -top-14 left-1/2 transform -translate-x-1/2;
   @apply bg-gray-900/95 backdrop-blur-sm text-white px-4 py-3 rounded-lg;
-  @apply text-sm whitespace-nowrap z-30;
+  @apply text-base whitespace-nowrap z-30;
   @apply border border-gray-600 shadow-2xl;
   @apply transition-all duration-200 ease-out;
   max-width: 200px;
