@@ -3,11 +3,25 @@
 import { useState } from 'react'
 
 interface ImageGalleryProps {
-  items: Array<{file: string, name: string}>
+  items: Array<{
+    file: string, 
+    name: string, 
+    rarity?: string,
+    description?: string,
+    effect?: string,
+    lore?: string,
+    stats?: string,
+    immune?: string,
+    weak?: string,
+    effect_description?: string,
+    tooltip?: string,
+    traits?: string
+  }>
   folder: string
   direction?: "left" | "right"
   size?: "small" | "medium" | "large" | "extra-large" | "massive"
   galleryId?: string
+  showTooltips?: boolean
 }
 
 export default function ImageGallery({ 
@@ -15,7 +29,8 @@ export default function ImageGallery({
   folder, 
   direction = "right", 
   size = "medium",
-  galleryId = ""
+  galleryId = "",
+  showTooltips = true
 }: ImageGalleryProps) {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
@@ -35,44 +50,155 @@ export default function ImageGallery({
     "massive": "h-96"     // 384px (4x larger with padding)
   }
 
+  // Rarity color mapping for borders
+  const rarityColors = {
+    common: "border-white",       // White border for common items
+    rare: "border-purple-400",    // Purple border for rare items  
+    relic: "border-yellow-400"    // Gold border for relic items
+  }
+
   const fallbackImage = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMzc0MTUxIi8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOUI5Qjk5IiBmb250LXNpemU9IjE0cHgiPj88L3RleHQ+Cjwvc3ZnPgo="
 
   const animationClass = direction === "left" ? "gallery-scroll-left" : "gallery-scroll-right"
   const galleryClass = `gallery-${galleryId}`
 
   // Create multiple duplicates for seamless infinite scrolling
-  // The more items we have, the smoother the infinite loop appears
   const multipliedItems = [...items, ...items, ...items, ...items]
 
+  const getBorderClasses = (item: any) => {
+    if ((folder === 'dice' || folder === 'mementos' || folder === 'watches') && item.rarity) {
+      const rarityColor = rarityColors[item.rarity as keyof typeof rarityColors] || "border-gray-700"
+      
+      // Get matching shadow color for the rarity
+      const shadowColor = item.rarity === 'common' ? 'group-hover:shadow-white/50' :
+                         item.rarity === 'rare' ? 'group-hover:shadow-purple-400/50' :
+                         item.rarity === 'relic' ? 'group-hover:shadow-yellow-400/50' : 
+                         'group-hover:shadow-gray-500/50'
+      
+      return `border-2 ${rarityColor} group-hover:scale-105 transition-all duration-300 shadow-lg group-hover:shadow-xl ${shadowColor}`
+    }
+    return "border-2 border-gray-700 group-hover:border-gray-500 transition-all duration-300 group-hover:scale-105 shadow-lg group-hover:shadow-xl"
+  }
+
+  // Image protection handlers
+  const handleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault()
+    return false
+  }
+
+  const handleDragStart = (e: React.DragEvent) => {
+    e.preventDefault()
+    return false
+  }
+
+  const handleSelectStart = (e: any) => {
+    e.preventDefault()
+    return false
+  }
+
+  const renderTooltipContent = (item: any) => {
+    return (
+      <div className="tooltip-content">
+        <div className="font-bold text-white mb-1">{item.name}</div>
+        
+        {/* Rarity for dice, mementos, and watches */}
+        {item.rarity && (folder === 'dice' || folder === 'mementos' || folder === 'watches') && (
+          <div className={`text-xs font-medium mb-2 ${
+            item.rarity === 'common' ? 'text-white' :
+            item.rarity === 'rare' ? 'text-purple-300' :
+            item.rarity === 'relic' ? 'text-yellow-300' : 'text-gray-300'
+          }`}>
+            {item.rarity.charAt(0).toUpperCase() + item.rarity.slice(1)}
+          </div>
+        )}
+
+        {/* Stats for enemies */}
+        {item.stats && folder === 'portraits' && (
+          <div className="text-xs text-gray-300 mb-1">
+            <span className="text-red-400">Stats:</span> {item.stats}
+          </div>
+        )}
+
+        {/* Traits for enemies */}
+        {item.traits && folder === 'portraits' && (
+          <div className="text-xs text-blue-300 mb-1">
+            <span className="text-blue-400">Traits:</span> {item.traits}
+          </div>
+        )}
+
+        {/* Effect description for dice */}
+        {item.description && folder === 'dice' && (
+          <div className="text-xs text-gray-300 mb-2">
+            <span className="text-green-400">Effect:</span> {item.description}
+          </div>
+        )}
+
+        {/* Tooltip for mementos */}
+        {item.tooltip && folder === 'mementos' && (
+          <div className="text-xs text-gray-300 mb-2">
+            <span className="text-green-400">Effect:</span> {item.tooltip}
+          </div>
+        )}
+
+        {/* Effect description for watches */}
+        {item.effect_description && folder === 'watches' && (
+          <div className="text-xs text-gray-300 mb-2">
+            <span className="text-green-400">Effect:</span> {item.effect_description}
+          </div>
+        )}
+
+        {/* Description for enemies, mementos, and watches */}
+        {item.description && (folder === 'portraits' || folder === 'mementos' || folder === 'watches') && (
+          <div className="text-xs text-gray-400 italic border-t border-gray-600 pt-2 mt-2">
+            "{item.description}"
+          </div>
+        )}
+      </div>
+    )
+  }
+
   return (
-    <div className={`w-full ${containerHeights[size]} overflow-hidden ${galleryClass} relative`}>
+    <div className={`w-full ${containerHeights[size]} overflow-visible ${galleryClass} relative`}>
       <div className={`flex space-x-4 ${animationClass} gallery-scroll`}>
         {multipliedItems.map((item, index) => {
           const tooltipKey = `${folder}-${item.name}-${index}`
           const imagePath = `/${folder}/${item.file}`
           
           return (
-            <div
-              key={`${item.file}-${index}`}
-              className="relative flex-shrink-0 group"
-              onMouseEnter={() => setHoveredItem(tooltipKey)}
-              onMouseLeave={() => setHoveredItem(null)}
-            >
+                          <div
+                key={`${item.file}-${index}`}
+                className="relative flex-shrink-0 group"
+                onMouseEnter={() => setHoveredItem(tooltipKey)}
+                onMouseLeave={() => setHoveredItem(null)}
+                onContextMenu={handleContextMenu}
+                {...({ onSelectStart: handleSelectStart } as any)}
+              >
               <div className="relative">
                 <img
                   src={imagePath}
                   alt={item.name}
-                  className={`${sizeClasses[size]} object-cover rounded-lg border-2 border-gray-700 group-hover:border-gray-500 transition-all duration-300 group-hover:scale-105 shadow-lg group-hover:shadow-xl`}
+                  className={`${sizeClasses[size]} object-cover rounded-lg ${getBorderClasses(item)} select-none pointer-events-none`}
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = fallbackImage
                   }}
+                  onDragStart={handleDragStart}
+                  onContextMenu={handleContextMenu}
+                  draggable={false}
+                  style={{
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none',
+                    MozUserSelect: 'none',
+                    msUserSelect: 'none',
+                    WebkitTouchCallout: 'none',
+                    KhtmlUserSelect: 'none'
+                  } as React.CSSProperties}
                 />
                 
-                {/* Tooltip */}
-                {hoveredItem === tooltipKey && (
-                  <div className="tooltip-container">
-                    {item.name}
-                    <div className="tooltip-arrow"></div>
+                {/* Enhanced Tooltip with better positioning */}
+                {showTooltips && hoveredItem === tooltipKey && (
+                  <div className="tooltip-container-enhanced">
+                    {renderTooltipContent(item)}
+                    <div className="tooltip-arrow-enhanced"></div>
                   </div>
                 )}
               </div>

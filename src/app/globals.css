@@ -1,6 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.cdnfonts.com/css/vcr-osd-mono');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global font family */
+* {
+  font-family: 'VCR OSD Mono', 'VT323', monospace !important;
+}
+
+/* Image protection styles */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
+
+/* Allow text selection for readable content */
+p, h1, h2, h3, h4, h5, h6, span, div:not(.no-select) {
+  user-select: text !important;
+  pointer-events: auto !important;
+}
+
+/* Hide scrollbars */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Typewriter animation */
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-cursor {
+  0%, 50% {
+    border-right-color: white;
+  }
+  51%, 100% {
+    border-right-color: transparent;
+  }
+}
+
+.typewriter-container {
+  position: relative;
+}
+
+.typewriter-line {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid transparent;
+  width: 0;
+}
+
+.typewriter-line:nth-child(1) {
+  animation: typewriter 2s steps(20, end) forwards;
+  animation-delay: 0.5s;
+}
+
+.typewriter-line:nth-child(2) {
+  animation: typewriter 2s steps(25, end) forwards;
+  animation-delay: 2.5s;
+}
+
+/* Cursor animation - only on the currently typing line */
+.typewriter-line:nth-child(1) {
+  animation: typewriter 2s steps(20, end) forwards, blink-cursor 1s infinite;
+  animation-delay: 0.5s, 0.5s;
+  animation-duration: 2s, 2s;
+  animation-fill-mode: forwards, none;
+}
+
+.typewriter-line:nth-child(2) {
+  animation: typewriter 2s steps(25, end) forwards, blink-cursor 1s infinite;
+  animation-delay: 2.5s, 2.5s;
+  animation-duration: 2s, 999s;
+  animation-fill-mode: forwards, forwards;
+}
+
+/* Image Protection CSS */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Allow text selection for specific elements */
+p, h1, h2, h3, h4, h5, h6, span, div.tooltip-content {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Prevent image dragging and context menu */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+  -webkit-touch-callout: none;
+}
+
+/* Disable text selection on images */
+img::selection {
+  background: transparent;
+}
+
+img::-moz-selection {
+  background: transparent;
+}
 
 /* Custom Animations for Seamless Carousel */
 @keyframes scroll-left {
@@ -15,29 +147,36 @@
 
 .gallery-scroll-left {
   animation: scroll-left 40s linear infinite;
-  transition: animation-duration 0.8s ease-out;
 }
 
 .gallery-scroll-right {
   animation: scroll-right 35s linear infinite; 
-  transition: animation-duration 0.8s ease-out;
 }
 
-/* Hover slowdown effects - much slower for better viewing */
-.gallery-dungeons:hover .gallery-scroll { 
-  animation-duration: 200s; 
+/* Hover slowdown effects - pause animation to preserve position */
+.gallery-dungeons:hover .gallery-scroll-left,
+.gallery-dungeons:hover .gallery-scroll-right { 
+  animation-play-state: paused;
 }
 
-.gallery-enemies:hover .gallery-scroll { 
-  animation-duration: 180s; 
+.gallery-enemies:hover .gallery-scroll-left,
+.gallery-enemies:hover .gallery-scroll-right { 
+  animation-play-state: paused;
 }
 
-.gallery-dice:hover .gallery-scroll { 
-  animation-duration: 160s; 
+.gallery-dice:hover .gallery-scroll-left,
+.gallery-dice:hover .gallery-scroll-right { 
+  animation-play-state: paused;
 }
 
-.gallery-mementos:hover .gallery-scroll { 
-  animation-duration: 220s; 
+.gallery-mementos:hover .gallery-scroll-left,
+.gallery-mementos:hover .gallery-scroll-right { 
+  animation-play-state: paused;
+}
+
+.gallery-watches:hover .gallery-scroll-left,
+.gallery-watches:hover .gallery-scroll-right { 
+  animation-play-state: paused;
 }
 
 /* Smooth scrolling */
@@ -51,12 +190,56 @@ body {
   min-height: 100vh;
 }
 
-/* Tooltip styles */
+/* Enhanced Tooltip styles - Fixed positioning */
+.tooltip-container-enhanced {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(17, 24, 39, 0.98);
+  backdrop-filter: blur(12px);
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  z-index: 1000;
+  border: 1px solid rgba(75, 85, 99, 0.8);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-out;
+  max-width: 320px;
+  min-width: 240px;
+  white-space: normal;
+  text-align: left;
+  pointer-events: none;
+}
+
+.tooltip-arrow-enhanced {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(17, 24, 39, 0.98);
+}
+
+/* Tooltip content styling */
+.tooltip-content {
+  line-height: 1.4;
+}
+
+/* Legacy tooltip styles for fallback */
 .tooltip-container {
-  @apply absolute -top-12 left-1/2 transform -translate-x-1/2;
-  @apply bg-gray-900 text-white px-3 py-2 rounded-lg;
-  @apply text-sm whitespace-nowrap z-20;
-  @apply border border-gray-700 shadow-xl;
+  @apply absolute -top-14 left-1/2 transform -translate-x-1/2;
+  @apply bg-gray-900/95 backdrop-blur-sm text-white px-4 py-3 rounded-lg;
+  @apply text-sm whitespace-nowrap z-30;
+  @apply border border-gray-600 shadow-2xl;
+  @apply transition-all duration-200 ease-out;
+  max-width: 200px;
+  white-space: normal;
+  text-align: center;
 }
 
 .tooltip-arrow {
@@ -67,4 +250,52 @@ body {
 /* Gallery overflow handling for seamless effect */
 .gallery-scroll {
   width: max-content;
+}
+
+/* Ensure tooltips can overflow gallery containers */
+.gallery-dungeons,
+.gallery-enemies, 
+.gallery-dice,
+.gallery-mementos,
+.gallery-watches {
+  overflow: visible !important;
+}
+
+/* Gallery item positioning for tooltips */
+.gallery-scroll > div {
+  position: relative;
+}
+
+/* White volume slider styling */
+.slider-white::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  border: 2px solid #374151;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.slider-white::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  border: 2px solid #374151;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.slider-white::-webkit-slider-track {
+  background: linear-gradient(to right, white 0%, white var(--slider-progress, 50%), #374151 var(--slider-progress, 50%), #374151 100%);
+  height: 4px;
+  border-radius: 2px;
+}
+
+.slider-white::-moz-range-track {
+  background: #374151;
+  height: 4px;
+  border-radius: 2px;
 } 
