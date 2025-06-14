@@ -82,8 +82,8 @@ export default function Home() {
                 src="/steam.png" 
                 alt="Wishlist on Steam" 
                 width={200}
-                height={40}
-                className="h-10 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
+                height={60}
+                className="w-auto h-12 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
@@ -205,7 +205,7 @@ export default function Home() {
             © 2024 Skipstone Games. All rights reserved.
           </p>
           <p className="text-gray-500 text-lg">
-            Every roll counts and death is just the beginning.
+            Every roll counts, and death is just the beginning.
           </p>
         </div>
       </footer>
