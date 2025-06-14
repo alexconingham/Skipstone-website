@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 interface ImageGalleryProps {
   items: Array<{
@@ -62,8 +63,8 @@ export default function ImageGallery({
   const animationClass = direction === "left" ? "gallery-scroll-left" : "gallery-scroll-right"
   const galleryClass = `gallery-${galleryId}`
 
-  // Create multiple duplicates for seamless infinite scrolling
-  const multipliedItems = [...items, ...items, ...items, ...items]
+  // Reduce duplicates to improve performance - still seamless but fewer images to load
+  const multipliedItems = [...items, ...items, ...items]
 
   const getBorderClasses = (item: any) => {
     if ((folder === 'dice' || folder === 'mementos' || folder === 'watches') && item.rarity) {
@@ -174,9 +175,11 @@ export default function ImageGallery({
                 {...({ onSelectStart: handleSelectStart } as any)}
               >
               <div className="relative">
-                <img
+                <Image
                   src={imagePath}
                   alt={item.name}
+                  width={size === 'massive' ? 192 : size === 'extra-large' ? 80 : size === 'large' ? 64 : size === 'medium' ? 48 : 40}
+                  height={size === 'massive' ? 128 : size === 'extra-large' ? 80 : size === 'large' ? 48 : size === 'medium' ? 48 : 40}
                   className={`${sizeClasses[size]} object-cover rounded-lg ${getBorderClasses(item)} select-none pointer-events-none`}
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = fallbackImage
@@ -184,6 +187,9 @@ export default function ImageGallery({
                   onDragStart={handleDragStart}
                   onContextMenu={handleContextMenu}
                   draggable={false}
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                   style={{
                     userSelect: 'none',
                     WebkitUserSelect: 'none',

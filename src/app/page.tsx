@@ -1,6 +1,7 @@
 import AudioPlayer from '@/components/AudioPlayer'
 import ImageGallery from '@/components/ImageGallery'
 import ImageProtection from '@/components/ImageProtection'
+import Image from 'next/image'
 import { getDiceData, getMementoData, getEnemyData, getWatchData } from '@/utils/dataMapper'
 
 // Game assets data structure with actual data from JSON files
@@ -52,11 +53,14 @@ export default function Home() {
         <div className="text-center space-y-4 max-w-3xl mx-auto relative z-10">
           {/* Main Logo */}
           <div className="mb-4">
-            <img 
+            <Image 
               src="/title_logo.png" 
               alt="Remember to Die - Game Logo" 
+              width={384}
+              height={200}
               className="mx-auto max-w-sm w-full h-auto"
               style={{ filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))' }}
+              priority
             />
           </div>
 
@@ -74,9 +78,11 @@ export default function Home() {
           {/* Steam Wishlist Button */}
           <div className="flex justify-center">
             <button className="group relative">
-              <img 
+              <Image 
                 src="/steam.png" 
                 alt="Wishlist on Steam" 
+                width={200}
+                height={40}
                 className="h-10 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -99,7 +105,7 @@ export default function Home() {
             A lifetime of memories
           </h2>
           <p className="text-center text-gray-400 mb-6 max-w-xl mx-auto text-sm md:text-base">
-           Each fragment unlocked splinters the story into new paths, you choose which memories to pursue and which truths to rewrite.
+           Each fragment you unlock splinters the story into new fates; you choose which fantasies to pursue, and which truths to rewrite.
           </p>
           <ImageGallery 
             items={gameAssets.dungeons} 
@@ -192,9 +198,11 @@ export default function Home() {
       <footer className="py-6 px-4 border-t border-gray-800">
         <div className="max-w-2xl mx-auto text-center space-y-2">
           <div className="flex justify-center mb-3">
-            <img 
+            <Image 
               src="/Skipstone_logo.png" 
               alt="Skipstone Games" 
+              width={100}
+              height={16}
               className="h-4 opacity-80"
             />
           </div>
