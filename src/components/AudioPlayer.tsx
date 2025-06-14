@@ -33,7 +33,7 @@ export default function AudioPlayer() {
   const [isHovered, setIsHovered] = useState(false)
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
-  const [isClosed, setIsClosed] = useState(false)
+  const [isMinimized, setIsMinimized] = useState(false)
 
   // Trigger pop-in animation and auto-play on mount
   useEffect(() => {
@@ -158,35 +158,32 @@ export default function AudioPlayer() {
 
   const progressPercentage = duration ? (currentTime / duration) * 100 : 0
 
-  const handleClose = () => {
-    setIsClosed(true)
-    if (audioRef.current) {
-      audioRef.current.pause()
-      setIsPlaying(false)
-    }
+  const handleToggle = () => {
+    setIsMinimized(!isMinimized)
   }
 
-  if (isClosed) return null
-
   return (
-    <div 
-      className={`fixed top-4 left-4 z-50 transition-all duration-700 ease-out transform ${
-        isVisible 
-          ? 'translate-x-0 translate-y-0 opacity-100' 
-          : '-translate-x-full -translate-y-full opacity-0'
-      } ${isHovered ? 'scale-105' : 'scale-100'}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Compact Retro Player Design */}
-      <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-black border-2 border-gray-600 rounded-lg p-2 shadow-2xl relative">
-        {/* Close Tab */}
-        <button
-          onClick={handleClose}
-          className="absolute -top-1 -right-1 w-5 h-5 bg-red-600 border border-red-400 rounded-full flex items-center justify-center hover:bg-red-500 transition-colors duration-200 text-white text-xs font-bold"
-        >
-          ×
-        </button>
+    <div className="fixed top-4 left-4 z-50">
+      {/* Toggle Tab - Always visible */}
+      <button
+        onClick={handleToggle}
+        className={`absolute ${isMinimized ? 'top-0 left-0' : 'top-0 -right-6'} w-6 h-8 bg-gray-700 border border-gray-500 rounded-r-lg flex items-center justify-center hover:bg-gray-600 transition-all duration-300 text-white text-xs font-bold z-10`}
+      >
+        {isMinimized ? '►' : '◄'}
+      </button>
+
+      {/* Player Container */}
+      <div 
+        className={`transition-all duration-700 ease-out transform ${
+          isVisible && !isMinimized
+            ? 'translate-x-0 translate-y-0 opacity-100' 
+            : '-translate-x-full -translate-y-full opacity-0'
+        } ${isHovered ? 'scale-105' : 'scale-100'}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Compact Retro Player Design */}
+        <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-black border-2 border-gray-600 rounded-lg p-2 shadow-2xl relative">
 
         {/* Compact Display */}
         <div className="bg-black border border-gray-700 rounded p-1 mb-2">
@@ -238,6 +235,7 @@ export default function AudioPlayer() {
               background: `linear-gradient(to right, #ef4444 0%, #ef4444 ${volume * 100}%, #374151 ${volume * 100}%, #374151 100%)`
             }}
           />
+        </div>
         </div>
       </div>
 

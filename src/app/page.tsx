@@ -122,7 +122,7 @@ export default function Home() {
       </section>
 
       {/* Enemies Section */}
-      <section className="py-8 px-4">
+      <section className="py-4 px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
             A string of haunting faces
@@ -204,9 +204,9 @@ export default function Home() {
             <Image 
               src="/Skipstone_logo.png" 
               alt="Skipstone Games" 
-              width={400}
-              height={64}
-              className="w-auto h-16 opacity-80"
+              width={800}
+              height={128}
+              className="w-auto h-32 opacity-80"
             />
           </div>
           <p className="text-gray-400">
