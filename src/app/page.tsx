@@ -49,25 +49,25 @@ export default function Home() {
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/60"></div>
         
-        <div className="text-center space-y-8 max-w-4xl mx-auto relative z-10">
+        <div className="text-center space-y-4 max-w-3xl mx-auto relative z-10">
           {/* Main Logo */}
-          <div className="mb-6">
+          <div className="mb-4">
             <img 
               src="/title_logo.png" 
               alt="Remember to Die - Game Logo" 
-              className="mx-auto max-w-xl w-full h-auto"
-              style={{ filter: 'drop-shadow(0 0 15px rgba(255, 255, 255, 0.3))' }}
+              className="mx-auto max-w-sm w-full h-auto"
+              style={{ filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))' }}
             />
           </div>
 
           {/* Hero Title */}
-          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 typewriter-container">
+          <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 typewriter-container">
             <span className="typewriter-line">Battle your demons.</span>
             <span className="typewriter-line">Re-roll your destiny.</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-gray-300 mb-6 leading-relaxed">
+          <p className="text-base md:text-lg text-gray-300 mb-4 leading-relaxed">
             Remember to Die is a gritty, narrative-driven battle against time and broken memories, wrapped in an intuitive and moreish dice strategy. roguelike where every dice roll dredges up a fragmented memory and decides your fate. Collect poignant mementos to bend truth or illusion in your favour, confront your inner demons and reroll your destiny one fragment at a time.
           </p>
 
@@ -77,7 +77,7 @@ export default function Home() {
               <img 
                 src="/steam.png" 
                 alt="Wishlist on Steam" 
-                className="h-12 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
+                className="h-10 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
@@ -93,19 +93,19 @@ export default function Home() {
       </section>
 
       {/* Dungeons Section */}
-      <section className="py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+      <section className="py-8 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
             A lifetime of memories
           </h2>
-          <p className="text-center text-gray-400 mb-8 max-w-2xl mx-auto">
+          <p className="text-center text-gray-400 mb-6 max-w-xl mx-auto text-sm md:text-base">
            Each fragment unlocked splinters the story into new paths, you choose which memories to pursue and which truths to rewrite.
           </p>
           <ImageGallery 
             items={gameAssets.dungeons} 
             folder="backgrounds" 
             direction="right" 
-            size="massive"
+            size="large"
             galleryId="dungeons"
             showTooltips={false}
           />
@@ -113,89 +113,89 @@ export default function Home() {
       </section>
 
       {/* Enemies Section */}
-      <section className="py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
+      <section className="py-8 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
             A string of haunting faces
           </h2>
-          <p className="text-center text-gray-400 mb-8 max-w-2xl mx-auto">
+          <p className="text-center text-gray-400 mb-6 max-w-xl mx-auto text-sm md:text-base">
             Each enemy hints at more of the haunting truth.
           </p>
           <ImageGallery 
             items={gameAssets.enemies} 
             folder="portraits" 
             direction="left" 
-            size="extra-large"
+            size="large"
             galleryId="enemies"
           />
         </div>
       </section>
 
       {/* Dice Section */}
-      <section className="py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+      <section className="py-8 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
             An evolving arsenal
           </h2>
-          <p className="text-center text-gray-400 mb-8 max-w-2xl mx-auto">
+          <p className="text-center text-gray-400 mb-6 max-w-xl mx-auto text-sm md:text-base">
             Collect and refine powerful dice combinations.
           </p>
           <ImageGallery 
             items={gameAssets.dice} 
             folder="dice" 
             direction="right" 
-            size="large"
+            size="medium"
             galleryId="dice"
           />
         </div>
       </section>
 
       {/* Mementos Section */}
-      <section className="py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+      <section className="py-8 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             And a bagful of tricks...
           </h2>
-          <p className="text-center text-gray-400 mb-8 max-w-2xl mx-auto">
+          <p className="text-center text-gray-400 mb-6 max-w-xl mx-auto text-sm md:text-base">
             Collect mementos drenched in heartbreaking lore, each with unique effects.
           </p>
           <ImageGallery 
             items={gameAssets.mementos} 
             folder="mementos" 
             direction="left" 
-            size="large"
+            size="medium"
             galleryId="mementos"
           />
         </div>
       </section>
 
       {/* Watches Section */}
-      <section className="py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 bg-gradient-to-r from-yellow-400 to-amber-400 bg-clip-text text-transparent">
+      <section className="py-8 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-yellow-400 to-amber-400 bg-clip-text text-transparent">
             Time is not on your side...
           </h2>
-          <p className="text-center text-gray-400 mb-8 max-w-2xl mx-auto">
+          <p className="text-center text-gray-400 mb-6 max-w-xl mx-auto text-sm md:text-base">
             Unique watches bend time, and bolster tenacity.
           </p>
           <ImageGallery 
             items={gameAssets.watches} 
             folder="watches" 
             direction="right" 
-            size="large"
+            size="medium"
             galleryId="watches"
           />
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-gray-800">
-        <div className="max-w-3xl mx-auto text-center space-y-3">
-          <div className="flex justify-center mb-4">
+      <footer className="py-6 px-4 border-t border-gray-800">
+        <div className="max-w-2xl mx-auto text-center space-y-2">
+          <div className="flex justify-center mb-3">
             <img 
               src="/Skipstone_logo.png" 
               alt="Skipstone Games" 
-              className="h-5 opacity-80"
+              className="h-4 opacity-80"
             />
           </div>
           <p className="text-gray-400">
