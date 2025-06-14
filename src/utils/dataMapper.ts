@@ -74,9 +74,8 @@ export const getMementoData = () => {
     if (memento.image === 'heavy_keychain.png') {
       imageFile = 'gate_lock.png'  // Different naming
     }
-    if (memento.image === 'weighted_die.png') {
-      imageFile = 'stress_ball.png'  // Different item entirely
-    }
+    // Remove the incorrect mapping - stress_ball.png should show stress_ball data
+    // and weighted_die.png should show weighted_die data
     if (memento.image === 'heartburn.png') {
       imageFile = 'holy_water.png'  // Different naming
     }
