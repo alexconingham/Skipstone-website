@@ -182,10 +182,10 @@ export default function Home() {
       <section className="py-4 px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-yellow-400 to-amber-400 bg-clip-text text-transparent">
-            Time is not on your side...
+            But time is not on your side...
           </h2>
           <p className="text-center text-gray-400 mb-6 max-w-xl mx-auto text-sm md:text-base">
-            Unique watches bend time, and bolster tenacity.
+            Unique watches shift the odds.
           </p>
           <ImageGallery 
             items={gameAssets.watches} 
