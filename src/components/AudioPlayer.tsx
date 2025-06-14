@@ -33,6 +33,7 @@ export default function AudioPlayer() {
   const [isHovered, setIsHovered] = useState(false)
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
+  const [isClosed, setIsClosed] = useState(false)
 
   // Trigger pop-in animation and auto-play on mount
   useEffect(() => {
@@ -157,6 +158,16 @@ export default function AudioPlayer() {
 
   const progressPercentage = duration ? (currentTime / duration) * 100 : 0
 
+  const handleClose = () => {
+    setIsClosed(true)
+    if (audioRef.current) {
+      audioRef.current.pause()
+      setIsPlaying(false)
+    }
+  }
+
+  if (isClosed) return null
+
   return (
     <div 
       className={`fixed top-4 left-4 z-50 transition-all duration-700 ease-out transform ${
@@ -167,83 +178,66 @@ export default function AudioPlayer() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Retro Cassette Player Design */}
-      <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-black border-4 border-gray-600 rounded-lg p-4 shadow-2xl">
-        {/* Retro Display Screen */}
-        <div className="bg-black border-2 border-gray-700 rounded p-2 mb-3">
+      {/* Compact Retro Player Design */}
+      <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-black border-2 border-gray-600 rounded-lg p-2 shadow-2xl relative">
+        {/* Close Tab */}
+        <button
+          onClick={handleClose}
+          className="absolute -top-1 -right-1 w-5 h-5 bg-red-600 border border-red-400 rounded-full flex items-center justify-center hover:bg-red-500 transition-colors duration-200 text-white text-xs font-bold"
+        >
+          ×
+        </button>
+
+        {/* Compact Display */}
+        <div className="bg-black border border-gray-700 rounded p-1 mb-2">
           <div className="text-green-400 font-mono text-xs text-center">
-            ♪ {playlist[currentTrackIndex].title.replace('Neon Shadows', 'NEON SHADOWS').slice(0, 25)} ♪
+            {playlist[currentTrackIndex].title.replace('Neon Shadows', 'NEON').slice(0, 15)}
           </div>
-          <div className="text-green-300 font-mono text-xs text-center mt-1">
-            {isPlaying ? '► PLAYING' : '⏸ PAUSED'} | VOL: {Math.round(volume * 100)}%
+          <div className="text-green-300 font-mono text-xs text-center">
+            {isPlaying ? '►' : '⏸'} {Math.round(volume * 100)}%
           </div>
         </div>
 
-        {/* Control Buttons - Retro Style */}
-        <div className="flex items-center justify-center space-x-2 mb-3">
-          {/* Previous Button */}
+        {/* Compact Controls */}
+        <div className="flex items-center justify-center space-x-1 mb-2">
           <button
             onClick={previousTrack}
-            className="w-8 h-8 bg-gray-700 border-2 border-gray-500 rounded-sm flex items-center justify-center hover:bg-gray-600 transition-colors duration-200 shadow-inner"
+            className="w-6 h-6 bg-gray-700 border border-gray-500 rounded flex items-center justify-center hover:bg-gray-600 transition-colors duration-200"
           >
-            <span className="text-gray-200 text-sm font-bold">⏮</span>
+            <span className="text-gray-200 text-xs">⏮</span>
           </button>
 
-          {/* Play/Pause Button */}
           <button
             onClick={togglePlay}
-            className="w-12 h-12 bg-red-600 border-2 border-red-400 rounded-sm flex items-center justify-center hover:bg-red-500 transition-colors duration-200 shadow-inner"
+            className="w-8 h-8 bg-red-600 border border-red-400 rounded flex items-center justify-center hover:bg-red-500 transition-colors duration-200"
           >
-            <span className="text-white text-lg font-bold">
+            <span className="text-white text-sm">
               {isPlaying ? '⏸' : '▶'}
             </span>
           </button>
 
-          {/* Next Button */}
           <button
             onClick={nextTrack}
-            className="w-8 h-8 bg-gray-700 border-2 border-gray-500 rounded-sm flex items-center justify-center hover:bg-gray-600 transition-colors duration-200 shadow-inner"
+            className="w-6 h-6 bg-gray-700 border border-gray-500 rounded flex items-center justify-center hover:bg-gray-600 transition-colors duration-200"
           >
-            <span className="text-gray-200 text-sm font-bold">⏭</span>
+            <span className="text-gray-200 text-xs">⏭</span>
           </button>
         </div>
 
-        {/* Volume Knob Style Control */}
-        <div className="flex items-center justify-center space-x-2">
-          <span className="text-gray-400 text-xs font-mono">VOL</span>
-          <div className="relative">
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.1"
-              value={volume}
-              onChange={(e) => setVolume(Number(e.target.value))}
-              className="w-16 h-2 bg-gray-800 border border-gray-600 rounded appearance-none cursor-pointer"
-              style={{
-                background: `linear-gradient(to right, #ef4444 0%, #ef4444 ${volume * 100}%, #374151 ${volume * 100}%, #374151 100%)`
-              }}
-            />
-          </div>
-          <span className="text-gray-400 text-xs font-mono">{Math.round(volume * 100)}</span>
-        </div>
-
-        {/* Retro Speaker Grilles */}
-        <div className="flex justify-between mt-3">
-          <div className="w-3 h-8 bg-gray-700 border border-gray-600 rounded-sm">
-            <div className="grid grid-cols-2 gap-px p-1 h-full">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="bg-gray-800 rounded-full"></div>
-              ))}
-            </div>
-          </div>
-          <div className="w-3 h-8 bg-gray-700 border border-gray-600 rounded-sm">
-            <div className="grid grid-cols-2 gap-px p-1 h-full">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="bg-gray-800 rounded-full"></div>
-              ))}
-            </div>
-          </div>
+        {/* Compact Volume */}
+        <div className="flex items-center justify-center space-x-1">
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            value={volume}
+            onChange={(e) => setVolume(Number(e.target.value))}
+            className="w-12 h-1 bg-gray-800 border border-gray-600 rounded appearance-none cursor-pointer"
+            style={{
+              background: `linear-gradient(to right, #ef4444 0%, #ef4444 ${volume * 100}%, #374151 ${volume * 100}%, #374151 100%)`
+            }}
+          />
         </div>
       </div>
 

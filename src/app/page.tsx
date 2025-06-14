@@ -141,7 +141,7 @@ export default function Home() {
       </section>
 
       {/* Dice Section */}
-      <section className="py-8 px-4">
+      <section className="py-4 px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
             An evolving arsenal
@@ -160,7 +160,7 @@ export default function Home() {
       </section>
 
       {/* Mementos Section */}
-      <section className="py-8 px-4">
+      <section className="py-4 px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             And a bagful of tricks...
@@ -179,7 +179,7 @@ export default function Home() {
       </section>
 
       {/* Watches Section */}
-      <section className="py-8 px-4">
+      <section className="py-4 px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-yellow-400 to-amber-400 bg-clip-text text-transparent">
             Time is not on your side...
@@ -204,9 +204,9 @@ export default function Home() {
             <Image 
               src="/Skipstone_logo.png" 
               alt="Skipstone Games" 
-              width={200}
-              height={32}
-              className="w-auto h-8 opacity-80"
+              width={400}
+              height={64}
+              className="w-auto h-16 opacity-80"
             />
           </div>
           <p className="text-gray-400">
