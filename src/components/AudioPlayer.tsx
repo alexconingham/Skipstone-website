@@ -32,6 +32,23 @@ export default function AudioPlayer() {
   const [duration, setDuration] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+
+  // Trigger pop-in animation and auto-play on mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true)
+      // Try to auto-play after the animation
+      if (audioRef.current) {
+        audioRef.current.play().then(() => {
+          setIsPlaying(true)
+        }).catch((error) => {
+          console.log('Autoplay prevented:', error)
+        })
+      }
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     const audio = audioRef.current
@@ -142,58 +159,59 @@ export default function AudioPlayer() {
 
   return (
     <div 
-      className={`fixed top-6 left-6 z-50 transition-all duration-300 ease-out ${
-        isHovered ? 'scale-105' : 'scale-100'
-      }`}
+      className={`fixed top-4 left-4 z-50 transition-all duration-700 ease-out transform ${
+        isVisible 
+          ? 'translate-x-0 translate-y-0 opacity-100' 
+          : '-translate-x-full -translate-y-full opacity-0'
+      } ${isHovered ? 'scale-105' : 'scale-100'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="bg-gray-900/80 backdrop-blur-md border border-gray-700/50 rounded-xl p-4 shadow-2xl">
-        <div className="flex flex-col items-center space-y-3">
-          {/* Control Buttons Row */}
-          <div className="flex items-center space-x-3">
-            {/* Previous Button */}
-            <button
-              onClick={previousTrack}
-              className="w-8 h-8 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-200 shadow-lg"
-            >
-              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-              </svg>
-            </button>
-
-            {/* Play/Pause Button */}
-            <button
-              onClick={togglePlay}
-              className="w-10 h-10 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-200 shadow-lg"
-            >
-              {isPlaying ? (
-                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
-              ) : (
-                <svg className="w-4 h-4 text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                </svg>
-              )}
-            </button>
-
-            {/* Next Button */}
-            <button
-              onClick={nextTrack}
-              className="w-8 h-8 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-200 shadow-lg"
-            >
-              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414zm6 0a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414-1.414L14.586 10l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </button>
+      {/* Retro Cassette Player Design */}
+      <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-black border-4 border-gray-600 rounded-lg p-4 shadow-2xl">
+        {/* Retro Display Screen */}
+        <div className="bg-black border-2 border-gray-700 rounded p-2 mb-3">
+          <div className="text-green-400 font-mono text-xs text-center">
+            ♪ {playlist[currentTrackIndex].title.replace('Neon Shadows', 'NEON SHADOWS').slice(0, 25)} ♪
           </div>
+          <div className="text-green-300 font-mono text-xs text-center mt-1">
+            {isPlaying ? '► PLAYING' : '⏸ PAUSED'} | VOL: {Math.round(volume * 100)}%
+          </div>
+        </div>
 
-          {/* Volume Control Row */}
-          <div className="flex items-center space-x-2">
-            <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.617.785L4.88 13.37A1 1 0 014 12.348V7.652a1 1 0 01.88-1.02l3.503-2.416A1 1 0 019.383 3.076zM12.863 5.18a.5.5 0 01.707 0 4.97 4.97 0 010 7.64.5.5 0 01-.707-.708 3.97 3.97 0 000-5.224.5.5 0 010-.708z" clipRule="evenodd" />
-            </svg>
+        {/* Control Buttons - Retro Style */}
+        <div className="flex items-center justify-center space-x-2 mb-3">
+          {/* Previous Button */}
+          <button
+            onClick={previousTrack}
+            className="w-8 h-8 bg-gray-700 border-2 border-gray-500 rounded-sm flex items-center justify-center hover:bg-gray-600 transition-colors duration-200 shadow-inner"
+          >
+            <span className="text-gray-200 text-sm font-bold">⏮</span>
+          </button>
+
+          {/* Play/Pause Button */}
+          <button
+            onClick={togglePlay}
+            className="w-12 h-12 bg-red-600 border-2 border-red-400 rounded-sm flex items-center justify-center hover:bg-red-500 transition-colors duration-200 shadow-inner"
+          >
+            <span className="text-white text-lg font-bold">
+              {isPlaying ? '⏸' : '▶'}
+            </span>
+          </button>
+
+          {/* Next Button */}
+          <button
+            onClick={nextTrack}
+            className="w-8 h-8 bg-gray-700 border-2 border-gray-500 rounded-sm flex items-center justify-center hover:bg-gray-600 transition-colors duration-200 shadow-inner"
+          >
+            <span className="text-gray-200 text-sm font-bold">⏭</span>
+          </button>
+        </div>
+
+        {/* Volume Knob Style Control */}
+        <div className="flex items-center justify-center space-x-2">
+          <span className="text-gray-400 text-xs font-mono">VOL</span>
+          <div className="relative">
             <input
               type="range"
               min="0"
@@ -201,11 +219,30 @@ export default function AudioPlayer() {
               step="0.1"
               value={volume}
               onChange={(e) => setVolume(Number(e.target.value))}
-              className="w-20 h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer slider-white"
+              className="w-16 h-2 bg-gray-800 border border-gray-600 rounded appearance-none cursor-pointer"
               style={{
-                '--slider-progress': `${volume * 100}%`
-              } as React.CSSProperties}
+                background: `linear-gradient(to right, #ef4444 0%, #ef4444 ${volume * 100}%, #374151 ${volume * 100}%, #374151 100%)`
+              }}
             />
+          </div>
+          <span className="text-gray-400 text-xs font-mono">{Math.round(volume * 100)}</span>
+        </div>
+
+        {/* Retro Speaker Grilles */}
+        <div className="flex justify-between mt-3">
+          <div className="w-3 h-8 bg-gray-700 border border-gray-600 rounded-sm">
+            <div className="grid grid-cols-2 gap-px p-1 h-full">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="bg-gray-800 rounded-full"></div>
+              ))}
+            </div>
+          </div>
+          <div className="w-3 h-8 bg-gray-700 border border-gray-600 rounded-sm">
+            <div className="grid grid-cols-2 gap-px p-1 h-full">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="bg-gray-800 rounded-full"></div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -214,7 +251,6 @@ export default function AudioPlayer() {
       <audio 
         ref={audioRef}
         src={playlist[currentTrackIndex].src}
-        loop
         preload="auto"
       />
     </div>

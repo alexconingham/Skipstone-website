@@ -76,7 +76,15 @@ export default function Home() {
           </p>
 
           {/* Steam Wishlist Button */}
-          <div className="flex justify-center">
+          <div className="flex items-center justify-center gap-4">
+            <div className="text-right">
+              <h3 className="text-2xl md:text-3xl font-bold text-white tracking-wide">
+                COMING SOON
+              </h3>
+            </div>
+            <div className="text-2xl md:text-3xl font-bold text-gray-400">
+              |
+            </div>
             <button className="group relative">
               <Image 
                 src="/steam.png" 
@@ -196,9 +204,9 @@ export default function Home() {
             <Image 
               src="/Skipstone_logo.png" 
               alt="Skipstone Games" 
-              width={100}
-              height={16}
-              className="h-4 opacity-80"
+              width={200}
+              height={32}
+              className="w-auto h-8 opacity-80"
             />
           </div>
           <p className="text-gray-400">
