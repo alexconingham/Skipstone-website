@@ -36,19 +36,19 @@ export default function ImageGallery({
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
   const sizeClasses = {
-    small: "w-10 h-10",           // 40x40px - Small mementos
-    medium: "w-12 h-12",          // 48x48px - Medium items  
-    large: "w-16 h-12",           // 64x48px - Large items
-    "extra-large": "w-20 h-20",   // 80x80px - Extra large items
-    "massive": "w-48 h-32"        // 192x128px - Smaller dungeons
+    small: "w-12 h-12",           // 48x48px - Small mementos
+    medium: "w-16 h-16",          // 64x64px - Medium items  
+    large: "w-20 h-16",           // 80x64px - Large items
+    "extra-large": "w-28 h-28",   // 112x112px - Extra large items
+    "massive": "w-64 h-40"        // 256x160px - Large dungeons
   }
 
   const containerHeights = {
-    small: "h-12",        // 48px
-    medium: "h-16",       // 64px  
-    large: "h-16",        // 64px
-    "extra-large": "h-24", // 96px
-    "massive": "h-40"     // 160px
+    small: "h-16",        // 64px
+    medium: "h-20",       // 80px  
+    large: "h-20",        // 80px
+    "extra-large": "h-32", // 128px
+    "massive": "h-48"     // 192px
   }
 
   // Rarity color mapping for borders
@@ -178,8 +178,8 @@ export default function ImageGallery({
                 <Image
                   src={imagePath}
                   alt={item.name}
-                  width={size === 'massive' ? 192 : size === 'extra-large' ? 80 : size === 'large' ? 64 : size === 'medium' ? 48 : 40}
-                  height={size === 'massive' ? 128 : size === 'extra-large' ? 80 : size === 'large' ? 48 : size === 'medium' ? 48 : 40}
+                  width={size === 'massive' ? 256 : size === 'extra-large' ? 112 : size === 'large' ? 80 : size === 'medium' ? 64 : 48}
+                  height={size === 'massive' ? 160 : size === 'extra-large' ? 112 : size === 'large' ? 64 : size === 'medium' ? 64 : 48}
                   className={`${sizeClasses[size]} object-cover rounded-lg ${getBorderClasses(item)} select-none pointer-events-none`}
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = fallbackImage

@@ -106,7 +106,7 @@ export default function Home() {
             items={gameAssets.dungeons} 
             folder="backgrounds" 
             direction="right" 
-            size="large"
+            size="massive"
             galleryId="dungeons"
             showTooltips={false}
           />
@@ -126,7 +126,7 @@ export default function Home() {
             items={gameAssets.enemies} 
             folder="portraits" 
             direction="left" 
-            size="large"
+            size="extra-large"
             galleryId="enemies"
           />
         </div>
