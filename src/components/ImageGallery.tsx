@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import Image from 'next/image'
 
 interface ImageGalleryProps {
@@ -34,6 +34,27 @@ export default function ImageGallery({
   showTooltips = true
 }: ImageGalleryProps) {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+  
+  // Drag functionality state
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStart, setDragStart] = useState(0)
+  const [scrollOffset, setScrollOffset] = useState(0)
+  const [isManuallyScrolling, setIsManuallyScrolling] = useState(false)
+  
+  const containerRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  // Reset manual scrolling after a delay
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout
+    if (isManuallyScrolling) {
+      timeoutId = setTimeout(() => {
+        setIsManuallyScrolling(false)
+        setScrollOffset(0)
+      }, 3000) // Resume auto-scroll after 3 seconds of no interaction
+    }
+    return () => clearTimeout(timeoutId)
+  }, [isManuallyScrolling])
 
   const sizeClasses = {
     small: "w-12 h-12",           // 48x48px - Small mementos
@@ -65,6 +86,50 @@ export default function ImageGallery({
 
   // Reduce duplicates to improve performance - still seamless but fewer images to load
   const multipliedItems = [...items, ...items, ...items]
+
+  // Drag handlers
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    setIsDragging(true)
+    setDragStart(e.clientX)
+    setIsManuallyScrolling(true)
+    e.preventDefault()
+  }, [])
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging) return
+    
+    const deltaX = e.clientX - dragStart
+    setScrollOffset(deltaX)
+    e.preventDefault()
+  }, [isDragging, dragStart])
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false)
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    setIsDragging(false)
+  }, [])
+
+  // Touch handlers for mobile
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    setIsDragging(true)
+    setDragStart(e.touches[0].clientX)
+    setIsManuallyScrolling(true)
+    e.preventDefault()
+  }, [])
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!isDragging) return
+    
+    const deltaX = e.touches[0].clientX - dragStart
+    setScrollOffset(deltaX)
+    e.preventDefault()
+  }, [isDragging, dragStart])
+
+  const handleTouchEnd = useCallback(() => {
+    setIsDragging(false)
+  }, [])
 
   const getBorderClasses = useCallback((item: any) => {
     if ((folder === 'dice' || folder === 'mementos' || folder === 'watches') && item.rarity) {
@@ -173,11 +238,26 @@ export default function ImageGallery({
 
   return (
     <div 
-      className={`w-full ${containerHeights[size]} overflow-visible ${galleryClass} relative`}
+      ref={containerRef}
+      className={`w-full ${containerHeights[size]} overflow-visible ${galleryClass} relative cursor-grab ${isDragging ? 'cursor-grabbing' : ''}`}
       role="region"
       aria-label={`${folder} gallery`}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
-      <div className={`flex space-x-4 ${animationClass} gallery-scroll`}>
+      <div 
+        ref={scrollRef}
+        className={`flex space-x-4 ${isManuallyScrolling ? '' : animationClass} gallery-scroll`}
+        style={{
+          transform: isManuallyScrolling ? `translateX(${scrollOffset}px)` : undefined,
+          transition: isManuallyScrolling ? 'none' : undefined
+        }}
+      >
         {multipliedItems.map((item, index) => {
           const tooltipKey = `${folder}-${item.name}-${index}`
           const imagePath = `/${folder}/${item.file}`
@@ -190,7 +270,7 @@ export default function ImageGallery({
             <div
               key={`${item.file}-${index}`}
               className="relative flex-shrink-0 group"
-              onMouseEnter={() => setHoveredItem(tooltipKey)}
+              onMouseEnter={() => !isDragging && setHoveredItem(tooltipKey)}
               onMouseLeave={() => setHoveredItem(null)}
               onContextMenu={handleContextMenu}
               {...({ onSelectStart: handleSelectStart } as any)}

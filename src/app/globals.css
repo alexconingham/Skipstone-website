@@ -290,12 +290,11 @@ html {
   animation-delay: 2.5s;
 }
 
-/* Cursor animation - only on the currently typing line */
+/* Cursor animation - only on the bottom line (second line) */
 .typewriter-line:nth-child(1) {
-  animation: typewriter 2s steps(20, end) forwards, blink-cursor 1s infinite;
-  animation-delay: 0.5s, 0.5s;
-  animation-duration: 2s, 2s;
-  animation-fill-mode: forwards, none;
+  animation: typewriter 2s steps(20, end) forwards;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
 }
 
 .typewriter-line:nth-child(2) {
@@ -473,6 +472,25 @@ body {
 /* Gallery item positioning for tooltips */
 .gallery-scroll > div {
   position: relative;
+}
+
+/* Drag functionality enhancements */
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.cursor-grabbing * {
+  pointer-events: none;
+}
+
+/* Disable auto-scroll animation during manual scrolling */
+.gallery-scroll.manual-scroll {
+  animation: none !important;
 }
 
 /* White volume slider styling */
