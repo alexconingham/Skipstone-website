@@ -5,8 +5,13 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
+    "build:prod": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "optimize": "npm run lint:fix && npm run build",
+    "deploy": "npm run optimize && echo 'Ready for deployment to Vercel'"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.50.0",

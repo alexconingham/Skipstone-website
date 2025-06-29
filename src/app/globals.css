@@ -5,6 +5,215 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Variables for better contrast compliance */
+:root {
+  --bg-dark: #000000;
+  --bg-overlay: rgba(0, 0, 0, 0.75);
+  --text-primary: #ffffff;
+  --text-secondary: #e5e7eb;
+  --text-tertiary: #d1d5db;
+  --border-light: rgba(255, 255, 255, 0.2);
+  --shadow-glow: rgba(255, 255, 255, 0.1);
+}
+
+/* Performance optimizations */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a1a 50%, var(--bg-dark) 100%);
+  min-height: 100vh;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Hide scrollbars */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Font optimization with better fallbacks */
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Typewriter animation with better performance */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-cursor {
+  0%, 50% { border-right-color: var(--text-primary); }
+  51%, 100% { border-right-color: transparent; }
+}
+
+.typewriter-container {
+  position: relative;
+}
+
+.typewriter-line {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid transparent;
+  width: 0;
+  will-change: width;
+}
+
+.typewriter-line:nth-child(1) {
+  animation: typewriter 2s steps(20, end) forwards, blink-cursor 1s infinite;
+  animation-delay: 0.5s;
+}
+
+.typewriter-line:nth-child(2) {
+  animation: typewriter 2s steps(25, end) forwards, blink-cursor 1s infinite;
+  animation-delay: 2.5s;
+  animation-duration: 2s, 999s;
+  animation-fill-mode: forwards;
+}
+
+/* Enhanced Image Protection */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+img::selection,
+img::-moz-selection {
+  background: transparent;
+}
+
+/* Allow text selection for readable content */
+p, h1, h2, h3, h4, h5, h6, span, div.tooltip-content, button[aria-label] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  pointer-events: auto;
+}
+
+/* Optimized Gallery Animations */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+.gallery-scroll-left {
+  animation: scroll-left 40s linear infinite;
+  will-change: transform;
+}
+
+.gallery-scroll-right {
+  animation: scroll-right 35s linear infinite;
+  will-change: transform;
+}
+
+/* Pause animations on hover for better UX */
+.gallery-dungeons:hover .gallery-scroll,
+.gallery-enemies:hover .gallery-scroll,
+.gallery-dice:hover .gallery-scroll,
+.gallery-mementos:hover .gallery-scroll,
+.gallery-watches:hover .gallery-scroll {
+  animation-play-state: paused;
+}
+
+/* Focus management for accessibility */
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--text-secondary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Improved contrast for interactive elements */
+button:hover,
+[role="button"]:hover {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Enhanced tooltip with better positioning and contrast */
+.tooltip-content {
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  max-width: 320px;
+  padding: 12px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .gallery-scroll-left,
+  .gallery-scroll-right {
+    animation: none;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-tertiary: #ffffff;
+    --border-light: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .gallery-scroll,
+  .typewriter-line {
+    animation: none !important;
+  }
+}
+
 /* Global font family */
 * {
   font-family: 'VCR OSD Mono', 'VT323', monospace !important;

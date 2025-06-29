@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://skipstone.co.nz/</loc>
+    <lastmod>2024-12-19T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    
+    <!-- Key images for SEO -->
+    <image:image>
+      <image:loc>https://skipstone.co.nz/title_logo.png</image:loc>
+      <image:title>Remember to Die - Game Logo</image:title>
+      <image:caption>Official logo for Remember to Die tactical dice combat roguelike game</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://skipstone.co.nz/og-image.png</image:loc>
+      <image:title>Remember to Die - Social Media Preview</image:title>
+      <image:caption>Social media preview image for Remember to Die by Skipstone Studios</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://skipstone.co.nz/Skipstone_logo.png</image:loc>
+      <image:title>Skipstone Studios Logo</image:title>
+      <image:caption>Official logo of Skipstone Studios indie game development company</image:caption>
+    </image:image>
+  </url>
+</urlset> 

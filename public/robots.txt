@@ -1,0 +1,65 @@
+User-agent: *
+Allow: /
+
+# High-priority content for crawling
+Allow: /title_logo.png
+Allow: /og-image.png
+Allow: /Skipstone_logo.png
+Allow: /manifest.webmanifest
+Allow: /sitemap.xml
+
+# Block crawling of large image directories to improve crawl budget
+# But allow a few representative images for better indexing
+Disallow: /backgrounds/
+Disallow: /portraits/
+Disallow: /dice/
+Disallow: /mementos/
+Disallow: /watches/
+Disallow: /audio/
+
+# Allow specific representative images for better SEO
+Allow: /backgrounds/alt_timewarpUPSCALED.PNG
+Allow: /portraits/D1_boss.png
+Allow: /dice/death_die.png
+Allow: /mementos/extra_life.png
+Allow: /watches/gold_watch.png
+
+# Block development and build files
+Disallow: /_next/
+Disallow: /api/
+Disallow: /.well-known/
+
+# Crawl delay to be respectful to server resources
+Crawl-delay: 1
+
+# Specific bot configurations
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Twitterbot
+Allow: /
+Allow: /og-image.png
+Allow: /title_logo.png
+
+User-agent: facebookexternalhit
+Allow: /
+Allow: /og-image.png
+Allow: /title_logo.png
+
+# Steam bot for game discovery
+User-agent: SteamBot
+Allow: /
+Allow: /title_logo.png
+Allow: /backgrounds/
+Allow: /portraits/
+
+# Sitemap location
+Sitemap: https://skipstone.co.nz/sitemap.xml
+
+# Additional sitemaps for rich content
+Sitemap: https://skipstone.co.nz/sitemap-images.xml 
