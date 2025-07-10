@@ -2,6 +2,9 @@ import AudioPlayer from '@/components/AudioPlayer'
 import ImageGallery from '@/components/ImageGallery'
 import ImageProtection from '@/components/ImageProtection'
 import PixelatedWakeBackground from '@/components/PixelatedWakeBackground'
+import Navigation from '@/components/Navigation'
+import AnimatedSection from '@/components/AnimatedSection'
+import CTASection from '@/components/CTASection'
 import Image from 'next/image'
 import { getDiceData, getMementoData, getEnemyData, getWatchData } from '@/utils/dataMapper'
 
@@ -78,6 +81,9 @@ export default function Home() {
       />
       
       <main className="min-h-screen bg-black text-white relative overflow-x-hidden">
+        {/* Professional Navigation */}
+        <Navigation />
+        
         {/* Image Protection */}
         <ImageProtection />
         
@@ -89,99 +95,142 @@ export default function Home() {
         
         {/* Hero Section */}
         <section 
-          className="min-h-screen flex flex-col items-center justify-center px-4 relative"
+          id="home"
+          className="min-h-screen flex flex-col items-center justify-center px-4 relative pt-16"
           role="banner"
           itemScope
           itemType="https://schema.org/VideoGame"
         >
-          {/* Hero Background with optimized loading */}
+          {/* Enhanced Hero Background with parallax */}
           <div className="absolute inset-0 w-full h-full">
             <Image
               src="/backgrounds/alt_timewarpUPSCALED.PNG"
               alt=""
               fill
               style={{ objectFit: 'cover' }}
-              quality={75}
+              quality={90}
               priority
               sizes="100vw"
               placeholder="blur"
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QFLQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
             />
-            {/* Dark overlay for better text readability with improved contrast */}
-            <div className="absolute inset-0 bg-black/70"></div>
+            {/* Enhanced overlay with gradient */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-black/90"></div>
+            {/* Atmospheric effects */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/10 via-transparent to-purple-900/10"></div>
           </div>
           
-          <div className="text-center space-y-4 max-w-3xl mx-auto relative z-20">
-            {/* Main Logo with optimized loading */}
-            <div className="mb-4">
-              <Image 
-                src="/title_logo.png" 
-                alt="Remember to Die - Tactical Dice Combat Game by Skipstone Studios" 
-                width={384}
-                height={200}
-                className="mx-auto max-w-sm w-full h-auto"
-                style={{ filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.4))' }}
-                priority
-                quality={85}
-                sizes="(max-width: 768px) 320px, 384px"
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-                itemProp="image"
-              />
-            </div>
-
-            {/* Hero Title with improved accessibility and microdata */}
-            <h1 
-              className="text-2xl md:text-4xl font-bold text-white mb-3 typewriter-container"
-              itemProp="name"
-            >
-              <span className="typewriter-line">Battle your demons.</span>
-              <span className="typewriter-line">Re-roll your destiny.</span>
-            </h1>
-
-            {/* Subtitle with better contrast and microdata */}
-            <p 
-              className="text-base md:text-lg text-gray-200 mb-4 leading-relaxed"
-              itemProp="description"
-            >
-              Remember to Die is a gritty, narrative-driven battle against time and broken memories, wrapped in an intuitive and moreish dice strategy roguelike where every dice roll dredges up a fragmented memory and decides your fate. Collect poignant mementos to bend truth or illusion in your favour, confront your inner demons and reroll your destiny one fragment at a time.
-            </p>
-
-            {/* Steam Wishlist Button with better accessibility and microdata */}
-            <div className="flex items-center justify-center gap-4">
-              <div className="text-right">
-                <h2 className="text-2xl md:text-3xl font-bold text-white tracking-wide">
-                  COMING SOON
-                </h2>
-              </div>
-              <div className="text-2xl md:text-3xl font-bold text-gray-300" aria-hidden="true">
-                |
-              </div>
-              <a
-                href="#steam-wishlist"
-                className="group relative"
-                aria-label="Wishlist Remember to Die on Steam"
-                role="button"
-                tabIndex={0}
-                itemProp="offers"
-                itemScope
-                itemType="https://schema.org/Offer"
-              >
-                <meta itemProp="availability" content="https://schema.org/PreOrder" />
-                <meta itemProp="price" content="TBD" />
-                <meta itemProp="priceCurrency" content="USD" />
+          <div className="text-center space-y-8 max-w-4xl mx-auto relative z-20">
+            {/* Enhanced Logo with animation */}
+            <AnimatedSection animation="scaleIn" delay={300}>
+              <div className="mb-8">
                 <Image 
-                  src="/steam.png" 
-                  alt="Wishlist on Steam" 
-                  width={200}
-                  height={60}
-                  className="w-auto h-12 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
-                  loading="lazy"
-                  quality={80}
+                  src="/title_logo.png" 
+                  alt="Remember to Die - Tactical Dice Combat Game by Skipstone Studios" 
+                  width={480}
+                  height={250}
+                  className="mx-auto max-w-md w-full h-auto filter drop-shadow-2xl"
+                  style={{ 
+                    filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 40px rgba(100, 200, 255, 0.2))',
+                    animation: 'float 6s ease-in-out infinite'
+                  }}
+                  priority
+                  quality={90}
+                  sizes="(max-width: 768px) 320px, 480px"
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                  itemProp="image"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </a>
-            </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Enhanced Hero Title */}
+            <AnimatedSection animation="fadeIn" delay={600}>
+              <h1 
+                className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 typewriter-container leading-tight"
+                itemProp="name"
+              >
+                <span className="typewriter-line">Battle your demons.</span>
+                <span className="typewriter-line">Re-roll your destiny.</span>
+              </h1>
+            </AnimatedSection>
+
+            {/* Enhanced Subtitle */}
+            <AnimatedSection animation="fadeIn" delay={1200}>
+              <p 
+                className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-8 leading-relaxed max-w-3xl mx-auto font-medium"
+                itemProp="description"
+              >
+                Remember to Die is a gritty, narrative-driven battle against time and broken memories, wrapped in an intuitive and moreish dice strategy roguelike where every dice roll dredges up a fragmented memory and decides your fate.
+              </p>
+            </AnimatedSection>
+
+            {/* Enhanced CTA Section */}
+            <AnimatedSection animation="slideUp" delay={1600}>
+              <div className="flex flex-col lg:flex-row items-center justify-center gap-8 mb-8">
+                <div className="text-center lg:text-right">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
+                    COMING SOON
+                  </h2>
+                  <p className="text-gray-400 text-sm">to Steam Early Access</p>
+                </div>
+                
+                <div className="text-4xl lg:text-5xl font-bold text-gray-600" aria-hidden="true">
+                  |
+                </div>
+                
+                <a
+                  href="#steam-cta"
+                  className="group relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+                  aria-label="Wishlist Remember to Die on Steam"
+                  role="button"
+                  tabIndex={0}
+                  itemProp="offers"
+                  itemScope
+                  itemType="https://schema.org/Offer"
+                >
+                  <meta itemProp="availability" content="https://schema.org/PreOrder" />
+                  <meta itemProp="price" content="TBD" />
+                  <meta itemProp="priceCurrency" content="USD" />
+                  <div className="flex items-center space-x-3">
+                    <Image 
+                      src="/steam.png" 
+                      alt="Steam" 
+                      width={32}
+                      height={32}
+                      className="h-8 w-auto group-hover:scale-110 transition-transform duration-300"
+                      loading="lazy"
+                      quality={80}
+                    />
+                    <span className="font-bold text-lg">Wishlist on Steam</span>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </div>
+                </a>
+              </div>
+            </AnimatedSection>
+
+            {/* Game Features Preview */}
+            <AnimatedSection animation="fadeIn" delay={2000}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 text-center">
+                <div className="space-y-3">
+                  <div className="text-4xl">🎲</div>
+                  <h3 className="text-xl font-bold text-cyan-400">Tactical Dice Combat</h3>
+                  <p className="text-gray-400 text-sm">Strategic dice-based battles with endless depth</p>
+                </div>
+                <div className="space-y-3">
+                  <div className="text-4xl">🧠</div>
+                  <h3 className="text-xl font-bold text-purple-400">Memory Fragments</h3>
+                  <p className="text-gray-400 text-sm">Unlock haunting memories that shape your destiny</p>
+                </div>
+                <div className="space-y-3">
+                  <div className="text-4xl">♾️</div>
+                  <h3 className="text-xl font-bold text-blue-400">Infinite Replayability</h3>
+                  <p className="text-gray-400 text-sm">Every run tells a different story</p>
+                </div>
+              </div>
+            </AnimatedSection>
           </div>
 
           {/* Hidden microdata for SEO */}
@@ -199,189 +248,218 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Dungeons Section */}
-        <section 
-          className="py-8 px-4" 
-          aria-labelledby="dungeons-heading"
-          itemScope
-          itemType="https://schema.org/ImageGallery"
-        >
-          <div className="max-w-5xl mx-auto">
-            <h2 
-              id="dungeons-heading"
-              className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent"
-              itemProp="name"
-            >
-              A lifetime of memories
-            </h2>
-            <p 
-              className="text-center text-gray-300 mb-6 max-w-xl mx-auto text-sm md:text-base"
-              itemProp="description"
-            >
-             Each fragment you unlock splinters the story into new fates; you choose which fantasies to pursue, and which truths to rewrite.
-            </p>
-            <ImageGallery 
-              items={gameAssets.dungeons} 
-              folder="backgrounds" 
-              direction="right" 
-              size="massive"
-              galleryId="dungeons"
-              showTooltips={false}
-            />
-          </div>
-        </section>
+        {/* Enhanced Dungeons Section */}
+        <AnimatedSection animation="slideUp" delay={200}>
+          <section 
+            id="memories"
+            className="py-20 px-4 bg-gradient-to-b from-transparent to-gray-900/20" 
+            aria-labelledby="dungeons-heading"
+            itemScope
+            itemType="https://schema.org/ImageGallery"
+          >
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 
+                  id="dungeons-heading"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent"
+                  itemProp="name"
+                >
+                  A lifetime of memories
+                </h2>
+                <p 
+                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+                  itemProp="description"
+                >
+                  Each fragment you unlock splinters the story into new fates; you choose which fantasies to pursue, and which truths to rewrite.
+                </p>
+              </div>
+              <ImageGallery 
+                items={gameAssets.dungeons} 
+                folder="backgrounds" 
+                direction="right" 
+                size="massive"
+                galleryId="dungeons"
+                showTooltips={false}
+              />
+            </div>
+          </section>
+        </AnimatedSection>
 
-        {/* Enemies Section */}
-        <section 
-          className="py-4 px-4" 
-          aria-labelledby="enemies-heading"
-          itemScope
-          itemType="https://schema.org/ImageGallery"
-        >
-          <div className="max-w-5xl mx-auto">
-            <h2 
-              id="enemies-heading"
-              className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-red-300 to-orange-300 bg-clip-text text-transparent"
-              itemProp="name"
-            >
-              A string of haunting faces
-            </h2>
-            <p 
-              className="text-center text-gray-300 mb-6 max-w-xl mx-auto text-sm md:text-base"
-              itemProp="description"
-            >
-              Each enemy hints at more of the haunting truth.
-            </p>
-            <ImageGallery 
-              items={gameAssets.enemies} 
-              folder="portraits" 
-              direction="left" 
-              size="extra-large"
-              galleryId="enemies"
-            />
-          </div>
-        </section>
+        {/* Enhanced Enemies Section */}
+        <AnimatedSection animation="slideUp" delay={200}>
+          <section 
+            id="enemies"
+            className="py-20 px-4" 
+            aria-labelledby="enemies-heading"
+            itemScope
+            itemType="https://schema.org/ImageGallery"
+          >
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 
+                  id="enemies-heading"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent"
+                  itemProp="name"
+                >
+                  A string of haunting faces
+                </h2>
+                <p 
+                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+                  itemProp="description"
+                >
+                  Each enemy hints at more of the haunting truth.
+                </p>
+              </div>
+              <ImageGallery 
+                items={gameAssets.enemies} 
+                folder="portraits" 
+                direction="left" 
+                size="extra-large"
+                galleryId="enemies"
+              />
+            </div>
+          </section>
+        </AnimatedSection>
 
-        {/* Dice Section */}
-        <section 
-          className="py-4 px-4" 
-          aria-labelledby="dice-heading"
-          itemScope
-          itemType="https://schema.org/ImageGallery"
-        >
-          <div className="max-w-5xl mx-auto">
-            <h2 
-              id="dice-heading"
-              className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-green-300 to-emerald-300 bg-clip-text text-transparent"
-              itemProp="name"
-            >
-              An evolving arsenal
-            </h2>
-            <p 
-              className="text-center text-gray-300 mb-6 max-w-xl mx-auto text-sm md:text-base"
-              itemProp="description"
-            >
-              Collect and refine powerful dice combinations.
-            </p>
-            <ImageGallery 
-              items={gameAssets.dice} 
-              folder="dice" 
-              direction="right" 
-              size="medium"
-              galleryId="dice"
-            />
-          </div>
-        </section>
+        {/* Enhanced Dice Section */}
+        <AnimatedSection animation="slideUp" delay={200}>
+          <section 
+            id="arsenal"
+            className="py-20 px-4 bg-gradient-to-b from-transparent to-green-900/10" 
+            aria-labelledby="dice-heading"
+            itemScope
+            itemType="https://schema.org/ImageGallery"
+          >
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 
+                  id="dice-heading"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent"
+                  itemProp="name"
+                >
+                  An evolving arsenal
+                </h2>
+                <p 
+                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+                  itemProp="description"
+                >
+                  Collect and refine powerful dice combinations.
+                </p>
+              </div>
+              <ImageGallery 
+                items={gameAssets.dice} 
+                folder="dice" 
+                direction="right" 
+                size="medium"
+                galleryId="dice"
+              />
+            </div>
+          </section>
+        </AnimatedSection>
 
-        {/* Mementos Section */}
-        <section 
-          className="py-4 px-4" 
-          aria-labelledby="mementos-heading"
-          itemScope
-          itemType="https://schema.org/ImageGallery"
-        >
-          <div className="max-w-5xl mx-auto">
-            <h2 
-              id="mementos-heading"
-              className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent"
-              itemProp="name"
-            >
-              And a bagful of tricks...
-            </h2>
-            <p 
-              className="text-center text-gray-300 mb-6 max-w-xl mx-auto text-sm md:text-base"
-              itemProp="description"
-            >
-              Collect mementos drenched in heartbreaking lore, each with unique effects.
-            </p>
-            <ImageGallery 
-              items={gameAssets.mementos} 
-              folder="mementos" 
-              direction="left" 
-              size="medium"
-              galleryId="mementos"
-            />
-          </div>
-        </section>
+        {/* Enhanced Mementos Section */}
+        <AnimatedSection animation="slideUp" delay={200}>
+          <section 
+            id="mementos"
+            className="py-20 px-4" 
+            aria-labelledby="mementos-heading"
+            itemScope
+            itemType="https://schema.org/ImageGallery"
+          >
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 
+                  id="mementos-heading"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 bg-clip-text text-transparent"
+                  itemProp="name"
+                >
+                  And a bagful of tricks...
+                </h2>
+                <p 
+                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+                  itemProp="description"
+                >
+                  Collect mementos drenched in heartbreaking lore, each with unique effects.
+                </p>
+              </div>
+              <ImageGallery 
+                items={gameAssets.mementos} 
+                folder="mementos" 
+                direction="left" 
+                size="medium"
+                galleryId="mementos"
+              />
+            </div>
+          </section>
+        </AnimatedSection>
 
-        {/* Watches Section */}
-        <section 
-          className="py-4 px-4" 
-          aria-labelledby="watches-heading"
-          itemScope
-          itemType="https://schema.org/ImageGallery"
-        >
-          <div className="max-w-5xl mx-auto">
-            <h2 
-              id="watches-heading"
-              className="text-2xl md:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-yellow-300 to-amber-300 bg-clip-text text-transparent"
-              itemProp="name"
-            >
-              But time is not on your side...
-            </h2>
-            <p 
-              className="text-center text-gray-300 mb-6 max-w-xl mx-auto text-sm md:text-base"
-              itemProp="description"
-            >
-              Unique watches shift the odds.
-            </p>
-            <ImageGallery 
-              items={gameAssets.watches} 
-              folder="watches" 
-              direction="right" 
-              size="medium"
-              galleryId="watches"
-            />
-          </div>
-        </section>
+        {/* Enhanced Watches Section */}
+        <AnimatedSection animation="slideUp" delay={200}>
+          <section 
+            className="py-20 px-4 bg-gradient-to-b from-transparent to-yellow-900/10" 
+            aria-labelledby="watches-heading"
+            itemScope
+            itemType="https://schema.org/ImageGallery"
+          >
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 
+                  id="watches-heading"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 bg-clip-text text-transparent"
+                  itemProp="name"
+                >
+                  But time is not on your side...
+                </h2>
+                <p 
+                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+                  itemProp="description"
+                >
+                  Unique watches shift the odds.
+                </p>
+              </div>
+              <ImageGallery 
+                items={gameAssets.watches} 
+                folder="watches" 
+                direction="right" 
+                size="medium"
+                galleryId="watches"
+              />
+            </div>
+          </section>
+        </AnimatedSection>
 
-        {/* Footer */}
+        {/* Professional CTA Section */}
+        <CTASection />
+
+        {/* Enhanced Footer */}
         <footer 
-          className="py-6 px-4 border-t border-gray-700" 
+          className="py-12 px-4 border-t border-gray-800 bg-gradient-to-b from-transparent to-black/50" 
           role="contentinfo"
           itemScope
           itemType="https://schema.org/Organization"
         >
-          <div className="max-w-2xl mx-auto text-center space-y-2">
-            <div className="flex justify-center mb-3">
-              <Image 
-                src="/Skipstone_logo.png" 
-                alt="Skipstone Studios - Indie Game Developer" 
-                width={800}
-                height={128}
-                className="w-auto h-32 opacity-80"
-                loading="lazy"
-                quality={80}
-                sizes="(max-width: 768px) 300px, 400px"
-                itemProp="logo"
-              />
-            </div>
-            <p className="text-gray-300" itemProp="copyrightNotice">
-              © 2024 <span itemProp="name">Skipstone Studios</span>. All rights reserved.
-            </p>
-            <p className="text-gray-400 text-lg">
-              Every roll counts, and death is just the beginning.
-            </p>
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <AnimatedSection animation="fadeIn">
+              <div className="flex justify-center mb-6">
+                <Image 
+                  src="/Skipstone_logo.png" 
+                  alt="Skipstone Studios - Indie Game Developer" 
+                  width={800}
+                  height={128}
+                  className="w-auto h-24 opacity-80 hover:opacity-100 transition-opacity duration-300"
+                  loading="lazy"
+                  quality={80}
+                  sizes="(max-width: 768px) 300px, 400px"
+                  itemProp="logo"
+                />
+              </div>
+              <p className="text-gray-400 text-lg font-medium" itemProp="copyrightNotice">
+                © 2024 <span itemProp="name" className="text-white">Skipstone Studios</span>. All rights reserved.
+              </p>
+              <p className="text-gray-500 text-xl font-bold">
+                Every roll counts, and death is just the beginning.
+              </p>
+            </AnimatedSection>
           </div>
         </footer>
       </main>
