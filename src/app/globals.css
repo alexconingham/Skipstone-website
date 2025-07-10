@@ -491,6 +491,19 @@ body {
   z-index: 31;
 }
 
+.gallery-dungeons::before,
+.gallery-enemies::before, 
+.gallery-dice::before,
+.gallery-mementos::before,
+.gallery-watches::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background: transparent;
+}
+
 /* Ensure all interactive content stays above wake effect */
 section {
   position: relative;
@@ -528,12 +541,102 @@ section {
   animation: none !important;
 }
 
-/* Pixelated canvas styling */
-.pixelated-canvas {
+/* CSS-only Pixelated Wake Effect */
+.pixelated-wake-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.pixelated-wake-effect::before,
+.pixelated-wake-effect::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  left: calc(var(--mouse-x, 50vw) - 100px);
+  top: calc(var(--mouse-y, 50vh) - 100px);
+  background: 
+    radial-gradient(
+      circle,
+      rgba(0, 255, 255, 0.8) 0%,
+      rgba(100, 200, 255, 0.6) 25%,
+      rgba(150, 150, 255, 0.3) 50%,
+      transparent 70%
+    );
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: all 0.15s ease-out;
+  transform: scale(0.5);
   image-rendering: -moz-crisp-edges;
-  image-rendering: -webkit-crisp-edges;
+  image-rendering: -webkit-crisp-edges; 
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+}
+
+.pixelated-wake-effect::after {
+  transform: scale(0.8);
+  opacity: 0.6;
+  animation-delay: 0.1s;
+}
+
+/* Pixelated dots pattern overlay */
+.pixelated-wake-effect::before {
+  background: 
+    radial-gradient(
+      circle,
+      rgba(0, 255, 255, 0.6) 0%,
+      rgba(100, 200, 255, 0.4) 30%,
+      transparent 50%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      rgba(0, 255, 255, 0.1) 1px,
+      transparent 2px,
+      transparent 8px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      rgba(0, 255, 255, 0.1) 1px,
+      transparent 2px,
+      transparent 8px
+    );
+  background-size: 100% 100%, 8px 8px, 8px 8px;
+}
+
+/* Show effect on mouse movement */
+body:hover .pixelated-wake-effect::before,
+body:hover .pixelated-wake-effect::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Continuous subtle animation */
+.pixelated-wake-effect::before {
+  animation: wakeGlow 3s ease-in-out infinite;
+}
+
+.pixelated-wake-effect::after {
+  animation: wakeGlow 3s ease-in-out infinite 1.5s;
+}
+
+@keyframes wakeGlow {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
 }
 
 /* White volume slider styling */
