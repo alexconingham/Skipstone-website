@@ -279,7 +279,6 @@ export default function Home() {
                 direction="right" 
                 size="massive"
                 galleryId="dungeons"
-                showTooltips={false}
               />
             </div>
           </section>
