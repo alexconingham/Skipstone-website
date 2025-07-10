@@ -1,6 +1,7 @@
 import AudioPlayer from '@/components/AudioPlayer'
 import ImageGallery from '@/components/ImageGallery'
 import ImageProtection from '@/components/ImageProtection'
+import PixelatedWakeBackground from '@/components/PixelatedWakeBackground'
 import Image from 'next/image'
 import { getDiceData, getMementoData, getEnemyData, getWatchData } from '@/utils/dataMapper'
 
@@ -83,6 +84,9 @@ export default function Home() {
         {/* Audio Player */}
         <AudioPlayer />
         
+        {/* Global Interactive Pixelated Wake Effect */}
+        <PixelatedWakeBackground />
+        
         {/* Hero Section */}
         <section 
           className="min-h-screen flex flex-col items-center justify-center px-4 relative"
@@ -101,13 +105,13 @@ export default function Home() {
               priority
               sizes="100vw"
               placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QFLQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
             />
             {/* Dark overlay for better text readability with improved contrast */}
             <div className="absolute inset-0 bg-black/70"></div>
           </div>
           
-          <div className="text-center space-y-4 max-w-3xl mx-auto relative z-10">
+          <div className="text-center space-y-4 max-w-3xl mx-auto relative z-20">
             {/* Main Logo with optimized loading */}
             <div className="mb-4">
               <Image 
