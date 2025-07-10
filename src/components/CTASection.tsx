@@ -66,25 +66,17 @@ export default function CTASection({ className = '' }: CTASectionProps) {
               href="https://store.steampowered.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center space-x-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-6 rounded-2xl text-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+              className="group inline-block transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
               aria-label="Wishlist Remember to Die on Steam"
             >
               <Image
-                src="/steam.png"
-                alt=""
-                width={40}
-                height={40}
-                className="h-10 w-auto group-hover:scale-110 transition-transform duration-300"
+                src="/steam wishlist bw3.png"
+                alt="Wishlist on Steam"
+                width={400}
+                height={160}
+                className="w-auto h-20 md:h-24 group-hover:brightness-110 transition-all duration-300"
+                quality={90}
               />
-              <span>Wishlist on Steam</span>
-              <svg 
-                className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
             </a>
           </div>
         </AnimatedSection>

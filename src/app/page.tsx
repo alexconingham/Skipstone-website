@@ -181,7 +181,7 @@ export default function Home() {
                 
                 <a
                   href="#steam-cta"
-                  className="group relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+                  className="group relative inline-block transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
                   aria-label="Wishlist Remember to Die on Steam"
                   role="button"
                   tabIndex={0}
@@ -192,21 +192,15 @@ export default function Home() {
                   <meta itemProp="availability" content="https://schema.org/PreOrder" />
                   <meta itemProp="price" content="TBD" />
                   <meta itemProp="priceCurrency" content="USD" />
-                  <div className="flex items-center space-x-3">
-                    <Image 
-                      src="/steam.png" 
-                      alt="Steam" 
-                      width={32}
-                      height={32}
-                      className="h-8 w-auto group-hover:scale-110 transition-transform duration-300"
-                      loading="lazy"
-                      quality={80}
-                    />
-                    <span className="font-bold text-lg">Wishlist on Steam</span>
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
+                  <Image 
+                    src="/steam wishlist bw3.png" 
+                    alt="Wishlist on Steam" 
+                    width={300}
+                    height={120}
+                    className="w-auto h-16 md:h-20 group-hover:brightness-110 transition-all duration-300"
+                    loading="lazy"
+                    quality={90}
+                  />
                 </a>
               </div>
             </AnimatedSection>
