@@ -62,6 +62,21 @@ export default function PixelatedWakeBackground() {
       if (now - lastUpdateRef.current < 16) return
       lastUpdateRef.current = now
 
+      // Check if mouse is over an interactive element that might have tooltips
+      const target = e.target as HTMLElement
+      if (target && (
+        target.closest('[role="button"]') ||
+        target.closest('.group') ||
+        target.closest('button') ||
+        target.closest('a') ||
+        target.closest('[data-tooltip]') ||
+        target.matches('img') ||
+        target.closest('.gallery-scroll')
+      )) {
+        // Don't add trail points over interactive elements
+        return
+      }
+
       const newPoint: TrailPoint = {
         x: e.clientX,
         y: e.clientY,
@@ -73,7 +88,8 @@ export default function PixelatedWakeBackground() {
       trailPointsRef.current = [newPoint, ...trailPointsRef.current.slice(0, 19)]
     }
 
-    document.addEventListener('mousemove', handleMouseMove, { passive: true })
+    // Use capture: false to ensure tooltips can still receive events
+    document.addEventListener('mousemove', handleMouseMove, { passive: true, capture: false })
     animate()
     
     return () => {
