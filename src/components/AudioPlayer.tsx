@@ -45,6 +45,18 @@ export default function AudioPlayer() {
           setIsPlaying(true)
         }).catch((error) => {
           console.log('Autoplay prevented:', error)
+          // Set up a one-time click listener to start playing
+          const startPlayback = () => {
+            if (audioRef.current) {
+              audioRef.current.play().then(() => {
+                setIsPlaying(true)
+              }).catch(console.error)
+            }
+            document.removeEventListener('click', startPlayback)
+            document.removeEventListener('keydown', startPlayback)
+          }
+          document.addEventListener('click', startPlayback, { once: true })
+          document.addEventListener('keydown', startPlayback, { once: true })
         })
       }
     }, 500)
@@ -79,6 +91,18 @@ export default function AudioPlayer() {
         setIsPlaying(true)
       }).catch((error) => {
         console.log('Autoplay prevented:', error)
+        // Set up a one-time click listener to start playing
+        const startPlayback = () => {
+          if (audioRef.current) {
+            audioRef.current.play().then(() => {
+              setIsPlaying(true)
+            }).catch(console.error)
+          }
+          document.removeEventListener('click', startPlayback)
+          document.removeEventListener('keydown', startPlayback)
+        }
+        document.addEventListener('click', startPlayback, { once: true })
+        document.addEventListener('keydown', startPlayback, { once: true })
       })
     }
 
@@ -193,6 +217,11 @@ export default function AudioPlayer() {
           <div className="text-green-300 font-mono text-xs text-center">
             {isPlaying ? '►' : '⏸'} {Math.round(volume * 100)}%
           </div>
+          {!isPlaying && (
+            <div className="text-yellow-400 font-mono text-xs text-center animate-pulse">
+              CLICK TO START
+            </div>
+          )}
         </div>
 
         {/* Compact Controls */}
