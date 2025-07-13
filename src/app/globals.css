@@ -356,7 +356,6 @@ button:hover,
   -moz-user-drag: none;
   -o-user-drag: none;
   user-drag: none;
-  pointer-events: none;
 }
 
 /* Allow text selection for readable content */
@@ -455,7 +454,6 @@ img {
   -moz-user-drag: none;
   -o-user-drag: none;
   user-drag: none;
-  pointer-events: none;
   -webkit-touch-callout: none;
 }
 
