@@ -165,11 +165,11 @@ export default function ImageGallery({
   const renderTooltipContent = useCallback((item: any) => {
     return (
       <div className="tooltip-content" role="tooltip" aria-live="polite">
-        <div className="font-bold text-white mb-0.5">{item.name}</div>
+        <div className="font-bold text-white mb-0">{item.name}</div>
         
         {/* Rarity for dice, mementos, and watches */}
         {item.rarity && (folder === 'dice' || folder === 'mementos' || folder === 'watches') && (
-          <div className={`text-sm font-medium mb-1 ${
+          <div className={`text-sm font-medium mb-0 ${
             item.rarity === 'common' ? 'text-gray-200' :
             item.rarity === 'rare' ? 'text-purple-200' :
             item.rarity === 'relic' ? 'text-yellow-200' : 'text-gray-200'
@@ -180,42 +180,42 @@ export default function ImageGallery({
 
         {/* Stats for enemies */}
         {item.stats && folder === 'portraits' && (
-          <div className="text-sm text-gray-200 mb-0.5">
+          <div className="text-sm text-gray-200 mb-0">
             <span className="text-red-300">Stats:</span> {item.stats}
           </div>
         )}
 
         {/* Traits for enemies */}
         {item.traits && folder === 'portraits' && (
-          <div className="text-sm text-blue-200 mb-0.5">
+          <div className="text-sm text-blue-200 mb-0">
             <span className="text-blue-300">Traits:</span> {item.traits}
           </div>
         )}
 
         {/* Effect description for dice */}
         {item.description && folder === 'dice' && (
-          <div className="text-sm text-gray-200 mb-1">
+          <div className="text-sm text-gray-200 mb-0">
             <span className="text-green-300">Effect:</span> {item.description}
           </div>
         )}
 
         {/* Tooltip for mementos */}
         {item.tooltip && folder === 'mementos' && (
-          <div className="text-sm text-gray-200 mb-1">
+          <div className="text-sm text-gray-200 mb-0">
             <span className="text-green-300">Effect:</span> {item.tooltip}
           </div>
         )}
 
         {/* Effect description for watches */}
         {item.effect_description && folder === 'watches' && (
-          <div className="text-sm text-gray-200 mb-1">
+          <div className="text-sm text-gray-200 mb-0">
             <span className="text-green-300">Effect:</span> {item.effect_description}
           </div>
         )}
 
         {/* Description for enemies, mementos, and watches */}
         {item.description && (folder === 'portraits' || folder === 'mementos' || folder === 'watches') && (
-          <div className="text-sm text-gray-300 italic border-t border-gray-500 pt-1 mt-1">
+          <div className="text-sm text-gray-300 italic border-t border-gray-500 pt-0 mt-0">
             "{item.description}"
           </div>
         )}
@@ -315,7 +315,7 @@ export default function ImageGallery({
                 
                 {/* Tooltip */}
                 {showTooltips && hoveredItem === tooltipKey && (
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-black/90 backdrop-blur-sm text-white text-xs rounded-lg shadow-xl border border-gray-600 max-w-xs z-50 pointer-events-none">
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black/90 backdrop-blur-sm text-white text-xs rounded-lg shadow-xl border border-gray-600 max-w-xs z-50 pointer-events-none">
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/90"></div>
                     {renderTooltipContent(item)}
                   </div>
