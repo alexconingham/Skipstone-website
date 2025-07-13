@@ -88,9 +88,9 @@ export default function PixelatedWakeBackground() {
       trailPointsRef.current = [newPoint, ...trailPointsRef.current.slice(0, 19)]
     }
 
-    // Temporarily disable wake effect to test tooltip functionality
-    // document.addEventListener('mousemove', handleMouseMove, { passive: true, capture: false })
-    // animate()
+    // Re-enable wake effect
+    document.addEventListener('mousemove', handleMouseMove, { passive: true, capture: false })
+    animate()
     
     return () => {
       document.removeEventListener('mousemove', handleMouseMove)

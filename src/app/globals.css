@@ -601,6 +601,20 @@ body {
   position: relative;
 }
 
+/* Ensure all gallery images stay above wake effect */
+.gallery-scroll img {
+  position: relative;
+  z-index: 31;
+  pointer-events: auto !important;
+}
+
+/* Tooltips above everything */
+.tooltip-container,
+.tooltip-container-enhanced,
+[role="tooltip"] {
+  z-index: 100;
+}
+
 /* Isolate galleries from background effects */
 .gallery-dungeons,
 .gallery-enemies, 
@@ -615,6 +629,7 @@ body {
 .gallery-scroll img {
   position: relative;
   z-index: 31;
+  pointer-events: auto !important;
 }
 
 .gallery-dungeons::before,
@@ -639,13 +654,6 @@ section {
 /* Audio player above wake effect */
 .fixed.top-4.left-4 {
   z-index: 50;
-}
-
-/* Tooltips above everything */
-.tooltip-container,
-.tooltip-container-enhanced,
-[role="tooltip"] {
-  z-index: 100;
 }
 
 /* Drag functionality enhancements */
