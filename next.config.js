@@ -2,7 +2,7 @@
 const nextConfig = {
   images: {
     unoptimized: false, // Enable Vercel's image optimization
-    domains: ['skipstone.co.nz', 'www.skipstone.co.nz', 'lospec.com'],
+    domains: ['skipstone.co.nz', 'www.skipstone.co.nz', 'rtd.skipstone.co.nz', 'lospec.com'],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     formats: ['image/webp', 'image/avif'],

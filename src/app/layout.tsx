@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/next'
+import { getBaseUrl } from '@/utils/config'
 import './globals.css'
 
 const inter = Inter({ 
@@ -22,14 +23,14 @@ export const metadata: Metadata = {
   authors: [{ name: 'Skipstone Studios', url: 'https://skipstone.co.nz' }],
   creator: 'Skipstone Studios',
   publisher: 'Skipstone Studios',
-  metadataBase: new URL('https://skipstone.co.nz'),
+  metadataBase: new URL(getBaseUrl()),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Remember to Die – Tactical Dice Combat Roguelike | Skipstone Studios',
     description: 'Experience Remember to Die - a gritty tactical dice combat roguelike where every roll dredges up fragmented memories. Battle demons, collect mementos, and reroll your destiny.',
-    url: 'https://skipstone.co.nz',
+    url: getBaseUrl(),
     siteName: 'Skipstone Studios',
     images: [
       {
@@ -92,17 +93,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const baseUrl = getBaseUrl()
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'VideoGame',
-        '@id': 'https://skipstone.co.nz/#game',
+        '@id': `${baseUrl}/#game`,
         name: 'Remember to Die',
         alternateName: 'Remember to Die - Tactical Dice Combat Roguelike',
         description: 'A gritty tactical dice combat roguelike where every roll dredges up fragmented memories. Collect mementos, battle demons, and reroll your destiny.',
-        url: 'https://skipstone.co.nz',
-        image: 'https://skipstone.co.nz/og-image.png',
+        url: baseUrl,
+        image: `${baseUrl}/og-image.png`,
         genre: ['Roguelike', 'Strategy', 'Tactical Combat', 'Horror', 'Indie'],
         gamePlatform: ['Steam', 'PC'],
         applicationCategory: 'Game',
@@ -157,10 +159,10 @@ export default function RootLayout({
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://skipstone.co.nz/#website',
-        url: 'https://skipstone.co.nz',
-        name: 'Skipstone Studios',
-        description: 'Official website of Skipstone Studios, creators of Remember to Die',
+        '@id': `${baseUrl}/#website`,
+        url: baseUrl,
+        name: 'Remember to Die - Skipstone Studios',
+        description: 'Official website for Remember to Die - a tactical dice combat roguelike by Skipstone Studios',
         inLanguage: 'en-US',
         publisher: {
           '@type': 'Organization',
@@ -168,24 +170,24 @@ export default function RootLayout({
         },
         potentialAction: {
           '@type': 'SearchAction',
-          target: 'https://skipstone.co.nz/?s={search_term_string}',
+          target: `${baseUrl}/?s={search_term_string}`,
           'query-input': 'required name=search_term_string',
         },
       },
       {
         '@type': 'WebPage',
-        '@id': 'https://skipstone.co.nz/#webpage',
-        url: 'https://skipstone.co.nz',
+        '@id': `${baseUrl}/#webpage`,
+        url: baseUrl,
         name: 'Remember to Die - Tactical Dice Combat Roguelike | Skipstone Studios',
         description: 'Experience Remember to Die - a gritty tactical dice combat roguelike where every roll dredges up fragmented memories.',
         inLanguage: 'en-US',
         isPartOf: {
           '@type': 'WebSite',
-          '@id': 'https://skipstone.co.nz/#website',
+          '@id': `${baseUrl}/#website`,
         },
         primaryImageOfPage: {
           '@type': 'ImageObject',
-          url: 'https://skipstone.co.nz/og-image.png',
+          url: `${baseUrl}/og-image.png`,
           width: 1200,
           height: 630,
         },
@@ -232,7 +234,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.webmanifest" />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://skipstone.co.nz/" />
+        <link rel="canonical" href={`${baseUrl}/`} />
         
         {/* DNS prefetch for performance */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />

@@ -7,6 +7,7 @@ import AnimatedSection from '@/components/AnimatedSection'
 import CTASection from '@/components/CTASection'
 import Image from 'next/image'
 import { getDiceData, getMementoData, getEnemyData, getWatchData } from '@/utils/dataMapper'
+import { getBaseUrl } from '@/utils/config'
 
 // Game assets data structure with actual data from JSON files
 const gameAssets = {
@@ -36,14 +37,15 @@ const gameAssets = {
 }
 
 export default function Home() {
+  const baseUrl = getBaseUrl()
   // Page-level structured data for better SEO
   const pageStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'ItemPage',
-    '@id': 'https://skipstone.co.nz/#itempage',
+    '@id': `${baseUrl}/#itempage`,
     'mainEntity': {
       '@type': 'VideoGame',
-      '@id': 'https://skipstone.co.nz/#game',
+      '@id': `${baseUrl}/#game`,
       'name': 'Remember to Die',
       'description': 'A gritty tactical dice combat roguelike where every roll dredges up fragmented memories.',
       'genre': ['Roguelike', 'Strategy', 'Tactical Combat', 'Horror', 'Indie'],
