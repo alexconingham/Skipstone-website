@@ -19,12 +19,31 @@ export default function CTASection({ className = '' }: CTASectionProps) {
 
     setIsLoading(true)
     
-    // Simulate newsletter signup
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
-    setIsSubscribed(true)
-    setIsLoading(false)
-    setEmail('')
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setIsSubscribed(true)
+        setEmail('')
+      } else {
+        // Handle error - you could show an error message to the user
+        console.error('Subscription error:', data.error)
+        alert('Failed to subscribe. Please try again later.')
+      }
+    } catch (error) {
+      console.error('Subscription error:', error)
+      alert('Failed to subscribe. Please try again later.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
