@@ -14,10 +14,13 @@ const gameAssets = {
   dungeons: [
     { file: "D1_bg.PNG", name: "Classroom" },
     { file: "D2_bg.PNG", name: "Dormitory" },
+    { file: "D3_bg.PNG", name: "Dungeon 3" },
     { file: "D4_bg.PNG", name: "Cemetery" },
     { file: "D5_bg.PNG", name: "Laboratory" },
     { file: "D6_bg.PNG", name: "Office" },
     { file: "D7_bg.PNG", name: "Library" },
+    { file: "D8_bg.PNG", name: "Dungeon 8" },
+    { file: "D9_bg.PNG", name: "Dungeon 9" },
     { file: "D10_bg.PNG", name: "Hallway" },
     { file: "alt_heaven.PNG", name: "Heaven" },
     { file: "alt_hell_bg.PNG", name: "Hell" },
@@ -275,6 +278,7 @@ export default function Home() {
                 direction="right" 
                 size="massive"
                 galleryId="dungeons"
+                showTooltips={false}
               />
             </div>
           </section>

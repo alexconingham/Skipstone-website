@@ -77,6 +77,16 @@ export const metadata: Metadata = {
   },
   category: 'gaming',
   classification: 'Video Game',
+  icons: {
+    icon: [
+      { url: '/dice/bleed_die.png', type: 'image/png' },
+      { url: '/dice/bleed_die.png', type: 'image/png', sizes: '32x32' },
+      { url: '/dice/bleed_die.png', type: 'image/png', sizes: '16x16' },
+    ],
+    apple: [
+      { url: '/dice/bleed_die.png', type: 'image/png' },
+    ],
+  },
   other: {
     'application-name': 'Remember to Die',
     'mobile-web-app-capable': 'yes',
@@ -228,9 +238,9 @@ export default function RootLayout({
         <meta name="msapplication-config" content="/browserconfig.xml" />
         
         {/* Favicons and app icons */}
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/dice/bleed_die.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/dice/bleed_die.png" type="image/png" sizes="16x16" />
+        <link rel="apple-touch-icon" href="/dice/bleed_die.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
         
         {/* Canonical URL */}

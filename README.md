@@ -140,8 +140,21 @@ Place background music file at `public/audio/background.mp3`. Supported formats:
 
 ### Adding New Assets
 
-1. Place images in appropriate `public/` subdirectory
-2. Update the `gameAssets` object in `src/app/page.tsx`
+#### Background Images
+
+Background images are stored in `assets/images/backgrounds/` and automatically copied to `public/backgrounds/` during build:
+
+1. Place new background images in `assets/images/backgrounds/main/`, `assets/images/backgrounds/alternate/`, or `assets/images/backgrounds/screens/`
+2. Run `npm run copy:backgrounds` to copy images to `public/backgrounds/` (or it will run automatically during `npm run build`)
+3. Update the `gameAssets.dungeons` array in `src/app/page.tsx` to include new backgrounds
+4. Commit both the source images in `assets/` and the copied images in `public/backgrounds/`
+
+The copy script automatically runs before builds via the `prebuild` hook, ensuring images are always synced during deployment.
+
+#### Other Assets
+
+1. Place images directly in appropriate `public/` subdirectory
+2. Update the corresponding data structure in `src/app/page.tsx` (e.g., `gameAssets.enemies`, `gameAssets.dice`, etc.)
 3. Follow the naming convention: `{category}_{name}.{ext}`
 
 ## 🎨 Customization
