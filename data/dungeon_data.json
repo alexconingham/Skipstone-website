@@ -4,7 +4,7 @@
 	  "id": 1,
 	  "dungeon_type": "main",
 	  "name": "The Trunk",
-	  "description": "Playing in your room, you find an old chest. Your father's name is engraved on its heavy lid along with a strange number. The perfect hiding spot... .",
+	  "description": "You hide in your father's old chest. The lid clicks shut. In the darkness, you wait for someone to notice you're gone.",
 	  "background": "D1_bg.png",
 	  "encounters": {
 		"grunt": {
@@ -175,7 +175,7 @@
 	  "id": 10,
 	  "dungeon_type": "main",
 	  "name": "The Deathbed",
-	  "description": "You're in a hospital bed, breathing slowly. Someone is holding your hand. You can't tell which son it is. The other hand aches with absence.",
+	  "description": "You're in a hospital bed, breathing slowly. Someone is holding your hand. Your son, perhaps? The other hand aches with the absence of those who left long ago.",
 	  "background": "D10_bg.png",
 	  "encounters": {
 		"grunt": {
@@ -186,6 +186,101 @@
 		},
 		"boss": {
 		  "enemies": ["D10_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": "ALT_D1",
+	  "dungeon_type": "alternate",
+	  "name": "The Trunk (Revisited)",
+	  "description": "The trunk beckons again. This time you understand what it means to be locked inside—and what it cost to be forgotten.",
+	  "background": "alt_D1_bg.png",
+	  "unlock_condition": {
+		"type": "core_outcome",
+		"source_dungeon": 1,
+		"required_outcome": "broken"
+	  },
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["ALT_D1_grunt"]
+		},
+		"elite": {
+		  "enemies": ["ALT_D1_elite"]
+		},
+		"boss": {
+		  "enemies": ["ALT_D1_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": "ALT_D2",
+	  "dungeon_type": "alternate",
+	  "name": "School Infirmary",
+	  "description": "The cafeteria fight is over. Now you sit alone on the infirmary cot, ice pack in hand, wondering what Dad's note really meant.",
+	  "background": "alt_D2_infirmary_bg.png",
+	  "unlock_condition": {
+		"type": "core_outcome",
+		"source_dungeon": 2,
+		"required_outcome": "broken"
+	  },
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["ALT_D2_grunt"]
+		},
+		"elite": {
+		  "enemies": ["ALT_D2_elite"]
+		},
+		"boss": {
+		  "enemies": ["ALT_D2_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": "GARAGE",
+	  "dungeon_type": "alternate",
+	  "name": "The Garage",
+	  "description": "Petrol fumes linger around Dad's unfinished car. The jack stands frozen. His watch ticks beside a fallen wrench. Some truths stay buried under the hood.",
+	  "background": "garage_bg.png",
+	  "unlock_condition": {
+		"type": "memento_required",
+		"required_memento": "Garage_Key"
+	  },
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["GARAGE_grunt"]
+		},
+		"elite": {
+		  "enemies": ["GARAGE_elite"]
+		},
+		"boss": {
+		  "enemies": ["GARAGE_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": "VOID",
+	  "dungeon_type": "alternate",
+	  "name": "The Void",
+	  "description": "Starless silence. Every memory you buried, every truth you avoided—they all wait here. In the dark, there's nowhere left to hide.",
+	  "background": "void_bg.png",
+	  "unlock_condition": {
+		"type": "all_alternates_cleared",
+		"required_alternates": ["ALT_D1", "ALT_D2", "GARAGE", "Heaven", "Purgatory", "Hell"],
+		"required_mementos": ["Clean_Slate", "Fractured_Hourglass", "Ash_Pendant", "Hollow_Echo"]
+	  },
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["VOID_grunt"]
+		},
+		"elite": {
+		  "enemies": ["VOID_elite"]
+		},
+		"boss": {
+		  "enemies": ["VOID_boss"],
 		  "count": 1
 		}
 	  }

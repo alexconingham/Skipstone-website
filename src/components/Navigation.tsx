@@ -116,10 +116,17 @@ export default function Navigation({ className = '' }: NavigationProps) {
             <div className="hidden md:flex items-center">
               <button
                 onClick={() => smoothScrollTo('#steam-cta')}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+                className="group relative inline-block transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
                 aria-label="Wishlist on Steam"
               >
-                Wishlist Now
+                <Image
+                  src="/steam wishlist bw3.png"
+                  alt="Wishlist on Steam"
+                  width={200}
+                  height={80}
+                  className="w-auto h-10 md:h-12 group-hover:brightness-110 transition-all duration-300"
+                  quality={90}
+                />
               </button>
             </div>
 
@@ -201,9 +208,17 @@ function MobileMenu({
                   onNavigate('#steam-cta')
                   setIsOpen(false)
                 }}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300"
+                className="group w-full flex justify-center transition-all duration-300 transform hover:scale-105"
+                aria-label="Wishlist on Steam"
               >
-                Wishlist on Steam
+                <Image
+                  src="/steam wishlist bw3.png"
+                  alt="Wishlist on Steam"
+                  width={300}
+                  height={120}
+                  className="w-auto h-16 group-hover:brightness-110 transition-all duration-300"
+                  quality={90}
+                />
               </button>
             </div>
           </div>

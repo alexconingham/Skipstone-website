@@ -11,7 +11,7 @@
 			"crit_multiplier": 1.5,
 			"rarity": "common",
 			"quality": "basic",
-			"qual_trigger": false,
+			"qual_trigger": true,
 			"qual_potency": true,
 			"roll_sfx": "roll_1d6",
 			"tags": [
@@ -32,7 +32,7 @@
 					"stats_modifier": [
 						"strength"
 					],
-					"icon": "res://assets/images/icons/simple_d6_attack_icon.png"
+					"icon": "res://assets/images/icons/attack.png"
 				}
 			],
 			"display_name": "Simple Attack Die",
@@ -69,7 +69,7 @@
 					"stats_modifier": [
 						"resilience"
 					],
-					"icon": "res://assets/images/icons/simple_d6_defence_icon.png"
+					"icon": "res://assets/images/icons/defend.png"
 				}
 			],
 			"display_name": "Simple Defence Die",
@@ -106,7 +106,7 @@
 					"stats_modifier": [
 						"strength"
 					],
-					"icon": "res://assets/images/icons/simple_d12_attack_icon.png"
+					"icon": "res://assets/images/icons/attack.png"
 				}
 			],
 			"display_name": "Improved Attack Die",
@@ -143,7 +143,7 @@
 					"stats_modifier": [
 						"resilience"
 					],
-					"icon": "res://assets/images/icons/simple_d12_defence_icon.png"
+					"icon": "res://assets/images/icons/defend.png"
 				}
 			],
 			"display_name": "Improved Defence Die",
@@ -159,7 +159,7 @@
 			"crit_multiplier": 1.5,
 			"rarity": "rare",
 			"quality": "basic",
-			"qual_trigger": true,
+			"qual_trigger": false,
 			"qual_potency": true,
 			"tags": [
 				"status",
@@ -356,7 +356,7 @@
 					"stats_modifier": [
 						"insight"
 					],
-					"icon": "res://assets/images/icons/piercing_icon.png"
+					"icon": "res://assets/images/icons/pierce_icon.png"
 				}
 			],
 			"display_name": "Piercing Die",
@@ -591,7 +591,7 @@
 			"type": "attack",
 			"min_result": 1.0,
 			"max_result": 20.0,
-			"crit_threshold": 18.0,
+			"crit_threshold": 15.0,
 			"crit_multiplier": 1.5,
 			"rarity": "relic",
 			"quality": "basic",
@@ -615,7 +615,7 @@
 					"stats_modifier": [
 						"strength"
 					],
-					"icon": "res://assets/images/icons/razor_icon.png"
+					"icon": "res://assets/images/icons/bleed_icon.png"
 				}
 			],
 			"display_name": "Razor Die",
@@ -772,7 +772,7 @@
 					"stats_modifier": [
 						"resilience"
 					],
-					"icon": "res://assets/images/icons/heal_icon.png"
+					"icon": "res://assets/images/icons/renew_icon.png"
 				}
 			],
 			"display_name": "Simple Heal Die",
@@ -808,7 +808,7 @@
 					"stats_modifier": [
 						"resilience"
 					],
-					"icon": "res://assets/images/icons/heal_icon.png"
+					"icon": "res://assets/images/icons/renew_icon.png"
 				}
 			],
 			"display_name": "Improved Heal Die",
@@ -936,7 +936,7 @@
 					"stats_modifier": [
 						"strength"
 					],
-					"icon": "res://assets/images/icons/strength.png"
+					"icon": "res://assets/images/icons/stat_buff_str.png"
 				}
 			],
 			"display_name": "Brave Heart Die",
@@ -987,11 +987,250 @@
 					"stats_modifier": [
 						"strength"
 					],
-					"icon": "res://assets/images/icons/statbuff_strength.png"
+					"icon": "res://assets/images/icons/stat_buff_multi_str.png"
 				}
 			],
-			"display_name": "Gladiator Die",
+			"display_name": "Solitary Champion Die",
 			"color": "purple"
+		},
+		{
+			"id": "collectors_d12",
+			"name": "Collector's D12",
+			"type": "utility",
+			"min_result": 1.0,
+			"max_result": 12.0,
+			"crit_threshold": 10.0,
+			"crit_multiplier": 2.0,
+			"rarity": "legendary",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"roll_sfx": "roll_1d12",
+			"tags": [
+				"legendary",
+				"utility",
+				"versatile",
+				"collection"
+			],
+			"effect_description": "Roll 1-3: Shield equal to roll (2 turns). Roll 4-6: Heal equal to roll. Roll 7-9: Attack equal to roll. Roll 10-12: All effects + +3 Strength/Resilience for 3 turns.",
+			"effects": [
+				{
+					"type": "defence",
+					"target": "self",
+					"min_value": 1.0,
+					"max_value": 3.0,
+					"potency": "roll_value",
+					"duration": 2.0,
+					"effect_log_text": "Shielded for {potency} damage (2 turns)!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/defend.png"
+				},
+				{
+					"type": "heal",
+					"target": "self",
+					"min_value": 4.0,
+					"max_value": 6.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Healed for {potency} HP!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/renew_icon.png"
+				},
+				{
+					"type": "attack",
+					"target": "enemy",
+					"min_value": 7.0,
+					"max_value": 9.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Direct hit for {potency} damage!",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/attack.png"
+				},
+				{
+					"type": "attack",
+					"target": "enemy",
+					"min_value": 10.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Devastating strike for {potency} damage!",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/attack.png"
+				},
+				{
+					"type": "defence",
+					"target": "self",
+					"min_value": 10.0,
+					"potency": "roll_value",
+					"duration": 2.0,
+					"effect_log_text": "Massive shield for {potency} damage (2 turns)!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/defend.png"
+				},
+				{
+					"type": "heal",
+					"target": "self",
+					"min_value": 10.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Restored {potency} HP!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/renew_icon.png"
+				},
+				{
+					"type": "stat_buff",
+					"target": "self",
+					"min_value": 10.0,
+					"stat_to_buff": "strength",
+					"potency": 3.0,
+					"duration": 3.0,
+					"effect_log_text": "Mastery grants +{potency} Strength for {duration} turns!",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/stat_buff_multi_str.png"
+				},
+				{
+					"type": "stat_buff",
+					"target": "self",
+					"min_value": 10.0,
+					"stat_to_buff": "resilience",
+					"potency": 3.0,
+					"duration": 3.0,
+					"effect_log_text": "Mastery grants +{potency} Resilience for {duration} turns!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/stat_buff_multi_res.png"
+				}
+			],
+			"display_name": "Collector's D12",
+			"color": "rainbow"
+		},
+		{
+			"id": "lucky_d6",
+			"name": "Lucky D6",
+			"type": "attack",
+			"min_result": 1.0,
+			"max_result": 6.0,
+			"crit_threshold": 4.0,
+			"crit_multiplier": 3.0,
+			"rarity": "legendary",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"roll_sfx": "roll_1d6",
+			"tags": [
+				"legendary",
+				"attack",
+				"luck",
+				"critical"
+			],
+			"effect_description": "Rolls 1-6 damage. Crits on 4+ (50% chance!). Critical hits deal 3x damage and grant +2 to all stats for 2 turns.",
+			"effects": [
+				{
+					"type": "attack",
+					"target": "enemy",
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "Lucky strike for {potency} damage!",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/attack.png"
+				},
+				{
+					"type": "stat_buff",
+					"target": "self",
+					"min_value": 4.0,
+					"stat_to_buff": "strength",
+					"potency": 2.0,
+					"duration": 2.0,
+					"effect_log_text": "Lucky momentum grants +{potency} Strength for {duration} turns!",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/stat_buff_multi_str.png"
+				},
+				{
+					"type": "stat_buff",
+					"target": "self",
+					"min_value": 4.0,
+					"stat_to_buff": "resilience",
+					"potency": 2.0,
+					"duration": 2.0,
+					"effect_log_text": "Lucky momentum grants +{potency} Resilience for {duration} turns!",
+					"stats_modifier": [
+						"resilience"
+					],
+					"icon": "res://assets/images/icons/stat_buff_multi_res.png"
+				},
+				{
+					"type": "stat_buff",
+					"target": "self",
+					"min_value": 4.0,
+					"stat_to_buff": "insight",
+					"potency": 2.0,
+					"duration": 2.0,
+					"effect_log_text": "Lucky momentum grants +{potency} Insight for {duration} turns!",
+					"stats_modifier": [
+						"insight"
+					],
+					"icon": "res://assets/images/icons/stat_buff_multi_ins.png"
+				}
+			],
+			"display_name": "Lucky D6",
+			"color": "gold"
+		},
+		{
+			"id": "the_centurion",
+			"name": "The Centurion",
+			"type": "attack",
+			"min_result": 1.0,
+			"max_result": 100.0,
+			"crit_threshold": 95.0,
+			"crit_multiplier": 2.0,
+			"rarity": "relic",
+			"quality": "basic",
+			"qual_trigger": true,
+			"qual_potency": true,
+			"roll_sfx": "roll_1d6",
+			"tags": [
+				"relic",
+				"attack",
+				"legendary",
+				"century"
+			],
+			"effect_description": "Rolls 1-100 damage. A century of memories condensed into a single die.",
+			"effects": [
+				{
+					"type": "attack",
+					"target": "enemy",
+					"min_value": 1.0,
+					"potency": "roll_value",
+					"duration": 0.0,
+					"effect_log_text": "The Centurion strikes for {potency} damage!",
+					"stats_modifier": [
+						"strength"
+					],
+					"icon": "res://assets/images/icons/attack.png"
+				}
+			],
+			"display_name": "The Centurion",
+			"color": "rainbow"
 		}
 	]
 }

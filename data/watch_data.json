@@ -42,7 +42,7 @@
 	"description": "The dinosaurs always made you feel strong.",
 	"rarity": "relic",
 	"image": "dino_watch.png",
-	"effect_description": "Increases strength by 1.5x",
+	"effect_description": "Increases strength by 1.5x, and life by 5 years",
 	"effect": {
 	  "type": "stat_buff_multi",
 	  "stat": "strength",
@@ -55,7 +55,7 @@
 	"description": "It's pretty. And whispers secrets about your enemies.",
 	"rarity": "relic",
 	"image": "unicorn_watch.png",
-	"effect_description": "Increases insight by 1.5x",
+	"effect_description": "Increases insight by 1.5x, and life by 5 years",
 	"effect": {
 	  "type": "stat_buff_multi",
 	  "stat": "Insight",
@@ -64,11 +64,11 @@
   },
   {
 	"id": "calcu_watch",
-	"name": "Calcu Watch",
+	"name": "Calculator Watch",
 	"description": "Sometimes the best offence is a calculated defence.",
 	"rarity": "relic",
 	"image": "calculator_watch.png",
-	"effect_description": "Increases resilience by 1.5x",
+	"effect_description": "Increases resilience by 1.5x, and life by 5 years",
 	"effect": {
 	  "type": "stat_buff_multi",
 	  "stat": "Resilience",
@@ -85,6 +85,31 @@
 	"effect": {
 	  "type": "fragment_year_reduction",
 	  "value": 2
+	}
+  },
+  {
+	"id": "batteries_not_included",
+	"name": "Batteries Not Included",
+	"description": "A watch that stopped ticking long ago. Memories cost nothing when time stands still.",
+	"rarity": "relic",
+	"image": "batteries_not_included.png",
+	"effect_description": "Makes fragments cost 0 years",
+	"effect": {
+	  "type": "fragment_year_reduction",
+	  "value": 999
+	}
+  },
+  {
+	"id": "collectors_edition",
+	"name": "Collector's Edition",
+	"description": "A limited edition watch that seems to attract rarer treasures. Higher tier drops become more common.",
+	"rarity": "relic",
+	"image": "collectors_edition.png",
+	"effect_description": "Increases drop chances for higher tiers by 15%",
+	"effect": {
+	  "type": "loot_rarity_modifier",
+	  "rarity": "rare",
+	  "modifier": 0.15
 	}
   }
 ]

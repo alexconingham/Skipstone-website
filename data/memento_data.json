@@ -2,7 +2,7 @@
   {
 	"id": "faded_photo",
 	"name": "Faded Photograph",
-	"description": "A worn photograph of happier times. Brings courage in dark moments.",
+	"description": "The only picture where everyone is smiling. You're not sure if it was real.",
 	"rarity": "common",
 	"image": "faded_photo.png",
 	"effects": [
@@ -21,20 +21,20 @@
   {
 	"id": "broken_toy",
 	"name": "Broken Toy",
-	"description": "A reminder of childhood innocence. Sharpens focus in battle.",
+	"description": "Stepped on in the dark. No one came when you cried. You learned to be quiet.",
 	"rarity": "common",
-	"image": "broken_toy_memento.png",
+	"image": "broken_toy.png",
 	"effects": [
 	  {
-		"type": "attack_flat",
-		"value": 1,
+		"type": "damage_dealt_self_pct",
+		"value": 0.20,
 		"trigger": "always"
 	  }
 	],
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Increases attack damage by 1"
+	"tooltip": "Deals 20% of damage dealt as self-damage"
   },
   {
 	"id": "dusty_locket",
@@ -64,7 +64,7 @@
   {
 	"id": "fathers_watch_memento",
 	"name": "Father's Watch",
-	"description": "An old wristwatch ticking irregularly. He always tried to be on time.",
+	"description": "An old wristwatch ticking irregularly. He was always too late. Even when he tried.",
 	"rarity": "rare",
 	"image": "fathers_watch_memento.png",
 	"effects": [
@@ -120,25 +120,25 @@
 	  {
 		"type": "stat_buff",
 		"stat": "strength",
-		"value": 4,
+		"value": 3,
 		"trigger": "always"
 	  },
 	  {
-		"type": "max_roll_bonus",
+		"type": "poison_on_crit",
+		"value": 3,
+		"duration": 4,
+		"trigger": "always"
+	  },
+	  {
+		"type": "poison_duration_amp",
 		"value": 1,
-		"trigger": "always"
-	  },
-	  {
-		"type": "loot_rarity_modifier",
-		"rarity": "rare",
-		"modifier": -0.15,
 		"trigger": "always"
 	  }
 	],
 	"lifespan_bonus": 15,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Increases Strength by 4 • Increases maximum possible dice roll by 1 • Increases chance of rare loot by -0.15%"
+	"tooltip": "Increases Strength by 3 • Critical hits inflict 3 poison for 4 turns • Increases poison duration by 1 turn"
   },
   {
 	"id": "bloodied_tenderizer",
@@ -173,7 +173,7 @@
   {
 	"id": "empty_lunchbox",
 	"name": "Empty Lunchbox",
-	"description": "Hungry for second chances. Hunger of a different kind.",
+	"description": "The cafeteria fell silent. You were hungry for something food couldn't fill.",
 	"rarity": "rare",
 	"image": "empty_lunchbox.png",
 	"effects": [
@@ -250,9 +250,109 @@
 	"tooltip": "Increases attack damage by 2 • Expands critical hit range by 1 (more rolls become critical) • Increases chance of rare loot by -0.1%"
   },
   {
+	"id": "crumpled_program",
+	"name": "Crumpled Program",
+	"description": "A graduation program with your name circled in faded ink. Hers should have been crossed out.",
+	"rarity": "rare",
+	"image": "crumpled_program.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 5,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Insight by 1 • Increases Resilience by 1"
+  },
+  {
+	"id": "empty_flask",
+	"name": "Empty Flask",
+	"description": "She said it was water. You wanted to believe her.",
+	"rarity": "rare",
+	"image": "empty_flask.png",
+	"effects": [
+	  {
+		"type": "poison_on_attack",
+		"value": 2,
+		"duration": 3,
+		"chance": 0.35,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 8,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "35% chance to inflict 2 poison for 3 turns on attack • Increases Insight by 1"
+  },
+  {
+	"id": "diploma_frame",
+	"name": "Diploma Frame",
+	"description": "It hangs on the wall. No one asks about the ceremony.",
+	"rarity": "rare",
+	"image": "diploma_frame.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 2,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": -1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 10,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Resilience by 2 • Decreases Insight by 1"
+  },
+  {
+	"id": "valedictorian_medal",
+	"name": "Valedictorian Medal",
+	"description": "You remember it differently now. Better. Brighter.",
+	"rarity": "relic",
+	"image": "valedictorian_medal.png",
+	"effects": [
+	  {
+		"type": "false_fragment_chance",
+		"value": 0.15,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "strength",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 12,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "15% increased chance of False fragments appearing • Increases Strength by 1"
+  },
+  {
 	"id": "engraved_pen",
 	"name": "Engraved Pen",
-	"description": "Your name scratched in steel ambition. They finally saw your worth.",
+	"description": "Your name scratched in steel ambition. You missed her birthday for this.",
 	"rarity": "rare",
 	"image": "engraved_pen.png",
 	"effects": [
@@ -404,7 +504,7 @@
   {
 	"id": "best_dad_certificate",
 	"name": "Best Dad Certificate",
-	"description": "Awarded ironically. It's the thought that counts. Right?",
+	"description": "Crayon letters spell out a lie. He made it himself. You were never there to see.",
 	"rarity": "rare",
 	"image": "best_dad_certificate.png",
 	"effects": [
@@ -454,7 +554,7 @@
   {
 	"id": "broken_flask",
 	"name": "Broken Flask",
-	"description": "Smells like escape. Still smells like escape.",
+	"description": "Found among her things. Mother's escape outlived her.",
 	"rarity": "rare",
 	"image": "broken_flask.png",
 	"effects": [
@@ -510,15 +610,16 @@
 	"effects": [
 	  {
 		"type": "damage_reduction_pct",
-		"value": 0.25,
+		"value": 0.15,
 		"condition": "low_hp",
-		"trigger": "always"
+		"trigger": "always",
+		"threshold": 0.3
 	  }
 	],
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Reduces incoming damage by 0.25%"
+	"tooltip": "Reduces incoming damage by 15% when below 30% HP"
   },
   {
 	"id": "obituary_clipping",
@@ -574,7 +675,7 @@
   {
 	"id": "shifting_photo",
 	"name": "Shifting Photo",
-	"description": "Subjects vanish when unobserved. One minute he's there, the next a blank space.",
+	"description": "The family portrait keeps changing. Your son's face blurs when you look away.",
 	"rarity": "rare",
 	"image": "shifting_photo.png",
 	"effects": [
@@ -624,7 +725,7 @@
   {
 	"id": "mended_ring",
 	"name": "Mended Ring",
-	"description": "The seam is almost invisible. It's not broken.",
+	"description": "Soldered back together after she threw it. The seam shows if you know where to look.",
 	"rarity": "rare",
 	"image": "mended_ring.png",
 	"effects": [
@@ -675,7 +776,7 @@
   {
 	"id": "blank_name_badge",
 	"name": "Blank Name Badge",
-	"description": "Identity pending. You weren't forgotten. Just overwritten.",
+	"description": "From your son's workplace. He never filled in the 'emergency contact' line.",
 	"rarity": "common",
 	"image": "blank_name_badge.png",
 	"effects": [
@@ -700,16 +801,16 @@
 	"image": "gate_lock.png",
 	"effects": [
 	  {
-		"type": "insight_check_reroll",
-		"value": 1,
-		"frequency": "once_per_floor",
+		"type": "damage_reduction_pct",
+		"value": 0.25,
+		"chance": 0.3,
 		"trigger": "always"
 	  }
 	],
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Allows rerolling insight checks 1 times"
+	"tooltip": "30% chance to reduce incoming damage by 25%"
   },
   {
 	"id": "silver_spoon",
@@ -810,7 +911,7 @@
   {
 	"id": "key_to_the_city",
 	"name": "Key to the City",
-	"description": "Opens doors to ego. The key unlocks more than doors.",
+	"description": "A ceremonial key that opens nothing real. The mayor smiled. Your son wasn't in the crowd.",
 	"rarity": "relic",
 	"image": "key_to_the_city.png",
 	"effects": [
@@ -890,14 +991,14 @@
   {
 	"id": "reunion_tour_ticket",
 	"name": "Reunion Tour Ticket",
-	"description": "One last show for old times. Just one more stop.",
+	"description": "The ticket you kept in your wallet for months. The visit you kept postponing. When you finally went, it changed everything.",
 	"rarity": "rare",
 	"image": "reunion_tour_ticket.png",
 	"effects": [
 	  {
-		"type": "duplicate_memento",
-		"frequency": "run_start",
-		"trigger": "always"
+		"type": "combat_start_shield",
+		"value": 3,
+		"trigger": "combat_start"
 	  },
 	  {
 		"type": "stat_buff",
@@ -909,7 +1010,7 @@
 	"lifespan_bonus": 12,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Creates a duplicate of another equipped memento • Increases Resilience by 1"
+	"tooltip": "Grants 3 shield at combat start • Increases Resilience by 1"
   },
   {
 	"id": "garage_key",
@@ -972,13 +1073,13 @@
 	"image": "cremation_ashes.png",
 	"effects": [
 	  {
-		"type": "burn_resistance",
-		"value": 0.5,
+		"type": "poison_potency_amp",
+		"value": 1,
 		"trigger": "always"
 	  },
 	  {
 		"type": "stat_buff",
-		"stat": "resilience",
+		"stat": "insight",
 		"value": 1,
 		"trigger": "always"
 	  }
@@ -986,7 +1087,7 @@
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Reduces burn damage by 0.5% • Increases Resilience by 1"
+	"tooltip": "Increases poison potency by 1 • Increases Insight by 1"
   },
   {
 	"id": "strange_key",
@@ -1037,22 +1138,24 @@
 	"tooltip": "Expands critical hit range by 1 (more rolls become critical) • Increases defense by -1"
   },
   {
-	"id": "lucky_cin",
+	"id": "lucky_coin",
 	"name": "Lucky Coin",
 	"description": "Worn smooth by anxious fingers. Cuts through uncertainty.",
 	"rarity": "common",
 	"image": "lucky_coin.png",
 	"effects": [
 	  {
-		"type": "crit_band",
+		"type": "bleed_on_attack",
 		"value": 1,
+		"duration": 2,
+		"chance": 0.4,
 		"trigger": "always"
 	  }
 	],
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Expands critical hit range by 1 (more rolls become critical)"
+	"tooltip": "40% chance to inflict 1 bleed for 2 turns on attack"
   },
   {
 	"id": "paper_crown",
@@ -1063,14 +1166,14 @@
 	"effects": [
 	  {
 		"type": "crit_multiplier_modifier",
-		"value": 0.25,
+		"value": 0.1,
 		"trigger": "always"
 	  }
 	],
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Increases critical hit damage multiplier by 0.25%"
+	"tooltip": "Increases critical hit damage multiplier by 10%"
   },
   {
 	"id": "tourniquet",
@@ -1134,7 +1237,7 @@
   {
 	"id": "heavy_keychain",
 	"name": "Heavy Keychain",
-	"description": "Dad's work keys that weighed down his pocket. Burden shared is burden doubled.",
+	"description": "Dad's factory keys. The weight in his pocket that kept him away from home.",
 	"rarity": "common",
 	"image": "heavy_keychain.png",
 	"effects": [
@@ -1157,7 +1260,7 @@
   {
 	"id": "salt_shells",
 	"name": "Salt Shells",
-	"description": "Riot control rounds from dad's army days. 'Less-lethal' can't say non-lethal anymore...",
+	"description": "Dad's military memento. He brought the war home in ways we couldn't see.",
 	"rarity": "common",
 	"image": "salt_shells.png",
 	"effects": [
@@ -1251,7 +1354,7 @@
   {
 	"id": "dried_rose",
 	"name": "Dried Rose",
-	"description": "From the bouquet you never gave. Beauty and pain intertwined.",
+	"description": "From the bouquet you bought for your wife's birthday. The one you missed for work.",
 	"rarity": "common",
 	"image": "dried_rose.png",
 	"effects": [
@@ -1297,7 +1400,7 @@
 	"image": "beauty_mirror.png",
 	"effects": [
 	  {
-		"type": "global_damage_reflect_pct",
+		"type": "damage_dealt_self_pct",
 		"value": 0.25,
 		"trigger": "always"
 	  }
@@ -1305,7 +1408,7 @@
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Reflects 0.25% of all damage taken"
+	"tooltip": "Deals 25% of damage dealt as self-damage"
   },
   {
 	"id": "safety_pin",
@@ -1341,17 +1444,22 @@
 		"type": "gain_thorns_equal_self_damage",
 		"value": 1,
 		"trigger": "always"
+	  },
+	  {
+		"type": "bleed_duration_amp",
+		"value": 1,
+		"trigger": "always"
 	  }
 	],
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Gain thorns equal to self-damage taken"
+	"tooltip": "Gain thorns equal to self-damage taken • Increases bleed duration by 1 turn"
   },
   {
 	"id": "black_eyeliner",
 	"name": "Black Eyeliner",
-	"description": "Mom's shade, worn to hide the bruises. Pain reflects in every surface.",
+	"description": "Mother's shade. She wore it to hide the mornings after. You learned to look away.",
 	"rarity": "common",
 	"image": "black_eyeliner.png",
 	"effects": [
@@ -1374,8 +1482,8 @@
 	"image": "rosary_beads.png",
 	"effects": [
 	  {
-		"type": "self_damage_reduction_pct_during_divinity",
-		"value": 0.5,
+		"type": "self_damage_reduction_pct",
+		"value": 0.33,
 		"trigger": "always"
 	  },
 	  {
@@ -1387,7 +1495,7 @@
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Reduces self-damage by 0.5% during divinity • Increases divinity duration by -1 turns"
+	"tooltip": "Reduces self-damage by 33% • Decreases divinity duration by 1 turns"
   },
   {
 	"id": "communion_wafer",
@@ -1415,22 +1523,22 @@
 	"image": "holy_water.png",
 	"effects": [
 	  {
-		"type": "self_damage_to_heal_pct_during_divinity",
-		"value": 1.0,
+		"type": "self_damage_to_heal_pct",
+		"value": 0.33,
 		"trigger": "always"
 	  }
 	],
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Converts 1.0% of self-damage to healing during divinity"
+	"tooltip": "Converts 33% of self-damage to healing"
   },
   {
 	"id": "sack_of_coins",
 	"name": "Sack of Coins",
 	"description": "From every job interview. Nervous energy that spreads and lingers.",
 	"rarity": "common",
-	"image": "sack_of_coins.png",
+	"image": "sock_of_coins.png",
 	"effects": [
 	  {
 		"type": "dot_duration_on_stun",
@@ -1487,7 +1595,7 @@
   {
 	"id": "empty_wallet",
 	"name": "Empty Wallet",
-	"description": "After the divorce settlement. Less to find, more to fight for.",
+	"description": "After the divorce settlement. She took what mattered. You kept what didn't.",
 	"rarity": "common",
 	"image": "empty_wallet.png",
 	"effects": [
@@ -1515,15 +1623,15 @@
 	"image": "razor_blade.png",
 	"effects": [
 	  {
-		"type": "bleed_on_crit",
-		"value": 1,
+		"type": "damage_dealt_self_pct",
+		"value": 0.15,
 		"trigger": "always"
 	  }
 	],
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Critical hits inflict 1 bleed for 0 turns"
+	"tooltip": "Deals 15% of damage dealt as self-damage"
   },
   {
 	"id": "whetstone",
@@ -1533,12 +1641,7 @@
 	"image": "whetstone.png",
 	"effects": [
 	  {
-		"type": "burn_shield_reduction_pct",
-		"value": 0.75,
-		"trigger": "always"
-	  },
-	  {
-		"type": "next_attack_pierce",
+		"type": "bleed_potency_amp",
 		"value": 1,
 		"trigger": "always"
 	  },
@@ -1551,7 +1654,7 @@
 	"lifespan_bonus": 0,
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
-	"tooltip": "Burn reduces shield effectiveness by 0.75% • Next attack ignores defense • Increases attack damage by -1"
+	"tooltip": "Increases bleed potency by 1 • Decreases attack damage by 1"
   },
   {
 	"id": "match_head",
@@ -1700,5 +1803,176 @@
 	"lifespan_gain_modifier": 0,
 	"lifespan_loss_modifier": 0,
 	"tooltip": "Revives with full health on death (once per run) • Increases Max HP by 10"
+  },
+  {
+	"id": "first_love_locket",
+	"name": "First Love Locket",
+	"description": "A locket holding your first perfect memory. Untainted and pure.",
+	"rarity": "rare",
+	"image": "first_love_locket.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "resilience",
+		"value": 3,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Resilience by 3"
+  },
+  {
+	"id": "tainted_love",
+	"name": "Tainted Love",
+	"description": "A flawed memory of love. Powerful but corrupting.",
+	"rarity": "rare",
+	"image": "tainted_love.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "strength",
+		"value": 5,
+		"trigger": "always"
+	  },
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": -4,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Strength by 5 • Decreases Insight by 4"
+  },
+  {
+	"id": "broken_mirror",
+	"name": "Broken Mirror",
+	"description": "Shattered reflections of fragmented memories. Pain becomes power.",
+	"rarity": "rare",
+	"image": "broken_mirror.png",
+	"effects": [
+	  {
+		"type": "thorns_flat",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "bleed_on_crit",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reflects 1 damage to attackers • Critical hits inflict 1 bleed"
+  },
+  {
+	"id": "corruption",
+	"name": "Corruption",
+	"description": "The void touches you. Strength grows, but insight fades with each battle.",
+	"rarity": "relic",
+	"image": "corruption.png",
+	"effects": [
+	  {
+		"type": "stat_buff_per_battle",
+		"stat": "strength",
+		"value": 3,
+		"trigger": "combat_start"
+	  },
+	  {
+		"type": "stat_buff_per_battle",
+		"stat": "insight",
+		"value": -5,
+		"trigger": "combat_start"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Gains +3 Strength per battle • Loses -5 Insight per battle"
+  },
+  {
+	"id": "slugger",
+	"name": "Slugger",
+	"description": "A legendary memento of pure power. Raw strength beyond measure.",
+	"rarity": "relic",
+	"image": "slugger.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "strength",
+		"value": 20,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Strength by 20"
+  },
+  {
+	"id": "gorgo_plushie",
+	"name": "Gorgo Plushie",
+	"description": "A legendary plushie that multiplies your critical hits. Four times the power.",
+	"rarity": "relic",
+	"image": "gorgo_plushie.png",
+	"effects": [
+	  {
+		"type": "crit_multiplier_modifier",
+		"value": 4.0,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases critical hit damage multiplier by 4.0x"
+  },
+  {
+	"id": "pain_converter",
+	"name": "Pain Converter",
+	"description": "Converts all pain into damage. Thorns and razor combined—every wound becomes a weapon.",
+	"rarity": "relic",
+	"image": "pain_converter.png",
+	"effects": [
+	  {
+		"type": "thorns_flat",
+		"value": 1,
+		"trigger": "always"
+	  },
+	  {
+		"type": "bleed_on_crit",
+		"value": 1,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Reflects 1 damage to attackers • Critical hits inflict 1 bleed"
+  },
+  {
+	"id": "rabbit_ears",
+	"name": "Rabbit Ears",
+	"description": "The picture will never be right",
+	"rarity": "rare",
+	"image": "rabbit_ears.png",
+	"effects": [
+	  {
+		"type": "stat_buff",
+		"stat": "insight",
+		"value": 4,
+		"trigger": "always"
+	  }
+	],
+	"lifespan_bonus": 0,
+	"lifespan_gain_modifier": 0,
+	"lifespan_loss_modifier": 0,
+	"tooltip": "Increases Insight by 4"
   }
 ]

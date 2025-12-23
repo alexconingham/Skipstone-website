@@ -12,8 +12,8 @@ export const getDiceData = () => {
     
     // Map JSON IDs to actual image filenames
     const filenameMap: { [key: string]: string } = {
-      'life': 'life.png',
-      'life_die': 'life.png',
+      'life': 'life_die.png',
+      'life_die': 'life_die.png',
       'simple_heal': 'simple_d6_heal.png',
       'simple_d6_heal': 'simple_d6_heal.png',
       'simple_d12_heal': 'simple_d12_heal.png',
@@ -37,7 +37,10 @@ export const getDiceData = () => {
       'razor': 'razor_die.png',
       'pain': 'pain_die.png',
       'thorn': 'thorn_die.png',
-      'chrono': 'chrono_die.png'
+      'chrono': 'chrono_die.png',
+      'collectors_d12': 'collectors_d12.png',
+      'lucky_d6': 'lucky_d6.png',
+      'the_centurion': 'the_centurion.png'
     }
     
     // Use mapped filename if available, otherwise use default
@@ -99,7 +102,7 @@ export const getWatchData = () => {
     // Handle the special case of calculator_watch which has a different filename
     let imageFile = watch.image
     if (watch.id === 'calcu_watch') {
-      imageFile = 'calcu_watch.png'
+      imageFile = 'calculator_watch.png'
     }
     
     return {
