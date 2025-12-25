@@ -17,7 +17,8 @@ export default function Navigation({ className = '' }: NavigationProps) {
     { id: 'enemies', label: 'Enemies', href: '#enemies' },
     { id: 'arsenal', label: 'Arsenal', href: '#arsenal' },
     { id: 'mementos', label: 'Mementos', href: '#mementos' },
-    { id: 'steam', label: 'Wishlist', href: '#steam-cta' }
+    { id: 'steam', label: 'Wishlist', href: '#steam-cta' },
+    { id: 'studio', label: 'Skipstone Studio', href: 'https://skipstone.co.nz', external: true }
   ]
 
   useEffect(() => {
@@ -42,7 +43,11 @@ export default function Navigation({ className = '' }: NavigationProps) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const smoothScrollTo = (href: string) => {
+  const smoothScrollTo = (href: string, isExternal?: boolean) => {
+    if (isExternal || href.startsWith('http')) {
+      window.open(href, '_blank', 'noopener,noreferrer')
+      return
+    }
     const targetId = href.replace('#', '')
     const element = document.getElementById(targetId)
     if (element) {
@@ -92,21 +97,26 @@ export default function Navigation({ className = '' }: NavigationProps) {
                 {navItems.map((item) => (
                   <button
                     key={item.id}
-                    onClick={() => smoothScrollTo(item.href)}
+                    onClick={() => smoothScrollTo(item.href, item.external)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative group ${
-                      activeSection === item.id
+                      activeSection === item.id && !item.external
                         ? 'text-cyan-300 bg-cyan-500/20'
                         : 'text-gray-300 hover:text-white hover:bg-white/10'
                     }`}
-                    aria-current={activeSection === item.id ? 'page' : undefined}
+                    aria-current={activeSection === item.id && !item.external ? 'page' : undefined}
                   >
                     {item.label}
+                    {item.external && (
+                      <span className="ml-1 text-xs opacity-60">↗</span>
+                    )}
                     {/* Active indicator */}
-                    <div 
-                      className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-cyan-400 transition-all duration-300 ${
-                        activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'
-                      }`}
-                    />
+                    {!item.external && (
+                      <div 
+                        className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-cyan-400 transition-all duration-300 ${
+                          activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'
+                        }`}
+                      />
+                    )}
                   </button>
                 ))}
               </div>
@@ -153,7 +163,7 @@ function MobileMenu({
 }: { 
   navItems: any[], 
   activeSection: string,
-  onNavigate: (href: string) => void
+  onNavigate: (href: string, isExternal?: boolean) => void
 }) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -188,16 +198,19 @@ function MobileMenu({
               <button
                 key={item.id}
                 onClick={() => {
-                  onNavigate(item.href)
+                  onNavigate(item.href, item.external)
                   setIsOpen(false)
                 }}
                 className={`block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
-                  activeSection === item.id
+                  activeSection === item.id && !item.external
                     ? 'text-cyan-300 bg-cyan-500/20'
                     : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
               >
                 {item.label}
+                {item.external && (
+                  <span className="ml-2 text-sm opacity-60">↗</span>
+                )}
               </button>
             ))}
             
