@@ -40,6 +40,12 @@ const root   = path.join(__dirname, '..');
 const assets = path.join(root, 'assets');
 const pub    = path.join(root, 'public');
 
+// assets/ is gitignored — on CI/Vercel it won't exist. Skip gracefully.
+if (!fs.existsSync(assets)) {
+  console.log('No assets/ folder found (CI environment) — skipping asset copy.');
+  process.exit(0);
+}
+
 // ── Backgrounds ────────────────────────────────────────────────────────────
 const bgDest = path.join(pub, 'backgrounds');
 ensureDir(bgDest);
