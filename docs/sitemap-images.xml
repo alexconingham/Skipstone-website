@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://skipstone.co.nz/</loc>
+    <lastmod>2024-12-19T00:00:00+00:00</lastmod>
+    
+    <!-- Main game assets for SEO -->
+    <image:image>
+      <image:loc>https://skipstone.co.nz/title_logo.png</image:loc>
+      <image:title>Remember to Die Game Logo</image:title>
+      <image:caption>Official logo for Remember to Die - a tactical dice combat roguelike by Skipstone Studios</image:caption>
+      <image:geo_location>New Zealand</image:geo_location>
+      <image:license>https://skipstone.co.nz/</image:license>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://skipstone.co.nz/Skipstone_logo.png</image:loc>
+      <image:title>Skipstone Studios Logo</image:title>
+      <image:caption>Official logo of Skipstone Studios - indie game development studio</image:caption>
+      <image:geo_location>New Zealand</image:geo_location>
+      <image:license>https://skipstone.co.nz/</image:license>
+    </image:image>
+    
+    <!-- Representative game content -->
+    <image:image>
+      <image:loc>https://skipstone.co.nz/backgrounds/alt_timewarpUPSCALED.PNG</image:loc>
+      <image:title>Remember to Die - Game Environment</image:title>
+      <image:caption>Atmospheric game environment from Remember to Die tactical roguelike</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://skipstone.co.nz/portraits/D1_boss.png</image:loc>
+      <image:title>Remember to Die - Boss Character</image:title>
+      <image:caption>Boss character artwork from Remember to Die game</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://skipstone.co.nz/dice/death_die.png</image:loc>
+      <image:title>Remember to Die - Death Die</image:title>
+      <image:caption>Death die from the tactical dice combat system in Remember to Die</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://skipstone.co.nz/mementos/extra_life.png</image:loc>
+      <image:title>Remember to Die - Extra Life Memento</image:title>
+      <image:caption>Extra Life memento item from Remember to Die roguelike game</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://skipstone.co.nz/watches/gold_watch.png</image:loc>
+      <image:title>Remember to Die - Gold Watch</image:title>
+      <image:caption>Gold watch time manipulation item from Remember to Die</image:caption>
+    </image:image>
+  </url>
+</urlset> 

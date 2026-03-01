@@ -1,64 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',   // replaces the removed `next export` command
+  distDir: 'docs',    // export directly to docs/ (GitHub Pages source)
+
   images: {
-    unoptimized: false, // Enable Vercel's image optimization
-    domains: ['skipstone.co.nz', 'www.skipstone.co.nz', 'rtd.skipstone.co.nz', 'lospec.com'],
+    unoptimized: true, // required for static export (no Next.js server at runtime)
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000, // 1 year
   },
-  async headers() {
-    return [
-      {
-        source: '/backgrounds/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/portraits/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/dice/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/mementos/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/watches/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-    ];
-  },
+
+  // headers() only applies to a running Next.js server, not static exports —
+  // cache headers for images are handled by GitHub Pages / CDN instead
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig

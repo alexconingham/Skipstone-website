@@ -1,0 +1,67 @@
+{
+  "name": "Remember to Die - Tactical Dice Combat Roguelike",
+  "short_name": "Remember to Die",
+  "description": "A gritty tactical dice combat roguelike where every roll dredges up fragmented memories. Battle demons, collect mementos, and reroll your destiny.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "id": "skipstone-remember-to-die",
+  "icons": [
+    {
+      "src": "/title_logo.png",
+      "sizes": "384x200",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Skipstone_logo.png",
+      "sizes": "800x128",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/backgrounds/alt_timewarpUPSCALED.PNG",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Remember to Die - Game Environment"
+    }
+  ],
+  "categories": ["games", "entertainment", "strategy"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "steam",
+      "id": "coming_soon",
+      "url": "https://store.steampowered.com/app/coming_soon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Steam Wishlist",
+      "short_name": "Wishlist",
+      "description": "Wishlist Remember to Die on Steam",
+      "url": "/#steam-wishlist",
+      "icons": [
+        {
+          "src": "/steam.png",
+          "sizes": "200x60",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  }
+} 
