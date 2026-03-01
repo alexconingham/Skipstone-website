@@ -13,6 +13,7 @@ export default function Navigation({ className = '' }: NavigationProps) {
 
   const navItems = [
     { id: 'home', label: 'Home', href: '#home' },
+    { id: 'trailer', label: 'Trailer', href: '#trailer' },
     { id: 'memories', label: 'Memories', href: '#memories' },
     { id: 'enemies', label: 'Enemies', href: '#enemies' },
     { id: 'arsenal', label: 'Arsenal', href: '#arsenal' },

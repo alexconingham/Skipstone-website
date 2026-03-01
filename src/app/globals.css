@@ -6,6 +6,122 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ════════════════════════════════════════════════
+   PIXEL ART GAME AESTHETIC SYSTEM
+════════════════════════════════════════════════ */
+
+/* CRT Scanlines overlay */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.13) 3px,
+    rgba(0, 0, 0, 0.13) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Section label tags */
+.section-tag {
+  display: inline-block;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 3px 14px;
+  margin-bottom: 14px;
+}
+
+.section-tag-blue  { color: rgba(96, 165, 250, 0.8);  border: 1px solid rgba(96, 165, 250, 0.25);  }
+.section-tag-red   { color: rgba(248, 113, 113, 0.8); border: 1px solid rgba(248, 113, 113, 0.25); }
+.section-tag-green { color: rgba(74, 222, 128, 0.8);  border: 1px solid rgba(74, 222, 128, 0.25);  }
+.section-tag-purple{ color: rgba(196, 130, 250, 0.8); border: 1px solid rgba(196, 130, 250, 0.25); }
+.section-tag-amber { color: rgba(251, 191, 36, 0.8);  border: 1px solid rgba(251, 191, 36, 0.25);  }
+
+/* default (cyan) */
+.section-tag:not([class*="section-tag-"]) {
+  color: rgba(0, 255, 255, 0.7);
+  border: 1px solid rgba(0, 255, 255, 0.25);
+}
+
+/* Section accent divider line */
+.section-accent-line {
+  height: 1px;
+  width: 80px;
+  display: block;
+}
+
+/* Feature cards */
+.feature-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card:hover {
+  background: rgba(0, 255, 255, 0.03);
+  border-color: rgba(0, 255, 255, 0.14);
+}
+
+/* Pixel corner accents on feature cards */
+.feature-card::before,
+.feature-card::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+
+.feature-card::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid rgba(0, 255, 255, 0.45);
+  border-left: 2px solid rgba(0, 255, 255, 0.45);
+}
+
+.feature-card::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid rgba(0, 255, 255, 0.45);
+  border-right: 2px solid rgba(0, 255, 255, 0.45);
+}
+
+/* Scroll chevron bounce */
+@keyframes bounce-soft {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50%       { transform: rotate(45deg) translateY(5px); }
+}
+
+.scroll-chevron {
+  width: 14px;
+  height: 14px;
+  border-right: 2px solid rgba(0, 255, 255, 0.4);
+  border-bottom: 2px solid rgba(0, 255, 255, 0.4);
+  transform: rotate(45deg);
+  animation: bounce-soft 2s ease-in-out infinite;
+}
+
+/* Video trailer corners */
+.video-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.video-corner-tl { top: -2px;    left: -2px;   border-top:    2px solid rgba(0, 255, 255, 0.75); border-left:   2px solid rgba(0, 255, 255, 0.75); }
+.video-corner-tr { top: -2px;    right: -2px;  border-top:    2px solid rgba(0, 255, 255, 0.75); border-right:  2px solid rgba(0, 255, 255, 0.75); }
+.video-corner-bl { bottom: -2px; left: -2px;   border-bottom: 2px solid rgba(0, 255, 255, 0.75); border-left:   2px solid rgba(0, 255, 255, 0.75); }
+.video-corner-br { bottom: -2px; right: -2px;  border-bottom: 2px solid rgba(0, 255, 255, 0.75); border-right:  2px solid rgba(0, 255, 255, 0.75); }
+
 /* CSS Variables for better contrast compliance */
 :root {
   --bg-dark: #000000;

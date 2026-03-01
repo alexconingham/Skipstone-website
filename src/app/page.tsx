@@ -5,11 +5,11 @@ import PixelatedWakeBackground from '@/components/PixelatedWakeBackground'
 import Navigation from '@/components/Navigation'
 import AnimatedSection from '@/components/AnimatedSection'
 import CTASection from '@/components/CTASection'
+import VideoTrailer from '@/components/VideoTrailer'
 import Image from 'next/image'
 import { getDiceData, getMementoData, getEnemyData, getWatchData } from '@/utils/dataMapper'
 import { getBaseUrl } from '@/utils/config'
 
-// Game assets data structure with actual data from JSON files
 const gameAssets = {
   dungeons: [
     { file: "D1_bg.PNG", name: "Classroom" },
@@ -41,241 +41,214 @@ const gameAssets = {
 
 export default function Home() {
   const baseUrl = getBaseUrl()
-  // Page-level structured data for better SEO
-  const pageStructuredData = {
+
+  const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'ItemPage',
-    '@id': `${baseUrl}/#itempage`,
-    'mainEntity': {
-      '@type': 'VideoGame',
-      '@id': `${baseUrl}/#game`,
-      'name': 'Remember to Die',
-      'description': 'A gritty tactical dice combat roguelike where every roll dredges up fragmented memories.',
-      'genre': ['Roguelike', 'Strategy', 'Tactical Combat', 'Horror', 'Indie'],
-      'gamePlatform': ['Steam', 'PC'],
-      'applicationCategory': 'Game',
-      'author': {
-        '@type': 'Organization',
-        'name': 'Skipstone Studios',
-        'url': 'https://skipstone.co.nz'
-      },
-      'offers': {
-        '@type': 'Offer',
-        'availability': 'https://schema.org/PreOrder',
-        'price': 'TBD',
-        'priceCurrency': 'USD'
-      },
-      'aggregateRating': {
-        '@type': 'AggregateRating',
-        'ratingValue': '5',
-        'ratingCount': '1',
-        'bestRating': '5',
-        'worstRating': '1'
-      }
-    }
+    '@type': 'VideoGame',
+    '@id': `${baseUrl}/#game`,
+    'name': 'Remember to Die',
+    'description': 'A gritty tactical dice combat roguelike where every roll dredges up fragmented memories.',
+    'genre': ['Roguelike', 'Strategy', 'Tactical Combat', 'Horror', 'Indie'],
+    'gamePlatform': ['Steam', 'PC'],
+    'author': { '@type': 'Organization', 'name': 'Skipstone Studios', 'url': 'https://skipstone.co.nz' },
+    'offers': { '@type': 'Offer', 'availability': 'https://schema.org/PreOrder', 'price': 'TBD', 'priceCurrency': 'USD' }
   }
 
   return (
     <>
-      {/* Page-specific structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(pageStructuredData),
-        }}
-      />
-      
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+
       <main className="min-h-screen bg-black text-white relative overflow-x-hidden">
-        {/* Professional Navigation */}
         <Navigation />
-        
-        {/* Image Protection */}
         <ImageProtection />
-        
-        {/* Audio Player */}
         <AudioPlayer />
-        
-        {/* Global Interactive Pixelated Wake Effect */}
         <PixelatedWakeBackground />
-        
-        {/* Hero Section */}
-        <section 
+
+        {/* ══════════════════════════════════════
+            HERO SECTION
+        ══════════════════════════════════════ */}
+        <section
           id="home"
-          className="min-h-screen flex flex-col items-center justify-center px-4 relative pt-16"
+          className="min-h-screen flex flex-col items-center justify-center px-4 relative pt-20 pb-24"
           role="banner"
-          itemScope
-          itemType="https://schema.org/VideoGame"
         >
-          {/* Enhanced Hero Background with parallax */}
-          <div className="absolute inset-0 w-full h-full">
+          {/* Background */}
+          <div className="absolute inset-0">
             <Image
               src="/backgrounds/alt_timewarpUPSCALED.PNG"
               alt=""
               fill
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
               quality={90}
               priority
               sizes="100vw"
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QFLQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
             />
-            {/* Enhanced overlay with gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-black/90"></div>
-            {/* Atmospheric effects */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/10 via-transparent to-purple-900/10"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/55 to-black" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
           </div>
-          
-          <div className="text-center space-y-8 max-w-4xl mx-auto relative z-20">
-            {/* Enhanced Logo with animation */}
-            <AnimatedSection animation="scaleIn" delay={300}>
-              <div className="mb-8">
-                <Image 
-                  src="/title_logo.png" 
-                  alt="Remember to Die - Tactical Dice Combat Game by Skipstone Studios" 
-                  width={480}
-                  height={250}
-                  className="mx-auto max-w-md w-full h-auto filter drop-shadow-2xl"
-                  style={{ 
-                    filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 40px rgba(100, 200, 255, 0.2))',
-                    animation: 'float 6s ease-in-out infinite'
+
+          {/* Scanlines */}
+          <div className="scanlines absolute inset-0 pointer-events-none z-[3]" />
+
+          {/* Hero content */}
+          <div className="text-center max-w-4xl mx-auto relative z-20 space-y-7">
+            <AnimatedSection animation="scaleIn" delay={200}>
+              <div className="mb-2">
+                <Image
+                  src="/title_logo.png"
+                  alt="Remember to Die — Tactical Dice Combat Roguelike"
+                  width={520}
+                  height={270}
+                  className="mx-auto max-w-sm md:max-w-lg w-full h-auto"
+                  style={{
+                    filter: 'drop-shadow(0 0 24px rgba(0,255,255,0.35)) drop-shadow(0 0 60px rgba(0,255,255,0.12))',
+                    animation: 'float 7s ease-in-out infinite',
                   }}
                   priority
                   quality={90}
-                  sizes="(max-width: 768px) 320px, 480px"
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-                  itemProp="image"
+                  sizes="(max-width: 768px) 320px, 520px"
                 />
               </div>
             </AnimatedSection>
 
-            {/* Enhanced Hero Title */}
             <AnimatedSection animation="fadeIn" delay={600}>
-              <h1 
-                className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 typewriter-container leading-tight"
-                itemProp="name"
-              >
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white typewriter-container leading-tight">
                 <span className="typewriter-line">Battle your demons.</span>
                 <span className="typewriter-line">Re-roll your destiny.</span>
               </h1>
             </AnimatedSection>
 
-            {/* Enhanced Subtitle */}
-            <AnimatedSection animation="fadeIn" delay={1200}>
-              <p 
-                className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-8 leading-relaxed max-w-3xl mx-auto font-medium"
-                itemProp="description"
-              >
+            <AnimatedSection animation="fadeIn" delay={1300}>
+              <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto">
                 Remember to Die is a gritty, narrative-driven battle against time and broken memories, wrapped in an intuitive and moreish dice strategy roguelike where every dice roll dredges up a fragmented memory and decides your fate.
               </p>
             </AnimatedSection>
 
-            {/* Enhanced CTA Section */}
-            <AnimatedSection animation="slideUp" delay={1600}>
-              <div className="flex flex-col lg:flex-row items-center justify-center gap-8 mb-8">
-                <div className="text-center lg:text-right">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
+            <AnimatedSection animation="slideUp" delay={1800}>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-2">
+                <div className="text-center">
+                  <p className="text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent tracking-wide">
                     COMING SOON
-                  </h2>
-                  <p className="text-gray-400 text-sm">to Steam Early Access</p>
+                  </p>
+                  <p className="text-gray-500 text-xs tracking-[0.25em] uppercase mt-1">to Steam Early Access</p>
                 </div>
-                
-                <div className="text-4xl lg:text-5xl font-bold text-gray-600" aria-hidden="true">
-                  |
-                </div>
-                
+
+                <div className="hidden sm:block w-px h-10 bg-white/15" />
+
                 <a
                   href="#steam-cta"
-                  className="group relative inline-block transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+                  className="group transition-all duration-300 hover:scale-105"
                   aria-label="Wishlist Remember to Die on Steam"
-                  role="button"
-                  tabIndex={0}
-                  itemProp="offers"
-                  itemScope
-                  itemType="https://schema.org/Offer"
                 >
-                  <meta itemProp="availability" content="https://schema.org/PreOrder" />
-                  <meta itemProp="price" content="TBD" />
-                  <meta itemProp="priceCurrency" content="USD" />
-                  <Image 
-                    src="/steam wishlist bw3.png" 
-                    alt="Wishlist on Steam" 
-                    width={300}
-                    height={120}
-                    className="w-auto h-16 md:h-20 group-hover:brightness-110 transition-all duration-300"
-                    loading="lazy"
+                  <Image
+                    src="/steam wishlist bw3.png"
+                    alt="Wishlist on Steam"
+                    width={280}
+                    height={112}
+                    className="w-auto h-14 md:h-16 group-hover:brightness-110 transition-all duration-300"
                     quality={90}
                   />
                 </a>
               </div>
             </AnimatedSection>
-
-            {/* Game Features Preview */}
-            <AnimatedSection animation="fadeIn" delay={2000}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 text-center">
-                <div className="space-y-3">
-                  <div className="text-4xl">🎲</div>
-                  <h3 className="text-xl font-bold text-cyan-400">Tactical Dice Combat</h3>
-                  <p className="text-gray-400 text-sm">Strategic dice-based battles with endless depth</p>
-                </div>
-                <div className="space-y-3">
-                  <div className="text-4xl">🧠</div>
-                  <h3 className="text-xl font-bold text-purple-400">Memory Fragments</h3>
-                  <p className="text-gray-400 text-sm">Unlock haunting memories that shape your destiny</p>
-                </div>
-                <div className="space-y-3">
-                  <div className="text-4xl">♾️</div>
-                  <h3 className="text-xl font-bold text-blue-400">Infinite Replayability</h3>
-                  <p className="text-gray-400 text-sm">Every run tells a different story</p>
-                </div>
-              </div>
-            </AnimatedSection>
           </div>
 
-          {/* Hidden microdata for SEO */}
-          <div style={{ display: 'none' }}>
-            <span itemProp="genre">Roguelike</span>
-            <span itemProp="genre">Strategy</span>
-            <span itemProp="genre">Tactical Combat</span>
-            <span itemProp="gamePlatform">PC</span>
-            <span itemProp="gamePlatform">Steam</span>
-            <span itemProp="applicationCategory">Game</span>
-            <span itemProp="operatingSystem">Windows</span>
-            <span itemProp="author" itemScope itemType="https://schema.org/Organization">
-              <span itemProp="name">Skipstone Studios</span>
-            </span>
+          {/* Scroll indicator */}
+          <AnimatedSection animation="fadeIn" delay={2600}>
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20">
+              <span className="text-xs tracking-[0.25em] text-gray-500 uppercase">Scroll</span>
+              <div className="scroll-chevron" />
+            </div>
+          </AnimatedSection>
+        </section>
+
+        {/* ══════════════════════════════════════
+            TRAILER SECTION
+        ══════════════════════════════════════ */}
+        <section id="trailer" className="relative py-20 px-4 bg-black">
+          {/* Ambient glow behind video */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-cyan-900/10 blur-[120px] rounded-full" />
+          </div>
+
+          <div className="max-w-5xl mx-auto relative z-10">
+            <AnimatedSection animation="fadeIn" delay={200}>
+              <div className="text-center mb-10">
+                <span className="section-tag">Official Trailer</span>
+                <h2 className="text-2xl md:text-3xl font-black text-white mt-1">
+                  Every roll counts.
+                </h2>
+                <div className="section-accent-line bg-gradient-to-r from-transparent via-cyan-500 to-transparent mt-4 mx-auto" />
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection animation="scaleIn" delay={400}>
+              <VideoTrailer src="/RTD_trailerv5.mp4" />
+            </AnimatedSection>
           </div>
         </section>
 
-        {/* Enhanced Dungeons Section */}
+        {/* ══════════════════════════════════════
+            FEATURE PILLS
+        ══════════════════════════════════════ */}
+        <section className="py-16 px-4 border-t border-b border-white/[0.04] bg-gradient-to-b from-black to-gray-950/60">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <AnimatedSection animation="slideUp" delay={100}>
+                <div className="feature-card">
+                  <div className="text-3xl mb-4">🎲</div>
+                  <h3 className="text-base font-black text-cyan-400 mb-2 tracking-wide">Tactical Dice Combat</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">Strategic dice-based battles with endless depth</p>
+                </div>
+              </AnimatedSection>
+              <AnimatedSection animation="slideUp" delay={200}>
+                <div className="feature-card">
+                  <div className="text-3xl mb-4">🧠</div>
+                  <h3 className="text-base font-black text-purple-400 mb-2 tracking-wide">Memory Fragments</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">Unlock haunting memories that shape your destiny</p>
+                </div>
+              </AnimatedSection>
+              <AnimatedSection animation="slideUp" delay={300}>
+                <div className="feature-card">
+                  <div className="text-3xl mb-4">♾️</div>
+                  <h3 className="text-base font-black text-blue-400 mb-2 tracking-wide">Infinite Replayability</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">Every run tells a different story</p>
+                </div>
+              </AnimatedSection>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════
+            MEMORIES / DUNGEONS
+        ══════════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
-          <section 
+          <section
             id="memories"
-            className="py-20 px-4 bg-gradient-to-b from-transparent to-gray-900/20" 
+            className="py-20 px-4 relative overflow-hidden"
             aria-labelledby="dungeons-heading"
-            itemScope
-            itemType="https://schema.org/ImageGallery"
           >
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-blue-950/8 to-black pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
+
+            <div className="max-w-6xl mx-auto relative z-10">
+              <div className="text-center mb-14">
+                <span className="section-tag section-tag-blue">World</span>
+                <h2
                   id="dungeons-heading"
-                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent"
-                  itemProp="name"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent"
                 >
                   A lifetime of memories
                 </h2>
-                <p 
-                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
-                  itemProp="description"
-                >
+                <div className="section-accent-line bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto" />
+                <p className="text-base md:text-lg text-gray-400 mt-5 max-w-xl mx-auto leading-relaxed">
                   Each fragment you unlock splinters the story into new fates; you choose which fantasies to pursue, and which truths to rewrite.
                 </p>
               </div>
-              <ImageGallery 
-                items={gameAssets.dungeons} 
-                folder="backgrounds" 
-                direction="right" 
+              <ImageGallery
+                items={gameAssets.dungeons}
+                folder="backgrounds"
+                direction="right"
                 size="massive"
                 galleryId="dungeons"
                 showTooltips={false}
@@ -284,35 +257,36 @@ export default function Home() {
           </section>
         </AnimatedSection>
 
-        {/* Enhanced Enemies Section */}
+        {/* ══════════════════════════════════════
+            ENEMIES
+        ══════════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
-          <section 
+          <section
             id="enemies"
-            className="py-20 px-4" 
+            className="py-20 px-4 relative overflow-hidden"
             aria-labelledby="enemies-heading"
-            itemScope
-            itemType="https://schema.org/ImageGallery"
           >
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-red-950/8 to-black pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
+
+            <div className="max-w-6xl mx-auto relative z-10">
+              <div className="text-center mb-14">
+                <span className="section-tag section-tag-red">Enemies</span>
+                <h2
                   id="enemies-heading"
-                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent"
-                  itemProp="name"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-red-400 via-orange-300 to-red-400 bg-clip-text text-transparent"
                 >
                   A string of haunting faces
                 </h2>
-                <p 
-                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
-                  itemProp="description"
-                >
+                <div className="section-accent-line bg-gradient-to-r from-transparent via-red-500 to-transparent mx-auto" />
+                <p className="text-base md:text-lg text-gray-400 mt-5 max-w-xl mx-auto leading-relaxed">
                   Each enemy hints at more of the haunting truth.
                 </p>
               </div>
-              <ImageGallery 
-                items={gameAssets.enemies} 
-                folder="portraits" 
-                direction="left" 
+              <ImageGallery
+                items={gameAssets.enemies}
+                folder="portraits"
+                direction="left"
                 size="extra-large"
                 galleryId="enemies"
               />
@@ -320,35 +294,36 @@ export default function Home() {
           </section>
         </AnimatedSection>
 
-        {/* Enhanced Dice Section */}
+        {/* ══════════════════════════════════════
+            ARSENAL / DICE
+        ══════════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
-          <section 
+          <section
             id="arsenal"
-            className="py-20 px-4 bg-gradient-to-b from-transparent to-green-900/10" 
+            className="py-20 px-4 relative overflow-hidden"
             aria-labelledby="dice-heading"
-            itemScope
-            itemType="https://schema.org/ImageGallery"
           >
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-green-950/8 to-black pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500/20 to-transparent" />
+
+            <div className="max-w-6xl mx-auto relative z-10">
+              <div className="text-center mb-14">
+                <span className="section-tag section-tag-green">Arsenal</span>
+                <h2
                   id="dice-heading"
-                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent"
-                  itemProp="name"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-green-400 via-emerald-300 to-green-400 bg-clip-text text-transparent"
                 >
                   An evolving arsenal
                 </h2>
-                <p 
-                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
-                  itemProp="description"
-                >
+                <div className="section-accent-line bg-gradient-to-r from-transparent via-green-500 to-transparent mx-auto" />
+                <p className="text-base md:text-lg text-gray-400 mt-5 max-w-xl mx-auto leading-relaxed">
                   Collect and refine powerful dice combinations.
                 </p>
               </div>
-              <ImageGallery 
-                items={gameAssets.dice} 
-                folder="dice" 
-                direction="right" 
+              <ImageGallery
+                items={gameAssets.dice}
+                folder="dice"
+                direction="right"
                 size="medium"
                 galleryId="dice"
               />
@@ -356,35 +331,36 @@ export default function Home() {
           </section>
         </AnimatedSection>
 
-        {/* Enhanced Mementos Section */}
+        {/* ══════════════════════════════════════
+            MEMENTOS
+        ══════════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
-          <section 
+          <section
             id="mementos"
-            className="py-20 px-4" 
+            className="py-20 px-4 relative overflow-hidden"
             aria-labelledby="mementos-heading"
-            itemScope
-            itemType="https://schema.org/ImageGallery"
           >
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/8 to-black pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
+
+            <div className="max-w-6xl mx-auto relative z-10">
+              <div className="text-center mb-14">
+                <span className="section-tag section-tag-purple">Collectibles</span>
+                <h2
                   id="mementos-heading"
-                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 bg-clip-text text-transparent"
-                  itemProp="name"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-purple-400 via-pink-300 to-purple-400 bg-clip-text text-transparent"
                 >
                   And a bagful of tricks...
                 </h2>
-                <p 
-                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
-                  itemProp="description"
-                >
+                <div className="section-accent-line bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto" />
+                <p className="text-base md:text-lg text-gray-400 mt-5 max-w-xl mx-auto leading-relaxed">
                   Collect mementos drenched in heartbreaking lore, each with unique effects.
                 </p>
               </div>
-              <ImageGallery 
-                items={gameAssets.mementos} 
-                folder="mementos" 
-                direction="left" 
+              <ImageGallery
+                items={gameAssets.mementos}
+                folder="mementos"
+                direction="left"
                 size="medium"
                 galleryId="mementos"
               />
@@ -392,34 +368,35 @@ export default function Home() {
           </section>
         </AnimatedSection>
 
-        {/* Enhanced Watches Section */}
+        {/* ══════════════════════════════════════
+            WATCHES
+        ══════════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
-          <section 
-            className="py-20 px-4 bg-gradient-to-b from-transparent to-yellow-900/10" 
+          <section
+            className="py-20 px-4 relative overflow-hidden"
             aria-labelledby="watches-heading"
-            itemScope
-            itemType="https://schema.org/ImageGallery"
           >
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-amber-950/8 to-black pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+
+            <div className="max-w-6xl mx-auto relative z-10">
+              <div className="text-center mb-14">
+                <span className="section-tag section-tag-amber">Time</span>
+                <h2
                   id="watches-heading"
-                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 bg-clip-text text-transparent"
-                  itemProp="name"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-400 bg-clip-text text-transparent"
                 >
                   But time is not on your side...
                 </h2>
-                <p 
-                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
-                  itemProp="description"
-                >
+                <div className="section-accent-line bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto" />
+                <p className="text-base md:text-lg text-gray-400 mt-5 max-w-xl mx-auto leading-relaxed">
                   Unique watches shift the odds.
                 </p>
               </div>
-              <ImageGallery 
-                items={gameAssets.watches} 
-                folder="watches" 
-                direction="right" 
+              <ImageGallery
+                items={gameAssets.watches}
+                folder="watches"
+                direction="right"
                 size="medium"
                 galleryId="watches"
               />
@@ -427,35 +404,34 @@ export default function Home() {
           </section>
         </AnimatedSection>
 
-        {/* Professional CTA Section */}
+        {/* CTA */}
         <CTASection />
 
-        {/* Enhanced Footer */}
-        <footer 
-          className="py-12 px-4 border-t border-gray-800 bg-gradient-to-b from-transparent to-black/50" 
+        {/* ══════════════════════════════════════
+            FOOTER
+        ══════════════════════════════════════ */}
+        <footer
+          className="relative py-14 px-4 border-t border-white/[0.06]"
           role="contentinfo"
-          itemScope
-          itemType="https://schema.org/Organization"
         >
-          <div className="max-w-4xl mx-auto text-center space-y-6">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 pointer-events-none" />
+          <div className="max-w-4xl mx-auto text-center space-y-5 relative z-10">
             <AnimatedSection animation="fadeIn">
-              <div className="flex justify-center mb-6">
-                <Image 
-                  src="/Skipstone_logo.png" 
-                  alt="Skipstone Studios - Indie Game Developer" 
-                  width={800}
-                  height={128}
-                  className="w-auto h-24 opacity-80 hover:opacity-100 transition-opacity duration-300"
+              <div className="flex justify-center mb-4">
+                <Image
+                  src="/Skipstone_logo.png"
+                  alt="Skipstone Studios — Indie Game Developer"
+                  width={400}
+                  height={64}
+                  className="w-auto h-16 opacity-70 hover:opacity-100 transition-opacity duration-400"
                   loading="lazy"
                   quality={80}
-                  sizes="(max-width: 768px) 300px, 400px"
-                  itemProp="logo"
                 />
               </div>
-              <p className="text-gray-400 text-lg font-medium" itemProp="copyrightNotice">
-                © 2024 <span itemProp="name" className="text-white">Skipstone Studios</span>. All rights reserved.
+              <p className="text-gray-500 text-sm tracking-wide">
+                © 2024 <span className="text-gray-300">Skipstone Studios</span>. All rights reserved.
               </p>
-              <p className="text-gray-500 text-xl font-bold">
+              <p className="text-gray-600 text-base font-bold tracking-widest mt-2">
                 Every roll counts, and death is just the beginning.
               </p>
             </AnimatedSection>
@@ -464,4 +440,4 @@ export default function Home() {
       </main>
     </>
   )
-} 
+}
