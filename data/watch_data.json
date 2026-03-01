@@ -33,7 +33,7 @@
 	"effect_description": "Increases life by 20 years",
 	"effect": {
 	  "type": "plus_life_expectancy",
-	  "value": 10
+	  "value": 20
 	}
   },
   {
@@ -81,10 +81,10 @@
 	"description": "A ticking timepiece that seems to slow the passage of years. Time saved is time earned.",
 	"rarity": "relic",
 	"image": "martys_watch.png",
-	"effect_description": "Reduces the cost of fragments by 2 years",
+	"effect_description": "Reduces fragment costs by 25%",
 	"effect": {
-	  "type": "fragment_year_reduction",
-	  "value": 2
+	  "type": "fragment_cost_reduction",
+	  "value": 25
 	}
   },
   {
@@ -93,10 +93,10 @@
 	"description": "A watch that stopped ticking long ago. Memories cost nothing when time stands still.",
 	"rarity": "relic",
 	"image": "batteries_not_included.png",
-	"effect_description": "Makes fragments cost 0 years",
+	"effect_description": "Reduces fragment costs by 50%",
 	"effect": {
-	  "type": "fragment_year_reduction",
-	  "value": 999
+	  "type": "fragment_cost_reduction",
+	  "value": 50
 	}
   },
   {

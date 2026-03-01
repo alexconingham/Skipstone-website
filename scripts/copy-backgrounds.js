@@ -1,99 +1,91 @@
-const fs = require('fs');
+const fs   = require('fs');
 const path = require('path');
 
-/**
- * Script to copy background images from assets/images/backgrounds to public/backgrounds
- * This ensures all background images are available for the Next.js app
- */
+const IMAGE_EXTS = ['.PNG', '.png', '.jpg', '.JPG', '.jpeg', '.JPEG'];
+const AUDIO_EXTS = ['.mp3', '.ogg', '.wav'];
 
-const sourceDirs = {
-  main: path.join(__dirname, '..', 'assets', 'images', 'backgrounds', 'main'),
-  alternate: path.join(__dirname, '..', 'assets', 'images', 'backgrounds', 'alternate'),
-  screens: path.join(__dirname, '..', 'assets', 'images', 'backgrounds', 'screens'),
-};
-
-const destDir = path.join(__dirname, '..', 'public', 'backgrounds');
-
-// Ensure destination directory exists
-if (!fs.existsSync(destDir)) {
-  fs.mkdirSync(destDir, { recursive: true });
+function ensureDir(dir) {
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 }
 
-// Image extensions to copy
-const imageExtensions = ['.PNG', '.png', '.jpg', '.JPG', '.jpeg', '.JPEG'];
-
-let copiedCount = 0;
-let skippedCount = 0;
-
-// Function to copy a file
-function copyFile(sourcePath, destPath, fileName) {
+// Always force-overwrite — OneDrive timestamps are unreliable
+function forceCopy(src, dest, label) {
   try {
-    // Check if destination file exists and is newer (skip if so)
-    if (fs.existsSync(destPath)) {
-      const sourceStats = fs.statSync(sourcePath);
-      const destStats = fs.statSync(destPath);
-      
-      // Skip if destination is newer or same age
-      if (destStats.mtime >= sourceStats.mtime) {
-        skippedCount++;
-        return;
-      }
-    }
-    
-    fs.copyFileSync(sourcePath, destPath);
-    console.log(`✓ Copied: ${fileName}`);
-    copiedCount++;
-  } catch (error) {
-    console.error(`✗ Error copying ${fileName}:`, error.message);
+    fs.copyFileSync(src, dest);
+    console.log(`✓ ${label}`);
+    copied++;
+  } catch (err) {
+    console.error(`✗ ${label}: ${err.message}`);
   }
 }
 
-// Process each source directory
-Object.entries(sourceDirs).forEach(([folderName, sourceDir]) => {
-  if (!fs.existsSync(sourceDir)) {
-    console.warn(`Warning: Source directory not found: ${sourceDir}`);
+function copyDir(srcDir, destDir, allowedExts) {
+  if (!fs.existsSync(srcDir)) {
+    console.warn(`Warning: ${srcDir} not found`);
     return;
   }
-
-  const files = fs.readdirSync(sourceDir);
-  
-  files.forEach(file => {
-    const ext = path.extname(file);
-    
-    // Only copy image files, skip .import files
-    if (imageExtensions.includes(ext) && !file.endsWith('.import')) {
-      const sourcePath = path.join(sourceDir, file);
-      const destPath = path.join(destDir, file);
-      
-      copyFile(sourcePath, destPath, file);
+  ensureDir(destDir);
+  const entries = fs.readdirSync(srcDir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (entry.name.endsWith('.import')) continue;
+    const srcPath = path.join(srcDir, entry.name);
+    if (entry.isFile() && allowedExts.includes(path.extname(entry.name))) {
+      forceCopy(srcPath, path.join(destDir, entry.name), entry.name);
     }
-  });
-});
-
-// Also check for any images directly in the backgrounds folder (like alt_timewarpUPSCALED.PNG)
-const rootBackgroundsDir = path.join(__dirname, '..', 'assets', 'images', 'backgrounds');
-if (fs.existsSync(rootBackgroundsDir)) {
-  const rootFiles = fs.readdirSync(rootBackgroundsDir);
-  rootFiles.forEach(file => {
-    const filePath = path.join(rootBackgroundsDir, file);
-    const stat = fs.statSync(filePath);
-    
-    // Only process files (not directories)
-    if (stat.isFile()) {
-      const ext = path.extname(file);
-      if (imageExtensions.includes(ext) && !file.endsWith('.import')) {
-        const destPath = path.join(destDir, file);
-        copyFile(filePath, destPath, file);
-      }
-    }
-  });
+  }
 }
 
-console.log('\n--- Summary ---');
-console.log(`Copied: ${copiedCount} files`);
-console.log(`Skipped: ${skippedCount} files (already up to date)`);
-console.log(`Total processed: ${copiedCount + skippedCount} files`);
+let copied = 0;
+const root   = path.join(__dirname, '..');
+const assets = path.join(root, 'assets');
+const pub    = path.join(root, 'public');
 
+// ── Backgrounds ────────────────────────────────────────────────────────────
+const bgDest = path.join(pub, 'backgrounds');
+ensureDir(bgDest);
+copyDir(path.join(assets, 'images', 'backgrounds', 'main'),      bgDest, IMAGE_EXTS);
+copyDir(path.join(assets, 'images', 'backgrounds', 'alternate'), bgDest, IMAGE_EXTS);
+copyDir(path.join(assets, 'images', 'backgrounds', 'screens'),   bgDest, IMAGE_EXTS);
+// root-level backgrounds (e.g. alt_timewarpUPSCALED.PNG)
+const bgRoot = path.join(assets, 'images', 'backgrounds');
+for (const f of fs.readdirSync(bgRoot)) {
+  const fp = path.join(bgRoot, f);
+  if (fs.statSync(fp).isFile() && IMAGE_EXTS.includes(path.extname(f)) && !f.endsWith('.import')) {
+    forceCopy(fp, path.join(bgDest, f), f);
+  }
+}
 
+// ── Portraits ──────────────────────────────────────────────────────────────
+const portraitsDest = path.join(pub, 'portraits');
+ensureDir(portraitsDest);
+copyDir(path.join(assets, 'images', 'portraits', 'enemies'),        portraitsDest, IMAGE_EXTS);
+copyDir(path.join(assets, 'images', 'portraits', 'the_quiet_type'), path.join(portraitsDest, 'the_quiet_type'), IMAGE_EXTS);
 
+// ── Dice ───────────────────────────────────────────────────────────────────
+copyDir(path.join(assets, 'images', 'dice'),     path.join(pub, 'dice'),     IMAGE_EXTS);
 
+// ── Mementos ───────────────────────────────────────────────────────────────
+copyDir(path.join(assets, 'images', 'mementos'), path.join(pub, 'mementos'), IMAGE_EXTS);
+
+// ── Watches ────────────────────────────────────────────────────────────────
+copyDir(path.join(assets, 'images', 'watches'),  path.join(pub, 'watches'),  IMAGE_EXTS);
+
+// ── Audio ──────────────────────────────────────────────────────────────────
+const audioSrc  = path.join(assets, 'audio', 'music');
+const audioDest = path.join(pub, 'audio');
+copyDir(audioSrc, audioDest, AUDIO_EXTS);
+
+// ── JSON data (assets/data → data/) ────────────────────────────────────────
+const dataAssets = path.join(assets, 'data');
+const dataDir    = path.join(root, 'data');
+ensureDir(dataDir);
+if (fs.existsSync(dataAssets)) {
+  for (const f of fs.readdirSync(dataAssets)) {
+    if (f.endsWith('.json')) {
+      forceCopy(path.join(dataAssets, f), path.join(dataDir, f), `data/${f}`);
+    }
+  }
+}
+
+console.log(`\n── Summary ─────────────────────`);
+console.log(`  Copied: ${copied} files`);

@@ -1,967 +1,2298 @@
 [
-	{
-		"id": "D1_grunt",
-		"name": "Imaginary Friend",
-		"description": "He likes small spaces...",
-		"battle_type": "grunt",
-		"dungeon_id": 1.0,
-		"stats": {
-			"hp": 20.0,
-			"strength": 1.0,
-			"resilience": 0.0,
-			"insight": 0.0
-		},
-		"dice": [
-			"simple_d6_attack"
-		],
-		"memento": "broken_toy",
-		"portrait": "D1_grunt.png",
-		"traits": {
-			"weaknesses": [
-				"poison"
-			],
-			"immunities": []
-		},
-		"xp_reward": 15.0,
-		"loot_table_template": "grunt_standard"
-	},
-	{
-		"id": "D1_elite",
-		"name": "The Neighbour",
-		"description": "She's always lonely",
-		"battle_type": "elite",
-		"dungeon_id": 1.0,
-		"stats": {
-			"hp": 25.0,
-			"strength": 1.0,
-			"resilience": 1.0,
-			"insight": 1.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence"
-		],
-		"portrait": "D1_elite.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": []
-		},
-		"xp_reward": 18.0,
-		"loot_table_template": "elite_standard",
-		"mementos": [
-			"broken_flask",
-			"faded_photo"
-		]
-	},
-	{
-		"id": "D1_boss",
-		"name": "Factory Foreman",
-		"description": "What's in those barrels?",
-		"battle_type": "boss",
-		"dungeon_id": 1.0,
-		"stats": {
-			"hp": 35.0,
-			"strength": 1.0,
-			"resilience": 1.0,
-			"insight": 1.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"poison_die"
-		],
-		"memento": "superpower_serum",
-		"portrait": "D1_boss.png",
-		"traits": {
-			"weaknesses": [],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 40.0,
-		"loot_table_template": "boss_standard"
-	},
-	{
-		"id": "D2_grunt",
-		"name": "Schoolyard Bully",
-		"description": "His words are as hard as his fists",
-		"battle_type": "grunt",
-		"dungeon_id": 2.0,
-		"stats": {
-			"hp": 16.0,
-			"strength": 2.0,
-			"resilience": 1.0,
-			"insight": 1.0
-		},
-		"dice": [
-			"pain_die",
-			"simple_d6_attack"
-		],
-		"memento": "empty_lunchbox",
-		"portrait": "D2_grunt.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 22.0,
-		"loot_table_template": "grunt_high_dice"
-	},
-	{
-		"id": "D2_elite",
-		"name": "Lunch Lady",
-		"description": "She has the best toys...",
-		"battle_type": "elite",
-		"dungeon_id": 2.0,
-		"stats": {
-			"hp": 22.0,
-			"strength": 2.0,
-			"resilience": 1.0,
-			"insight": 1.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"bleed_die"
-		],
-		"memento": "bloodied_tenderizer",
-		"portrait": "D2_elite.png",
-		"traits": {
-			"weaknesses": [],
-			"immunities": []
-		},
-		"xp_reward": 30.0,
-		"loot_table_template": "elite_standard"
-	},
-	{
-		"id": "D2_boss",
-		"name": "Grief Counsellor",
-		"description": "Accidents are accidents.",
-		"battle_type": "boss",
-		"dungeon_id": 2.0,
-		"stats": {
-			"hp": 32.0,
-			"strength": 2.0,
-			"resilience": 2.0,
-			"insight": 4.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"shield_die",
-			"bleed_die"
-		],
-		"portrait": "D2_boss.png",
-		"traits": {
-			"weaknesses": [],
-			"immunities": [
-				"poison",
-				"bleed"
-			]
-		},
-		"xp_reward": 52.0,
-		"loot_table_template": "boss_standard",
-		"mementos": [
-			"juice_stained_yearbook",
-			"faded_photo"
-		]
-	},
-	{
-		"id": "D3_grunt",
-		"name": "Bottle Shop Attendant",
-		"description": "Enabler of liquid escapes and forgotten promises.",
-		"battle_type": "grunt",
-		"dungeon_id": 3.0,
-		"stats": {
-			"hp": 22.0,
-			"strength": 2.0,
-			"resilience": 1.0,
-			"insight": 1.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"poison_die"
-		],
-		"memento": "broken_toy",
-		"portrait": "D3_grunt.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 30.0,
-		"loot_table_template": "grunt_standard"
-	},
-	{
-		"id": "D3_elite",
-		"name": "Graduation Twins",
-		"description": "Two faces of achievement - pride and disappointment intertwined.",
-		"battle_type": "elite",
-		"dungeon_id": 3.0,
-		"stats": {
-			"hp": 24.0,
-			"strength": 3.0,
-			"resilience": 2.0,
-			"insight": 1.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"simple_d6_defence"
-		],
-		"portrait": "D3_elite.png",
-		"traits": {
-			"weaknesses": [
-				"poison"
-			],
-			"immunities": [
-				"bleed"
-			]
-		},
-		"xp_reward": 38.0,
-		"loot_table_template": "elite_standard",
-		"mementos": [
-			"family_bondo",
-			"dusty_locket"
-		]
-	},
-	{
-		"id": "D3_boss",
-		"name": "Headmaster Baird",
-		"description": "He saw your pride, he smelled her shame...",
-		"battle_type": "boss",
-		"dungeon_id": 3.0,
-		"stats": {
-			"hp": 28.0,
-			"strength": 3.0,
-			"resilience": 2.0,
-			"insight": 2.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"knockback_die",
-			"poison_die"
-		],
-		"portrait": "D3_boss.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 68.0,
-		"loot_table_template": "boss_standard",
-		"mementos": [
-			"expired_aderall",
-			"fathers_watch_memento"
-		]
-	},
-	{
-		"id": "D4_grunt",
-		"name": "Nervous Intern",
-		"description": "Your younger, anxious self reflected in corporate fluorescent lights.",
-		"battle_type": "grunt",
-		"dungeon_id": 4.0,
-		"stats": {
-			"hp": 26.0,
-			"strength": 3.0,
-			"resilience": 2.0,
-			"insight": 1.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"cleanse_die"
-		],
-		"portrait": "D4_grunt.png",
-		"traits": {
-			"weaknesses": [
-				"poison"
-			],
-			"immunities": []
-		},
-		"xp_reward": 33.0,
-		"loot_table_template": "grunt_standard",
-		"mementos": [
-			"empty_wallet",
-			"faded_photo"
-		]
-	},
-	{
-		"id": "D4_elite",
-		"name": "Paranoid Colleague",
-		"description": "Workplace sabotage fears made manifest in corporate paranoia.",
-		"battle_type": "elite",
-		"dungeon_id": 4.0,
-		"stats": {
-			"hp": 32.0,
-			"strength": 3.0,
-			"resilience": 2.0,
-			"insight": 2.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"poison_die",
-			"stagger_die"
-		],
-		"portrait": "D4_elite.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 45.0,
-		"loot_table_template": "elite_standard",
-		"mementos": [
-			"stress_ball",
-			"mums_perfume"
-		]
-	},
-	{
-		"id": "D4_boss",
-		"name": "VP Calhoun",
-		"description": "The authority you're trying to impress, holding your career in their hands.",
-		"battle_type": "boss",
-		"dungeon_id": 4.0,
-		"stats": {
-			"hp": 42.0,
-			"strength": 4.0,
-			"resilience": 2.0,
-			"insight": 2.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d6_defence",
-			"piercing_die",
-			"stagger_die"
-		],
-		"portrait": "D4_boss.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 82.0,
-		"loot_table_template": "boss_standard",
-		"mementos": [
-			"engraved_pen",
-			"corrupted_amulet"
-		]
-	},
-	{
-		"id": "D5_grunt",
-		"name": "The Doula",
-		"description": "Judged you from day one, who does the think is paying her?",
-		"battle_type": "grunt",
-		"dungeon_id": 5.0,
-		"stats": {
-			"hp": 30.0,
-			"strength": 3.0,
-			"resilience": 2.0,
-			"insight": 2.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"cleanse_die"
-		],
-		"portrait": "D5_grunt.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": []
-		},
-		"xp_reward": 38.0,
-		"loot_table_template": "grunt_standard",
-		"mementos": [
-			"baby_monitor",
-			"empty_lunchbox"
-		]
-	},
-	{
-		"id": "D5_elite",
-		"name": "Babysitter",
-		"description": "Great with the kid, but too friendly...",
-		"battle_type": "elite",
-		"dungeon_id": 5.0,
-		"stats": {
-			"hp": 35.0,
-			"strength": 4.0,
-			"resilience": 2.0,
-			"insight": 2.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d6_defence",
-			"renew_die",
-			"shield_die"
-		],
-		"portrait": "D5_elite.png",
-		"traits": {
-			"weaknesses": [
-				"poison"
-			],
-			"immunities": [
-				"bleed"
-			]
-		},
-		"xp_reward": 52.0,
-		"loot_table_template": "elite_standard",
-		"mementos": [
-			"beauty_mirror",
-			"dusty_locket"
-		]
-	},
-	{
-		"id": "D5_boss",
-		"name": "Micro Manager",
-		"description": "If anyone is to blame its him.",
-		"battle_type": "boss",
-		"dungeon_id": 5.0,
-		"stats": {
-			"hp": 48.0,
-			"strength": 4.0,
-			"resilience": 3.0,
-			"insight": 2.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d6_defence",
-			"stagger_die",
-			"piercing_die"
-		],
-		"portrait": "D5_boss.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 98.0,
-		"loot_table_template": "boss_standard",
-		"mementos": [
-			"framed_memo",
-			"crystal_pendant"
-		]
-	},
-	{
-		"id": "D6_grunt",
-		"name": "Strange Man",
-		"description": "Claims to be a cousin. False family connections emerge at funerals.",
-		"battle_type": "grunt",
-		"dungeon_id": 6.0,
-		"stats": {
-			"hp": 32.0,
-			"strength": 4.0,
-			"resilience": 2.0,
-			"insight": 2.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"poison_die",
-			"divinity_die"
-		],
-		"portrait": "D6_grunt.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": []
-		},
-		"xp_reward": 42.0,
-		"loot_table_template": "grunt_standard",
-		"mementos": [
-			"dried_rose",
-			"broken_toy"
-		]
-	},
-	{
-		"id": "D6_elite",
-		"name": "Mortician",
-		"description": "Professional handler of death, witness to your family's final dysfunction.",
-		"battle_type": "elite",
-		"dungeon_id": 6.0,
-		"stats": {
-			"hp": 38.0,
-			"strength": 5.0,
-			"resilience": 3.0,
-			"insight": 2.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d6_defence",
-			"poison_die",
-			"stagger_die",
-			"divinity_die"
-		],
-		"portrait": "D6_elite.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 60.0,
-		"loot_table_template": "elite_standard",
-		"mementos": [
-			"death_certificate",
-			"fathers_watch_memento"
-		]
-	},
-	{
-		"id": "D6_boss",
-		"name": "Pastor",
-		"description": "Moral judgment incarnate, with a fixed cross necklace that never quite sits right.",
-		"battle_type": "boss",
-		"dungeon_id": 6.0,
-		"stats": {
-			"hp": 52.0,
-			"strength": 5.0,
-			"resilience": 3.0,
-			"insight": 3.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d12_defence",
-			"divinity_die",
-			"cleanse_die",
-			"shield_die"
-		],
-		"portrait": "D6_boss.png",
-		"traits": {
-			"weaknesses": [
-				"poison"
-			],
-			"immunities": [
-				"bleed"
-			]
-		},
-		"xp_reward": 112.0,
-		"loot_table_template": "boss_standard",
-		"mementos": [
-			"cremation_ashes",
-			"superpower_serum"
-		]
-	},
-	{
-		"id": "D7_grunt",
-		"name": "The Replacement",
-		"description": "Your successor, younger and eager, everything you once were.",
-		"battle_type": "grunt",
-		"dungeon_id": 7.0,
-		"stats": {
-			"hp": 35.0,
-			"strength": 5.0,
-			"resilience": 3.0,
-			"insight": 2.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"renew_die",
-			"cleanse_die"
-		],
-		"portrait": "D7_grunt.png",
-		"traits": {
-			"weaknesses": [
-				"poison"
-			],
-			"immunities": []
-		},
-		"xp_reward": 48.0,
-		"loot_table_template": "grunt_standard",
-		"mementos": [
-			"reading_glasses",
-			"faded_photo"
-		]
-	},
-	{
-		"id": "D7_elite",
-		"name": "The CEO",
-		"description": "Corporate hierarchy's peak, representing the career that consumed your life.",
-		"battle_type": "elite",
-		"dungeon_id": 7.0,
-		"stats": {
-			"hp": 45.0,
-			"strength": 6.0,
-			"resilience": 3.0,
-			"insight": 3.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d6_defence",
-			"piercing_die",
-			"stagger_die"
-		],
-		"portrait": "D7_elite.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 68.0,
-		"loot_table_template": "elite_standard",
-		"mementos": [
-			"gold_watch_memento",
-			"mums_perfume"
-		]
-	},
-	{
-		"id": "D7_boss",
-		"name": "Divorce Lawyer",
-		"description": "Legal dissolution of a marriage that was already emotionally dead.",
-		"battle_type": "boss",
-		"dungeon_id": 7.0,
-		"stats": {
-			"hp": 58.0,
-			"strength": 6.0,
-			"resilience": 4.0,
-			"insight": 3.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d12_defence",
-			"razor_die",
-			"piercing_die"
-		],
-		"portrait": "D7_boss.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 128.0,
-		"loot_table_template": "boss_standard",
-		"mementos": [
-			"intimidating_presence",
-			"bloodied_tenderizer"
-		]
-	},
-	{
-		"id": "D8_grunt",
-		"name": "Toll Booth Operator",
-		"description": "Gatekeeper on the journey to reconciliation, demanding payment for passage.",
-		"battle_type": "grunt",
-		"dungeon_id": 8.0,
-		"stats": {
-			"hp": 38.0,
-			"strength": 6.0,
-			"resilience": 3.0,
-			"insight": 3.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"cleanse_die"
-		],
-		"portrait": "D8_grunt.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": []
-		},
-		"xp_reward": 52.0,
-		"loot_table_template": "grunt_standard"
-	},
-	{
-		"id": "D8_elite",
-		"name": "Motel Clerk",
-		"description": "Witness to your lonely journey, keeper of temporary refuges.",
-		"battle_type": "elite",
-		"dungeon_id": 8.0,
-		"stats": {
-			"hp": 48.0,
-			"strength": 6.0,
-			"resilience": 4.0,
-			"insight": 3.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d6_defence",
-			"renew_die",
-			"shield_die"
-		],
-		"portrait": "D8_elite.png",
-		"traits": {
-			"weaknesses": [
-				"poison"
-			],
-			"immunities": [
-				"bleed"
-			]
-		},
-		"xp_reward": 75.0,
-		"loot_table_template": "elite_standard",
-		"mementos": [
-			"blank_name_badge",
-			"dusty_locket"
-		]
-	},
-	{
-		"id": "D8_boss",
-		"name": "Dad's Reflection",
-		"description": "Confronting inherited patterns, the ghost of generational dysfunction.",
-		"battle_type": "boss",
-		"dungeon_id": 8.0,
-		"stats": {
-			"hp": 62.0,
-			"strength": 6.0,
-			"resilience": 4.0,
-			"insight": 4.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d12_defence",
-			"razor_die",
-			"reflect_die"
-		],
-		"portrait": "D8_boss.png",
-		"traits": {
-			"weaknesses": [
-				"poison"
-			],
-			"immunities": [
-				"bleed"
-			]
-		},
-		"xp_reward": 142.0,
-		"loot_table_template": "boss_standard",
-		"mementos": [
-			"intimidating_presence",
-			"corrupted_amulet"
-		]
-	},
-	{
-		"id": "D9_grunt",
-		"name": "Photographer",
-		"description": "Curator of false memories, capturing only what should be remembered.",
-		"battle_type": "grunt",
-		"dungeon_id": 9.0,
-		"stats": {
-			"hp": 42.0,
-			"strength": 6.0,
-			"resilience": 4.0,
-			"insight": 3.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"cleanse_die"
-		],
-		"portrait": "D9_grunt.png",
-		"traits": {
-			"weaknesses": [
-				"poison"
-			],
-			"immunities": []
-		},
-		"xp_reward": 57.0,
-		"loot_table_template": "grunt_standard",
-		"mementos": [
-			"faded_photo",
-			"broken_toy"
-		]
-	},
-	{
-		"id": "D9_elite",
-		"name": "Dark Room Assistant",
-		"description": "Developer of hidden truths, bringing painful memories into focus.",
-		"battle_type": "elite",
-		"dungeon_id": 9.0,
-		"stats": {
-			"hp": 52.0,
-			"strength": 7.0,
-			"resilience": 4.0,
-			"insight": 4.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d6_defence",
-			"burn_die",
-			"stagger_die"
-		],
-		"portrait": "D9_elite.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 82.0,
-		"loot_table_template": "elite_standard",
-		"mementos": [
-			"strange_polaroid",
-			"fathers_watch_memento"
-		]
-	},
-	{
-		"id": "D9_boss",
-		"name": "The Missing Figure",
-		"description": "Absent memories made manifest, the gaps in your curated history.",
-		"battle_type": "boss",
-		"dungeon_id": 9.0,
-		"stats": {
-			"hp": 65.0,
-			"strength": 7.0,
-			"resilience": 4.0,
-			"insight": 4.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d12_defence",
-			"razor_die",
-			"reflect_die",
-			"burn_die"
-		],
-		"portrait": "D9_boss.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": [
-				"poison"
-			]
-		},
-		"xp_reward": 158.0,
-		"loot_table_template": "boss_standard",
-		"mementos": [
-			"bloodied_tenderizer",
-			"crystal_pendant"
-		]
-	},
-	{
-		"id": "D10_grunt",
-		"name": "Cruel Nurse",
-		"description": "Indifferent to suffering, a reminder of institutional coldness in final moments.",
-		"battle_type": "grunt",
-		"dungeon_id": 10.0,
-		"stats": {
-			"hp": 45.0,
-			"strength": 7.0,
-			"resilience": 4.0,
-			"insight": 4.0
-		},
-		"dice": [
-			"simple_d6_attack",
-			"simple_d6_defence",
-			"cleanse_die"
-		],
-		"portrait": "D10_grunt.png",
-		"traits": {
-			"weaknesses": [
-				"bleed"
-			],
-			"immunities": []
-		},
-		"xp_reward": 63.0,
-		"loot_table_template": "grunt_standard",
-		"mementos": [
-			"thick_bandage",
-			"faded_photo"
-		]
-	},
-	{
-		"id": "D10_elite",
-		"name": "Dr. Keller",
-		"description": "Medical authority presiding over your final transition, clinical and detached.",
-		"battle_type": "elite",
-		"dungeon_id": 10.0,
-		"stats": {
-			"hp": 55.0,
-			"strength": 8.0,
-			"resilience": 4.0,
-			"insight": 4.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d12_defence",
-			"piercing_die",
-			"divinity_die"
-		],
-		"portrait": "D10_elite.png",
-		"traits": {
-			"weaknesses": [
-				"poison"
-			],
-			"immunities": [
-				"bleed"
-			]
-		},
-		"xp_reward": 90.0,
-		"loot_table_template": "elite_standard",
-		"mementos": [
-			"tourniquet",
-			"mums_perfume"
-		]
-	},
-	{
-		"id": "D10_boss",
-		"name": "The Player",
-		"description": "Final self-confrontation. You are your own greatest enemy and salvation. Mirrors your exact current state.",
-		"battle_type": "boss",
-		"dungeon_id": 10.0,
-		"stats": {
-			"hp": 70.0,
-			"strength": 8.0,
-			"resilience": 4.0,
-			"insight": 4.0
-		},
-		"dice": [
-			"simple_d12_attack",
-			"simple_d12_attack",
-			"simple_d12_defence",
-			"razor_die",
-			"reflect_die"
-		],
-		"portrait": "D10_boss.png",
-		"traits": {
-			"weaknesses": "mirror_player",
-			"immunities": "mirror_player"
-		},
-		"special_mechanics": {
-			"mirror_player_dice": true,
-			"power_scaling": 1.1
-		},
-		"xp_reward": 225.0,
-		"loot_table_template": "boss_standard",
-		"mementos": [
-			"superpower_serum",
-			"bloodied_tenderizer"
-		]
-	}
+  {
+    "id": "D1_grunt",
+    "name": "Imaginary Friend",
+    "description": "He likes small spaces...",
+    "battle_type": "grunt",
+    "dungeon_id": 1.0,
+    "stats": {
+      "hp": 20.0,
+      "strength": 4.0,
+      "resilience": 0.0,
+      "insight": 0.0
+    },
+    "dice": [
+      "simple_d6_attack"
+    ],
+    "memento": "broken_toy",
+    "portrait": "D1_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 15.0,
+    "loot_table_template": "grunt_standard",
+    "ai_profile": {
+      "intelligence": 0.35,
+      "risk_tolerance": 0.45,
+      "adaptation_speed": 0.3,
+      "panic_threshold": 0.45,
+      "aggression_scaling": 0.95,
+      "defensive_scaling": 0.95,
+      "pattern_memory_rounds": 4,
+      "consistency": 0.55,
+      "combo_awareness": 0.35,
+      "timing_patience": 0.4,
+      "stance": "balanced"
+    }
+  },
+  {
+    "id": "D1_elite",
+    "name": "The Neighbour",
+    "description": "She's always lonely",
+    "battle_type": "elite",
+    "dungeon_id": 1.0,
+    "stats": {
+      "hp": 26.0,
+      "strength": 3.0,
+      "resilience": 1.5,
+      "insight": 1.5
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence"
+    ],
+    "portrait": "D1_elite.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 18.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "broken_flask",
+      "faded_photo"
+    ],
+    "ai_profile": {
+      "intelligence": 0.5,
+      "risk_tolerance": 0.5,
+      "adaptation_speed": 0.4,
+      "panic_threshold": 0.4,
+      "aggression_scaling": 1.0,
+      "defensive_scaling": 1.0,
+      "pattern_memory_rounds": 5,
+      "consistency": 0.65,
+      "combo_awareness": 0.45,
+      "timing_patience": 0.45,
+      "stance": "balanced"
+    }
+  },
+  {
+    "id": "D1_boss",
+    "name": "Factory Foreman",
+    "description": "What's in those barrels?",
+    "battle_type": "boss",
+    "dungeon_id": 1.0,
+    "stats": {
+      "hp": 22.0,
+      "strength": 2.0,
+      "resilience": 0.5,
+      "insight": 0.5
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "poison_die"
+    ],
+    "memento": "superpower_serum",
+    "portrait": "D1_boss.png",
+    "traits": {
+      "weaknesses": [],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 40.0,
+    "loot_table_template": "boss_standard",
+    "ai_profile": {
+      "intelligence": 0.6,
+      "risk_tolerance": 0.57,
+      "adaptation_speed": 0.55,
+      "panic_threshold": 0.35,
+      "aggression_scaling": 1.05,
+      "defensive_scaling": 1.05,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.75,
+      "combo_awareness": 0.63,
+      "timing_patience": 0.5,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D2_grunt",
+    "name": "Schoolyard Bully",
+    "description": "His words are as hard as his fists",
+    "battle_type": "grunt",
+    "dungeon_id": 2.0,
+    "stats": {
+      "hp": 22.0,
+      "strength": 4.0,
+      "resilience": 0.0,
+      "insight": 0.0
+    },
+    "dice": [
+      "pain_die",
+      "simple_d6_attack"
+    ],
+    "memento": "empty_lunchbox",
+    "portrait": "D2_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 22.0,
+    "loot_table_template": "grunt_high_dice",
+    "ai_profile": {
+      "intelligence": 0.37,
+      "risk_tolerance": 0.51,
+      "adaptation_speed": 0.32,
+      "panic_threshold": 0.45,
+      "aggression_scaling": 1.11,
+      "defensive_scaling": 0.91,
+      "pattern_memory_rounds": 4,
+      "consistency": 0.53,
+      "combo_awareness": 0.36,
+      "timing_patience": 0.41,
+      "stance": "aggressive"
+    }
+  },
+  {
+    "id": "D2_elite",
+    "name": "Lunch Lady",
+    "description": "She has the best toys...",
+    "battle_type": "elite",
+    "dungeon_id": 2.0,
+    "stats": {
+      "hp": 29.0,
+      "strength": 5.5,
+      "resilience": 2.0,
+      "insight": 2.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "bleed_die"
+    ],
+    "memento": "bloodied_tenderizer",
+    "portrait": "D2_elite.png",
+    "traits": {
+      "weaknesses": [],
+      "immunities": []
+    },
+    "xp_reward": 30.0,
+    "loot_table_template": "elite_standard",
+    "ai_profile": {
+      "intelligence": 0.53,
+      "risk_tolerance": 0.54,
+      "adaptation_speed": 0.47,
+      "panic_threshold": 0.4,
+      "aggression_scaling": 1.02,
+      "defensive_scaling": 1.02,
+      "pattern_memory_rounds": 5,
+      "consistency": 0.66,
+      "combo_awareness": 0.55,
+      "timing_patience": 0.46,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D2_boss",
+    "name": "Grief Counsellor",
+    "description": "Accidents are accidents.",
+    "battle_type": "boss",
+    "dungeon_id": 2.0,
+    "stats": {
+      "hp": 37.0,
+      "strength": 7.0,
+      "resilience": 3.0,
+      "insight": 2.5
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "shield_die",
+      "bleed_die"
+    ],
+    "portrait": "D2_boss.png",
+    "traits": {
+      "weaknesses": [],
+      "immunities": [
+        "poison",
+        "bleed"
+      ]
+    },
+    "xp_reward": 52.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "juice_stained_yearbook",
+      "faded_photo"
+    ],
+    "ai_profile": {
+      "intelligence": 0.63,
+      "risk_tolerance": 0.57,
+      "adaptation_speed": 0.53,
+      "panic_threshold": 0.39,
+      "aggression_scaling": 1.02,
+      "defensive_scaling": 1.22,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.77,
+      "combo_awareness": 0.57,
+      "timing_patience": 0.51,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D3_grunt",
+    "name": "Bottle Shop Attendant",
+    "description": "Enabler of liquid escapes and forgotten promises.",
+    "battle_type": "grunt",
+    "dungeon_id": 3.0,
+    "stats": {
+      "hp": 25.0,
+      "strength": 4.0,
+      "resilience": 2.0,
+      "insight": 2.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "poison_die"
+    ],
+    "memento": "broken_toy",
+    "portrait": "D3_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 30.0,
+    "loot_table_template": "grunt_standard",
+    "ai_profile": {
+      "intelligence": 0.39,
+      "risk_tolerance": 0.49,
+      "adaptation_speed": 0.38,
+      "panic_threshold": 0.44,
+      "aggression_scaling": 0.98,
+      "defensive_scaling": 0.98,
+      "pattern_memory_rounds": 4,
+      "consistency": 0.57,
+      "combo_awareness": 0.45,
+      "timing_patience": 0.42,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D3_elite",
+    "name": "Graduation Twins",
+    "description": "Two faces of achievement - pride and disappointment intertwined.",
+    "battle_type": "elite",
+    "dungeon_id": 3.0,
+    "stats": {
+      "hp": 32.0,
+      "strength": 4.0,
+      "resilience": 2.5,
+      "insight": 2.5
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "simple_d6_defence"
+    ],
+    "portrait": "D3_elite.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": [
+        "bleed"
+      ]
+    },
+    "xp_reward": 38.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "family_bondo",
+      "dusty_locket"
+    ],
+    "ai_profile": {
+      "intelligence": 0.6,
+      "risk_tolerance": 0.51,
+      "adaptation_speed": 0.44,
+      "panic_threshold": 0.39,
+      "aggression_scaling": 1.04,
+      "defensive_scaling": 1.04,
+      "pattern_memory_rounds": 5,
+      "consistency": 0.72,
+      "combo_awareness": 0.56,
+      "timing_patience": 0.47,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D3_boss",
+    "name": "Headmaster Baird",
+    "description": "He saw your pride, he smelled her shame...",
+    "battle_type": "boss",
+    "dungeon_id": 3.0,
+    "stats": {
+      "hp": 41.0,
+      "strength": 6.5,
+      "resilience": 5.0,
+      "insight": 5.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "knockback_die",
+      "poison_die"
+    ],
+    "portrait": "D3_boss.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 68.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "expired_aderall",
+      "fathers_watch_memento"
+    ],
+    "ai_profile": {
+      "intelligence": 0.66,
+      "risk_tolerance": 0.61,
+      "adaptation_speed": 0.6,
+      "panic_threshold": 0.34,
+      "aggression_scaling": 1.1,
+      "defensive_scaling": 1.1,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.78,
+      "combo_awareness": 0.67,
+      "timing_patience": 0.52,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D4_grunt",
+    "name": "Nervous Intern",
+    "description": "Your younger, anxious self reflected in corporate fluorescent lights.",
+    "battle_type": "grunt",
+    "dungeon_id": 4.0,
+    "stats": {
+      "hp": 27.0,
+      "strength": 8.5,
+      "resilience": 3.0,
+      "insight": 3.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "cleanse_die",
+      "divinity_die"
+    ],
+    "portrait": "D4_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 33.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "empty_wallet",
+      "faded_photo"
+    ],
+    "ai_profile": {
+      "intelligence": 0.41,
+      "risk_tolerance": 0.48,
+      "adaptation_speed": 0.34,
+      "panic_threshold": 0.49,
+      "aggression_scaling": 0.94,
+      "defensive_scaling": 1.15,
+      "pattern_memory_rounds": 4,
+      "consistency": 0.58,
+      "combo_awareness": 0.39,
+      "timing_patience": 0.42,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D4_elite",
+    "name": "Paranoid Colleague",
+    "description": "Workplace sabotage fears made manifest in corporate paranoia.",
+    "battle_type": "elite",
+    "dungeon_id": 4.0,
+    "stats": {
+      "hp": 34.0,
+      "strength": 9.0,
+      "resilience": 4.5,
+      "insight": 4.5
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "poison_die",
+      "stagger_die"
+    ],
+    "portrait": "D4_elite.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 45.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "stress_ball",
+      "mums_perfume"
+    ],
+    "ai_profile": {
+      "intelligence": 0.57,
+      "risk_tolerance": 0.57,
+      "adaptation_speed": 0.51,
+      "panic_threshold": 0.39,
+      "aggression_scaling": 1.06,
+      "defensive_scaling": 1.06,
+      "pattern_memory_rounds": 5,
+      "consistency": 0.69,
+      "combo_awareness": 0.57,
+      "timing_patience": 0.48,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D4_boss",
+    "name": "VP Calhoun",
+    "description": "The authority you're trying to impress, holding your career in their hands.",
+    "battle_type": "boss",
+    "dungeon_id": 4.0,
+    "stats": {
+      "hp": 44.0,
+      "strength": 10.5,
+      "resilience": 6.0,
+      "insight": 6.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d6_defence",
+      "piercing_die",
+      "stagger_die"
+    ],
+    "portrait": "D4_boss.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 82.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "engraved_pen",
+      "corrupted_amulet"
+    ],
+    "ai_profile": {
+      "intelligence": 0.74,
+      "risk_tolerance": 0.59,
+      "adaptation_speed": 0.57,
+      "panic_threshold": 0.33,
+      "aggression_scaling": 1.12,
+      "defensive_scaling": 1.12,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.85,
+      "combo_awareness": 0.69,
+      "timing_patience": 0.54,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D5_grunt",
+    "name": "The Doula",
+    "description": "Judged you from day one, who does the think is paying her?",
+    "battle_type": "grunt",
+    "dungeon_id": 5.0,
+    "stats": {
+      "hp": 30.0,
+      "strength": 9.0,
+      "resilience": 3.0,
+      "insight": 3.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "cleanse_die"
+    ],
+    "portrait": "D5_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 38.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "baby_monitor",
+      "empty_lunchbox"
+    ],
+    "ai_profile": {
+      "intelligence": 0.43,
+      "risk_tolerance": 0.49,
+      "adaptation_speed": 0.36,
+      "panic_threshold": 0.48,
+      "aggression_scaling": 0.96,
+      "defensive_scaling": 1.16,
+      "pattern_memory_rounds": 5,
+      "consistency": 0.59,
+      "combo_awareness": 0.4,
+      "timing_patience": 0.43,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D5_elite",
+    "name": "Babysitter",
+    "description": "Great with the kid, but too friendly...",
+    "battle_type": "elite",
+    "dungeon_id": 5.0,
+    "stats": {
+      "hp": 37.0,
+      "strength": 10.0,
+      "resilience": 5.0,
+      "insight": 5.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d6_defence",
+      "renew_die",
+      "shield_die"
+    ],
+    "portrait": "D5_elite.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": [
+        "bleed"
+      ]
+    },
+    "xp_reward": 52.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "beauty_mirror",
+      "dusty_locket"
+    ],
+    "ai_profile": {
+      "intelligence": 0.6,
+      "risk_tolerance": 0.56,
+      "adaptation_speed": 0.48,
+      "panic_threshold": 0.43,
+      "aggression_scaling": 1.03,
+      "defensive_scaling": 1.23,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.7,
+      "combo_awareness": 0.51,
+      "timing_patience": 0.49,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D5_boss",
+    "name": "Micro Manager",
+    "description": "If anyone is to blame its him.",
+    "battle_type": "boss",
+    "dungeon_id": 5.0,
+    "stats": {
+      "hp": 48.0,
+      "strength": 8.0,
+      "resilience": 5.0,
+      "insight": 5.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d6_defence",
+      "stagger_die",
+      "piercing_die"
+    ],
+    "portrait": "D5_boss.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 98.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "framed_memo",
+      "crystal_pendant"
+    ],
+    "ai_profile": {
+      "intelligence": 0.77,
+      "risk_tolerance": 0.61,
+      "adaptation_speed": 0.6,
+      "panic_threshold": 0.33,
+      "aggression_scaling": 1.15,
+      "defensive_scaling": 1.15,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.86,
+      "combo_awareness": 0.71,
+      "timing_patience": 0.55,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D6_grunt",
+    "name": "Strange Man",
+    "description": "Claims to be a cousin. False family connections emerge at funerals.",
+    "battle_type": "grunt",
+    "dungeon_id": 6.0,
+    "stats": {
+      "hp": 32.0,
+      "strength": 6.0,
+      "resilience": 3.0,
+      "insight": 3.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "poison_die",
+      "divinity_die"
+    ],
+    "portrait": "D6_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 42.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "dried_rose",
+      "broken_toy"
+    ],
+    "ai_profile": {
+      "intelligence": 0.45,
+      "risk_tolerance": 0.52,
+      "adaptation_speed": 0.42,
+      "panic_threshold": 0.43,
+      "aggression_scaling": 1.02,
+      "defensive_scaling": 1.02,
+      "pattern_memory_rounds": 5,
+      "consistency": 0.6,
+      "combo_awareness": 0.49,
+      "timing_patience": 0.44,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D6_elite",
+    "name": "Mortician",
+    "description": "Professional handler of death, witness to your family's final dysfunction.",
+    "battle_type": "elite",
+    "dungeon_id": 6.0,
+    "stats": {
+      "hp": 40.0,
+      "strength": 8.0,
+      "resilience": 4.5,
+      "insight": 4.5
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d6_defence",
+      "poison_die",
+      "stagger_die",
+      "divinity_die"
+    ],
+    "portrait": "D6_elite.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 60.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "death_certificate",
+      "fathers_watch_memento"
+    ],
+    "ai_profile": {
+      "intelligence": 0.62,
+      "risk_tolerance": 0.59,
+      "adaptation_speed": 0.55,
+      "panic_threshold": 0.38,
+      "aggression_scaling": 1.1,
+      "defensive_scaling": 1.1,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.71,
+      "combo_awareness": 0.6,
+      "timing_patience": 0.5,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D6_boss",
+    "name": "Pastor",
+    "description": "Moral judgment incarnate, with a fixed cross necklace that never quite sits right.",
+    "battle_type": "boss",
+    "dungeon_id": 6.0,
+    "stats": {
+      "hp": 51.0,
+      "strength": 10.0,
+      "resilience": 7.0,
+      "insight": 4.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "divinity_die",
+      "cleanse_die",
+      "shield_die"
+    ],
+    "portrait": "D6_boss.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": [
+        "bleed"
+      ]
+    },
+    "xp_reward": 112.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "cremation_ashes",
+      "superpower_serum"
+    ],
+    "ai_profile": {
+      "intelligence": 0.75,
+      "risk_tolerance": 0.65,
+      "adaptation_speed": 0.62,
+      "panic_threshold": 0.37,
+      "aggression_scaling": 1.12,
+      "defensive_scaling": 1.32,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.82,
+      "combo_awareness": 0.65,
+      "timing_patience": 0.56,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D7_grunt",
+    "name": "The Replacement",
+    "description": "Your successor, younger and eager, everything you once were.",
+    "battle_type": "grunt",
+    "dungeon_id": 7.0,
+    "stats": {
+      "hp": 34.0,
+      "strength": 10.0,
+      "resilience": 5.0,
+      "insight": 5.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "renew_die",
+      "cleanse_die"
+    ],
+    "portrait": "D7_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 48.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "reading_glasses",
+      "faded_photo"
+    ],
+    "ai_profile": {
+      "intelligence": 0.47,
+      "risk_tolerance": 0.51,
+      "adaptation_speed": 0.39,
+      "panic_threshold": 0.48,
+      "aggression_scaling": 0.99,
+      "defensive_scaling": 1.19,
+      "pattern_memory_rounds": 5,
+      "consistency": 0.61,
+      "combo_awareness": 0.42,
+      "timing_patience": 0.45,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D7_elite",
+    "name": "The CEO",
+    "description": "Corporate hierarchy's peak, representing the career that consumed your life.",
+    "battle_type": "elite",
+    "dungeon_id": 7.0,
+    "stats": {
+      "hp": 43.0,
+      "strength": 10.0,
+      "resilience": 6.0,
+      "insight": 6.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d6_defence",
+      "piercing_die",
+      "stagger_die"
+    ],
+    "portrait": "D7_elite.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 68.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "gold_watch_memento",
+      "mums_perfume"
+    ],
+    "ai_profile": {
+      "intelligence": 0.7,
+      "risk_tolerance": 0.57,
+      "adaptation_speed": 0.52,
+      "panic_threshold": 0.37,
+      "aggression_scaling": 1.12,
+      "defensive_scaling": 1.12,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.77,
+      "combo_awareness": 0.62,
+      "timing_patience": 0.51,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D7_boss",
+    "name": "Divorce Lawyer",
+    "description": "Legal dissolution of a marriage that was already emotionally dead.",
+    "battle_type": "boss",
+    "dungeon_id": 7.0,
+    "stats": {
+      "hp": 54.0,
+      "strength": 4.0,
+      "resilience": 2.5,
+      "insight": 2.5
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "razor_die",
+      "piercing_die"
+    ],
+    "portrait": "D7_boss.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 128.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "intimidating_presence",
+      "bloodied_tenderizer"
+    ],
+    "ai_profile": {
+      "intelligence": 0.78,
+      "risk_tolerance": 0.72,
+      "adaptation_speed": 0.65,
+      "panic_threshold": 0.32,
+      "aggression_scaling": 1.35,
+      "defensive_scaling": 1.15,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.81,
+      "combo_awareness": 0.67,
+      "timing_patience": 0.57,
+      "stance": "aggressive"
+    }
+  },
+  {
+    "id": "D8_grunt",
+    "name": "Toll Booth Operator",
+    "description": "Gatekeeper on the journey to reconciliation, demanding payment for passage.",
+    "battle_type": "grunt",
+    "dungeon_id": 8.0,
+    "stats": {
+      "hp": 37.0,
+      "strength": 12.0,
+      "resilience": 5.0,
+      "insight": 5.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "cleanse_die"
+    ],
+    "portrait": "D8_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 52.0,
+    "loot_table_template": "grunt_standard",
+    "ai_profile": {
+      "intelligence": 0.49,
+      "risk_tolerance": 0.52,
+      "adaptation_speed": 0.4,
+      "panic_threshold": 0.47,
+      "aggression_scaling": 1.0,
+      "defensive_scaling": 1.2,
+      "pattern_memory_rounds": 5,
+      "consistency": 0.62,
+      "combo_awareness": 0.43,
+      "timing_patience": 0.46,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D8_elite",
+    "name": "Motel Clerk",
+    "description": "Witness to your lonely journey, keeper of temporary refuges.",
+    "battle_type": "elite",
+    "dungeon_id": 8.0,
+    "stats": {
+      "hp": 46.0,
+      "strength": 14.5,
+      "resilience": 7.0,
+      "insight": 7.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d6_defence",
+      "renew_die",
+      "shield_die"
+    ],
+    "portrait": "D8_elite.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": [
+        "bleed"
+      ]
+    },
+    "xp_reward": 75.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "blank_name_badge",
+      "dusty_locket"
+    ],
+    "ai_profile": {
+      "intelligence": 0.68,
+      "risk_tolerance": 0.6,
+      "adaptation_speed": 0.54,
+      "panic_threshold": 0.42,
+      "aggression_scaling": 1.09,
+      "defensive_scaling": 1.29,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.73,
+      "combo_awareness": 0.56,
+      "timing_patience": 0.52,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D8_boss",
+    "name": "Dad's Reflection",
+    "description": "Confronting inherited patterns, the ghost of generational dysfunction.",
+    "battle_type": "boss",
+    "dungeon_id": 8.0,
+    "stats": {
+      "hp": 58.0,
+      "strength": 7.0,
+      "resilience": 4.0,
+      "insight": 4.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "razor_die",
+      "reflect_die"
+    ],
+    "portrait": "D8_boss.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": [
+        "bleed"
+      ]
+    },
+    "xp_reward": 142.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "intimidating_presence",
+      "corrupted_amulet"
+    ],
+    "ai_profile": {
+      "intelligence": 0.86,
+      "risk_tolerance": 0.67,
+      "adaptation_speed": 0.68,
+      "panic_threshold": 0.31,
+      "aggression_scaling": 1.23,
+      "defensive_scaling": 1.23,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.91,
+      "combo_awareness": 0.77,
+      "timing_patience": 0.58,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D9_grunt",
+    "name": "Photographer",
+    "description": "Curator of false memories, capturing only what should be remembered.",
+    "battle_type": "grunt",
+    "dungeon_id": 9.0,
+    "stats": {
+      "hp": 39.0,
+      "strength": 13.0,
+      "resilience": 8.0,
+      "insight": 8.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "cleanse_die"
+    ],
+    "portrait": "D9_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 57.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "faded_photo",
+      "broken_toy"
+    ],
+    "ai_profile": {
+      "intelligence": 0.51,
+      "risk_tolerance": 0.53,
+      "adaptation_speed": 0.42,
+      "panic_threshold": 0.47,
+      "aggression_scaling": 1.02,
+      "defensive_scaling": 1.22,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.63,
+      "combo_awareness": 0.45,
+      "timing_patience": 0.46,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D9_elite",
+    "name": "Dark Room Assistant",
+    "description": "Developer of hidden truths, bringing painful memories into focus.",
+    "battle_type": "elite",
+    "dungeon_id": 9.0,
+    "stats": {
+      "hp": 48.0,
+      "strength": 16.0,
+      "resilience": 10.5,
+      "insight": 10.5
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d6_defence",
+      "burn_die",
+      "stagger_die"
+    ],
+    "portrait": "D9_elite.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 82.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "strange_polaroid",
+      "fathers_watch_memento"
+    ],
+    "ai_profile": {
+      "intelligence": 0.7,
+      "risk_tolerance": 0.64,
+      "adaptation_speed": 0.61,
+      "panic_threshold": 0.36,
+      "aggression_scaling": 1.16,
+      "defensive_scaling": 1.16,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.75,
+      "combo_awareness": 0.65,
+      "timing_patience": 0.53,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D9_boss",
+    "name": "The Missing Figure",
+    "description": "Absent memories made manifest, the gaps in your curated history.",
+    "battle_type": "boss",
+    "dungeon_id": 9.0,
+    "stats": {
+      "hp": 61.0,
+      "strength": 13.0,
+      "resilience": 9.0,
+      "insight": 9.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "razor_die",
+      "reflect_die",
+      "burn_die"
+    ],
+    "portrait": "D9_boss.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 158.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "bloodied_tenderizer",
+      "crystal_pendant"
+    ],
+    "ai_profile": {
+      "intelligence": 0.89,
+      "risk_tolerance": 0.69,
+      "adaptation_speed": 0.7,
+      "panic_threshold": 0.31,
+      "aggression_scaling": 1.25,
+      "defensive_scaling": 1.25,
+      "pattern_memory_rounds": 8,
+      "consistency": 0.92,
+      "combo_awareness": 0.79,
+      "timing_patience": 0.6,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D10_grunt",
+    "name": "Cruel Nurse",
+    "description": "Indifferent to suffering, a reminder of institutional coldness in final moments.",
+    "battle_type": "grunt",
+    "dungeon_id": 10.0,
+    "stats": {
+      "hp": 42.0,
+      "strength": 15.0,
+      "resilience": 7.5,
+      "insight": 7.5
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "cleanse_die"
+    ],
+    "portrait": "D10_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 63.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "thick_bandage",
+      "faded_photo"
+    ],
+    "ai_profile": {
+      "intelligence": 0.53,
+      "risk_tolerance": 0.54,
+      "adaptation_speed": 0.43,
+      "panic_threshold": 0.46,
+      "aggression_scaling": 1.03,
+      "defensive_scaling": 1.23,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.64,
+      "combo_awareness": 0.46,
+      "timing_patience": 0.47,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D10_elite",
+    "name": "Dr. Keller",
+    "description": "Medical authority presiding over your final transition, clinical and detached.",
+    "battle_type": "elite",
+    "dungeon_id": 10.0,
+    "stats": {
+      "hp": 51.0,
+      "strength": 19.0,
+      "resilience": 11.0,
+      "insight": 11.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "piercing_die",
+      "divinity_die"
+    ],
+    "portrait": "D10_elite.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": [
+        "bleed"
+      ]
+    },
+    "xp_reward": 90.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "tourniquet",
+      "mums_perfume"
+    ],
+    "ai_profile": {
+      "intelligence": 0.72,
+      "risk_tolerance": 0.64,
+      "adaptation_speed": 0.58,
+      "panic_threshold": 0.41,
+      "aggression_scaling": 1.13,
+      "defensive_scaling": 1.33,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.76,
+      "combo_awareness": 0.58,
+      "timing_patience": 0.54,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D10_boss",
+    "name": "The Player",
+    "description": "Final self-confrontation. You are your own greatest enemy and salvation. Mirrors your exact current state.",
+    "battle_type": "boss",
+    "dungeon_id": 10.0,
+    "stats": {
+      "hp": 65.0,
+      "strength": 8.0,
+      "resilience": 5.0,
+      "insight": 5.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "razor_die",
+      "reflect_die"
+    ],
+    "portrait": "D10_boss.png",
+    "traits": {
+      "weaknesses": "mirror_player",
+      "immunities": "mirror_player"
+    },
+    "special_mechanics": {
+      "mirror_player_dice": true,
+      "power_scaling": 1.1
+    },
+    "xp_reward": 225.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "superpower_serum",
+      "bloodied_tenderizer"
+    ],
+    "ai_profile": {
+      "intelligence": 0.92,
+      "risk_tolerance": 0.71,
+      "adaptation_speed": 0.72,
+      "panic_threshold": 0.3,
+      "aggression_scaling": 1.28,
+      "defensive_scaling": 1.28,
+      "pattern_memory_rounds": 8,
+      "consistency": 0.94,
+      "combo_awareness": 0.81,
+      "timing_patience": 0.61,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D11_grunt",
+    "name": "The Waiting Son",
+    "description": "He waits by the door, holding the weight you left behind.",
+    "battle_type": "grunt",
+    "dungeon_id": 11.0,
+    "stats": {
+      "hp": 44.0,
+      "strength": 16.0,
+      "resilience": 8.0,
+      "insight": 8.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "cleanse_die"
+    ],
+    "portrait": "D11_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 63.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "clean_slate"
+    ],
+    "ai_profile": {
+      "intelligence": 0.55,
+      "risk_tolerance": 0.55,
+      "adaptation_speed": 0.45,
+      "panic_threshold": 0.46,
+      "aggression_scaling": 1.05,
+      "defensive_scaling": 1.25,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.65,
+      "combo_awareness": 0.47,
+      "timing_patience": 0.48,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D11_elite",
+    "name": "The Unspoken Witness",
+    "description": "They carry the words you never said.",
+    "battle_type": "elite",
+    "dungeon_id": 11.0,
+    "stats": {
+      "hp": 54.0,
+      "strength": 8.0,
+      "resilience": 20.0,
+      "insight": 8.0
+    },
+    "dice": [
+      "simple_d12_defence",
+      "divinity_die",
+      "reflect_die",
+      "cleanse_die"
+    ],
+    "portrait": "D11_elite.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": [
+        "bleed"
+      ]
+    },
+    "xp_reward": 90.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "flickering_halo"
+    ],
+    "ai_profile": {
+      "intelligence": 0.8,
+      "risk_tolerance": 0.63,
+      "adaptation_speed": 0.6,
+      "panic_threshold": 0.36,
+      "aggression_scaling": 1.2,
+      "defensive_scaling": 1.2,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.82,
+      "combo_awareness": 0.68,
+      "timing_patience": 0.55,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D11_boss",
+    "name": "The Forgiver",
+    "description": "They offer forgiveness with no conditions.",
+    "battle_type": "boss",
+    "dungeon_id": 11.0,
+    "stats": {
+      "hp": 80.0,
+      "strength": 30.0,
+      "resilience": 18.0,
+      "insight": 18.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "divinity_die",
+      "reflect_die",
+      "cleanse_die"
+    ],
+    "portrait": "D11_boss.png",
+    "traits": {
+      "weaknesses": "mirror_player",
+      "immunities": "mirror_player"
+    },
+    "special_mechanics": {
+      "mirror_player_dice": true,
+      "power_scaling": 1.1
+    },
+    "xp_reward": 250.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "reunion_tour_ticket"
+    ],
+    "ai_profile": {
+      "intelligence": 0.95,
+      "risk_tolerance": 0.73,
+      "adaptation_speed": 0.75,
+      "panic_threshold": 0.3,
+      "aggression_scaling": 1.3,
+      "defensive_scaling": 1.3,
+      "pattern_memory_rounds": 8,
+      "consistency": 0.95,
+      "combo_awareness": 0.83,
+      "timing_patience": 0.62,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D12_grunt",
+    "name": "The Questioner",
+    "description": "A voice asks from the other side, and you still hesitate.",
+    "battle_type": "grunt",
+    "dungeon_id": 12.0,
+    "stats": {
+      "hp": 46.0,
+      "strength": 17.0,
+      "resilience": 9.5,
+      "insight": 9.5
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "shield_die"
+    ],
+    "portrait": "D12_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 63.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "strange_key"
+    ],
+    "ai_profile": {
+      "intelligence": 0.57,
+      "risk_tolerance": 0.56,
+      "adaptation_speed": 0.46,
+      "panic_threshold": 0.46,
+      "aggression_scaling": 1.06,
+      "defensive_scaling": 1.26,
+      "pattern_memory_rounds": 6,
+      "consistency": 0.66,
+      "combo_awareness": 0.48,
+      "timing_patience": 0.49,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D12_elite",
+    "name": "The Confessor",
+    "description": "They speak in the dark, but the voice is not yours.",
+    "battle_type": "elite",
+    "dungeon_id": 12.0,
+    "stats": {
+      "hp": 57.0,
+      "strength": 28.0,
+      "resilience": 16.0,
+      "insight": 16.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "piercing_die",
+      "reflect_die"
+    ],
+    "portrait": "D12_elite.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": [
+        "bleed"
+      ]
+    },
+    "xp_reward": 90.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "reading_glasses"
+    ],
+    "ai_profile": {
+      "intelligence": 0.83,
+      "risk_tolerance": 0.65,
+      "adaptation_speed": 0.62,
+      "panic_threshold": 0.35,
+      "aggression_scaling": 1.22,
+      "defensive_scaling": 1.22,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.83,
+      "combo_awareness": 0.69,
+      "timing_patience": 0.56,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D12_boss",
+    "name": "The Weeping Stranger",
+    "description": "On the stairs, a stranger with your face passes by—crying—without ever seeing you.",
+    "battle_type": "boss",
+    "dungeon_id": 12.0,
+    "stats": {
+      "hp": 86.0,
+      "strength": 14.0,
+      "resilience": 9.0,
+      "insight": 9.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "razor_die",
+      "reflect_die",
+      "shield_die"
+    ],
+    "portrait": "D12_boss.png",
+    "traits": {
+      "weaknesses": [],
+      "immunities": []
+    },
+    "xp_reward": 265.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "key_to_the_city"
+    ],
+    "ai_profile": {
+      "intelligence": 0.95,
+      "risk_tolerance": 0.75,
+      "adaptation_speed": 0.78,
+      "panic_threshold": 0.29,
+      "aggression_scaling": 1.33,
+      "defensive_scaling": 1.33,
+      "pattern_memory_rounds": 8,
+      "consistency": 0.95,
+      "combo_awareness": 0.85,
+      "timing_patience": 0.63,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D13_grunt",
+    "name": "The Pursuer",
+    "description": "You run, and they still follow.",
+    "battle_type": "grunt",
+    "dungeon_id": 13.0,
+    "stats": {
+      "hp": 49.0,
+      "strength": 10.0,
+      "resilience": 5.5,
+      "insight": 5.5
+    },
+    "dice": [
+      "simple_d6_attack",
+      "bleed_die",
+      "poison_die"
+    ],
+    "portrait": "D13_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 63.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "cremation_ashes"
+    ],
+    "ai_profile": {
+      "intelligence": 0.59,
+      "risk_tolerance": 0.59,
+      "adaptation_speed": 0.53,
+      "panic_threshold": 0.4,
+      "aggression_scaling": 1.13,
+      "defensive_scaling": 1.13,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.67,
+      "combo_awareness": 0.57,
+      "timing_patience": 0.5,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D13_elite",
+    "name": "The Accusor",
+    "description": "He kneels and begs, and your answer is the blade.",
+    "battle_type": "elite",
+    "dungeon_id": 13.0,
+    "stats": {
+      "hp": 300.0,
+      "strength": 3.0,
+      "resilience": 2.0,
+      "insight": 2.0
+    },
+    "dice": [
+      "razor_die",
+      "bleed_die",
+      "poison_die",
+      "piercing_die",
+      "stagger_die",
+      "burn_die",
+      "divinity_die",
+      "death_die",
+      "pain_die",
+      "gladiator_die"
+    ],
+    "portrait": "D13_elite.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": [
+        "bleed"
+      ]
+    },
+    "xp_reward": 90.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "razor_blade"
+    ],
+    "ai_profile": {
+      "intelligence": 0.8,
+      "risk_tolerance": 0.7,
+      "adaptation_speed": 0.69,
+      "panic_threshold": 0.35,
+      "aggression_scaling": 1.24,
+      "defensive_scaling": 1.24,
+      "pattern_memory_rounds": 8,
+      "consistency": 0.79,
+      "combo_awareness": 0.71,
+      "timing_patience": 0.57,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D13_boss",
+    "name": "The Inheritor",
+    "description": "He answers: you did not break it. You buried it.",
+    "battle_type": "boss",
+    "dungeon_id": 13.0,
+    "stats": {
+      "hp": 92.0,
+      "strength": 17.5,
+      "resilience": 11.5,
+      "insight": 11.5
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "razor_die",
+      "poison_die",
+      "reflect_die"
+    ],
+    "portrait": "D13_boss.png",
+    "traits": {
+      "weaknesses": "mirror_player",
+      "immunities": "mirror_player"
+    },
+    "special_mechanics": {
+      "mirror_player_dice": true,
+      "power_scaling": 1.1
+    },
+    "xp_reward": 280.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "black_eyeliner"
+    ],
+    "ai_profile": {
+      "intelligence": 0.95,
+      "risk_tolerance": 0.81,
+      "adaptation_speed": 0.85,
+      "panic_threshold": 0.29,
+      "aggression_scaling": 1.35,
+      "defensive_scaling": 1.35,
+      "pattern_memory_rounds": 9,
+      "consistency": 0.93,
+      "combo_awareness": 0.87,
+      "timing_patience": 0.64,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D14_grunt",
+    "name": "The Radio Host",
+    "description": "He plays Dad’s favourite song like it can change what happened.",
+    "battle_type": "grunt",
+    "dungeon_id": 14.0,
+    "stats": {
+      "hp": 51.0,
+      "strength": 8.0,
+      "resilience": 4.0,
+      "insight": 4.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "piercing_die"
+    ],
+    "portrait": "D14_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 63.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "garage_key"
+    ],
+    "ai_profile": {
+      "intelligence": 0.61,
+      "risk_tolerance": 0.63,
+      "adaptation_speed": 0.49,
+      "panic_threshold": 0.4,
+      "aggression_scaling": 1.29,
+      "defensive_scaling": 1.09,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.65,
+      "combo_awareness": 0.51,
+      "timing_patience": 0.5,
+      "stance": "aggressive"
+    }
+  },
+  {
+    "id": "D14_elite",
+    "name": "The Mechanic",
+    "description": "No explanation ever arrived, only the ticking.",
+    "battle_type": "elite",
+    "dungeon_id": 14.0,
+    "stats": {
+      "hp": 62.0,
+      "strength": 9.0,
+      "resilience": 5.0,
+      "insight": 5.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "piercing_die",
+      "shield_die",
+      "simple_d12_defence"
+    ],
+    "portrait": "D14_elite.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": [
+        "bleed"
+      ]
+    },
+    "xp_reward": 90.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "broken_stopwatch"
+    ],
+    "ai_profile": {
+      "intelligence": 0.82,
+      "risk_tolerance": 0.7,
+      "adaptation_speed": 0.66,
+      "panic_threshold": 0.39,
+      "aggression_scaling": 1.21,
+      "defensive_scaling": 1.41,
+      "pattern_memory_rounds": 8,
+      "consistency": 0.81,
+      "combo_awareness": 0.65,
+      "timing_patience": 0.58,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D14_boss",
+    "name": "The Hero",
+    "description": "He insists you could have lifted it all—if only you’d been stronger.",
+    "battle_type": "boss",
+    "dungeon_id": 14.0,
+    "stats": {
+      "hp": 78.0,
+      "strength": 10.0,
+      "resilience": 6.0,
+      "insight": 6.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "razor_die",
+      "reflect_die",
+      "shield_die"
+    ],
+    "portrait": "D14_boss.png",
+    "traits": {
+      "weaknesses": "mirror_player",
+      "immunities": "mirror_player"
+    },
+    "special_mechanics": {
+      "mirror_player_dice": true,
+      "power_scaling": 1.1
+    },
+    "xp_reward": 225.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "family_bondo"
+    ],
+    "ai_profile": {
+      "intelligence": 0.95,
+      "risk_tolerance": 0.79,
+      "adaptation_speed": 0.82,
+      "panic_threshold": 0.28,
+      "aggression_scaling": 1.38,
+      "defensive_scaling": 1.38,
+      "pattern_memory_rounds": 9,
+      "consistency": 0.95,
+      "combo_awareness": 0.89,
+      "timing_patience": 0.66,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D15_grunt",
+    "name": "The Starless Witness",
+    "description": "Only your heartbeat remains, and Mum's last goodbye.",
+    "battle_type": "grunt",
+    "dungeon_id": 15.0,
+    "stats": {
+      "hp": 60.0,
+      "strength": 9.0,
+      "resilience": 6.0,
+      "insight": 6.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "reflect_die",
+      "cleanse_die"
+    ],
+    "portrait": "D15_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 75.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "death_certificate"
+    ],
+    "ai_profile": {
+      "intelligence": 0.68,
+      "risk_tolerance": 0.57,
+      "adaptation_speed": 0.51,
+      "panic_threshold": 0.39,
+      "aggression_scaling": 1.16,
+      "defensive_scaling": 1.16,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.74,
+      "combo_awareness": 0.6,
+      "timing_patience": 0.51,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D15_elite",
+    "name": "The Promise-Giver",
+    "description": "They promise peace, but the light feels wrong.",
+    "battle_type": "elite",
+    "dungeon_id": 15.0,
+    "stats": {
+      "hp": 72.0,
+      "strength": 10.0,
+      "resilience": 7.0,
+      "insight": 7.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "reflect_die",
+      "divinity_die"
+    ],
+    "portrait": "D15_elite.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": [
+        "bleed"
+      ]
+    },
+    "xp_reward": 105.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "flickering_halo"
+    ],
+    "ai_profile": {
+      "intelligence": 0.9,
+      "risk_tolerance": 0.69,
+      "adaptation_speed": 0.68,
+      "panic_threshold": 0.34,
+      "aggression_scaling": 1.28,
+      "defensive_scaling": 1.28,
+      "pattern_memory_rounds": 8,
+      "consistency": 0.87,
+      "combo_awareness": 0.74,
+      "timing_patience": 0.59,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D15_boss",
+    "name": "The Truthbearer",
+    "description": "Each shard whispers the truth you buried.",
+    "battle_type": "boss",
+    "dungeon_id": 15.0,
+    "stats": {
+      "hp": 110.0,
+      "strength": 14.0,
+      "resilience": 9.0,
+      "insight": 9.0
+    },
+    "dice": [
+      "simple_d12_attack",
+      "simple_d12_defence",
+      "razor_die",
+      "reflect_die",
+      "divinity_die"
+    ],
+    "portrait": "D15_boss.png",
+    "traits": {
+      "weaknesses": "mirror_player",
+      "immunities": "mirror_player"
+    },
+    "special_mechanics": {
+      "mirror_player_dice": true,
+      "power_scaling": 1.1
+    },
+    "xp_reward": 320.0,
+    "loot_table_template": "final_boss",
+    "mementos": [
+      "broken_stopwatch"
+    ],
+    "ai_profile": {
+      "intelligence": 0.95,
+      "risk_tolerance": 0.81,
+      "adaptation_speed": 0.85,
+      "panic_threshold": 0.28,
+      "aggression_scaling": 1.4,
+      "defensive_scaling": 1.4,
+      "pattern_memory_rounds": 9,
+      "consistency": 0.95,
+      "combo_awareness": 0.91,
+      "timing_patience": 0.67,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D16_grunt",
+    "name": "The Varnish Wraith",
+    "description": "In the trunk’s pitch-black air, it clings to your lungs—varnish, dust, and counted heartbeats.",
+    "battle_type": "grunt",
+    "dungeon_id": 16.0,
+    "stats": {
+      "hp": 56.0,
+      "strength": 9.0,
+      "resilience": 5.0,
+      "insight": 5.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "poison_die"
+    ],
+    "portrait": "D16_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "poison"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 35.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "broken_toy"
+    ],
+    "ai_profile": {
+      "intelligence": 0.65,
+      "risk_tolerance": 0.62,
+      "adaptation_speed": 0.57,
+      "panic_threshold": 0.39,
+      "aggression_scaling": 1.17,
+      "defensive_scaling": 1.17,
+      "pattern_memory_rounds": 7,
+      "consistency": 0.7,
+      "combo_awareness": 0.61,
+      "timing_patience": 0.52,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D16_elite",
+    "name": "The Biscuit Siren",
+    "description": "A cool breeze carries perfume and fresh biscuits, coaxing you to stay perfectly still.",
+    "battle_type": "elite",
+    "dungeon_id": 16.0,
+    "stats": {
+      "hp": 68.0,
+      "strength": 10.0,
+      "resilience": 6.0,
+      "insight": 6.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "reflect_die"
+    ],
+    "portrait": "D16_elite.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": []
+    },
+    "xp_reward": 48.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "faded_photo"
+    ],
+    "ai_profile": {
+      "intelligence": 0.93,
+      "risk_tolerance": 0.7,
+      "adaptation_speed": 0.7,
+      "panic_threshold": 0.33,
+      "aggression_scaling": 1.3,
+      "defensive_scaling": 1.3,
+      "pattern_memory_rounds": 8,
+      "consistency": 0.88,
+      "combo_awareness": 0.76,
+      "timing_patience": 0.6,
+      "stance": "tactical"
+    }
+  },
+  {
+    "id": "D16_boss",
+    "name": "Mother",
+    "description": "Her tear-streaked face swears it was “only a minute” before the darkness seals you in again.",
+    "battle_type": "boss",
+    "dungeon_id": 16.0,
+    "stats": {
+      "hp": 85.0,
+      "strength": 11.0,
+      "resilience": 7.0,
+      "insight": 7.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "poison_die",
+      "bleed_die"
+    ],
+    "portrait": "D16_boss.png",
+    "traits": {
+      "weaknesses": [],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 80.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "mums_perfume"
+    ],
+    "ai_profile": {
+      "intelligence": 0.95,
+      "risk_tolerance": 0.87,
+      "adaptation_speed": 0.93,
+      "panic_threshold": 0.27,
+      "aggression_scaling": 1.43,
+      "defensive_scaling": 1.43,
+      "pattern_memory_rounds": 9,
+      "consistency": 0.95,
+      "combo_awareness": 0.93,
+      "timing_patience": 0.68,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D17_grunt",
+    "name": "The Hall Monitor",
+    "description": "He patrols empty corridors while the infirmary cot holds your silence.",
+    "battle_type": "grunt",
+    "dungeon_id": 17.0,
+    "stats": {
+      "hp": 58.0,
+      "strength": 9.0,
+      "resilience": 5.0,
+      "insight": 5.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "bleed_die"
+    ],
+    "portrait": "D17_grunt.png",
+    "traits": {
+      "weaknesses": [
+        "bleed"
+      ],
+      "immunities": [
+        "poison"
+      ]
+    },
+    "xp_reward": 34.0,
+    "loot_table_template": "grunt_standard",
+    "mementos": [
+      "empty_lunchbox"
+    ],
+    "ai_profile": {
+      "intelligence": 0.67,
+      "risk_tolerance": 0.63,
+      "adaptation_speed": 0.59,
+      "panic_threshold": 0.39,
+      "aggression_scaling": 1.19,
+      "defensive_scaling": 1.19,
+      "pattern_memory_rounds": 8,
+      "consistency": 0.71,
+      "combo_awareness": 0.62,
+      "timing_patience": 0.53,
+      "stance": "status_focused"
+    }
+  },
+  {
+    "id": "D17_elite",
+    "name": "The Quiet Nurse",
+    "description": "She watches as you reread the note you still don't understand.",
+    "battle_type": "elite",
+    "dungeon_id": 17.0,
+    "stats": {
+      "hp": 71.0,
+      "strength": 10.0,
+      "resilience": 6.0,
+      "insight": 6.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "shield_die"
+    ],
+    "portrait": "D17_elite.png",
+    "traits": {
+      "weaknesses": [],
+      "immunities": []
+    },
+    "xp_reward": 46.0,
+    "loot_table_template": "elite_standard",
+    "mementos": [
+      "juice_stained_yearbook"
+    ],
+    "ai_profile": {
+      "intelligence": 0.9,
+      "risk_tolerance": 0.74,
+      "adaptation_speed": 0.72,
+      "panic_threshold": 0.38,
+      "aggression_scaling": 1.27,
+      "defensive_scaling": 1.47,
+      "pattern_memory_rounds": 9,
+      "consistency": 0.84,
+      "combo_awareness": 0.69,
+      "timing_patience": 0.61,
+      "stance": "defensive"
+    }
+  },
+  {
+    "id": "D17_boss",
+    "name": "The Groundskeeper",
+    "description": "Always watching the children, but never watching over them.",
+    "battle_type": "boss",
+    "dungeon_id": 17.0,
+    "stats": {
+      "hp": 88.0,
+      "strength": 11.0,
+      "resilience": 7.0,
+      "insight": 7.0
+    },
+    "dice": [
+      "simple_d6_attack",
+      "simple_d6_defence",
+      "bleed_die",
+      "shield_die"
+    ],
+    "portrait": "D17_boss.png",
+    "traits": {
+      "weaknesses": [],
+      "immunities": [
+        "poison",
+        "bleed"
+      ]
+    },
+    "xp_reward": 78.0,
+    "loot_table_template": "boss_standard",
+    "mementos": [
+      "bloodied_tenderizer"
+    ],
+    "ai_profile": {
+      "intelligence": 0.95,
+      "risk_tolerance": 0.89,
+      "adaptation_speed": 0.95,
+      "panic_threshold": 0.27,
+      "aggression_scaling": 1.45,
+      "defensive_scaling": 1.45,
+      "pattern_memory_rounds": 10,
+      "consistency": 0.95,
+      "combo_awareness": 0.95,
+      "timing_patience": 0.69,
+      "stance": "status_focused"
+    }
+  }
 ]

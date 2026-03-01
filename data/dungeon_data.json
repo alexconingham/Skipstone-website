@@ -5,7 +5,7 @@
 	  "dungeon_type": "main",
 	  "name": "The Trunk",
 	  "description": "You hide in your father's old chest. The lid clicks shut. In the darkness, you wait for someone to notice you're gone.",
-	  "background": "D1_bg.png",
+	  "background": "D1_bg.PNG",
 	  "encounters": {
 		"grunt": {
 		  "enemies": ["D1_grunt"]
@@ -24,7 +24,7 @@
 	  "dungeon_type": "main",
 	  "name": "Bullying",
 	  "description": "Only 17 and already in hell, but dad said if the teachers won't do anything, I should...",
-	  "background": "D2_bg.png",
+	  "background": "D2_bg.PNG",
 	  "encounters": {
 		"grunt": {
 		  "enemies": ["D2_grunt"]
@@ -43,7 +43,7 @@
 	  "dungeon_type": "main",
 	  "name": "Graduation",
 	  "description": "Your graduation day arrives. Mother stumbles in late, reeking of alcohol, while father remains conspicuously absent.",
-	  "background": "D3_bg.png",
+	  "background": "D3_bg.PNG",
 	  "encounters": {
 		"grunt": {
 		  "enemies": ["D3_grunt"]
@@ -62,7 +62,7 @@
 	  "dungeon_type": "main",
 	  "name": "The Pitch",
 	  "description": "Your first major opportunity at work. You work all night to perfect your presentation, missing your partner's birthday in the process.",
-	  "background": "D4_bg.png",
+	  "background": "D4_bg.PNG",
 	  "encounters": {
 		"grunt": {
 		  "enemies": ["D4_grunt"]
@@ -81,7 +81,7 @@
 	  "dungeon_type": "main",
 	  "name": "Fatherhood",
 	  "description": "Your child is born. You're there physically—but distant emotionally. You promise yourself you won't be like your father.",
-	  "background": "D5_bg.png",
+	  "background": "D5_bg.PNG",
 	  "encounters": {
 		"grunt": {
 		  "enemies": ["D5_grunt"]
@@ -100,7 +100,7 @@
 	  "dungeon_type": "main",
 	  "name": "The Funeral",
 	  "description": "Your mother dies after years of alcoholism. You plan the funeral alone while your son avoids your calls.",
-	  "background": "D6_bg.png",
+	  "background": "D6_bg.PNG",
 	  "encounters": {
 		"grunt": {
 		  "enemies": ["D6_grunt"]
@@ -119,7 +119,7 @@
 	  "dungeon_type": "main",
 	  "name": "Retirement",
 	  "description": "You retire after a long, dutiful career. The ceremony is quiet, like your marriage. Your wife leaves you shortly after.",
-	  "background": "D7_bg.png",
+	  "background": "D7_bg.PNG",
 	  "encounters": {
 		"grunt": {
 		  "enemies": ["D7_grunt"]
@@ -138,7 +138,7 @@
 	  "dungeon_type": "main",
 	  "name": "Reconciliation",
 	  "description": "Years after retirement, you decide to drive cross-country to reconnect with your estranged son. You're unsure if he'll even open the door.",
-	  "background": "D8_bg.png",
+	  "background": "D8_bg.PNG",
 	  "encounters": {
 		"grunt": {
 		  "enemies": ["D8_grunt"]
@@ -157,7 +157,7 @@
 	  "dungeon_type": "main",
 	  "name": "The Family Album",
 	  "description": "You find an old family photo album in the attic. It's curated—only the happy photos are included. You begin hunting down the missing ones.",
-	  "background": "D9_bg.png",
+	  "background": "D9_bg.PNG",
 	  "encounters": {
 		"grunt": {
 		  "enemies": ["D9_grunt"]
@@ -176,7 +176,7 @@
 	  "dungeon_type": "main",
 	  "name": "The Deathbed",
 	  "description": "You're in a hospital bed, breathing slowly. Someone is holding your hand. Your son, perhaps? The other hand aches with the absence of those who left long ago.",
-	  "background": "D10_bg.png",
+	  "background": "D10_bg.PNG",
 	  "encounters": {
 		"grunt": {
 		  "enemies": ["D10_grunt"]
@@ -194,8 +194,8 @@
 	  "id": "ALT_D1",
 	  "dungeon_type": "alternate",
 	  "name": "The Trunk (Revisited)",
-	  "description": "The trunk beckons again. This time you understand what it means to be locked inside—and what it cost to be forgotten.",
-	  "background": "alt_D1_bg.png",
+	  "description": "The trunk beckons again. Same darkness, same lid, but this time you're ready for the horrors within...",
+	  "background": "alt_the_trunk_bg.PNG",
 	  "unlock_condition": {
 		"type": "core_outcome",
 		"source_dungeon": 1,
@@ -203,23 +203,23 @@
 	  },
 	  "encounters": {
 		"grunt": {
-		  "enemies": ["ALT_D1_grunt"]
+		  "enemies": ["D16_grunt"]
 		},
 		"elite": {
-		  "enemies": ["ALT_D1_elite"]
+		  "enemies": ["D16_elite"]
 		},
 		"boss": {
-		  "enemies": ["ALT_D1_boss"],
+		  "enemies": ["D16_boss"],
 		  "count": 1
 		}
 	  }
-	},
+	}, 
 	{
 	  "id": "ALT_D2",
 	  "dungeon_type": "alternate",
 	  "name": "School Infirmary",
-	  "description": "The cafeteria fight is over. Now you sit alone on the infirmary cot, ice pack in hand, wondering what Dad's note really meant.",
-	  "background": "alt_D2_infirmary_bg.png",
+	  "description": "The cafeteria fight is over. You sit alone on the infirmary cot, ice pack in hand, and read Dad's note again. What did he really mean?",
+	  "background": "alt_school_cafeteria_bg.PNG",
 	  "unlock_condition": {
 		"type": "core_outcome",
 		"source_dungeon": 2,
@@ -227,13 +227,13 @@
 	  },
 	  "encounters": {
 		"grunt": {
-		  "enemies": ["ALT_D2_grunt"]
+		  "enemies": ["D17_grunt"]
 		},
 		"elite": {
-		  "enemies": ["ALT_D2_elite"]
+		  "enemies": ["D17_elite"]
 		},
 		"boss": {
-		  "enemies": ["ALT_D2_boss"],
+		  "enemies": ["D17_boss"],
 		  "count": 1
 		}
 	  }
@@ -242,21 +242,93 @@
 	  "id": "GARAGE",
 	  "dungeon_type": "alternate",
 	  "name": "The Garage",
-	  "description": "Petrol fumes linger around Dad's unfinished car. The jack stands frozen. His watch ticks beside a fallen wrench. Some truths stay buried under the hood.",
-	  "background": "garage_bg.png",
+	  "description": "It smells of sweet petrol and oil. The truck sits unfinished on the jacks while his watch stops ticking on the bench.",
+	  "background": "alt_the_garage_bg.PNG",
 	  "unlock_condition": {
 		"type": "memento_required",
-		"required_memento": "Garage_Key"
+		"required_memento": "garage_key"
 	  },
 	  "encounters": {
 		"grunt": {
-		  "enemies": ["GARAGE_grunt"]
+		  "enemies": ["D14_grunt"]
 		},
 		"elite": {
-		  "enemies": ["GARAGE_elite"]
+		  "enemies": ["D14_elite"]
 		},
 		"boss": {
-		  "enemies": ["GARAGE_boss"],
+		  "enemies": ["D14_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": "Heaven",
+	  "dungeon_type": "alternate",
+	  "name": "Heaven",
+	  "description": "A quiet reconciliation. The house is whole, the distance is closed, and the weight of what you carried finally sets down.",
+	  "background": "alt_heaven.PNG",
+	  "unlock_condition": {
+		"type": "core_outcome",
+		"source_dungeon": 10,
+		"required_outcome": "pure"
+	  },
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D11_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D11_elite"]
+		},
+		"boss": {
+		  "enemies": ["D11_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": "Purgatory",
+	  "dungeon_type": "alternate",
+	  "name": "Purgatory",
+	  "description": "An in-between space of doors and doubts. Each truth opens a path; each falsehood closes another.",
+	  "background": "alt_purgatory_bg.PNG",
+	  "unlock_condition": {
+		"type": "core_outcome",
+		"source_dungeon": 10,
+		"required_outcome": "tainted"
+	  },
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D12_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D12_elite"]
+		},
+		"boss": {
+		  "enemies": ["D12_boss"],
+		  "count": 1
+		}
+	  }
+	},
+	{
+	  "id": "Hell",
+	  "dungeon_type": "alternate",
+	  "name": "Hell",
+	  "description": "The loop tightens. Every mistake returns as accusation, every silence becomes a scream.",
+	  "background": "alt_hell_bg.PNG",
+	  "unlock_condition": {
+		"type": "core_outcome",
+		"source_dungeon": 10,
+		"required_outcome": "corrupt"
+	  },
+	  "encounters": {
+		"grunt": {
+		  "enemies": ["D13_grunt"]
+		},
+		"elite": {
+		  "enemies": ["D13_elite"]
+		},
+		"boss": {
+		  "enemies": ["D13_boss"],
 		  "count": 1
 		}
 	  }
@@ -265,22 +337,23 @@
 	  "id": "VOID",
 	  "dungeon_type": "alternate",
 	  "name": "The Void",
-	  "description": "Starless silence. Every memory you buried, every truth you avoided—they all wait here. In the dark, there's nowhere left to hide.",
-	  "background": "void_bg.png",
+	  "description": "Starless silence. Every memory you buried, every truth you avoided, they all wait here.",
+	  "background": "alt_the_void_bg.PNG",
 	  "unlock_condition": {
-		"type": "all_alternates_cleared",
-		"required_alternates": ["ALT_D1", "ALT_D2", "GARAGE", "Heaven", "Purgatory", "Hell"],
-		"required_mementos": ["Clean_Slate", "Fractured_Hourglass", "Ash_Pendant", "Hollow_Echo"]
+		"type": "alternate_core_types_completed",
+		"dungeon_id": "Purgatory",
+		"required_core_types": ["pure"],
+		"required_mementos": ["strange_key"]
 	  },
 	  "encounters": {
 		"grunt": {
-		  "enemies": ["VOID_grunt"]
+		  "enemies": ["D15_grunt"]
 		},
 		"elite": {
-		  "enemies": ["VOID_elite"]
+		  "enemies": ["D15_elite"]
 		},
 		"boss": {
-		  "enemies": ["VOID_boss"],
+		  "enemies": ["D15_boss"],
 		  "count": 1
 		}
 	  }

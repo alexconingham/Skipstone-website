@@ -193,29 +193,25 @@ export default function Home() {
         ══════════════════════════════════════ */}
         <section className="py-16 px-4 border-t border-b border-white/[0.04] bg-gradient-to-b from-black to-gray-950/60">
           <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <AnimatedSection animation="slideUp" delay={100}>
+            <AnimatedSection animation="slideUp" delay={100}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
                 <div className="feature-card">
                   <div className="text-3xl mb-4">🎲</div>
                   <h3 className="text-base font-black text-cyan-400 mb-2 tracking-wide">Tactical Dice Combat</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">Strategic dice-based battles with endless depth</p>
                 </div>
-              </AnimatedSection>
-              <AnimatedSection animation="slideUp" delay={200}>
                 <div className="feature-card">
                   <div className="text-3xl mb-4">🧠</div>
                   <h3 className="text-base font-black text-purple-400 mb-2 tracking-wide">Memory Fragments</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">Unlock haunting memories that shape your destiny</p>
                 </div>
-              </AnimatedSection>
-              <AnimatedSection animation="slideUp" delay={300}>
                 <div className="feature-card">
                   <div className="text-3xl mb-4">♾️</div>
                   <h3 className="text-base font-black text-blue-400 mb-2 tracking-wide">Infinite Replayability</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">Every run tells a different story</p>
                 </div>
-              </AnimatedSection>
-            </div>
+              </div>
+            </AnimatedSection>
           </div>
         </section>
 
