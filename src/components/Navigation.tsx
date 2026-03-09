@@ -10,227 +10,158 @@ interface NavigationProps {
 export default function Navigation({ className = '' }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   const navItems = [
-    { id: 'home', label: 'Home', href: '#home' },
-    { id: 'trailer', label: 'Trailer', href: '#trailer' },
+    { id: 'home',     label: 'Home',     href: '#home' },
+    { id: 'trailer',  label: 'Trailer',  href: '#trailer' },
     { id: 'memories', label: 'Memories', href: '#memories' },
-    { id: 'enemies', label: 'Enemies', href: '#enemies' },
-    { id: 'arsenal', label: 'Arsenal', href: '#arsenal' },
+    { id: 'enemies',  label: 'Enemies',  href: '#enemies' },
+    { id: 'arsenal',  label: 'Arsenal',  href: '#arsenal' },
     { id: 'mementos', label: 'Mementos', href: '#mementos' },
-    { id: 'steam', label: 'Wishlist', href: '#steam-cta' },
-    { id: 'studio', label: 'Skipstone Studio', href: 'https://skipstone.co.nz', external: true }
+    { id: 'studio',   label: 'Skipstone Studio', href: 'https://skipstone.co.nz', external: true },
   ]
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-      
-      // Update active section based on scroll position
-      const sections = navItems.map(item => item.id)
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section)
+      setIsScrolled(window.scrollY > 60)
+      for (const item of navItems) {
+        const el = document.getElementById(item.id)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= 120 && rect.bottom >= 120) {
+            setActiveSection(item.id)
             break
           }
         }
       }
     }
-
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const smoothScrollTo = (href: string, isExternal?: boolean) => {
+  const scrollTo = (href: string, isExternal?: boolean) => {
     if (isExternal || href.startsWith('http')) {
       window.open(href, '_blank', 'noopener,noreferrer')
       return
     }
-    const targetId = href.replace('#', '')
-    const element = document.getElementById(targetId)
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      })
-    }
+    const el = document.getElementById(href.replace('#', ''))
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   return (
-    <nav 
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${className}`}
       role="navigation"
       aria-label="Main navigation"
     >
-      <div 
-        className={`transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-black/80 backdrop-blur-lg border-b border-white/10 shadow-2xl' 
-            : 'bg-transparent'
+      <div
+        className={`transition-all duration-500 border-b ${
+          isScrolled
+            ? 'bg-[#0e0c0c]/92 backdrop-blur-md border-[rgba(196,163,90,0.1)]'
+            : 'bg-transparent border-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="flex items-center justify-between h-14">
+
             {/* Logo */}
-            <div className="flex-shrink-0">
-              <button
-                onClick={() => smoothScrollTo('#home')}
-                className="flex items-center space-x-2 group transition-transform duration-300 hover:scale-105"
-                aria-label="Remember to Die - Home"
-              >
-                <Image
-                  src="/Skipstone_logo.png"
-                  alt="Skipstone Studios"
-                  width={120}
-                  height={24}
-                  className="h-8 w-auto brightness-100 group-hover:brightness-110 transition-all duration-300"
-                  priority
-                />
-              </button>
+            <button
+              onClick={() => scrollTo('#home')}
+              className="flex-shrink-0 opacity-80 hover:opacity-100 transition-opacity duration-300"
+              aria-label="Remember to Die — Home"
+            >
+              <Image
+                src="/Skipstone_logo.png"
+                alt="Skipstone Studios"
+                width={110}
+                height={22}
+                className="h-7 w-auto"
+                priority
+              />
+            </button>
+
+            {/* Desktop nav */}
+            <div className="hidden md:flex items-center gap-0.5">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollTo(item.href, item.external)}
+                  className={`nav-link ${activeSection === item.id && !item.external ? 'active' : ''}`}
+                  aria-current={activeSection === item.id && !item.external ? 'page' : undefined}
+                >
+                  {item.label}
+                  {item.external && <span className="ml-1 opacity-40 text-[0.55rem]">↗</span>}
+                </button>
+              ))}
             </div>
 
-            {/* Desktop Navigation */}
+            {/* Steam CTA — desktop */}
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-1">
-                {navItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => smoothScrollTo(item.href, item.external)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative group ${
-                      activeSection === item.id && !item.external
-                        ? 'text-cyan-300 bg-cyan-500/20'
-                        : 'text-gray-300 hover:text-white hover:bg-white/10'
-                    }`}
-                    aria-current={activeSection === item.id && !item.external ? 'page' : undefined}
-                  >
-                    {item.label}
-                    {item.external && (
-                      <span className="ml-1 text-xs opacity-60">↗</span>
-                    )}
-                    {/* Active indicator */}
-                    {!item.external && (
-                      <div 
-                        className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-cyan-400 transition-all duration-300 ${
-                          activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'
-                        }`}
-                      />
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Steam Wishlist CTA */}
-            <div className="hidden md:flex items-center">
               <button
-                onClick={() => smoothScrollTo('#steam-cta')}
-                className="group relative inline-block transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+                onClick={() => scrollTo('#steam-cta')}
+                className="opacity-85 hover:opacity-100 transition-all duration-300 hover:scale-[1.03]"
                 aria-label="Wishlist on Steam"
               >
                 <Image
                   src="/steam wishlist bw3.png"
                   alt="Wishlist on Steam"
-                  width={200}
-                  height={80}
-                  className="w-auto h-10 md:h-12 group-hover:brightness-110 transition-all duration-300"
+                  width={180}
+                  height={72}
+                  className="w-auto h-9"
                   quality={90}
                 />
               </button>
             </div>
 
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <MobileMenu 
-                navItems={navItems} 
-                activeSection={activeSection}
-                onNavigate={smoothScrollTo}
-              />
-            </div>
+            {/* Mobile toggle */}
+            <button
+              className="md:hidden text-[#7a6a58] hover:text-[#c4a35a] transition-colors duration-200 p-2"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-expanded={mobileOpen}
+              aria-label="Toggle menu"
+            >
+              <svg className="w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d={mobileOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
-    </nav>
-  )
-}
 
-// Mobile Menu Component
-function MobileMenu({ 
-  navItems, 
-  activeSection, 
-  onNavigate 
-}: { 
-  navItems: any[], 
-  activeSection: string,
-  onNavigate: (href: string, isExternal?: boolean) => void
-}) {
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-300"
-        aria-expanded={isOpen}
-        aria-label="Toggle mobile menu"
-      >
-        <svg
-          className={`h-6 w-6 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`}
-          stroke="currentColor"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-          />
-        </svg>
-      </button>
-
-      {/* Mobile Menu Overlay */}
-      {isOpen && (
-        <div className="fixed inset-0 top-16 bg-black/95 backdrop-blur-lg md:hidden z-40">
-          <div className="px-4 pt-6 pb-6 space-y-2">
+      {/* Mobile drawer */}
+      {mobileOpen && (
+        <div className="fixed inset-0 top-14 bg-[#0e0c0c]/97 backdrop-blur-lg md:hidden z-40 border-t border-[rgba(196,163,90,0.08)]">
+          <div className="px-8 pt-8 pb-8 space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => {
-                  onNavigate(item.href, item.external)
-                  setIsOpen(false)
-                }}
-                className={`block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
-                  activeSection === item.id && !item.external
-                    ? 'text-cyan-300 bg-cyan-500/20'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
+                onClick={() => { scrollTo(item.href, item.external); setMobileOpen(false) }}
+                className={`block w-full text-left nav-link py-3 ${
+                  activeSection === item.id && !item.external ? 'active' : ''
                 }`}
               >
                 {item.label}
-                {item.external && (
-                  <span className="ml-2 text-sm opacity-60">↗</span>
-                )}
+                {item.external && <span className="ml-2 opacity-40 text-[0.55rem]">↗</span>}
               </button>
             ))}
-            
-            {/* Mobile Steam CTA */}
-            <div className="pt-4 mt-4 border-t border-white/10">
+            <div className="pt-6 mt-6 border-t border-[rgba(196,163,90,0.08)]">
               <button
-                onClick={() => {
-                  onNavigate('#steam-cta')
-                  setIsOpen(false)
-                }}
-                className="group w-full flex justify-center transition-all duration-300 transform hover:scale-105"
+                onClick={() => { scrollTo('#steam-cta'); setMobileOpen(false) }}
+                className="opacity-85 hover:opacity-100 transition-opacity duration-200"
                 aria-label="Wishlist on Steam"
               >
                 <Image
                   src="/steam wishlist bw3.png"
                   alt="Wishlist on Steam"
-                  width={300}
-                  height={120}
-                  className="w-auto h-16 group-hover:brightness-110 transition-all duration-300"
+                  width={240}
+                  height={96}
+                  className="w-auto h-14"
                   quality={90}
                 />
               </button>
@@ -238,6 +169,6 @@ function MobileMenu({
           </div>
         </div>
       )}
-    </>
+    </nav>
   )
-} 
+}

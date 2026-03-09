@@ -12,164 +12,178 @@ export default function CTASection({ className = '' }: CTASectionProps) {
   const [email, setEmail] = useState('')
   const [isSubscribed, setIsSubscribed] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || isLoading) return
-
     setIsLoading(true)
-    
+    setError('')
+
     try {
       const response = await fetch('/api/subscribe', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       })
-
       const data = await response.json()
-
       if (response.ok) {
         setIsSubscribed(true)
         setEmail('')
       } else {
-        // Handle error - you could show an error message to the user
-        console.error('Subscription error:', data.error)
-        alert('Failed to subscribe. Please try again later.')
+        setError(data.error || 'Something went wrong. Please try again.')
       }
-    } catch (error) {
-      console.error('Subscription error:', error)
-      alert('Failed to subscribe. Please try again later.')
+    } catch {
+      setError('Something went wrong. Please try again.')
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
-    <section 
+    <section
       id="steam-cta"
-      className={`relative py-24 px-4 overflow-hidden ${className}`}
+      className={`relative overflow-hidden ${className}`}
       aria-labelledby="cta-heading"
     >
-      {/* Background with parallax effect */}
+      {/* Background — world art behind dark scrim */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-cyan-900/20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black/80" />
-        
-        {/* Animated background elements */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <Image
+          src="/backgrounds/alt_the_void_bg.PNG"
+          alt=""
+          fill
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          quality={80}
+        />
+        <div className="absolute inset-0 bg-[#0e0c0c]/88" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0e0c0c] via-transparent to-[#0e0c0c]" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <AnimatedSection animation="scaleIn" delay={200}>
-          <h2 
-            id="cta-heading"
-            className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent"
-          >
-            Begin Your Journey
-          </h2>
-        </AnimatedSection>
+      <div className="scanlines absolute inset-0 pointer-events-none z-[2]" />
 
-        <AnimatedSection animation="fadeIn" delay={400}>
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed max-w-2xl mx-auto">
-            Wishlist Remember to Die on Steam and be the first to experience this haunting tactical roguelike.
-          </p>
-        </AnimatedSection>
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-28">
 
-        {/* Steam Wishlist CTA */}
-        <AnimatedSection animation="slideUp" delay={600}>
-          <div className="mb-16">
-            <a
-              href="https://store.steampowered.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-block transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
-              aria-label="Wishlist Remember to Die on Steam"
-            >
-              <Image
-                src="/steam wishlist bw3.png"
-                alt="Wishlist on Steam"
-                width={400}
-                height={160}
-                className="w-auto h-20 md:h-24 group-hover:brightness-110 transition-all duration-300"
-                quality={90}
-              />
-            </a>
+        {/* Stats — earned, not boastful */}
+        <AnimatedSection animation="fadeIn" delay={100}>
+          <div className="grid grid-cols-3 gap-0 border-t border-b border-[rgba(196,163,90,0.1)] mb-20 divide-x divide-[rgba(196,163,90,0.08)]">
+            <div className="stat-callout">
+              <span className="stat-callout__number">1000<span style={{ fontSize: '0.45em', verticalAlign: 'super', opacity: 0.5 }}>+</span></span>
+              <span className="stat-callout__label">Wishlists & counting</span>
+            </div>
+            <div className="stat-callout">
+              <span className="stat-callout__number">50<span style={{ fontSize: '0.45em', verticalAlign: 'super', opacity: 0.5 }}>+</span></span>
+              <span className="stat-callout__label">Hours of content</span>
+            </div>
+            <div className="stat-callout">
+              <span className="stat-callout__number" style={{ fontStyle: 'italic' }}>∞</span>
+              <span className="stat-callout__label">Replayability</span>
+            </div>
           </div>
         </AnimatedSection>
 
-        {/* Newsletter Signup */}
-        <AnimatedSection animation="slideUp" delay={800}>
-          <div className="bg-black/40 backdrop-blur-lg border border-white/10 rounded-2xl p-8 max-w-lg mx-auto">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Stay Updated
-            </h3>
-            <p className="text-gray-400 mb-6">
-              Get exclusive updates, behind-the-scenes content, and early access opportunities.
+        {/* Main CTA */}
+        <div className="text-center">
+          <AnimatedSection animation="fadeIn" delay={300}>
+            <span className="chapter-label">Join the Wishlist</span>
+            <h2
+              id="cta-heading"
+              className="text-5xl md:text-6xl lg:text-7xl font-light text-[#e8dcc8] leading-[1.05] mb-6"
+              style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
+            >
+              Begin your<br />
+              <em className="italic text-[#c4a35a]">final reckoning.</em>
+            </h2>
+            <div className="section-rule" />
+            <p
+              className="text-[#7a6a58] text-base max-w-xl mx-auto leading-relaxed mb-12 mt-6"
+              style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}
+            >
+              Wishlist Remember to Die on Steam and be the first to experience this
+              haunting tactical roguelike when it launches in Early Access.
             </p>
-            
-            {!isSubscribed ? (
-              <form onSubmit={handleNewsletterSubmit} className="space-y-4">
-                <div className="relative">
+          </AnimatedSection>
+
+          {/* Steam wishlist button */}
+          <AnimatedSection animation="slideUp" delay={500}>
+            <div className="mb-16">
+              <a
+                href="https://store.steampowered.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block opacity-90 hover:opacity-100 transition-all duration-300 hover:scale-[1.04]"
+                aria-label="Wishlist Remember to Die on Steam"
+              >
+                <Image
+                  src="/steam wishlist bw3.png"
+                  alt="Wishlist on Steam"
+                  width={380}
+                  height={152}
+                  className="w-auto h-20 md:h-24"
+                  quality={90}
+                />
+              </a>
+            </div>
+          </AnimatedSection>
+
+          {/* Newsletter */}
+          <AnimatedSection animation="fadeIn" delay={700}>
+            <div
+              className="max-w-md mx-auto border border-[rgba(196,163,90,0.1)] p-8"
+              style={{ background: 'rgba(14,12,12,0.7)' }}
+            >
+              <h3
+                className="text-xl font-light text-[#c9b99a] mb-2"
+                style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
+              >
+                Stay in the loop.
+              </h3>
+              <p
+                className="text-[#4a3e35] text-sm mb-6 leading-relaxed"
+                style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}
+              >
+                Development updates, lore drops, and early access news — nothing more.
+              </p>
+
+              {!isSubscribed ? (
+                <form onSubmit={handleNewsletterSubmit} className="space-y-3">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
-                    className="w-full px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300"
+                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 bg-transparent border border-[rgba(196,163,90,0.15)] text-[#c9b99a] placeholder-[#4a3e35] focus:outline-none focus:border-[rgba(196,163,90,0.4)] transition-colors duration-200 text-sm"
+                    style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}
                     required
                     disabled={isLoading}
                   />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isLoading || !email}
-                  className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 disabled:from-gray-600 disabled:to-gray-700 text-white px-6 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.02] disabled:scale-100 disabled:cursor-not-allowed"
-                >
-                  {isLoading ? (
-                    <div className="flex items-center justify-center space-x-2">
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      <span>Subscribing...</span>
-                    </div>
-                  ) : (
-                    'Subscribe for Updates'
+                  {error && (
+                    <p className="text-[#7a1c1c] text-xs" style={{ fontFamily: 'var(--font-body)' }}>
+                      {error}
+                    </p>
                   )}
-                </button>
-              </form>
-            ) : (
-              <div className="text-center py-8">
-                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
+                  <button
+                    type="submit"
+                    disabled={isLoading || !email}
+                    className="w-full py-3 border border-[rgba(196,163,90,0.25)] text-[#c4a35a] text-xs tracking-[0.2em] uppercase hover:border-[rgba(196,163,90,0.5)] hover:bg-[rgba(196,163,90,0.05)] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
+                    style={{ fontFamily: 'var(--font-body)', fontWeight: 500 }}
+                  >
+                    {isLoading ? 'Subscribing…' : 'Subscribe for Updates'}
+                  </button>
+                </form>
+              ) : (
+                <div className="py-4 text-center">
+                  <p
+                    className="text-[#c4a35a] text-sm tracking-wide"
+                    style={{ fontFamily: 'var(--font-display, Georgia, serif)', fontStyle: 'italic' }}
+                  >
+                    You're in. We'll be in touch.
+                  </p>
                 </div>
-                <h4 className="text-xl font-bold text-white mb-2">Thank You!</h4>
-                <p className="text-gray-400">You're now subscribed to our updates.</p>
-              </div>
-            )}
-          </div>
-        </AnimatedSection>
-
-        {/* Social Proof */}
-        <AnimatedSection animation="fadeIn" delay={1000}>
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="space-y-2">
-              <div className="text-3xl font-bold text-cyan-400">1000+</div>
-              <div className="text-gray-400">Wishlists</div>
+              )}
             </div>
-            <div className="space-y-2">
-              <div className="text-3xl font-bold text-purple-400">50+</div>
-              <div className="text-gray-400">Hours of Content</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-3xl font-bold text-blue-400">∞</div>
-              <div className="text-gray-400">Replayability</div>
-            </div>
-          </div>
-        </AnimatedSection>
+          </AnimatedSection>
+        </div>
       </div>
     </section>
   )
-} 
+}
