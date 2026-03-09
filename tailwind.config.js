@@ -26,8 +26,8 @@ module.exports = {
         foreground: 'var(--foreground)',
       },
       fontFamily: {
-        display: ['var(--font-display)', 'Cormorant Garamond', 'Georgia', 'serif'],
-        body:    ['var(--font-body)',    'DM Sans',            'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'Playfair Display', 'Georgia', 'serif'],
+        body:    ['var(--font-body)',    'Lora',             'Georgia', 'serif'],
       },
       animation: {
         'scroll-left':  'scroll-left 40s linear infinite',

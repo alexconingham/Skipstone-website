@@ -113,22 +113,27 @@ export default function Home() {
             </AnimatedSection>
 
             <AnimatedSection animation="fadeIn" delay={700}>
-              <p
-                className="text-xl md:text-3xl lg:text-4xl font-light italic tracking-wide text-[#c9b99a] leading-snug"
+              <div
+                className="space-y-1"
                 style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
               >
-                Battle your demons.{' '}
-                <span className="text-[#e8dcc8] not-italic font-normal">Re-roll your destiny.</span>
-              </p>
+                <p className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#e8dcc8] tracking-wide leading-tight">
+                  Battle your demons.
+                </p>
+                <p className="text-2xl md:text-4xl lg:text-5xl font-bold italic text-[#c4a35a] tracking-wide leading-tight">
+                  Re-roll your destiny.
+                </p>
+              </div>
             </AnimatedSection>
 
             <AnimatedSection animation="fadeIn" delay={1100}>
               <p
-                className="text-sm md:text-base text-[#7a6a58] leading-relaxed max-w-xl mx-auto"
-                style={{ fontFamily: 'var(--font-body, DM Sans, sans-serif)', fontWeight: 300 }}
+                className="text-sm md:text-base text-[#7a6a58] leading-relaxed max-w-2xl mx-auto"
+                style={{ fontFamily: 'var(--font-body, Georgia, serif)' }}
               >
-                A dying man relives his fractured memories — battles manifestations of regret and trauma,
-                and fights to re-roll his destiny. A narrative-driven tactical dice roguelike.
+                Remember to Die is a gritty, narrative-driven battle against time and broken memories,
+                wrapped in an intuitive and moreish dice strategy roguelike where every dice roll
+                dredges up a fragmented memory and decides your fate.
               </p>
             </AnimatedSection>
 
@@ -195,24 +200,18 @@ export default function Home() {
               {/* Left: copy */}
               <AnimatedSection animation="slideRight" delay={200}>
                 <div>
-                  <span className="chapter-label">About the Game</span>
+                  <span className="chapter-label">Official Trailer</span>
                   <h2
-                    className="text-4xl md:text-5xl lg:text-6xl font-light text-[#e8dcc8] mb-6 leading-[1.05]"
+                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#e8dcc8] mb-6 leading-[1.05]"
                     style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
                   >
-                    A lifetime of{' '}
-                    <em className="italic text-[#c9b99a]">regret</em>
-                    {' '}made playable.
+                    Every roll counts.
                   </h2>
                   <div className="section-rule section-rule-left" />
-                  <p className="text-[#7a6a58] text-base leading-relaxed mb-6" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+                  <p className="text-[#7a6a58] text-base leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
                     Remember to Die is a gritty, narrative-driven battle against time and broken memories,
-                    wrapped in an intuitive and moreish dice strategy roguelike. Every dice roll dredges
-                    up a fragmented memory and decides your fate.
-                  </p>
-                  <p className="text-[#7a6a58] text-base leading-relaxed" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                    Each run splinters the story into new fates. Choose which fantasies to pursue,
-                    which truths to rewrite, and how — or whether — to make peace with the life you lived.
+                    wrapped in an intuitive and moreish dice strategy roguelike where every dice roll
+                    dredges up a fragmented memory and decides your fate.
                   </p>
                 </div>
               </AnimatedSection>
@@ -231,8 +230,7 @@ export default function Home() {
                   <span className="editorial-callout__number">01</span>
                   <span className="editorial-callout__title">Tactical Dice Combat</span>
                   <span className="editorial-callout__body">
-                    Build and refine a dice pool across each run. Every roll is a gamble with memory
-                    and consequence — strategic depth wrapped in the chaos of fate.
+                    Strategic dice-based battles with endless depth.
                   </span>
                 </div>
 
@@ -240,8 +238,7 @@ export default function Home() {
                   <span className="editorial-callout__number">02</span>
                   <span className="editorial-callout__title">Memory Fragments</span>
                   <span className="editorial-callout__body">
-                    Unlock haunting memories that splinter the story into new paths. Each fragment
-                    reshapes the world and the man you are becoming — or the man you were.
+                    Unlock haunting memories that shape your destiny.
                   </span>
                 </div>
 
@@ -249,8 +246,7 @@ export default function Home() {
                   <span className="editorial-callout__number">03</span>
                   <span className="editorial-callout__title">Infinite Replayability</span>
                   <span className="editorial-callout__body">
-                    Multiple endings, branching dungeons, and procedural runs ensure no two
-                    lives — no two deaths — are ever the same.
+                    Every run tells a different story.
                   </span>
                 </div>
 
@@ -283,9 +279,8 @@ export default function Home() {
                   <em className="italic text-[#c4a35a]">memories.</em>
                 </h2>
                 <div className="section-rule section-rule-left" />
-                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                  Each fragment you unlock splinters the story into new fates; you choose which
-                  fantasies to pursue, and which truths to rewrite.
+                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)' }}>
+                  Each fragment you unlock splinters the story into new fates; you choose which fantasies to pursue, and which truths to rewrite.
                 </p>
               </div>
               <ImageGallery
@@ -324,8 +319,8 @@ export default function Home() {
                   <em className="italic" style={{ color: '#9b3535' }}>haunting faces.</em>
                 </h2>
                 <div className="section-rule section-rule-left" style={{ background: '#7a1c1c', opacity: 0.5 }} />
-                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                  Each enemy hints at more of the haunting truth. Hover to meet them.
+                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)' }}>
+                  Each enemy hints at more of the haunting truth.
                 </p>
               </div>
               <ImageGallery
@@ -363,8 +358,8 @@ export default function Home() {
                   <em className="italic" style={{ color: '#5a7a52' }}>arsenal.</em>
                 </h2>
                 <div className="section-rule section-rule-left" style={{ background: '#4a6444', opacity: 0.5 }} />
-                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                  Collect and refine powerful dice combinations. Every die tells a story.
+                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)' }}>
+                  Collect and refine powerful dice combinations.
                 </p>
               </div>
               <ImageGallery
@@ -402,9 +397,8 @@ export default function Home() {
                   <em className="italic" style={{ color: '#7a5a9b' }}>of tricks.</em>
                 </h2>
                 <div className="section-rule section-rule-left" style={{ background: '#6a4a8a', opacity: 0.5 }} />
-                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)' }}>
                   Collect mementos drenched in heartbreaking lore, each with unique effects.
-                  Hover to hear their stories.
                 </p>
               </div>
               <ImageGallery
@@ -441,8 +435,8 @@ export default function Home() {
                   <em className="italic text-[#c4a35a]">on your side.</em>
                 </h2>
                 <div className="section-rule section-rule-left" />
-                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                  Unique watches shift the odds — and the clock never stops.
+                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)' }}>
+                  Unique watches shift the odds.
                 </p>
               </div>
               <ImageGallery

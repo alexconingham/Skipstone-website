@@ -87,19 +87,17 @@ export default function CTASection({ className = '' }: CTASectionProps) {
             <span className="chapter-label">Join the Wishlist</span>
             <h2
               id="cta-heading"
-              className="text-5xl md:text-6xl lg:text-7xl font-light text-[#e8dcc8] leading-[1.05] mb-6"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#e8dcc8] leading-[1.05] mb-6"
               style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
             >
-              Begin your<br />
-              <em className="italic text-[#c4a35a]">final reckoning.</em>
+              Begin Your Journey
             </h2>
             <div className="section-rule" />
             <p
               className="text-[#7a6a58] text-base max-w-xl mx-auto leading-relaxed mb-12 mt-6"
-              style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}
+              style={{ fontFamily: 'var(--font-body)' }}
             >
-              Wishlist Remember to Die on Steam and be the first to experience this
-              haunting tactical roguelike when it launches in Early Access.
+              Wishlist Remember to Die on Steam and be the first to experience this haunting tactical roguelike.
             </p>
           </AnimatedSection>
 
@@ -132,16 +130,16 @@ export default function CTASection({ className = '' }: CTASectionProps) {
               style={{ background: 'rgba(14,12,12,0.7)' }}
             >
               <h3
-                className="text-xl font-light text-[#c9b99a] mb-2"
+                className="text-xl font-bold text-[#c9b99a] mb-2"
                 style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
               >
-                Stay in the loop.
+                Stay Updated
               </h3>
               <p
                 className="text-[#4a3e35] text-sm mb-6 leading-relaxed"
-                style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}
+                style={{ fontFamily: 'var(--font-body)' }}
               >
-                Development updates, lore drops, and early access news — nothing more.
+                Get exclusive updates, behind-the-scenes content, and early access opportunities.
               </p>
 
               {!isSubscribed ? (
@@ -171,12 +169,15 @@ export default function CTASection({ className = '' }: CTASectionProps) {
                   </button>
                 </form>
               ) : (
-                <div className="py-4 text-center">
+                <div className="py-8 text-center">
                   <p
-                    className="text-[#c4a35a] text-sm tracking-wide"
-                    style={{ fontFamily: 'var(--font-display, Georgia, serif)', fontStyle: 'italic' }}
+                    className="text-[#e8dcc8] text-xl font-bold mb-2"
+                    style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
                   >
-                    You're in. We'll be in touch.
+                    Thank You!
+                  </p>
+                  <p className="text-[#4a3e35] text-sm" style={{ fontFamily: 'var(--font-body)' }}>
+                    You're now subscribed to our updates.
                   </p>
                 </div>
               )}
