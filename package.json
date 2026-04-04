@@ -13,12 +13,14 @@
     "copy:backgrounds": "node scripts/copy-backgrounds.js",
     "prebuild": "npm run copy:backgrounds",
     "optimize": "npm run lint:fix && npm run build",
-    "deploy": "npm run optimize && echo 'Ready for deployment to Vercel'"
+    "deploy": "npm run optimize && echo 'Ready for deployment to Vercel'",
+    "remote": "claude remote-control --name \"Skipstone Studio\""
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.50.0",
+    "@supabase/supabase-js": "^2.101.1",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
+    "marked": "^17.0.5",
     "next": "^16.1.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

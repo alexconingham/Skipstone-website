@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image'
 
 interface NavigationProps {
@@ -10,6 +11,9 @@ interface NavigationProps {
 export default function Navigation({ className = '' }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const pathname = usePathname()
+  const router = useRouter()
+  const isHomepage = pathname === '/'
 
   const navItems = [
     { id: 'home', label: 'Home', href: '#home' },
@@ -18,6 +22,7 @@ export default function Navigation({ className = '' }: NavigationProps) {
     { id: 'enemies', label: 'Enemies', href: '#enemies' },
     { id: 'arsenal', label: 'Arsenal', href: '#arsenal' },
     { id: 'mementos', label: 'Mementos', href: '#mementos' },
+    { id: 'blog', label: 'Devlog', href: '/blog', route: true },
     { id: 'steam', label: 'Wishlist', href: '#steam-cta' },
     { id: 'studio', label: 'Skipstone Studio', href: 'https://skipstone.co.nz', external: true }
   ]
@@ -43,9 +48,18 @@ export default function Navigation({ className = '' }: NavigationProps) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const smoothScrollTo = (href: string, isExternal?: boolean) => {
+  const smoothScrollTo = (href: string, isExternal?: boolean, isRoute?: boolean) => {
     if (isExternal || href.startsWith('http')) {
       window.open(href, '_blank', 'noopener,noreferrer')
+      return
+    }
+    if (isRoute) {
+      router.push(href)
+      return
+    }
+    // Anchor link — if not on homepage, navigate there first
+    if (!isHomepage) {
+      router.push(`/${href}`)
       return
     }
     const targetId = href.replace('#', '')
@@ -93,9 +107,19 @@ export default function Navigation({ className = '' }: NavigationProps) {
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => smoothScrollTo(item.href, item.external)}
-                  className={`nav-pill ${activeSection === item.id && !item.external ? 'active' : ''}`}
-                  aria-current={activeSection === item.id && !item.external ? 'page' : undefined}
+                  onClick={() => smoothScrollTo(item.href, item.external, item.route)}
+                  className={`nav-pill ${
+                    (item.route && pathname.startsWith(item.href)) ||
+                    (activeSection === item.id && !item.external && !item.route)
+                      ? 'active'
+                      : ''
+                  }`}
+                  aria-current={
+                    (item.route && pathname.startsWith(item.href)) ||
+                    (activeSection === item.id && !item.external && !item.route)
+                      ? 'page'
+                      : undefined
+                  }
                 >
                   {item.label}
                   {item.external && <span className="ml-1 text-xs opacity-40">↗</span>}
@@ -126,6 +150,7 @@ export default function Navigation({ className = '' }: NavigationProps) {
               <MobileMenu
                 navItems={navItems}
                 activeSection={activeSection}
+                pathname={pathname}
                 onNavigate={smoothScrollTo}
               />
             </div>
@@ -139,11 +164,13 @@ export default function Navigation({ className = '' }: NavigationProps) {
 function MobileMenu({
   navItems,
   activeSection,
+  pathname,
   onNavigate
 }: {
   navItems: any[]
   activeSection: string
-  onNavigate: (href: string, isExternal?: boolean) => void
+  pathname: string
+  onNavigate: (href: string, isExternal?: boolean, isRoute?: boolean) => void
 }) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -177,11 +204,12 @@ function MobileMenu({
               <button
                 key={item.id}
                 onClick={() => {
-                  onNavigate(item.href, item.external)
+                  onNavigate(item.href, item.external, item.route)
                   setIsOpen(false)
                 }}
                 className={`block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
-                  activeSection === item.id && !item.external
+                  (item.route && pathname.startsWith(item.href)) ||
+                  (activeSection === item.id && !item.external && !item.route)
                     ? 'text-cyan-300 bg-cyan-500/10'
                     : 'text-gray-300 hover:text-white hover:bg-white/5'
                 }`}
