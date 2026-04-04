@@ -7,15 +7,9 @@ interface VideoTrailerProps {
 
 export default function VideoTrailer({ src, className = '' }: VideoTrailerProps) {
   return (
-    <div className={`relative ${className}`}>
-      {/* Glow border */}
-      <div
-        className="absolute inset-0 pointer-events-none z-10"
-        style={{
-          border: '1px solid rgba(0,255,255,0.25)',
-          boxShadow: '0 0 40px rgba(0,255,255,0.15), 0 0 80px rgba(0,255,255,0.07), inset 0 0 40px rgba(0,255,255,0.04)',
-        }}
-      />
+    <div className={`video-frame relative ${className}`}>
+      {/* Glitch line sweep */}
+      <div className="video-glitch-line" />
 
       {/* Corner accents */}
       <div className="video-corner video-corner-tl" />
@@ -25,7 +19,7 @@ export default function VideoTrailer({ src, className = '' }: VideoTrailerProps)
 
       <video
         controls
-        className="w-full aspect-video bg-black block"
+        className="w-full aspect-video bg-black block relative z-[1]"
         preload="metadata"
       >
         <source src={src} type="video/mp4" />

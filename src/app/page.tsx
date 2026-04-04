@@ -6,6 +6,9 @@ import Navigation from '@/components/Navigation'
 import AnimatedSection from '@/components/AnimatedSection'
 import CTASection from '@/components/CTASection'
 import VideoTrailer from '@/components/VideoTrailer'
+import ParticleField from '@/components/ParticleField'
+import SectionDivider from '@/components/SectionDivider'
+import ScrollProgress from '@/components/ScrollProgress'
 import Image from 'next/image'
 import { getDiceData, getMementoData, getEnemyData, getWatchData } from '@/utils/dataMapper'
 import { getBaseUrl } from '@/utils/config'
@@ -59,20 +62,21 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
       <main className="min-h-screen bg-black text-white relative overflow-x-hidden">
+        <ScrollProgress />
         <Navigation />
         <ImageProtection />
         <AudioPlayer />
         <PixelatedWakeBackground />
 
-        {/* ══════════════════════════════════════
-            HERO SECTION
-        ══════════════════════════════════════ */}
+        {/* ═══════════════════════════════════
+            HERO
+        ═══════════════════════════════════ */}
         <section
           id="home"
           className="min-h-screen flex flex-col items-center justify-center px-4 relative pt-20 pb-24"
           role="banner"
         >
-          {/* Background */}
+          {/* Parallax background layers */}
           <div className="absolute inset-0">
             <Image
               src="/backgrounds/alt_timewarpUPSCALED.PNG"
@@ -83,15 +87,17 @@ export default function Home() {
               priority
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/55 to-black" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
           </div>
 
-          {/* Scanlines */}
           <div className="scanlines absolute inset-0 pointer-events-none z-[3]" />
 
+          {/* Floating particles */}
+          <ParticleField />
+
           {/* Hero content */}
-          <div className="text-center max-w-4xl mx-auto relative z-20 space-y-7">
+          <div className="text-center max-w-4xl mx-auto relative z-20 space-y-8">
             <AnimatedSection animation="scaleIn" delay={200}>
               <div className="mb-2">
                 <Image
@@ -99,11 +105,7 @@ export default function Home() {
                   alt="Remember to Die — Tactical Dice Combat Roguelike"
                   width={520}
                   height={270}
-                  className="mx-auto max-w-sm md:max-w-lg w-full h-auto"
-                  style={{
-                    filter: 'drop-shadow(0 0 24px rgba(0,255,255,0.35)) drop-shadow(0 0 60px rgba(0,255,255,0.12))',
-                    animation: 'float 7s ease-in-out infinite',
-                  }}
+                  className="mx-auto max-w-sm md:max-w-lg w-full h-auto logo-shimmer"
                   priority
                   quality={90}
                   sizes="(max-width: 768px) 320px, 520px"
@@ -127,7 +129,7 @@ export default function Home() {
             <AnimatedSection animation="slideUp" delay={1800}>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-2">
                 <div className="text-center">
-                  <p className="text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent tracking-wide">
+                  <p className="text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent tracking-wide shimmer-text">
                     COMING SOON
                   </p>
                   <p className="text-gray-500 text-xs tracking-[0.25em] uppercase mt-1">to Steam Early Access</p>
@@ -162,20 +164,19 @@ export default function Home() {
           </AnimatedSection>
         </section>
 
-        {/* ══════════════════════════════════════
-            TRAILER SECTION
-        ══════════════════════════════════════ */}
-        <section id="trailer" className="relative py-20 px-4 bg-black">
-          {/* Ambient glow behind video */}
+        {/* ═══════════════════════════════════
+            TRAILER
+        ═══════════════════════════════════ */}
+        <section id="trailer" className="relative py-24 px-4 bg-black">
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-cyan-900/10 blur-[120px] rounded-full" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-cyan-900/10 blur-[120px] rounded-full video-breathe" />
           </div>
 
           <div className="max-w-5xl mx-auto relative z-10">
             <AnimatedSection animation="fadeIn" delay={200}>
-              <div className="text-center mb-10">
+              <div className="text-center mb-12">
                 <span className="section-tag">Official Trailer</span>
-                <h2 className="text-2xl md:text-3xl font-black text-white mt-1">
+                <h2 className="text-3xl md:text-4xl font-black text-white mt-2">
                   Every roll counts.
                 </h2>
                 <div className="section-accent-line bg-gradient-to-r from-transparent via-cyan-500 to-transparent mt-4 mx-auto" />
@@ -188,25 +189,33 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ══════════════════════════════════════
+        <SectionDivider />
+
+        {/* ═══════════════════════════════════
             FEATURE PILLS
-        ══════════════════════════════════════ */}
-        <section className="py-16 px-4 border-t border-b border-white/[0.04] bg-gradient-to-b from-black to-gray-950/60">
+        ═══════════════════════════════════ */}
+        <section className="py-20 px-4 bg-gradient-to-b from-black via-gray-950/40 to-black">
           <div className="max-w-5xl mx-auto">
             <AnimatedSection animation="slideUp" delay={100}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
                 <div className="feature-card">
-                  <div className="text-3xl mb-4">🎲</div>
+                  <span className="corner corner-tl" />
+                  <span className="corner corner-br" />
+                  <div className="feature-icon">🎲</div>
                   <h3 className="text-base font-black text-cyan-400 mb-2 tracking-wide">Tactical Dice Combat</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">Strategic dice-based battles with endless depth</p>
                 </div>
                 <div className="feature-card">
-                  <div className="text-3xl mb-4">🧠</div>
+                  <span className="corner corner-tl" />
+                  <span className="corner corner-br" />
+                  <div className="feature-icon">🧠</div>
                   <h3 className="text-base font-black text-purple-400 mb-2 tracking-wide">Memory Fragments</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">Unlock haunting memories that shape your destiny</p>
                 </div>
                 <div className="feature-card">
-                  <div className="text-3xl mb-4">♾️</div>
+                  <span className="corner corner-tl" />
+                  <span className="corner corner-br" />
+                  <div className="feature-icon">♾️</div>
                   <h3 className="text-base font-black text-blue-400 mb-2 tracking-wide">Infinite Replayability</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">Every run tells a different story</p>
                 </div>
@@ -215,20 +224,21 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ══════════════════════════════════════
+        <SectionDivider />
+
+        {/* ═══════════════════════════════════
             MEMORIES / DUNGEONS
-        ══════════════════════════════════════ */}
+        ═══════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
           <section
             id="memories"
-            className="py-20 px-4 relative overflow-hidden"
+            className="py-24 px-4 relative overflow-hidden"
             aria-labelledby="dungeons-heading"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-black via-blue-950/8 to-black pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
 
             <div className="max-w-6xl mx-auto relative z-10">
-              <div className="text-center mb-14">
+              <div className="text-center mb-16">
                 <span className="section-tag section-tag-blue">World</span>
                 <h2
                   id="dungeons-heading"
@@ -253,20 +263,21 @@ export default function Home() {
           </section>
         </AnimatedSection>
 
-        {/* ══════════════════════════════════════
+        <SectionDivider />
+
+        {/* ═══════════════════════════════════
             ENEMIES
-        ══════════════════════════════════════ */}
+        ═══════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
           <section
             id="enemies"
-            className="py-20 px-4 relative overflow-hidden"
+            className="py-24 px-4 relative overflow-hidden"
             aria-labelledby="enemies-heading"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-black via-red-950/8 to-black pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
 
             <div className="max-w-6xl mx-auto relative z-10">
-              <div className="text-center mb-14">
+              <div className="text-center mb-16">
                 <span className="section-tag section-tag-red">Enemies</span>
                 <h2
                   id="enemies-heading"
@@ -290,20 +301,21 @@ export default function Home() {
           </section>
         </AnimatedSection>
 
-        {/* ══════════════════════════════════════
+        <SectionDivider />
+
+        {/* ═══════════════════════════════════
             ARSENAL / DICE
-        ══════════════════════════════════════ */}
+        ═══════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
           <section
             id="arsenal"
-            className="py-20 px-4 relative overflow-hidden"
+            className="py-24 px-4 relative overflow-hidden"
             aria-labelledby="dice-heading"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-black via-green-950/8 to-black pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500/20 to-transparent" />
 
             <div className="max-w-6xl mx-auto relative z-10">
-              <div className="text-center mb-14">
+              <div className="text-center mb-16">
                 <span className="section-tag section-tag-green">Arsenal</span>
                 <h2
                   id="dice-heading"
@@ -327,20 +339,21 @@ export default function Home() {
           </section>
         </AnimatedSection>
 
-        {/* ══════════════════════════════════════
+        <SectionDivider />
+
+        {/* ═══════════════════════════════════
             MEMENTOS
-        ══════════════════════════════════════ */}
+        ═══════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
           <section
             id="mementos"
-            className="py-20 px-4 relative overflow-hidden"
+            className="py-24 px-4 relative overflow-hidden"
             aria-labelledby="mementos-heading"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/8 to-black pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
 
             <div className="max-w-6xl mx-auto relative z-10">
-              <div className="text-center mb-14">
+              <div className="text-center mb-16">
                 <span className="section-tag section-tag-purple">Collectibles</span>
                 <h2
                   id="mementos-heading"
@@ -364,19 +377,20 @@ export default function Home() {
           </section>
         </AnimatedSection>
 
-        {/* ══════════════════════════════════════
+        <SectionDivider />
+
+        {/* ═══════════════════════════════════
             WATCHES
-        ══════════════════════════════════════ */}
+        ═══════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
           <section
-            className="py-20 px-4 relative overflow-hidden"
+            className="py-24 px-4 relative overflow-hidden"
             aria-labelledby="watches-heading"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-black via-amber-950/8 to-black pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
 
             <div className="max-w-6xl mx-auto relative z-10">
-              <div className="text-center mb-14">
+              <div className="text-center mb-16">
                 <span className="section-tag section-tag-amber">Time</span>
                 <h2
                   id="watches-heading"
@@ -400,14 +414,16 @@ export default function Home() {
           </section>
         </AnimatedSection>
 
+        <SectionDivider />
+
         {/* CTA */}
         <CTASection />
 
-        {/* ══════════════════════════════════════
+        {/* ═══════════════════════════════════
             FOOTER
-        ══════════════════════════════════════ */}
+        ═══════════════════════════════════ */}
         <footer
-          className="relative py-14 px-4 border-t border-white/[0.06]"
+          className="relative py-16 px-4 border-t border-white/[0.04]"
           role="contentinfo"
         >
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 pointer-events-none" />
@@ -419,7 +435,7 @@ export default function Home() {
                   alt="Skipstone Studios — Indie Game Developer"
                   width={400}
                   height={64}
-                  className="w-auto h-16 opacity-70 hover:opacity-100 transition-opacity duration-400"
+                  className="w-auto h-16 opacity-60 hover:opacity-100 transition-opacity duration-500"
                   loading="lazy"
                   quality={80}
                 />

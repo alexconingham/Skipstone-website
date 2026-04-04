@@ -25,14 +25,13 @@ export default function Navigation({ className = '' }: NavigationProps) {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
-      
-      // Update active section based on scroll position
-      const sections = navItems.map(item => item.id)
+
+      const sections = navItems.filter(i => !i.external).map(i => i.id)
       for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= 100 && rect.bottom >= 100) {
+        const el = document.getElementById(section === 'steam' ? 'steam-cta' : section)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= 120 && rect.bottom >= 120) {
             setActiveSection(section)
             break
           }
@@ -52,23 +51,20 @@ export default function Navigation({ className = '' }: NavigationProps) {
     const targetId = href.replace('#', '')
     const element = document.getElementById(targetId)
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      })
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
 
   return (
-    <nav 
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${className}`}
       role="navigation"
       aria-label="Main navigation"
     >
-      <div 
+      <div
         className={`transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-black/80 backdrop-blur-lg border-b border-white/10 shadow-2xl' 
+          isScrolled
+            ? 'bg-black/80 backdrop-blur-xl border-b border-white/[0.06] shadow-2xl shadow-black/40'
             : 'bg-transparent'
         }`}
       >
@@ -86,48 +82,32 @@ export default function Navigation({ className = '' }: NavigationProps) {
                   alt="Skipstone Studios"
                   width={120}
                   height={24}
-                  className="h-8 w-auto brightness-100 group-hover:brightness-110 transition-all duration-300"
+                  className="h-8 w-auto brightness-100 group-hover:brightness-125 transition-all duration-300"
                   priority
                 />
               </button>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-1">
-                {navItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => smoothScrollTo(item.href, item.external)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative group ${
-                      activeSection === item.id && !item.external
-                        ? 'text-cyan-300 bg-cyan-500/20'
-                        : 'text-gray-300 hover:text-white hover:bg-white/10'
-                    }`}
-                    aria-current={activeSection === item.id && !item.external ? 'page' : undefined}
-                  >
-                    {item.label}
-                    {item.external && (
-                      <span className="ml-1 text-xs opacity-60">↗</span>
-                    )}
-                    {/* Active indicator */}
-                    {!item.external && (
-                      <div 
-                        className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-cyan-400 transition-all duration-300 ${
-                          activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'
-                        }`}
-                      />
-                    )}
-                  </button>
-                ))}
-              </div>
+            {/* Desktop nav pills */}
+            <div className="hidden md:flex items-baseline space-x-1">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => smoothScrollTo(item.href, item.external)}
+                  className={`nav-pill ${activeSection === item.id && !item.external ? 'active' : ''}`}
+                  aria-current={activeSection === item.id && !item.external ? 'page' : undefined}
+                >
+                  {item.label}
+                  {item.external && <span className="ml-1 text-xs opacity-40">↗</span>}
+                </button>
+              ))}
             </div>
 
             {/* Steam Wishlist CTA */}
             <div className="hidden md:flex items-center">
               <button
                 onClick={() => smoothScrollTo('#steam-cta')}
-                className="group relative inline-block transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+                className="group relative inline-block transition-all duration-300 transform hover:scale-105"
                 aria-label="Wishlist on Steam"
               >
                 <Image
@@ -135,16 +115,16 @@ export default function Navigation({ className = '' }: NavigationProps) {
                   alt="Wishlist on Steam"
                   width={200}
                   height={80}
-                  className="w-auto h-10 md:h-12 group-hover:brightness-110 transition-all duration-300"
+                  className="w-auto h-10 md:h-12 group-hover:brightness-125 transition-all duration-300"
                   quality={90}
                 />
               </button>
             </div>
 
-            {/* Mobile menu button */}
+            {/* Mobile menu */}
             <div className="md:hidden">
-              <MobileMenu 
-                navItems={navItems} 
+              <MobileMenu
+                navItems={navItems}
                 activeSection={activeSection}
                 onNavigate={smoothScrollTo}
               />
@@ -156,14 +136,13 @@ export default function Navigation({ className = '' }: NavigationProps) {
   )
 }
 
-// Mobile Menu Component
-function MobileMenu({ 
-  navItems, 
-  activeSection, 
-  onNavigate 
-}: { 
-  navItems: any[], 
-  activeSection: string,
+function MobileMenu({
+  navItems,
+  activeSection,
+  onNavigate
+}: {
+  navItems: any[]
+  activeSection: string
   onNavigate: (href: string, isExternal?: boolean) => void
 }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -191,9 +170,8 @@ function MobileMenu({
         </svg>
       </button>
 
-      {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 top-16 bg-black/95 backdrop-blur-lg md:hidden z-40">
+        <div className="fixed inset-0 top-16 bg-black/95 backdrop-blur-xl md:hidden z-40">
           <div className="px-4 pt-6 pb-6 space-y-2">
             {navItems.map((item) => (
               <button
@@ -204,19 +182,16 @@ function MobileMenu({
                 }}
                 className={`block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
                   activeSection === item.id && !item.external
-                    ? 'text-cyan-300 bg-cyan-500/20'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    ? 'text-cyan-300 bg-cyan-500/10'
+                    : 'text-gray-300 hover:text-white hover:bg-white/5'
                 }`}
               >
                 {item.label}
-                {item.external && (
-                  <span className="ml-2 text-sm opacity-60">↗</span>
-                )}
+                {item.external && <span className="ml-2 text-sm opacity-40">↗</span>}
               </button>
             ))}
-            
-            {/* Mobile Steam CTA */}
-            <div className="pt-4 mt-4 border-t border-white/10">
+
+            <div className="pt-4 mt-4 border-t border-white/[0.06]">
               <button
                 onClick={() => {
                   onNavigate('#steam-cta')
@@ -240,4 +215,4 @@ function MobileMenu({
       )}
     </>
   )
-} 
+}
