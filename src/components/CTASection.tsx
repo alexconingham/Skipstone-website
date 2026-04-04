@@ -12,6 +12,7 @@ export default function CTASection({ className = '' }: CTASectionProps) {
   const [email, setEmail] = useState('')
   const [isSubscribed, setIsSubscribed] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -33,14 +34,14 @@ export default function CTASection({ className = '' }: CTASectionProps) {
       if (response.ok) {
         setIsSubscribed(true)
         setEmail('')
+        setError(null)
       } else {
-        // Handle error - you could show an error message to the user
         console.error('Subscription error:', data.error)
-        alert('Failed to subscribe. Please try again later.')
+        setError('Subscription failed. Please try again.')
       }
-    } catch (error) {
-      console.error('Subscription error:', error)
-      alert('Failed to subscribe. Please try again later.')
+    } catch (err) {
+      console.error('Subscription error:', err)
+      setError('Could not connect. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -111,18 +112,36 @@ export default function CTASection({ className = '' }: CTASectionProps) {
             </p>
             
             {!isSubscribed ? (
-              <form onSubmit={handleNewsletterSubmit} className="space-y-4">
-                <div className="relative">
+              <form onSubmit={handleNewsletterSubmit} className="space-y-4" noValidate>
+                <div className="space-y-1.5">
+                  <label
+                    htmlFor="newsletter-email"
+                    className="block text-left text-xs tracking-widest text-gray-500 uppercase"
+                  >
+                    Email Address
+                  </label>
                   <input
+                    id="newsletter-email"
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
-                    className="w-full px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300"
+                    onChange={(e) => { setEmail(e.target.value); setError(null) }}
+                    placeholder="you@example.com"
+                    className="w-full px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300"
                     required
                     disabled={isLoading}
+                    aria-describedby={error ? 'newsletter-error' : undefined}
+                    autoComplete="email"
                   />
                 </div>
+                {error && (
+                  <p
+                    id="newsletter-error"
+                    role="alert"
+                    className="text-left text-xs text-red-400 tracking-wide"
+                  >
+                    {error}
+                  </p>
+                )}
                 <button
                   type="submit"
                   disabled={isLoading || !email}

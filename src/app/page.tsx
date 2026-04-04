@@ -197,28 +197,75 @@ export default function Home() {
         <section className="py-20 px-4 bg-gradient-to-b from-black via-gray-950/40 to-black">
           <div className="max-w-5xl mx-auto">
             <AnimatedSection animation="slideUp" delay={100}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                <div className="feature-card">
-                  <span className="corner corner-tl" />
-                  <span className="corner corner-br" />
-                  <div className="feature-icon">🎲</div>
-                  <h3 className="text-base font-black text-cyan-400 mb-2 tracking-wide">Tactical Dice Combat</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">Strategic dice-based battles with endless depth</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+
+                {/* Card 1 — Tactical Dice Combat */}
+                <div className="feature-card-terminal group">
+                  <div className="terminal-chrome">
+                    <span className="terminal-dot dot-red" />
+                    <span className="terminal-dot dot-yellow" />
+                    <span className="terminal-dot dot-green" />
+                    <span className="terminal-filename">DICE_TACTICS.exe</span>
+                  </div>
+                  <div className="terminal-body">
+                    <div className="feature-icon text-cyan-400">
+                      <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="3" />
+                        <circle cx="8.5" cy="8.5" r="1" fill="currentColor" stroke="none" />
+                        <circle cx="15.5" cy="8.5" r="1" fill="currentColor" stroke="none" />
+                        <circle cx="8.5" cy="15.5" r="1" fill="currentColor" stroke="none" />
+                        <circle cx="15.5" cy="15.5" r="1" fill="currentColor" stroke="none" />
+                        <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-black text-cyan-400 mb-2 tracking-wide">Tactical Dice Combat</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">Strategic dice-based battles with endless depth</p>
+                  </div>
                 </div>
-                <div className="feature-card">
-                  <span className="corner corner-tl" />
-                  <span className="corner corner-br" />
-                  <div className="feature-icon">🧠</div>
-                  <h3 className="text-base font-black text-purple-400 mb-2 tracking-wide">Memory Fragments</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">Unlock haunting memories that shape your destiny</p>
+
+                {/* Card 2 — Memory Fragments */}
+                <div className="feature-card-terminal group">
+                  <div className="terminal-chrome">
+                    <span className="terminal-dot dot-red" />
+                    <span className="terminal-dot dot-yellow" />
+                    <span className="terminal-dot dot-green" />
+                    <span className="terminal-filename">MEMORY_FRAG.exe</span>
+                  </div>
+                  <div className="terminal-body">
+                    <div className="feature-icon text-purple-400">
+                      <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" />
+                        <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" />
+                        <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4" />
+                        <path d="M17.599 6.5a3 3 0 0 0 .399-1.375" />
+                        <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-black text-purple-400 mb-2 tracking-wide">Memory Fragments</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">Unlock haunting memories that shape your destiny</p>
+                  </div>
                 </div>
-                <div className="feature-card">
-                  <span className="corner corner-tl" />
-                  <span className="corner corner-br" />
-                  <div className="feature-icon">♾️</div>
-                  <h3 className="text-base font-black text-blue-400 mb-2 tracking-wide">Infinite Replayability</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">Every run tells a different story</p>
+
+                {/* Card 3 — Infinite Replayability */}
+                <div className="feature-card-terminal group">
+                  <div className="terminal-chrome">
+                    <span className="terminal-dot dot-red" />
+                    <span className="terminal-dot dot-yellow" />
+                    <span className="terminal-dot dot-green" />
+                    <span className="terminal-filename">INFINITE_RUN.exe</span>
+                  </div>
+                  <div className="terminal-body">
+                    <div className="feature-icon text-blue-400">
+                      <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4z" />
+                        <path d="M12 12c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-black text-blue-400 mb-2 tracking-wide">Infinite Replayability</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">Every run tells a different story</p>
+                  </div>
                 </div>
+
               </div>
             </AnimatedSection>
           </div>
