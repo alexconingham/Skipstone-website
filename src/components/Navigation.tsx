@@ -1,74 +1,98 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image'
 
-interface NavigationProps {
-  className?: string
-}
+const PAGE_LINKS = [
+  { id: 'guide', label: 'Guide', href: '/guide' },
+  { id: 'blog', label: 'Devlog', href: '/blog' },
+]
 
-export default function Navigation({ className = '' }: NavigationProps) {
+const SECTION_LINKS = [
+  { id: 'home', label: 'Home', href: '#home', key: '1' },
+  { id: 'trailer', label: 'Trailer', href: '#trailer', key: '2' },
+  { id: 'memories', label: 'Memories', href: '#memories', key: '3' },
+  { id: 'enemies', label: 'Enemies', href: '#enemies', key: '4' },
+  { id: 'arsenal', label: 'Arsenal', href: '#arsenal', key: '5' },
+  { id: 'mementos', label: 'Mementos', href: '#mementos', key: '6' },
+  { id: 'steam', label: 'Wishlist on Steam', href: '#steam-cta', key: '7' },
+]
+
+const EXTERNAL_LINKS = [
+  { id: 'studio', label: 'Skipstone Studio', href: 'https://skipstone.co.nz' },
+]
+
+export default function Navigation({ className = '' }: { className?: string }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const [panelOpen, setPanelOpen] = useState(false)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
   const pathname = usePathname()
   const router = useRouter()
   const isHomepage = pathname === '/'
 
-  const navItems = [
-    { id: 'home', label: 'Home', href: '#home' },
-    { id: 'trailer', label: 'Trailer', href: '#trailer' },
-    { id: 'memories', label: 'Memories', href: '#memories' },
-    { id: 'enemies', label: 'Enemies', href: '#enemies' },
-    { id: 'arsenal', label: 'Arsenal', href: '#arsenal' },
-    { id: 'mementos', label: 'Mementos', href: '#mementos' },
-    { id: 'blog', label: 'Devlog', href: '/blog', route: true },
-    { id: 'steam', label: 'Wishlist', href: '#steam-cta' },
-    { id: 'guide', label: 'Guide', href: '/guide', route: true },
-    { id: 'studio', label: 'Skipstone Studio', href: 'https://skipstone.co.nz', external: true }
-  ]
-
   useEffect(() => {
-    const handleScroll = () => {
+    const onScroll = () => {
       setIsScrolled(window.scrollY > 50)
-
-      const sections = navItems.filter(i => !i.external).map(i => i.id)
-      for (const section of sections) {
-        const el = document.getElementById(section === 'steam' ? 'steam-cta' : section)
+      if (!isHomepage) return
+      for (const s of SECTION_LINKS) {
+        const el = document.getElementById(s.href.replace('#', ''))
         if (el) {
-          const rect = el.getBoundingClientRect()
-          if (rect.top <= 120 && rect.bottom >= 120) {
-            setActiveSection(section)
+          const r = el.getBoundingClientRect()
+          if (r.top <= 120 && r.bottom >= 120) {
+            setActiveSection(s.id)
             break
           }
         }
       }
     }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [isHomepage])
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  // Close on outside click
+  useEffect(() => {
+    if (!panelOpen) return
+    const onClick = (e: MouseEvent) => {
+      if (
+        panelRef.current && !panelRef.current.contains(e.target as Node) &&
+        triggerRef.current && !triggerRef.current.contains(e.target as Node)
+      ) {
+        setPanelOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', onClick)
+    return () => document.removeEventListener('mousedown', onClick)
+  }, [panelOpen])
 
-  const smoothScrollTo = (href: string, isExternal?: boolean, isRoute?: boolean) => {
+  // Keyboard: Escape to close, number keys to navigate
+  useEffect(() => {
+    if (!panelOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { setPanelOpen(false); return }
+      const match = SECTION_LINKS.find(s => s.key === e.key)
+      if (match) {
+        navigateTo(match.href)
+        setPanelOpen(false)
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [panelOpen])
+
+  const navigateTo = useCallback((href: string, isExternal?: boolean) => {
     if (isExternal || href.startsWith('http')) {
       window.open(href, '_blank', 'noopener,noreferrer')
       return
     }
-    if (isRoute) {
-      router.push(href)
-      return
-    }
-    // Anchor link — if not on homepage, navigate there first
-    if (!isHomepage) {
-      router.push(`/${href}`)
-      return
-    }
-    const targetId = href.replace('#', '')
-    const element = document.getElementById(targetId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }
+    if (href.startsWith('/')) { router.push(href); return }
+    if (!isHomepage) { router.push(`/${href}`); return }
+    const el = document.getElementById(href.replace('#', ''))
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [isHomepage, router])
 
   return (
     <nav
@@ -76,62 +100,162 @@ export default function Navigation({ className = '' }: NavigationProps) {
       role="navigation"
       aria-label="Main navigation"
     >
-      <div
-        className={`transition-all duration-500 ${
-          isScrolled
-            ? 'bg-black/80 backdrop-blur-xl border-b border-white/[0.06] shadow-2xl shadow-black/40'
-            : 'bg-transparent'
-        }`}
-      >
+      <div className={`transition-all duration-500 ${
+        isScrolled
+          ? 'bg-black/80 backdrop-blur-xl border-b border-white/[0.06] shadow-2xl shadow-black/40'
+          : 'bg-transparent'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <div className="flex-shrink-0">
+
+            {/* ── Left: Logo + Page links ── */}
+            <div className="flex items-center gap-1 sm:gap-3">
               <button
-                onClick={() => smoothScrollTo('#home')}
-                className="flex items-center space-x-2 group transition-transform duration-300 hover:scale-105"
-                aria-label="Remember to Die - Home"
+                onClick={() => navigateTo('#home')}
+                className="flex items-center group transition-transform duration-300 hover:scale-105 mr-1 sm:mr-3"
+                aria-label="Home"
               >
                 <Image
                   src="/Skipstone_logo.png"
                   alt="Skipstone Studios"
                   width={120}
                   height={24}
-                  className="h-8 w-auto brightness-100 group-hover:brightness-125 transition-all duration-300"
+                  className="h-7 sm:h-8 w-auto brightness-100 group-hover:brightness-125 transition-all duration-300"
                   priority
                 />
               </button>
-            </div>
 
-            {/* Desktop nav pills */}
-            <div className="hidden md:flex items-baseline space-x-1">
-              {navItems.map((item) => (
+              {PAGE_LINKS.map((p) => (
                 <button
-                  key={item.id}
-                  onClick={() => smoothScrollTo(item.href, item.external, item.route)}
-                  className={`nav-pill ${
-                    (item.route && pathname.startsWith(item.href)) ||
-                    (activeSection === item.id && !item.external && !item.route)
-                      ? 'active'
-                      : ''
-                  }`}
-                  aria-current={
-                    (item.route && pathname.startsWith(item.href)) ||
-                    (activeSection === item.id && !item.external && !item.route)
-                      ? 'page'
-                      : undefined
-                  }
+                  key={p.id}
+                  onClick={() => navigateTo(p.href)}
+                  className={`nav-pill hidden sm:inline-flex ${pathname.startsWith(p.href) ? 'active' : ''}`}
+                  aria-current={pathname.startsWith(p.href) ? 'page' : undefined}
                 >
-                  {item.label}
-                  {item.external && <span className="ml-1 text-xs opacity-40">↗</span>}
+                  {p.label}
                 </button>
               ))}
             </div>
 
-            {/* Steam Wishlist CTA */}
-            <div className="hidden md:flex items-center">
+            {/* ── Center: Terminal trigger ── */}
+            <div className="relative">
               <button
-                onClick={() => smoothScrollTo('#steam-cta')}
+                ref={triggerRef}
+                onClick={() => setPanelOpen(v => !v)}
+                className={`cmd-trigger ${panelOpen ? 'active' : ''}`}
+                aria-expanded={panelOpen}
+                aria-haspopup="true"
+                aria-label="Navigate sections"
+              >
+                <span className="cmd-trigger-prompt" aria-hidden="true">&gt;_</span>
+                <span className="hidden sm:inline">Navigate</span>
+                <span className="sm:hidden">Menu</span>
+                <kbd className="cmd-trigger-kbd hidden md:inline-flex">
+                  <span className="text-[0.5rem]">ESC</span>
+                </kbd>
+              </button>
+
+              {/* ── Command palette dropdown ── */}
+              {panelOpen && (
+                <div
+                  ref={panelRef}
+                  className="cmd-panel"
+                  role="menu"
+                >
+                  <div className="cmd-panel-scanline" aria-hidden="true" />
+
+                  {/* Terminal chrome */}
+                  <div className="cmd-panel-chrome">
+                    <span className="terminal-dot dot-red" />
+                    <span className="terminal-dot dot-yellow" />
+                    <span className="terminal-dot dot-green" />
+                    <span className="cmd-panel-title">NAV.sh</span>
+                  </div>
+
+                  {/* Section links */}
+                  <div className="cmd-panel-body">
+                    {isHomepage && (
+                      <div className="cmd-panel-group">
+                        <div className="cmd-panel-group-label">Sections</div>
+                        {SECTION_LINKS.map((item, i) => (
+                          <button
+                            key={item.id}
+                            onClick={() => { navigateTo(item.href); setPanelOpen(false) }}
+                            className={`cmd-panel-item ${activeSection === item.id ? 'active' : ''}`}
+                            style={{ animationDelay: `${i * 40}ms` }}
+                            role="menuitem"
+                          >
+                            <span className="cmd-panel-item-index">{item.key}</span>
+                            <span className="cmd-panel-item-prompt" aria-hidden="true">&gt;</span>
+                            <span className="cmd-panel-item-label">{item.label}</span>
+                            {activeSection === item.id && (
+                              <span className="cmd-panel-item-active" aria-hidden="true">●</span>
+                            )}
+                            <kbd className="cmd-panel-item-key">{item.key}</kbd>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+
+                    {!isHomepage && (
+                      <div className="cmd-panel-group">
+                        <div className="cmd-panel-group-label">Navigation</div>
+                        <button
+                          onClick={() => { navigateTo('/'); setPanelOpen(false) }}
+                          className="cmd-panel-item"
+                          style={{ animationDelay: '0ms' }}
+                          role="menuitem"
+                        >
+                          <span className="cmd-panel-item-index">0</span>
+                          <span className="cmd-panel-item-prompt" aria-hidden="true">&gt;</span>
+                          <span className="cmd-panel-item-label">← Back to Home</span>
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Pages (visible on mobile where pills are hidden) */}
+                    <div className="cmd-panel-group sm:hidden">
+                      <div className="cmd-panel-group-label">Pages</div>
+                      {PAGE_LINKS.map((item, i) => (
+                        <button
+                          key={item.id}
+                          onClick={() => { navigateTo(item.href); setPanelOpen(false) }}
+                          className={`cmd-panel-item ${pathname.startsWith(item.href) ? 'active' : ''}`}
+                          style={{ animationDelay: `${(SECTION_LINKS.length + i) * 40}ms` }}
+                          role="menuitem"
+                        >
+                          <span className="cmd-panel-item-prompt" aria-hidden="true">&gt;</span>
+                          <span className="cmd-panel-item-label">{item.label}</span>
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* External */}
+                    <div className="cmd-panel-group">
+                      <div className="cmd-panel-group-label">External</div>
+                      {EXTERNAL_LINKS.map((item, i) => (
+                        <button
+                          key={item.id}
+                          onClick={() => { navigateTo(item.href, true); setPanelOpen(false) }}
+                          className="cmd-panel-item"
+                          style={{ animationDelay: `${(SECTION_LINKS.length + PAGE_LINKS.length + i) * 40}ms` }}
+                          role="menuitem"
+                        >
+                          <span className="cmd-panel-item-prompt" aria-hidden="true">&gt;</span>
+                          <span className="cmd-panel-item-label">{item.label}</span>
+                          <span className="text-[0.6rem] text-gray-600 ml-auto">↗</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* ── Right: Steam wishlist ── */}
+            <div className="hidden sm:flex items-center">
+              <button
+                onClick={() => navigateTo('#steam-cta')}
                 className="group relative inline-block transition-all duration-300 transform hover:scale-105"
                 aria-label="Wishlist on Steam"
               >
@@ -145,103 +269,9 @@ export default function Navigation({ className = '' }: NavigationProps) {
                 />
               </button>
             </div>
-
-            {/* Mobile menu */}
-            <div className="md:hidden">
-              <MobileMenu
-                navItems={navItems}
-                activeSection={activeSection}
-                pathname={pathname}
-                onNavigate={smoothScrollTo}
-              />
-            </div>
           </div>
         </div>
       </div>
     </nav>
-  )
-}
-
-function MobileMenu({
-  navItems,
-  activeSection,
-  pathname,
-  onNavigate
-}: {
-  navItems: any[]
-  activeSection: string
-  pathname: string
-  onNavigate: (href: string, isExternal?: boolean, isRoute?: boolean) => void
-}) {
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-300"
-        aria-expanded={isOpen}
-        aria-label="Toggle mobile menu"
-      >
-        <svg
-          className={`h-6 w-6 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`}
-          stroke="currentColor"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-          />
-        </svg>
-      </button>
-
-      {isOpen && (
-        <div className="fixed inset-0 top-16 bg-black/95 backdrop-blur-xl md:hidden z-40">
-          <div className="px-4 pt-6 pb-6 space-y-2">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  onNavigate(item.href, item.external, item.route)
-                  setIsOpen(false)
-                }}
-                className={`block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
-                  (item.route && pathname.startsWith(item.href)) ||
-                  (activeSection === item.id && !item.external && !item.route)
-                    ? 'text-cyan-300 bg-cyan-500/10'
-                    : 'text-gray-300 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                {item.label}
-                {item.external && <span className="ml-2 text-sm opacity-40">↗</span>}
-              </button>
-            ))}
-
-            <div className="pt-4 mt-4 border-t border-white/[0.06]">
-              <button
-                onClick={() => {
-                  onNavigate('#steam-cta')
-                  setIsOpen(false)
-                }}
-                className="group w-full flex justify-center transition-all duration-300 transform hover:scale-105"
-                aria-label="Wishlist on Steam"
-              >
-                <Image
-                  src="/steam wishlist bw3.png"
-                  alt="Wishlist on Steam"
-                  width={300}
-                  height={120}
-                  className="w-auto h-16 group-hover:brightness-110 transition-all duration-300"
-                  quality={90}
-                />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
   )
 }
