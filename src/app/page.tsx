@@ -493,6 +493,9 @@ export default function Home() {
               <p className="text-gray-600 text-base font-bold tracking-widest mt-2">
                 Every roll counts, and death is just the beginning.
               </p>
+              <a href="/privacy" className="inline-block text-[0.6rem] tracking-[0.2em] text-gray-700 hover:text-cyan-400 transition-colors duration-200 uppercase mt-3">
+                Privacy Policy
+              </a>
             </AnimatedSection>
           </div>
         </footer>

@@ -142,13 +142,18 @@ export default async function BlogPage() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="py-10 px-4 border-t border-white/[0.04] text-center">
+      <footer className="py-10 px-4 border-t border-white/[0.04] text-center space-y-3">
         <Link
           href="/"
           className="text-xs tracking-[0.2em] text-gray-600 hover:text-cyan-400 transition-colors duration-200 uppercase"
         >
           ← Back to Remember to Die
         </Link>
+        <div>
+          <Link href="/privacy" className="text-[0.6rem] tracking-[0.2em] text-gray-700 hover:text-cyan-400 transition-colors duration-200 uppercase">
+            Privacy Policy
+          </Link>
+        </div>
       </footer>
     </main>
   )

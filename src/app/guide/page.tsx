@@ -669,6 +669,9 @@ export default function GuidePage() {
           <p className="text-gray-600 text-xs tracking-wide">
             © 2024 <span className="text-gray-400">Skipstone Studios</span>. Remember to Die — Tactical Dice Combat Roguelike.
           </p>
+          <a href="/privacy" className="inline-block text-[0.6rem] tracking-[0.2em] text-gray-700 hover:text-cyan-400 transition-colors duration-200 uppercase mt-2">
+            Privacy Policy
+          </a>
         </div>
       </footer>
     </main>
