@@ -24,6 +24,7 @@ export default function Navigation({ className = '' }: NavigationProps) {
     { id: 'mementos', label: 'Mementos', href: '#mementos' },
     { id: 'blog', label: 'Devlog', href: '/blog', route: true },
     { id: 'steam', label: 'Wishlist', href: '#steam-cta' },
+    { id: 'guide', label: 'Guide', href: '/guide', route: true },
     { id: 'studio', label: 'Skipstone Studio', href: 'https://skipstone.co.nz', external: true }
   ]
 
