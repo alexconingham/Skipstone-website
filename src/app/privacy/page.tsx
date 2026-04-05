@@ -52,8 +52,8 @@ export default function PrivacyPage() {
           </p>
           <p>
             If you have questions about this policy you can contact us at{' '}
-            <a href="mailto:privacy@skipstone.co.nz" className="text-cyan-400 hover:text-cyan-300 transition-colors">
-              privacy@skipstone.co.nz
+            <a href="mailto:alex@skipstone.co.nz" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+              alex@skipstone.co.nz
             </a>.
           </p>
         </Section>
@@ -136,8 +136,8 @@ export default function PrivacyPage() {
           </ul>
           <p>
             To exercise any of these rights, contact us at{' '}
-            <a href="mailto:privacy@skipstone.co.nz" className="text-cyan-400 hover:text-cyan-300 transition-colors">
-              privacy@skipstone.co.nz
+            <a href="mailto:alex@skipstone.co.nz" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+              alex@skipstone.co.nz
             </a>.
           </p>
         </Section>
