@@ -11,6 +11,7 @@ export const revalidate = 3600
 
 // Pre-render known slugs at build time; unknown ones are rendered on-demand
 export async function generateStaticParams() {
+  if (!supabase) return []
   const { data } = await supabase
     .from('posts')
     .select('slug')
@@ -25,6 +26,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
+  if (!supabase) return {}
   const { data } = await supabase
     .from('posts')
     .select('title, excerpt')
@@ -59,6 +61,7 @@ export default async function PostPage({
 }) {
   const { slug } = await params
 
+  if (!supabase) notFound()
   const { data: post } = await supabase
     .from('posts')
     .select('*')

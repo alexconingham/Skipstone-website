@@ -85,13 +85,18 @@ function PostCard({ post, index }: { post: PostSummary; index: number }) {
 }
 
 export default async function BlogPage() {
-  const { data: posts, error } = await supabase
-    .from('posts')
-    .select('id, title, slug, excerpt, cover_image, published_at')
-    .lte('published_at', new Date().toISOString())
-    .order('published_at', { ascending: false })
+  let posts: PostSummary[] | null = null
 
-  if (error) console.error('Blog fetch error:', error)
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('posts')
+      .select('id, title, slug, excerpt, cover_image, published_at')
+      .lte('published_at', new Date().toISOString())
+      .order('published_at', { ascending: false })
+
+    if (error) console.error('Blog fetch error:', error)
+    posts = data as PostSummary[] | null
+  }
 
   return (
     <main className="min-h-screen bg-black text-white relative overflow-x-hidden">
