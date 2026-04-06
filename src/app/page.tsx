@@ -136,12 +136,13 @@ export default function Home() {
             </AnimatedSection>
 
             <AnimatedSection animation="fadeIn" delay={700}>
-              <div style={{ fontFamily: 'var(--font-display)' }}>
-                <p className="text-3xl md:text-5xl lg:text-6xl tracking-widest text-[#e8e8e8] leading-tight vhs-glitch">
+              <div>
+                <p className="text-3xl md:text-5xl lg:text-6xl tracking-widest text-[#e8e8e8] leading-tight vhs-glitch"
+                  style={{ fontFamily: 'var(--font-display)' }}>
                   BATTLE YOUR DEMONS.
                 </p>
-                <p className="text-3xl md:text-5xl lg:text-6xl tracking-widest leading-tight"
-                  style={{ color: '#00ff41', textShadow: '0 0 20px rgba(0,255,65,0.5), 0 0 40px rgba(0,255,65,0.2)' }}>
+                <p className="text-3xl md:text-5xl lg:text-6xl tracking-widest leading-tight italic"
+                  style={{ fontFamily: 'var(--font-display)', color: '#00ff41', textShadow: '0 0 20px rgba(0,255,65,0.5), 0 0 40px rgba(0,255,65,0.2)' }}>
                   RE-ROLL YOUR DESTINY.
                 </p>
               </div>

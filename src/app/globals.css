@@ -324,13 +324,13 @@ html {
   animation-play-state: paused;
 }
 
-/* Enemy desaturation + VHS colour cast */
+/* Enemy portraits — slight dimming at rest, full colour on hover */
 .gallery-enemies .gallery-scroll img {
-  filter: grayscale(0.6) sepia(0.3) hue-rotate(160deg) brightness(0.75);
+  filter: brightness(0.8) saturate(0.85);
   transition: filter 0.35s ease;
 }
 .gallery-enemies .gallery-scroll > div:hover img {
-  filter: grayscale(0) sepia(0) hue-rotate(0deg) brightness(1);
+  filter: brightness(1) saturate(1);
 }
 
 /* Dice/mementos/watches: dimmed + slight green cast at rest */
