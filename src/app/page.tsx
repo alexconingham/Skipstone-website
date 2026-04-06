@@ -7,6 +7,7 @@ import AnimatedSection from '@/components/AnimatedSection'
 import CTASection from '@/components/CTASection'
 import VideoTrailer from '@/components/VideoTrailer'
 import FeatureCallouts from '@/components/FeatureCallouts'
+import VHSIntro from '@/components/VHSIntro'
 import Image from 'next/image'
 import { getDiceData, getMementoData, getEnemyData, getWatchData } from '@/utils/dataMapper'
 import { getBaseUrl } from '@/utils/config'
@@ -60,6 +61,7 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
       <main className="min-h-screen bg-[#080808] text-[#e8e8e8] relative overflow-x-hidden">
+        <VHSIntro />
         <Navigation />
         <ImageProtection />
         <AudioPlayer />
@@ -92,28 +94,20 @@ export default function Home() {
           <div className="scanlines absolute inset-0 pointer-events-none z-[3]" />
           <div className="vhs-static-sweep" />
 
-          {/* REC indicator — top right */}
-          <div
-            className="absolute top-20 right-6 z-20 flex items-center gap-2"
-            style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', letterSpacing: '0.15em' }}
-          >
-            <span className="rec-dot" />
-            <span style={{ color: '#ff2200' }}>REC</span>
-          </div>
-
-          {/* VHS badge — top left */}
-          <div
-            className="absolute top-20 left-6 z-20"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.7rem',
-              letterSpacing: '0.2em',
-              color: 'rgba(0,255,65,0.6)',
-              border: '1px solid rgba(0,255,65,0.2)',
-              padding: '2px 8px',
-            }}
-          >
-            VHS SP • HI-FI STEREO
+          {/* REC + format badge — unified, subtler */}
+          <div className="absolute top-20 right-6 z-20 flex items-center gap-3">
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.65rem',
+                letterSpacing: '0.2em',
+                color: 'rgba(0,255,65,0.35)',
+              }}
+            >
+              VHS SP
+            </span>
+            <span className="rec-dot" style={{ width: 6, height: 6 }} />
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.15em', color: 'rgba(255,34,0,0.7)' }}>REC</span>
           </div>
 
 
@@ -152,22 +146,22 @@ export default function Home() {
             <AnimatedSection animation="fadeIn" delay={1100}>
               <p
                 className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
-                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.6)', letterSpacing: '0.03em' }}
+                style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(232,232,232,0.55)', letterSpacing: '0.01em' }}
               >
-                Remember to Die is a gritty, narrative-driven battle against time and broken memories,
-                wrapped in an intuitive and moreish dice strategy roguelike where every dice roll
-                dredges up a fragmented memory and decides your fate.
+                A gritty, narrative-driven battle against time and broken memories —
+                an intuitive dice strategy roguelike where every roll dredges up a
+                fragmented memory and decides your fate.
               </p>
             </AnimatedSection>
 
             <AnimatedSection animation="slideUp" delay={1500}>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-2">
                 <div className="text-center">
-                  <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', letterSpacing: '0.25em', color: '#00ff41' }}>
+                  <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', letterSpacing: '0.22em', color: '#00ff41', textShadow: '0 0 10px rgba(0,255,65,0.4)' }}>
                     COMING SOON
                   </p>
-                  <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.2em', color: 'rgba(0,255,65,0.4)' }}>
-                    STEAM EARLY ACCESS
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.15em', color: 'rgba(0,255,65,0.4)', textTransform: 'uppercase' }}>
+                    Steam Early Access
                   </p>
                 </div>
 
@@ -191,19 +185,18 @@ export default function Home() {
             </AnimatedSection>
           </div>
 
-          {/* Timestamp — camcorder style, bottom right */}
-          <div
-            className="absolute bottom-10 right-6 z-20 text-right"
-            style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em' }}
-          >
-            <div>04-06-94</div>
-            <div>11:42 PM</div>
-          </div>
-
           {/* Scroll indicator */}
           <AnimatedSection animation="fadeIn" delay={2400}>
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-20">
-              <span className="vhs-scroll-arrow">▼ FAST-FWD ▼</span>
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20">
+              <div
+                className="vhs-scroll-arrow"
+                style={{
+                  width: 1,
+                  height: 40,
+                  background: 'linear-gradient(to bottom, transparent, rgba(0,255,65,0.6))',
+                  animation: 'vhs-scroll-bounce 2s ease-in-out infinite',
+                }}
+              />
             </div>
           </AnimatedSection>
         </section>
@@ -219,20 +212,25 @@ export default function Home() {
 
               <AnimatedSection animation="slideRight" delay={200}>
                 <div>
-                  <div className="vhs-chapter">SCENE 01 — OFFICIAL TRAILER</div>
-                  <h2
-                    className="text-6xl md:text-7xl lg:text-8xl mb-5 vhs-glitch"
-                    style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.06em' }}
-                  >
-                    EVERY ROLL COUNTS.
-                  </h2>
+                  <div className="scene-label">
+                    <span className="scene-label__num">01</span>
+                    <span className="scene-label__rule" />
+                    <span className="scene-label__text">Official Trailer</span>
+                  </div>
+                  <AnimatedSection animation="clipReveal" delay={100}>
+                    <h2
+                      className="text-6xl md:text-7xl lg:text-8xl mb-5 vhs-glitch"
+                      style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.06em' }}
+                    >
+                      EVERY ROLL COUNTS.
+                    </h2>
+                  </AnimatedSection>
                   <p
                     className="text-base leading-relaxed mb-6"
-                    style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.6)' }}
+                    style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(232,232,232,0.55)' }}
                   >
-                    Remember to Die is a gritty, narrative-driven battle against time and broken memories,
-                    wrapped in an intuitive and moreish dice strategy roguelike where every dice roll
-                    dredges up a fragmented memory and decides your fate.
+                    A gritty, narrative-driven battle against time and broken memories —
+                    an intuitive dice strategy roguelike where every roll decides your fate.
                   </p>
                 </div>
               </AnimatedSection>
@@ -256,16 +254,18 @@ export default function Home() {
           <section id="memories" className="py-20 px-6 relative overflow-hidden" aria-labelledby="memories-heading">
             <div className="max-w-6xl mx-auto relative z-10">
               <div className="mb-12">
-                <div className="vhs-chapter">SCENE 02 — THE WORLD</div>
-                <h2
-                  id="memories-heading"
-                  className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
-                  A LIFETIME OF MEMORIES
-                </h2>
-                <p style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.55)', fontSize: '1rem' }}>
-                  Each fragment you unlock splinters the story into new fates; you choose which fantasies to pursue, and which truths to rewrite.
+                <div className="scene-label">
+                  <span className="scene-label__num">02</span>
+                  <span className="scene-label__rule" />
+                  <span className="scene-label__text">The World</span>
+                </div>
+                <AnimatedSection animation="clipReveal" delay={100}>
+                  <h2 id="memories-heading" className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch" style={{ fontFamily: 'var(--font-display)' }}>
+                    A LIFETIME OF MEMORIES
+                  </h2>
+                </AnimatedSection>
+                <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(232,232,232,0.5)', fontSize: '1rem' }}>
+                  Each fragment you unlock splinters the story into new fates — you choose which fantasies to pursue, and which truths to rewrite.
                 </p>
               </div>
               <ImageGallery items={gameAssets.dungeons} folder="backgrounds" direction="right" size="massive" galleryId="dungeons" showTooltips={false} />
@@ -282,23 +282,25 @@ export default function Home() {
           <section id="enemies" className="py-20 px-6 relative overflow-hidden" aria-labelledby="enemies-heading">
             <div className="max-w-6xl mx-auto relative z-10">
               <div className="mb-12">
-                <div className="vhs-chapter" style={{ color: '#ff2200' }}>
-                  <span style={{ color: '#ff2200' }}>■</span>
-                  SCENE 03 — ENEMIES
-                  <span style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, rgba(255,34,0,0.4), transparent)', maxWidth: '240px', display: 'block' }} />
+                <div className="scene-label">
+                  <span className="scene-label__num" style={{ color: 'rgba(255,34,0,0.5)' }}>03</span>
+                  <span className="scene-label__rule" style={{ background: 'linear-gradient(to right, rgba(255,34,0,0.4), transparent)' }} />
+                  <span className="scene-label__text">Enemies</span>
                 </div>
-                <h2
-                  id="enemies-heading"
-                  className="text-6xl md:text-7xl lg:text-8xl mb-4"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    textShadow: '2px 0 rgba(255,0,255,0.8), -2px 0 rgba(0,229,255,0.8)',
-                    animation: 'chroma-burst 9s step-end infinite',
-                  }}
-                >
-                  A STRING OF HAUNTING FACES
-                </h2>
-                <p style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.55)', fontSize: '1rem' }}>
+                <AnimatedSection animation="clipReveal" delay={100}>
+                  <h2
+                    id="enemies-heading"
+                    className="text-6xl md:text-7xl lg:text-8xl mb-4"
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      textShadow: '2px 0 rgba(255,0,255,0.8), -2px 0 rgba(0,229,255,0.8)',
+                      animation: 'chroma-burst 9s step-end infinite',
+                    }}
+                  >
+                    A STRING OF HAUNTING FACES
+                  </h2>
+                </AnimatedSection>
+                <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(232,232,232,0.5)', fontSize: '1rem' }}>
                   Each enemy hints at more of the haunting truth.
                 </p>
               </div>
@@ -316,15 +318,17 @@ export default function Home() {
           <section id="arsenal" className="py-20 px-6 relative overflow-hidden" aria-labelledby="dice-heading">
             <div className="max-w-6xl mx-auto relative z-10">
               <div className="mb-12">
-                <div className="vhs-chapter">SCENE 04 — ARSENAL</div>
-                <h2
-                  id="dice-heading"
-                  className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
-                  AN EVOLVING ARSENAL
-                </h2>
-                <p style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.55)', fontSize: '1rem' }}>
+                <div className="scene-label">
+                  <span className="scene-label__num">04</span>
+                  <span className="scene-label__rule" />
+                  <span className="scene-label__text">Arsenal</span>
+                </div>
+                <AnimatedSection animation="clipReveal" delay={100}>
+                  <h2 id="dice-heading" className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch" style={{ fontFamily: 'var(--font-display)' }}>
+                    AN EVOLVING ARSENAL
+                  </h2>
+                </AnimatedSection>
+                <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(232,232,232,0.5)', fontSize: '1rem' }}>
                   Collect and refine powerful dice combinations.
                 </p>
               </div>
@@ -342,15 +346,17 @@ export default function Home() {
           <section id="mementos" className="py-20 px-6 relative overflow-hidden" aria-labelledby="mementos-heading">
             <div className="max-w-6xl mx-auto relative z-10">
               <div className="mb-12">
-                <div className="vhs-chapter">SCENE 05 — COLLECTIBLES</div>
-                <h2
-                  id="mementos-heading"
-                  className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
-                  AND A BAGFUL OF TRICKS...
-                </h2>
-                <p style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.55)', fontSize: '1rem' }}>
+                <div className="scene-label">
+                  <span className="scene-label__num">05</span>
+                  <span className="scene-label__rule" />
+                  <span className="scene-label__text">Collectibles</span>
+                </div>
+                <AnimatedSection animation="clipReveal" delay={100}>
+                  <h2 id="mementos-heading" className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch" style={{ fontFamily: 'var(--font-display)' }}>
+                    AND A BAGFUL OF TRICKS...
+                  </h2>
+                </AnimatedSection>
+                <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(232,232,232,0.5)', fontSize: '1rem' }}>
                   Collect mementos drenched in heartbreaking lore, each with unique effects.
                 </p>
               </div>
@@ -368,15 +374,17 @@ export default function Home() {
           <section className="py-20 px-6 relative overflow-hidden" aria-labelledby="watches-heading">
             <div className="max-w-6xl mx-auto relative z-10">
               <div className="mb-12">
-                <div className="vhs-chapter">SCENE 06 — TIME</div>
-                <h2
-                  id="watches-heading"
-                  className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
-                  BUT TIME IS NOT ON YOUR SIDE...
-                </h2>
-                <p style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.55)', fontSize: '1rem' }}>
+                <div className="scene-label">
+                  <span className="scene-label__num">06</span>
+                  <span className="scene-label__rule" />
+                  <span className="scene-label__text">Time</span>
+                </div>
+                <AnimatedSection animation="clipReveal" delay={100}>
+                  <h2 id="watches-heading" className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch" style={{ fontFamily: 'var(--font-display)' }}>
+                    BUT TIME IS NOT ON YOUR SIDE...
+                  </h2>
+                </AnimatedSection>
+                <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(232,232,232,0.5)', fontSize: '1rem' }}>
                   Unique watches shift the odds.
                 </p>
               </div>

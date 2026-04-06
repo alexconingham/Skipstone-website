@@ -6,17 +6,17 @@ import { motion } from 'framer-motion'
 import AnimatedSection from './AnimatedSection'
 
 export default function CTASection({ className = '' }: { className?: string }) {
-  const [email, setEmail]           = useState('')
+  const [email, setEmail]             = useState('')
   const [isSubscribed, setSubscribed] = useState(false)
-  const [isLoading, setLoading]     = useState(false)
-  const [error, setError]           = useState('')
+  const [isLoading, setLoading]       = useState(false)
+  const [error, setError]             = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || isLoading) return
     setLoading(true); setError('')
     try {
-      const res = await fetch('/api/subscribe', {
+      const res  = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -31,8 +31,9 @@ export default function CTASection({ className = '' }: { className?: string }) {
     }
   }
 
-  const mono: React.CSSProperties = { fontFamily: 'VT323, Courier New, monospace' }
-  const display: React.CSSProperties = { fontFamily: 'Bebas Neue, Impact, sans-serif' }
+  const body: React.CSSProperties    = { fontFamily: 'var(--font-body)', fontWeight: 300 }
+  const display: React.CSSProperties = { fontFamily: 'var(--font-display)' }
+  const mono: React.CSSProperties    = { fontFamily: 'var(--font-mono)' }
   const green = '#00ff41'
 
   return (
@@ -42,64 +43,88 @@ export default function CTASection({ className = '' }: { className?: string }) {
       style={{ background: '#080808' }}
       aria-labelledby="cta-heading"
     >
-      {/* Background image with heavy vhs scrim */}
+      {/* Background */}
       <div className="absolute inset-0">
         <Image
           src="/backgrounds/alt_the_void_bg.PNG"
           alt=""
           fill
-          style={{ objectFit: 'cover', objectPosition: 'center', filter: 'grayscale(0.8) brightness(0.3)' }}
+          style={{ objectFit: 'cover', objectPosition: 'center', filter: 'grayscale(0.9) brightness(0.2)' }}
           quality={70}
         />
-        <div className="absolute inset-0" style={{ background: 'rgba(8,8,8,0.82)' }} />
-        <div
-          className="absolute inset-0"
-          style={{ background: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.35) 0px, rgba(0,0,0,0.35) 1px, transparent 1px, transparent 3px)' }}
-        />
+        <div className="absolute inset-0" style={{ background: 'rgba(8,8,8,0.88)' }} />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-24">
 
-        {/* Stats — VHS spec stickers */}
+        {/* Stats grid — cleaner, editorial */}
         <motion.div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3,1fr)',
-            borderTop: '1px solid rgba(0,255,65,0.12)',
-            borderBottom: '1px solid rgba(0,255,65,0.12)',
-            marginBottom: '4rem',
+            marginBottom: '5rem',
           }}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px 0px' }}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.18 } } }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
         >
           {[
-            { num: '1000+', label: 'WISHLISTS' },
-            { num: '50+',   label: 'HRS OF CONTENT' },
-            { num: '∞',     label: 'REPLAYABILITY' },
+            { num: '1000+', label: 'Wishlists' },
+            { num: '50+',   label: 'Hours of content' },
+            { num: '∞',     label: 'Replayability' },
           ].map((s, i) => (
             <motion.div
               key={i}
-              className="vhs-stat"
-              style={{ borderRight: i < 2 ? '1px solid rgba(0,255,65,0.1)' : 'none' }}
+              style={{
+                textAlign: 'center',
+                padding: '2rem 1rem',
+                borderRight: i < 2 ? '1px solid rgba(0,255,65,0.08)' : 'none',
+                borderTop: '1px solid rgba(0,255,65,0.08)',
+                borderBottom: '1px solid rgba(0,255,65,0.08)',
+                position: 'relative',
+              }}
               variants={{
-                hidden:  { opacity: 0, y: 24 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+                hidden:  { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
               }}
             >
-              <span className="vhs-stat__num">{s.num}</span>
-              <span className="vhs-stat__label">{s.label}</span>
+              {/* Corner dots */}
+              <span style={{ position: 'absolute', top: -1, left: -1, width: 3, height: 3, background: 'rgba(0,255,65,0.3)' }} />
+              {i === 2 && <span style={{ position: 'absolute', top: -1, right: -1, width: 3, height: 3, background: 'rgba(0,255,65,0.3)' }} />}
+              {i === 0 && <span style={{ position: 'absolute', bottom: -1, left: -1, width: 3, height: 3, background: 'rgba(0,255,65,0.3)' }} />}
+              {i === 2 && <span style={{ position: 'absolute', bottom: -1, right: -1, width: 3, height: 3, background: 'rgba(0,255,65,0.3)' }} />}
+
+              <span style={{
+                ...display,
+                fontSize: 'clamp(2.8rem, 6vw, 5rem)',
+                color: green,
+                textShadow: '0 0 24px rgba(0,255,65,0.35)',
+                display: 'block',
+                lineHeight: 1,
+                letterSpacing: '0.04em',
+              }}>
+                {s.num}
+              </span>
+              <span style={{
+                ...body,
+                fontSize: '0.75rem',
+                fontWeight: 400,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: 'rgba(232,232,232,0.35)',
+                display: 'block',
+                marginTop: '0.6rem',
+              }}>
+                {s.label}
+              </span>
             </motion.div>
           ))}
         </motion.div>
 
         {/* Main CTA */}
         <div className="text-center">
-          <AnimatedSection animation="fadeIn" delay={300}>
-            <div style={{ ...mono, fontSize: '0.8rem', letterSpacing: '0.25em', color: 'rgba(0,255,65,0.5)', marginBottom: '1rem' }}>
-              ■ PRESS PLAY TO BEGIN
-            </div>
+          <AnimatedSection animation="clipReveal" delay={200}>
             <h2
               id="cta-heading"
               className="vhs-glitch"
@@ -109,12 +134,15 @@ export default function CTASection({ className = '' }: { className?: string }) {
                 letterSpacing: '0.06em',
                 lineHeight: 1.0,
                 color: '#e8e8e8',
-                marginBottom: '1.5rem',
+                marginBottom: '1.25rem',
               }}
             >
               BEGIN YOUR JOURNEY
             </h2>
-            <p style={{ ...mono, fontSize: '1rem', color: 'rgba(232,232,232,0.5)', maxWidth: '480px', margin: '0 auto 2.5rem', lineHeight: 1.6 }}>
+          </AnimatedSection>
+
+          <AnimatedSection animation="fadeIn" delay={400}>
+            <p style={{ ...body, fontSize: '1rem', color: 'rgba(232,232,232,0.45)', maxWidth: '440px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
               Wishlist Remember to Die on Steam and be the first to experience this haunting tactical roguelike.
             </p>
           </AnimatedSection>
@@ -126,8 +154,8 @@ export default function CTASection({ className = '' }: { className?: string }) {
                 href="https://store.steampowered.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'inline-block', opacity: 0.9 }}
-                className="hover:opacity-100 transition-opacity duration-200 hover:scale-[1.03]"
+                style={{ display: 'inline-block', opacity: 0.85 }}
+                className="hover:opacity-100 transition-all duration-200 hover:scale-[1.03]"
                 aria-label="Wishlist Remember to Die on Steam"
               >
                 <Image
@@ -142,22 +170,23 @@ export default function CTASection({ className = '' }: { className?: string }) {
             </div>
           </AnimatedSection>
 
-          {/* Newsletter — VHS terminal style */}
+          {/* Newsletter */}
           <AnimatedSection animation="fadeIn" delay={700}>
             <div
               style={{
-                maxWidth: '380px',
+                maxWidth: '360px',
                 margin: '0 auto',
-                border: '1px solid rgba(0,255,65,0.18)',
-                background: 'rgba(6,13,6,0.9)',
-                padding: '1.5rem',
+                border: '1px solid rgba(0,255,65,0.12)',
+                background: 'rgba(6,10,6,0.95)',
+                padding: '1.75rem',
+                backdropFilter: 'blur(8px)',
               }}
             >
-              <div style={{ ...mono, fontSize: '0.75rem', color: green, letterSpacing: '0.2em', marginBottom: '0.35rem' }}>
-                ■ STAY UPDATED
-              </div>
-              <p style={{ ...mono, fontSize: '0.85rem', color: 'rgba(0,255,65,0.4)', marginBottom: '1rem', lineHeight: 1.5 }}>
-                Get exclusive updates, behind-the-scenes content, and early access opportunities.
+              <p style={{ ...display, fontSize: '1.1rem', letterSpacing: '0.12em', color: 'rgba(232,232,232,0.8)', marginBottom: '0.3rem' }}>
+                STAY IN THE LOOP
+              </p>
+              <p style={{ ...body, fontSize: '0.8rem', color: 'rgba(232,232,232,0.35)', marginBottom: '1.25rem', lineHeight: 1.6 }}>
+                Exclusive updates &amp; early access opportunities.
               </p>
 
               {!isSubscribed ? (
@@ -167,50 +196,54 @@ export default function CTASection({ className = '' }: { className?: string }) {
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    placeholder="USER@EMAIL.COM"
+                    placeholder="your@email.com"
                     required
                     disabled={isLoading}
                     style={{
-                      ...mono,
+                      ...body,
                       fontSize: '0.9rem',
-                      letterSpacing: '0.1em',
-                      background: 'rgba(0,255,65,0.04)',
-                      border: '1px solid rgba(0,255,65,0.2)',
-                      color: green,
-                      padding: '8px 12px',
+                      background: 'rgba(255,255,255,0.04)',
+                      border: '1px solid rgba(0,255,65,0.18)',
+                      color: 'rgba(232,232,232,0.8)',
+                      padding: '9px 14px',
                       outline: 'none',
                       width: '100%',
+                      transition: 'border-color 0.2s ease',
                     }}
+                    onFocus={e => (e.target.style.borderColor = 'rgba(0,255,65,0.45)')}
+                    onBlur={e => (e.target.style.borderColor = 'rgba(0,255,65,0.18)')}
                   />
                   {error && (
-                    <p style={{ ...mono, fontSize: '0.8rem', color: '#ff2200', letterSpacing: '0.1em' }}>{error}</p>
+                    <p style={{ ...body, fontSize: '0.8rem', color: '#ff2200', letterSpacing: '0.05em' }}>{error}</p>
                   )}
                   <button
                     type="submit"
                     disabled={isLoading || !email}
                     style={{
-                      ...mono,
-                      fontSize: '0.85rem',
-                      letterSpacing: '0.2em',
-                      background: isLoading ? 'rgba(0,255,65,0.05)' : 'rgba(0,255,65,0.1)',
-                      border: '1px solid rgba(0,255,65,0.3)',
+                      ...display,
+                      fontSize: '0.95rem',
+                      letterSpacing: '0.18em',
+                      background: isLoading ? 'rgba(0,255,65,0.04)' : 'rgba(0,255,65,0.08)',
+                      border: '1px solid rgba(0,255,65,0.25)',
                       color: isLoading ? 'rgba(0,255,65,0.3)' : green,
-                      padding: '8px 12px',
+                      padding: '9px 12px',
                       cursor: isLoading ? 'not-allowed' : 'pointer',
                       transition: 'all 0.2s ease',
                       width: '100%',
                     }}
+                    onMouseEnter={e => { if (!isLoading && email) (e.currentTarget.style.background = 'rgba(0,255,65,0.14)') }}
+                    onMouseLeave={e => { if (!isLoading) (e.currentTarget.style.background = 'rgba(0,255,65,0.08)') }}
                   >
-                    {isLoading ? 'LOADING...' : '► SUBSCRIBE'}
+                    {isLoading ? 'SENDING...' : 'SUBSCRIBE'}
                   </button>
                 </form>
               ) : (
                 <div style={{ textAlign: 'center', padding: '1rem 0' }}>
-                  <p style={{ ...mono, fontSize: '1rem', color: green, letterSpacing: '0.15em', textShadow: `0 0 10px ${green}` }}>
-                    ✓ SUBSCRIBED
+                  <p style={{ ...display, fontSize: '1.2rem', letterSpacing: '0.15em', color: green, textShadow: `0 0 12px ${green}` }}>
+                    SUBSCRIBED
                   </p>
-                  <p style={{ ...mono, fontSize: '0.8rem', color: 'rgba(0,255,65,0.4)', marginTop: '4px' }}>
-                    You're now subscribed to our updates.
+                  <p style={{ ...body, fontSize: '0.8rem', color: 'rgba(232,232,232,0.35)', marginTop: '6px' }}>
+                    You'll be first to know.
                   </p>
                 </div>
               )}

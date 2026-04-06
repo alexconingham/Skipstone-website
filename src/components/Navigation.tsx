@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 export default function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [isScrolled, setIsScrolled]   = useState(false)
+  const [activeSection, setActive]    = useState('home')
+  const [mobileOpen, setMobileOpen]   = useState(false)
+  const [scrollPct, setScrollPct]     = useState(0)
 
   const navItems = [
     { id: 'home',     label: 'HOME',    href: '#home' },
@@ -20,21 +20,25 @@ export default function Navigation() {
   ]
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 60)
+    const onScroll = () => {
+      const scrollY = window.scrollY
+      const maxY    = document.body.scrollHeight - window.innerHeight
+      setIsScrolled(scrollY > 60)
+      setScrollPct(maxY > 0 ? scrollY / maxY : 0)
+
       for (const item of navItems) {
         const el = document.getElementById(item.id)
         if (el) {
           const rect = el.getBoundingClientRect()
           if (rect.top <= 120 && rect.bottom >= 120) {
-            setActiveSection(item.id)
+            setActive(item.id)
             break
           }
         }
       }
     }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const scrollTo = (href: string, isExternal?: boolean) => {
@@ -44,6 +48,7 @@ export default function Navigation() {
     }
     const el = document.getElementById(href.replace('#', ''))
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setMobileOpen(false)
   }
 
   return (
@@ -52,12 +57,18 @@ export default function Navigation() {
       role="navigation"
       aria-label="Main navigation"
     >
+      {/* Scroll progress bar */}
+      <div
+        className="scroll-progress-bar"
+        style={{ width: '100%', transform: `scaleX(${scrollPct})` }}
+      />
+
       <div
         style={{
-          background: isScrolled ? 'rgba(5,5,5,0.95)' : 'transparent',
-          backdropFilter: isScrolled ? 'blur(8px)' : 'none',
-          borderBottom: isScrolled ? '1px solid rgba(0,255,65,0.15)' : '1px solid transparent',
-          transition: 'all 0.3s ease',
+          background: isScrolled ? 'rgba(5,5,5,0.96)' : 'transparent',
+          backdropFilter: isScrolled ? 'blur(12px)' : 'none',
+          borderBottom: isScrolled ? '1px solid rgba(0,255,65,0.1)' : '1px solid transparent',
+          transition: 'all 0.4s ease',
         }}
       >
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
@@ -66,7 +77,7 @@ export default function Navigation() {
             {/* Logo */}
             <button
               onClick={() => scrollTo('#home')}
-              className="flex-shrink-0 transition-opacity duration-200 hover:opacity-70"
+              className="flex-shrink-0 transition-opacity duration-200 hover:opacity-80"
               aria-label="Remember to Die — Home"
             >
               <Image
@@ -74,37 +85,60 @@ export default function Navigation() {
                 alt="Skipstone Studios"
                 width={100}
                 height={20}
-                className="h-6 w-auto"
-                style={{ filter: 'grayscale(1) brightness(0.6)' }}
+                className="h-5 w-auto"
+                style={{ filter: 'grayscale(1) brightness(0.55)' }}
                 priority
               />
             </button>
 
             {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-0">
+            <div className="hidden md:flex items-center">
               {navItems.map((item) => {
                 const isActive = activeSection === item.id && !item.external
                 return (
                   <button
                     key={item.id}
                     onClick={() => scrollTo(item.href, item.external)}
+                    className="nav-underline"
                     style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.75rem',
-                      letterSpacing: '0.18em',
-                      color: isActive ? '#00ff41' : 'rgba(232,232,232,0.45)',
-                      textShadow: isActive ? '0 0 8px rgba(0,255,65,0.6)' : 'none',
-                      padding: '6px 10px',
-                      transition: 'all 0.2s ease',
+                      fontFamily: 'var(--font-body)',
+                      fontWeight: 500,
+                      fontSize: '0.7rem',
+                      letterSpacing: '0.16em',
+                      textTransform: 'uppercase',
+                      color: isActive
+                        ? 'rgba(232,232,232,0.9)'
+                        : 'rgba(232,232,232,0.38)',
+                      padding: '8px 11px',
+                      transition: 'color 0.2s ease',
                       background: 'none',
                       border: 'none',
                       cursor: 'pointer',
+                      position: 'relative',
                     }}
-                    onMouseEnter={e => { if (!isActive) (e.target as HTMLElement).style.color = 'rgba(232,232,232,0.85)' }}
-                    onMouseLeave={e => { if (!isActive) (e.target as HTMLElement).style.color = 'rgba(232,232,232,0.45)' }}
+                    onMouseEnter={e => {
+                      if (!isActive) (e.currentTarget as HTMLElement).style.color = 'rgba(232,232,232,0.75)'
+                    }}
+                    onMouseLeave={e => {
+                      if (!isActive) (e.currentTarget as HTMLElement).style.color = 'rgba(232,232,232,0.38)'
+                    }}
                     aria-current={isActive ? 'page' : undefined}
                   >
                     {item.label}
+                    {/* Underline indicator */}
+                    <span
+                      style={{
+                        position: 'absolute',
+                        bottom: 2, left: '50%',
+                        transform: 'translateX(-50%)',
+                        height: '1px',
+                        width: isActive ? '80%' : '0%',
+                        background: 'linear-gradient(90deg, transparent, #00ff41, transparent)',
+                        boxShadow: '0 0 6px rgba(0,255,65,0.5)',
+                        transition: 'width 0.3s ease',
+                        pointerEvents: 'none',
+                      }}
+                    />
                   </button>
                 )
               })}
@@ -114,8 +148,8 @@ export default function Navigation() {
             <div className="hidden md:block">
               <button
                 onClick={() => scrollTo('#steam-cta')}
-                className="opacity-75 hover:opacity-100 transition-opacity duration-200 hover:scale-[1.03]"
-                style={{ transform: 'scale(1)', transition: 'all 0.2s ease' }}
+                className="opacity-60 hover:opacity-90 transition-opacity duration-200"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
                 aria-label="Wishlist on Steam"
               >
                 <Image
@@ -123,7 +157,7 @@ export default function Navigation() {
                   alt="Wishlist on Steam"
                   width={160}
                   height={64}
-                  className="w-auto h-8"
+                  className="w-auto h-7"
                   quality={90}
                 />
               </button>
@@ -131,8 +165,16 @@ export default function Navigation() {
 
             {/* Mobile toggle */}
             <button
-              className="md:hidden transition-colors duration-200 p-2"
-              style={{ fontFamily: 'var(--font-mono)', fontSize: '1.4rem', color: 'rgba(0,255,65,0.6)', background: 'none', border: 'none', cursor: 'pointer' }}
+              className="md:hidden p-2"
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '1.2rem',
+                color: 'rgba(232,232,232,0.5)',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                letterSpacing: '0.05em',
+              }}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -146,40 +188,43 @@ export default function Navigation() {
       {mobileOpen && (
         <div
           className="fixed inset-0 top-14 md:hidden z-40"
-          style={{ background: 'rgba(5,5,5,0.97)', borderTop: '1px solid rgba(0,255,65,0.15)' }}
+          style={{
+            background: 'rgba(5,5,5,0.98)',
+            borderTop: '1px solid rgba(0,255,65,0.08)',
+            backdropFilter: 'blur(16px)',
+          }}
         >
-          <div className="px-8 pt-8 pb-8 space-y-1">
+          <div className="px-8 pt-10 pb-8 space-y-1">
             {navItems.map((item) => {
               const isActive = activeSection === item.id && !item.external
               return (
                 <button
                   key={item.id}
-                  onClick={() => { scrollTo(item.href, item.external); setMobileOpen(false) }}
+                  onClick={() => scrollTo(item.href, item.external)}
                   style={{
                     display: 'block',
                     width: '100%',
                     textAlign: 'left',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '1.1rem',
-                    letterSpacing: '0.2em',
-                    color: isActive ? '#00ff41' : 'rgba(232,232,232,0.5)',
-                    textShadow: isActive ? '0 0 8px rgba(0,255,65,0.5)' : 'none',
-                    padding: '12px 0',
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '2rem',
+                    letterSpacing: '0.08em',
+                    color: isActive ? '#00ff41' : 'rgba(232,232,232,0.45)',
+                    padding: '10px 0',
                     background: 'none',
                     border: 'none',
                     cursor: 'pointer',
-                    borderBottom: '1px solid rgba(0,255,65,0.06)',
+                    borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    transition: 'color 0.2s ease',
                   }}
                 >
                   {item.label}
                 </button>
               )
             })}
-            <div className="pt-6">
+            <div className="pt-8">
               <button
-                onClick={() => { scrollTo('#steam-cta'); setMobileOpen(false) }}
-                className="opacity-80"
-                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                onClick={() => scrollTo('#steam-cta')}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, opacity: 0.7 }}
               >
                 <Image src="/steam wishlist bw3.png" alt="Wishlist on Steam" width={220} height={88} className="w-auto h-12" quality={90} />
               </button>
