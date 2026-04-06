@@ -116,8 +116,6 @@ export default function Home() {
             VHS SP • HI-FI STEREO
           </div>
 
-          {/* Floating particles */}
-          <ParticleField />
 
           {/* Hero content */}
           <div className="relative z-20 w-full max-w-4xl mx-auto text-center space-y-5">
