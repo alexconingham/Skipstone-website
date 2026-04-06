@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=VT323&family=Inter:wght@300;400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -31,6 +31,7 @@
 
   --font-display:  'Bebas Neue', 'Impact', sans-serif;
   --font-mono:     'VT323', 'Courier New', monospace;
+  --font-body:     'Inter', system-ui, -apple-system, sans-serif;
 }
 
 /* ─── BASE RESET ─── */
@@ -53,12 +54,13 @@ html {
 /* ─── BASE TYPOGRAPHY ─── */
 @layer base {
   body {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     background-color: var(--bg-base);
     color: var(--vhs-white);
-    line-height: 1.5;
-    letter-spacing: 0.04em;
-    font-size: 1.1rem;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    font-size: 1rem;
+    font-weight: 300;
   }
 
   h1, h2, h3, h4 {
@@ -69,9 +71,10 @@ html {
   }
 
   p {
-    font-family: var(--font-mono);
-    color: rgba(232, 232, 232, 0.7);
-    line-height: 1.6;
+    font-family: var(--font-body);
+    color: rgba(232, 232, 232, 0.65);
+    line-height: 1.7;
+    font-weight: 300;
   }
 }
 
@@ -173,7 +176,7 @@ html {
   50%, 100% { opacity: 0; }
 }
 
-/* ─── VHS CHAPTER LABELS ─── */
+/* ─── VHS CHAPTER LABELS (legacy, kept for compat) ─── */
 .vhs-chapter {
   display: flex;
   align-items: center;
@@ -185,19 +188,45 @@ html {
   color: var(--phosphor);
   margin-bottom: 1rem;
 }
-
 .vhs-chapter::before {
   content: '■';
   font-size: 0.6rem;
   color: var(--phosphor);
 }
-
 .vhs-chapter::after {
   content: '';
   flex: 1;
   height: 1px;
   background: linear-gradient(to right, rgba(0,255,65,0.4) 0%, transparent 100%);
   max-width: 240px;
+}
+
+/* ─── MODERN SCENE LABEL ─── */
+.scene-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1.25rem;
+}
+.scene-label__num {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  color: rgba(0,255,65,0.45);
+  line-height: 1;
+}
+.scene-label__rule {
+  flex: 0 0 48px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(0,255,65,0.4), transparent);
+}
+.scene-label__text {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(232,232,232,0.3);
 }
 
 /* ─── SECTION DIVIDER ─── */
@@ -550,6 +579,60 @@ a:focus-visible {
 
 /* ─── SECTION Z-INDEX ─── */
 section { position: relative; z-index: 20; }
+
+/* ─── CLIP-PATH SECTION REVEAL ─── */
+@keyframes clip-in-up {
+  from { clip-path: inset(100% 0 0 0); }
+  to   { clip-path: inset(0% 0 0 0);   }
+}
+.clip-reveal {
+  animation: clip-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ─── INTRO NOISE ─── */
+@keyframes noise-shift {
+  0%   { background-position: 0 0; }
+  25%  { background-position: -40px 20px; }
+  50%  { background-position: 20px -30px; }
+  75%  { background-position: -20px 40px; }
+  100% { background-position: 0 0; }
+}
+
+/* ─── SCROLL PROGRESS BAR ─── */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00ff41, #00e5ff);
+  transform-origin: left;
+  z-index: 100;
+  box-shadow: 0 0 6px rgba(0,255,65,0.5);
+  pointer-events: none;
+}
+
+/* ─── HOVER UNDERLINE (nav links) ─── */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 50%; right: 50%;
+  height: 1px;
+  background: var(--phosphor);
+  transition: left 0.25s ease, right 0.25s ease;
+  box-shadow: 0 0 6px rgba(0,255,65,0.5);
+}
+.nav-underline:hover::after,
+.nav-underline.active::after {
+  left: 0; right: 0;
+}
+
+/* ─── SECTION HEADING ENTRANCE ─── */
+.heading-clip {
+  display: inline-block;
+  overflow: hidden;
+}
 
 /* ─── REDUCED MOTION ─── */
 @media (prefers-reduced-motion: reduce) {

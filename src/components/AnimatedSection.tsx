@@ -6,7 +6,7 @@ import { motion, Variants } from 'framer-motion'
 interface AnimatedSectionProps {
   children: ReactNode
   className?: string
-  animation?: 'fadeIn' | 'slideUp' | 'slideLeft' | 'slideRight' | 'scaleIn' | 'parallax'
+  animation?: 'fadeIn' | 'slideUp' | 'slideLeft' | 'slideRight' | 'scaleIn' | 'parallax' | 'clipReveal' | 'clipRevealLeft'
   delay?: number       // milliseconds
   duration?: number    // milliseconds
   threshold?: number   // kept for API compat
@@ -39,6 +39,16 @@ const presets: Record<string, Variants> = {
   parallax: {
     hidden:  { opacity: 0, y: 48, scale: 0.97 },
     visible: { opacity: 1, y: 0,  scale: 1 },
+  },
+  // Clip-path reveal — content wipes in upward (cinematic section entrance)
+  clipReveal: {
+    hidden:  { clipPath: 'inset(100% 0 0 0)', opacity: 1 },
+    visible: { clipPath: 'inset(0% 0 0 0)',   opacity: 1 },
+  },
+  // Clip-path from the right — for left-aligned content
+  clipRevealLeft: {
+    hidden:  { clipPath: 'inset(0 100% 0 0)', opacity: 1 },
+    visible: { clipPath: 'inset(0 0% 0 0)',   opacity: 1 },
   },
 }
 
