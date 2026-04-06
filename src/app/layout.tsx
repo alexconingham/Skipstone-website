@@ -1,15 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/next'
 import { getBaseUrl } from '@/utils/config'
 import './globals.css'
-
-const inter = Inter({ 
-  subsets: ['latin'],
-  display: 'swap',
-  preload: true,
-})
 
 export const metadata: Metadata = {
   title: 'Remember to Die – Tactical Dice Combat Roguelike | Skipstone Studios',
@@ -214,17 +207,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         
-        {/* Font preloading */}
-        <link 
-          rel="preload" 
-          as="font" 
-          href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" 
-          type="font/woff2" 
-          crossOrigin="" 
-        />
+        {/* Font preconnects */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         
         {/* Theme and app configuration */}
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#0e0c0c" />
         <meta name="color-scheme" content="dark" />
         <meta name="format-detection" content="telephone=no" />
         
@@ -283,7 +271,7 @@ export default function RootLayout({
         <meta name="game:genre" content="Strategy" />
         <meta name="game:genre" content="Roguelike" />
       </head>
-      <body className={`${inter.className} bg-black text-white antialiased`}>
+      <body className="bg-[#080808] text-[#e8e8e8] antialiased">
         {children}
         <SpeedInsights />
         <Analytics />

@@ -21,259 +21,329 @@ const playlist = [
   { title: 'Neon Shadows (Pink)', src: '/audio/Neon Shadows (pink).mp3' },
   { title: 'Neon Shadows (Pink 2)', src: '/audio/Neon Shadows (pink2).mp3' },
   { title: 'Neon Shadows (Post Electronica)', src: '/audio/Neon Shadows (post electronica).mp3' },
-  { title: 'Neon Shadows (Synthpop)', src: '/audio/Neon Shadows (synthpop).mp3' }
+  { title: 'Neon Shadows (Synthpop)', src: '/audio/Neon Shadows (synthpop).mp3' },
 ]
+
+// Short display labels for the marquee
+const shortLabel = (title: string) =>
+  title.replace('Neon Shadows', 'NSH').replace('(', '[').replace(')', ']').toUpperCase()
+
+function formatTime(t: number) {
+  if (!isFinite(t) || isNaN(t) || t < 0) return '0:00'
+  const m = Math.floor(t / 60)
+  const s = Math.floor(t % 60)
+  return `${m}:${s.toString().padStart(2, '0')}`
+}
 
 export default function AudioPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [volume, setVolume] = useState(0.5)
+  const [isPlaying, setIsPlaying]     = useState(false)
+  const [volume, setVolume]           = useState(0.5)
   const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(0)
-  const [isHovered, setIsHovered] = useState(false)
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
-  const [isMinimized, setIsMinimized] = useState(false)
+  const [duration, setDuration]       = useState(0)
+  const [trackIdx, setTrackIdx]       = useState(0)
+  const [visible, setVisible]         = useState(false)
+  const [collapsed, setCollapsed]     = useState(false)
 
-  // Trigger pop-in animation and auto-play on mount
+  // Pop in + try autoplay
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true)
-      // Try to auto-play after the animation
-      if (audioRef.current) {
-        audioRef.current.play().then(() => {
-          setIsPlaying(true)
-        }).catch((error) => {
-          console.log('Autoplay prevented:', error)
-          // Set up a one-time click listener to start playing
-          const startPlayback = () => {
-            if (audioRef.current) {
-              audioRef.current.play().then(() => {
-                setIsPlaying(true)
-              }).catch(console.error)
-            }
-            document.removeEventListener('click', startPlayback)
-            document.removeEventListener('keydown', startPlayback)
-          }
-          document.addEventListener('click', startPlayback, { once: true })
-          document.addEventListener('keydown', startPlayback, { once: true })
-        })
-      }
+    const t = setTimeout(() => {
+      setVisible(true)
+      audioRef.current?.play().then(() => setIsPlaying(true)).catch(() => {
+        const start = () => {
+          audioRef.current?.play().then(() => setIsPlaying(true)).catch(console.error)
+          document.removeEventListener('click', start)
+          document.removeEventListener('keydown', start)
+        }
+        document.addEventListener('click', start, { once: true })
+        document.addEventListener('keydown', start, { once: true })
+      })
     }, 500)
-    return () => clearTimeout(timer)
+    return () => clearTimeout(t)
   }, [])
 
+  // Audio events
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
-
-    const updateTime = () => setCurrentTime(audio.currentTime)
-    const updateDuration = () => setDuration(audio.duration)
-    const handleEnded = () => {
+    const onTime = () => setCurrentTime(audio.currentTime)
+    const onMeta = () => setDuration(audio.duration)
+    const onEnd = () => {
       setIsPlaying(false)
-      // Auto-play next track if available
-      if (currentTrackIndex < playlist.length - 1) {
-        nextTrack()
-      } else {
-        // Loop back to first track
-        setCurrentTrackIndex(0)
-        setCurrentTime(0)
-        setTimeout(() => {
-          audio.play()
-          setIsPlaying(true)
-        }, 100)
-      }
+      const next = (trackIdx + 1) % playlist.length
+      setTrackIdx(next)
+      setCurrentTime(0)
     }
-
-    const handleCanPlay = () => {
-      // Auto-play when audio is ready
-      audio.play().then(() => {
-        setIsPlaying(true)
-      }).catch((error) => {
-        console.log('Autoplay prevented:', error)
-        // Set up a one-time click listener to start playing
-        const startPlayback = () => {
-          if (audioRef.current) {
-            audioRef.current.play().then(() => {
-              setIsPlaying(true)
-            }).catch(console.error)
-          }
-          document.removeEventListener('click', startPlayback)
-          document.removeEventListener('keydown', startPlayback)
+    const onCanPlay = () => {
+      audio.play().then(() => setIsPlaying(true)).catch(() => {
+        const start = () => {
+          audio.play().then(() => setIsPlaying(true)).catch(console.error)
+          document.removeEventListener('click', start)
         }
-        document.addEventListener('click', startPlayback, { once: true })
-        document.addEventListener('keydown', startPlayback, { once: true })
+        document.addEventListener('click', start, { once: true })
       })
     }
-
-    audio.addEventListener('timeupdate', updateTime)
-    audio.addEventListener('loadedmetadata', updateDuration)
-    audio.addEventListener('ended', handleEnded)
-    audio.addEventListener('canplay', handleCanPlay)
-
+    audio.addEventListener('timeupdate', onTime)
+    audio.addEventListener('loadedmetadata', onMeta)
+    audio.addEventListener('ended', onEnd)
+    audio.addEventListener('canplay', onCanPlay)
     return () => {
-      audio.removeEventListener('timeupdate', updateTime)
-      audio.removeEventListener('loadedmetadata', updateDuration)
-      audio.removeEventListener('ended', handleEnded)
-      audio.removeEventListener('canplay', handleCanPlay)
+      audio.removeEventListener('timeupdate', onTime)
+      audio.removeEventListener('loadedmetadata', onMeta)
+      audio.removeEventListener('ended', onEnd)
+      audio.removeEventListener('canplay', onCanPlay)
     }
-  }, [currentTrackIndex])
+  }, [trackIdx])
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume
-    }
+    if (audioRef.current) audioRef.current.volume = volume
   }, [volume])
 
   const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause()
-      } else {
-        audioRef.current.play()
-      }
-      setIsPlaying(!isPlaying)
-    }
+    if (!audioRef.current) return
+    if (isPlaying) { audioRef.current.pause(); setIsPlaying(false) }
+    else { audioRef.current.play(); setIsPlaying(true) }
+  }
+
+  const prevTrack = () => {
+    const i = trackIdx > 0 ? trackIdx - 1 : playlist.length - 1
+    setTrackIdx(i); setCurrentTime(0)
+    setTimeout(() => { if (isPlaying) audioRef.current?.play() }, 100)
   }
 
   const nextTrack = () => {
-    const nextIndex = currentTrackIndex < playlist.length - 1 ? currentTrackIndex + 1 : 0
-    setCurrentTrackIndex(nextIndex)
-    setCurrentTime(0)
-    if (audioRef.current) {
-      setTimeout(() => {
-        if (isPlaying) {
-          audioRef.current?.play()
-        }
-      }, 100)
-    }
+    const i = (trackIdx + 1) % playlist.length
+    setTrackIdx(i); setCurrentTime(0)
+    setTimeout(() => { if (isPlaying) audioRef.current?.play() }, 100)
   }
 
-  const previousTrack = () => {
-    const prevIndex = currentTrackIndex > 0 ? currentTrackIndex - 1 : playlist.length - 1
-    setCurrentTrackIndex(prevIndex)
-    setCurrentTime(0)
-    if (audioRef.current) {
-      setTimeout(() => {
-        if (isPlaying) {
-          audioRef.current?.play()
-        }
-      }, 100)
-    }
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!audioRef.current || !duration) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    const t = ((e.clientX - rect.left) / rect.width) * duration
+    audioRef.current.currentTime = t
+    setCurrentTime(t)
   }
 
-  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (audioRef.current && duration) {
-      const rect = e.currentTarget.getBoundingClientRect()
-      const clickX = e.clientX - rect.left
-      const newTime = (clickX / rect.width) * duration
-      audioRef.current.currentTime = newTime
-      setCurrentTime(newTime)
-    }
-  }
+  const progress = duration ? (currentTime / duration) * 100 : 0
+  const volPct   = Math.round(volume * 10)            // 0–10 segments
+  const trackNum = String(trackIdx + 1).padStart(2, '0')
 
-  const formatTime = (time: number) => {
-    if (isNaN(time) || !isFinite(time) || time < 0) return '0:00'
-    const totalSeconds = Math.floor(time)
-    const minutes = Math.floor(totalSeconds / 60)
-    const seconds = totalSeconds % 60
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`
-  }
-
-  const progressPercentage = duration ? (currentTime / duration) * 100 : 0
-
-  const handleToggle = () => {
-    setIsMinimized(!isMinimized)
-  }
+  const mono: React.CSSProperties = { fontFamily: 'VT323, Courier New, monospace' }
+  const green = '#00ff41'
+  const dimGreen = 'rgba(0,255,65,0.35)'
+  const panelBg = '#060d06'
 
   return (
-    <div className="fixed top-4 left-4 z-50">
-      {/* Toggle Tab - Always visible */}
-      <button
-        onClick={handleToggle}
-        className={`absolute ${isMinimized ? 'top-0 left-0' : 'top-0 -right-6'} w-6 h-8 bg-gray-700 border border-gray-500 rounded-r-lg flex items-center justify-center hover:bg-gray-600 transition-all duration-300 text-white text-xs font-bold z-10`}
-      >
-        {isMinimized ? '►' : '◄'}
-      </button>
+    <div
+      style={{
+        position: 'fixed',
+        bottom: '1rem',
+        left: '1rem',
+        zIndex: 50,
+        width: collapsed ? 'auto' : '240px',
+        transition: 'all 0.4s ease',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(120%)',
+      }}
+    >
+      <audio ref={audioRef} src={playlist[trackIdx].src} preload="auto" />
 
-      {/* Player Container */}
-      <div 
-        className={`transition-all duration-700 ease-out transform ${
-          isVisible && !isMinimized
-            ? 'translate-x-0 translate-y-0 opacity-100' 
-            : '-translate-x-full -translate-y-full opacity-0'
-        } ${isHovered ? 'scale-105' : 'scale-100'}`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+      {/* Outer casing */}
+      <div
+        style={{
+          background: 'linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 60%, #111 100%)',
+          border: `1px solid rgba(0,255,65,0.25)`,
+          boxShadow: `0 0 0 1px #000, 0 8px 32px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.05)`,
+        }}
       >
-        {/* Compact Retro Player Design */}
-        <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-black border-2 border-gray-600 rounded-lg p-2 shadow-2xl relative">
+        {/* Top bar — VHS label strip */}
+        <div
+          style={{
+            background: '#111',
+            borderBottom: '1px solid rgba(0,255,65,0.15)',
+            padding: '4px 8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <span style={{ ...mono, fontSize: '0.7rem', letterSpacing: '0.2em', color: dimGreen }}>
+            ▓ VHS DECK
+          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            {isPlaying && (
+              <span style={{ ...mono, fontSize: '0.6rem', color: '#ff2200', letterSpacing: '0.1em' }}>
+                ● REC
+              </span>
+            )}
+            <button
+              onClick={() => setCollapsed(!collapsed)}
+              style={{ ...mono, fontSize: '0.65rem', color: dimGreen, background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.1em', padding: '0 2px' }}
+            >
+              {collapsed ? '[+]' : '[–]'}
+            </button>
+          </div>
+        </div>
 
-        {/* Compact Display */}
-        <div className="bg-black border border-gray-700 rounded p-1 mb-2">
-          <div className="text-green-400 font-mono text-xs text-center">
-            {playlist[currentTrackIndex].title.replace('Neon Shadows', 'NEON').slice(0, 15)}
-          </div>
-          <div className="text-green-300 font-mono text-xs text-center">
-            {isPlaying ? '►' : '⏸'} {Math.round(volume * 100)}%
-          </div>
-          {!isPlaying && (
-            <div className="text-yellow-400 font-mono text-xs text-center animate-pulse">
-              CLICK TO START
+        {!collapsed && (
+          <>
+            {/* Phosphor screen */}
+            <div
+              style={{
+                background: panelBg,
+                margin: '6px',
+                padding: '6px 8px',
+                border: '1px solid rgba(0,255,65,0.2)',
+                boxShadow: `inset 0 0 12px rgba(0,255,65,0.06)`,
+              }}
+            >
+              {/* Track ID + status */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
+                <span style={{ ...mono, fontSize: '0.7rem', color: dimGreen, letterSpacing: '0.12em' }}>
+                  T-{trackNum} / SP
+                </span>
+                <span style={{ ...mono, fontSize: '0.7rem', color: isPlaying ? green : dimGreen, letterSpacing: '0.1em' }}>
+                  {isPlaying ? '▶ PLAY' : '■ STOP'}
+                </span>
+              </div>
+
+              {/* Track name */}
+              <div
+                style={{
+                  overflow: 'hidden',
+                  whiteSpace: 'nowrap',
+                  marginBottom: '4px',
+                }}
+              >
+                <span
+                  style={{
+                    ...mono,
+                    fontSize: '0.85rem',
+                    color: green,
+                    letterSpacing: '0.08em',
+                    textShadow: `0 0 8px ${green}`,
+                    display: 'inline-block',
+                    animation: isPlaying ? 'marquee-scroll 10s linear infinite' : 'none',
+                  }}
+                >
+                  {shortLabel(playlist[trackIdx].title)}
+                </span>
+              </div>
+
+              {/* Time */}
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ ...mono, fontSize: '0.8rem', color: green, letterSpacing: '0.1em' }}>
+                  {formatTime(currentTime)}
+                </span>
+                <span style={{ ...mono, fontSize: '0.8rem', color: dimGreen, letterSpacing: '0.1em' }}>
+                  {formatTime(duration)}
+                </span>
+              </div>
+
+              {/* Progress bar — clickable */}
+              <div
+                onClick={handleSeek}
+                style={{
+                  marginTop: '5px',
+                  height: '4px',
+                  background: 'rgba(0,255,65,0.1)',
+                  cursor: 'pointer',
+                  position: 'relative',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: `${progress}%`,
+                    background: green,
+                    boxShadow: `0 0 6px ${green}`,
+                    transition: 'width 0.5s linear',
+                  }}
+                />
+              </div>
             </div>
-          )}
-        </div>
 
-        {/* Compact Controls */}
-        <div className="flex items-center justify-center space-x-1 mb-2">
-          <button
-            onClick={previousTrack}
-            className="w-6 h-6 bg-gray-700 border border-gray-500 rounded flex items-center justify-center hover:bg-gray-600 transition-colors duration-200"
-          >
-            <span className="text-gray-200 text-xs">⏮</span>
-          </button>
+            {/* Transport buttons */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', padding: '4px 6px' }}>
+              {[
+                { label: '◄◄', action: () => { if (audioRef.current) audioRef.current.currentTime = Math.max(0, currentTime - 10) }, title: 'REW' },
+                { label: '◄',  action: prevTrack, title: 'PREV' },
+                { label: isPlaying ? '■' : '▶', action: togglePlay, isMain: true, title: isPlaying ? 'STOP' : 'PLAY' },
+                { label: '►',  action: nextTrack, title: 'NEXT' },
+                { label: '▶▶', action: () => { if (audioRef.current) audioRef.current.currentTime = Math.min(duration, currentTime + 10) }, title: 'FF' },
+              ].map((btn) => (
+                <button
+                  key={btn.label}
+                  onClick={btn.action}
+                  title={btn.title}
+                  style={{
+                    ...mono,
+                    fontSize: btn.isMain ? '1rem' : '0.75rem',
+                    background: btn.isMain ? 'rgba(0,255,65,0.12)' : 'rgba(0,0,0,0.6)',
+                    border: btn.isMain ? `1px solid rgba(0,255,65,0.4)` : '1px solid rgba(0,255,65,0.15)',
+                    color: btn.isMain ? green : dimGreen,
+                    cursor: 'pointer',
+                    padding: btn.isMain ? '5px 10px' : '4px 6px',
+                    letterSpacing: '0.05em',
+                    transition: 'all 0.15s ease',
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,255,65,0.7)'; (e.currentTarget as HTMLElement).style.color = green }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = btn.isMain ? 'rgba(0,255,65,0.4)' : 'rgba(0,255,65,0.15)'; (e.currentTarget as HTMLElement).style.color = btn.isMain ? green : dimGreen }}
+                >
+                  {btn.label}
+                </button>
+              ))}
+            </div>
 
-          <button
-            onClick={togglePlay}
-            className="w-8 h-8 bg-red-600 border border-red-400 rounded flex items-center justify-center hover:bg-red-500 transition-colors duration-200"
-          >
-            <span className="text-white text-sm">
-              {isPlaying ? '⏸' : '▶'}
-            </span>
-          </button>
+            {/* Volume bar + label */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '4px 8px 6px',
+                borderTop: '1px solid rgba(0,255,65,0.08)',
+              }}
+            >
+              <span style={{ ...mono, fontSize: '0.65rem', color: dimGreen, letterSpacing: '0.15em', flexShrink: 0 }}>VOL</span>
 
-          <button
-            onClick={nextTrack}
-            className="w-6 h-6 bg-gray-700 border border-gray-500 rounded flex items-center justify-center hover:bg-gray-600 transition-colors duration-200"
-          >
-            <span className="text-gray-200 text-xs">⏭</span>
-          </button>
-        </div>
+              {/* Segmented volume display */}
+              <div style={{ display: 'flex', gap: '2px', flex: 1 }}>
+                {Array.from({ length: 10 }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setVolume((i + 1) / 10)}
+                    style={{
+                      flex: 1,
+                      height: '10px',
+                      background: i < volPct ? green : 'rgba(0,255,65,0.12)',
+                      boxShadow: i < volPct ? `0 0 4px ${green}` : 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      padding: 0,
+                      transition: 'background 0.1s',
+                    }}
+                  />
+                ))}
+              </div>
 
-        {/* Compact Volume */}
-        <div className="flex items-center justify-center space-x-1">
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.1"
-            value={volume}
-            onChange={(e) => setVolume(Number(e.target.value))}
-            className="w-12 h-1 bg-gray-800 border border-gray-600 rounded appearance-none cursor-pointer"
-            style={{
-              background: `linear-gradient(to right, #ef4444 0%, #ef4444 ${volume * 100}%, #374151 ${volume * 100}%, #374151 100%)`
-            }}
-          />
-        </div>
-        </div>
+              <span style={{ ...mono, fontSize: '0.6rem', color: dimGreen, letterSpacing: '0.1em', flexShrink: 0 }}>
+                HI-FI
+              </span>
+            </div>
+          </>
+        )}
       </div>
 
-      {/* Audio Element */}
-      <audio 
-        ref={audioRef}
-        src={playlist[currentTrackIndex].src}
-        preload="auto"
-      />
+      <style>{`
+        @keyframes marquee-scroll {
+          0%   { transform: translateX(0); }
+          40%  { transform: translateX(0); }
+          90%  { transform: translateX(-60%); }
+          100% { transform: translateX(0); }
+        }
+      `}</style>
     </div>
   )
-} 
+}

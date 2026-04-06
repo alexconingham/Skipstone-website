@@ -9,54 +9,57 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        'bg-base':    '#080808',
+        'bg-panel':   '#0f0f0f',
+        'phosphor':   '#00ff41',
+        'vhs-cyan':   '#00e5ff',
+        'vhs-mag':    '#ff00ff',
+        'vhs-yellow': '#ffee00',
+        'vhs-red':    '#ff2200',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
       },
-      // Optimize for better contrast ratios
-      backgroundColor: {
-        'dark': '#000000',
-        'dark-overlay': 'rgba(0, 0, 0, 0.7)',
-      },
-      textColor: {
-        'high-contrast': '#ffffff',
-        'medium-contrast': '#e5e7eb', // gray-200
-        'low-contrast': '#d1d5db',    // gray-300
+      fontFamily: {
+        display: ['var(--font-display)', 'Bebas Neue', 'Impact', 'sans-serif'],
+        mono:    ['var(--font-mono)',    'VT323',      'Courier New', 'monospace'],
       },
       animation: {
-        'scroll-left': 'scroll-left 30s linear infinite',
-        'scroll-right': 'scroll-right 25s linear infinite',
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.3s ease-out',
+        'scroll-left':  'scroll-left 40s linear infinite',
+        'scroll-right': 'scroll-right 35s linear infinite',
+        'fade-in':      'fadeIn 0.6s ease-in-out',
+        'slide-up':     'slideUp 0.5s ease-out',
+        'float-gentle': 'float-gentle 8s ease-in-out infinite',
       },
       keyframes: {
         'scroll-left': {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
+          '0%':   { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-33.333%)' },
         },
         'scroll-right': {
-          '0%': { transform: 'translateX(-50%)' },
+          '0%':   { transform: 'translateX(-33.333%)' },
           '100%': { transform: 'translateX(0)' },
         },
         fadeIn: {
-          '0%': { opacity: '0' },
+          '0%':   { opacity: '0' },
           '100%': { opacity: '1' },
         },
         slideUp: {
-          '0%': { transform: 'translateY(10px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+          '0%':   { transform: 'translateY(12px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)',    opacity: '1' },
+        },
+        'float-gentle': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%':      { transform: 'translateY(-6px)' },
         },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic':  'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
   },
   plugins: [],
-  // Enable CSS optimization features
   corePlugins: {
-    // Disable unused features to reduce bundle size
     preflight: true,
   },
-} 
+}
