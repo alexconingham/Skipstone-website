@@ -6,6 +6,7 @@ import Navigation from '@/components/Navigation'
 import AnimatedSection from '@/components/AnimatedSection'
 import CTASection from '@/components/CTASection'
 import VideoTrailer from '@/components/VideoTrailer'
+import FeatureCallouts from '@/components/FeatureCallouts'
 import Image from 'next/image'
 import { getDiceData, getMementoData, getEnemyData, getWatchData } from '@/utils/dataMapper'
 import { getBaseUrl } from '@/utils/config'
@@ -240,25 +241,7 @@ export default function Home() {
             </div>
 
             {/* Feature callouts */}
-            <AnimatedSection animation="fadeIn" delay={600}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-16">
-                <div className="vhs-callout">
-                  <span className="vhs-callout__num">TRACK 01</span>
-                  <span className="vhs-callout__title">TACTICAL DICE COMBAT</span>
-                  <span className="vhs-callout__body">Strategic dice-based battles with endless depth.</span>
-                </div>
-                <div className="vhs-callout">
-                  <span className="vhs-callout__num">TRACK 02</span>
-                  <span className="vhs-callout__title">MEMORY FRAGMENTS</span>
-                  <span className="vhs-callout__body">Unlock haunting memories that shape your destiny.</span>
-                </div>
-                <div className="vhs-callout">
-                  <span className="vhs-callout__num">TRACK 03</span>
-                  <span className="vhs-callout__title">INFINITE REPLAYABILITY</span>
-                  <span className="vhs-callout__body">Every run tells a different story.</span>
-                </div>
-              </div>
-            </AnimatedSection>
+            <FeatureCallouts />
           </div>
         </section>
 

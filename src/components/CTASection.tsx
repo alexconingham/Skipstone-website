@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import AnimatedSection from './AnimatedSection'
 
 export default function CTASection({ className = '' }: { className?: string }) {
@@ -60,32 +61,38 @@ export default function CTASection({ className = '' }: { className?: string }) {
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-24">
 
         {/* Stats — VHS spec stickers */}
-        <AnimatedSection animation="fadeIn" delay={100}>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3,1fr)',
-              borderTop: '1px solid rgba(0,255,65,0.12)',
-              borderBottom: '1px solid rgba(0,255,65,0.12)',
-              marginBottom: '4rem',
-            }}
-          >
-            {[
-              { num: '1000+', label: 'WISHLISTS' },
-              { num: '50+',   label: 'HRS OF CONTENT' },
-              { num: '∞',     label: 'REPLAYABILITY' },
-            ].map((s, i) => (
-              <div
-                key={i}
-                className="vhs-stat"
-                style={{ borderRight: i < 2 ? '1px solid rgba(0,255,65,0.1)' : 'none' }}
-              >
-                <span className="vhs-stat__num">{s.num}</span>
-                <span className="vhs-stat__label">{s.label}</span>
-              </div>
-            ))}
-          </div>
-        </AnimatedSection>
+        <motion.div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3,1fr)',
+            borderTop: '1px solid rgba(0,255,65,0.12)',
+            borderBottom: '1px solid rgba(0,255,65,0.12)',
+            marginBottom: '4rem',
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px 0px' }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.18 } } }}
+        >
+          {[
+            { num: '1000+', label: 'WISHLISTS' },
+            { num: '50+',   label: 'HRS OF CONTENT' },
+            { num: '∞',     label: 'REPLAYABILITY' },
+          ].map((s, i) => (
+            <motion.div
+              key={i}
+              className="vhs-stat"
+              style={{ borderRight: i < 2 ? '1px solid rgba(0,255,65,0.1)' : 'none' }}
+              variants={{
+                hidden:  { opacity: 0, y: 24 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+              }}
+            >
+              <span className="vhs-stat__num">{s.num}</span>
+              <span className="vhs-stat__label">{s.label}</span>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* Main CTA */}
         <div className="text-center">

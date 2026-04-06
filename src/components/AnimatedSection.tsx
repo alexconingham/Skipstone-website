@@ -1,16 +1,45 @@
 'use client'
 
-import { useEffect, useRef, useState, ReactNode } from 'react'
+import { ReactNode } from 'react'
+import { motion, Variants } from 'framer-motion'
 
 interface AnimatedSectionProps {
   children: ReactNode
   className?: string
   animation?: 'fadeIn' | 'slideUp' | 'slideLeft' | 'slideRight' | 'scaleIn' | 'parallax'
-  delay?: number
-  duration?: number
-  threshold?: number
-  rootMargin?: string
+  delay?: number       // milliseconds
+  duration?: number    // milliseconds
+  threshold?: number   // kept for API compat
+  rootMargin?: string  // kept for API compat
   triggerOnce?: boolean
+}
+
+// Cinematic entrance presets — snappy departure, settled arrival
+const presets: Record<string, Variants> = {
+  fadeIn: {
+    hidden:  { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  },
+  slideUp: {
+    hidden:  { opacity: 0, y: 72 },
+    visible: { opacity: 1, y: 0 },
+  },
+  slideLeft: {
+    hidden:  { opacity: 0, x: 72 },
+    visible: { opacity: 1, x: 0 },
+  },
+  slideRight: {
+    hidden:  { opacity: 0, x: -72 },
+    visible: { opacity: 1, x: 0 },
+  },
+  scaleIn: {
+    hidden:  { opacity: 0, scale: 0.88 },
+    visible: { opacity: 1, scale: 1 },
+  },
+  parallax: {
+    hidden:  { opacity: 0, y: 48, scale: 0.97 },
+    visible: { opacity: 1, y: 0,  scale: 1 },
+  },
 }
 
 export default function AnimatedSection({
@@ -19,109 +48,28 @@ export default function AnimatedSection({
   animation = 'fadeIn',
   delay = 0,
   duration = 600,
-  threshold = 0.1,
-  rootMargin = '0px 0px -100px 0px',
-  triggerOnce = true
+  triggerOnce = true,
 }: AnimatedSectionProps) {
-  const [isVisible, setIsVisible] = useState(false)
-  const [hasTriggered, setHasTriggered] = useState(false)
-  const elementRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && (!triggerOnce || !hasTriggered)) {
-          setTimeout(() => {
-            setIsVisible(true)
-            if (triggerOnce) {
-              setHasTriggered(true)
-            }
-          }, delay)
-        } else if (!triggerOnce) {
-          setIsVisible(false)
-        }
-      },
-      {
-        threshold,
-        rootMargin
-      }
-    )
-
-    const currentElement = elementRef.current
-    if (currentElement) {
-      observer.observe(currentElement)
-    }
-
-    return () => {
-      if (currentElement) {
-        observer.unobserve(currentElement)
-      }
-    }
-  }, [delay, threshold, rootMargin, triggerOnce, hasTriggered])
-
-  const getAnimationClasses = () => {
-    const baseTransition = `transition-all duration-${duration} ease-out`
-    
-    switch (animation) {
-      case 'fadeIn':
-        return `${baseTransition} ${
-          isVisible 
-            ? 'opacity-100 transform translate-y-0' 
-            : 'opacity-0 transform translate-y-8'
-        }`
-      
-      case 'slideUp':
-        return `${baseTransition} ${
-          isVisible 
-            ? 'opacity-100 transform translate-y-0' 
-            : 'opacity-0 transform translate-y-16'
-        }`
-      
-      case 'slideLeft':
-        return `${baseTransition} ${
-          isVisible 
-            ? 'opacity-100 transform translate-x-0' 
-            : 'opacity-0 transform translate-x-16'
-        }`
-      
-      case 'slideRight':
-        return `${baseTransition} ${
-          isVisible 
-            ? 'opacity-100 transform translate-x-0' 
-            : 'opacity-0 transform -translate-x-16'
-        }`
-      
-      case 'scaleIn':
-        return `${baseTransition} ${
-          isVisible 
-            ? 'opacity-100 transform scale-100' 
-            : 'opacity-0 transform scale-95'
-        }`
-      
-      case 'parallax':
-        return `${baseTransition} ${
-          isVisible 
-            ? 'opacity-100 transform translate-y-0 scale-100' 
-            : 'opacity-0 transform translate-y-12 scale-98'
-        }`
-      
-      default:
-        return baseTransition
-    }
-  }
-
   return (
-    <div
-      ref={elementRef}
-      className={`${getAnimationClasses()} ${className}`}
+    <motion.div
+      className={className}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: triggerOnce, margin: '-80px 0px' }}
+      variants={presets[animation] ?? presets.fadeIn}
+      transition={{
+        duration: duration / 1000,
+        delay: delay / 1000,
+        ease: [0.22, 1, 0.36, 1],  // expo-out: fast initial movement, buttery settle
+      }}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }
 
-// Loading Skeleton Component for galleries
-export function LoadingSkeleton({ count = 3, className = '' }: { count?: number, className?: string }) {
+// Kept for backwards compat — uses Framer Motion internally
+export function LoadingSkeleton({ count = 3, className = '' }: { count?: number; className?: string }) {
   return (
     <div className={`flex space-x-4 ${className}`}>
       {Array.from({ length: count }).map((_, i) => (
@@ -135,66 +83,42 @@ export function LoadingSkeleton({ count = 3, className = '' }: { count?: number,
   )
 }
 
-// Progressive Image Loading Component
-export function ProgressiveImage({ 
-  src, 
-  alt, 
+// Staggered grid container — use this for card grids
+export function StaggerGrid({
+  children,
   className = '',
-  blurDataURL,
-  ...props 
-}: any) {
-  const [isLoaded, setIsLoaded] = useState(false)
-  
-  return (
-    <div className="relative overflow-hidden">
-      <img
-        {...props}
-        src={src}
-        alt={alt}
-        className={`transition-all duration-500 ${
-          isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-sm'
-        } ${className}`}
-        onLoad={() => setIsLoaded(true)}
-      />
-      {!isLoaded && blurDataURL && (
-        <img
-          src={blurDataURL}
-          alt=""
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-            isLoaded ? 'opacity-0' : 'opacity-100'
-          }`}
-          aria-hidden="true"
-        />
-      )}
-    </div>
-  )
-}
-
-// Staggered Animation Container
-export function StaggeredContainer({ 
-  children, 
-  className = '',
-  staggerDelay = 100 
-}: { 
-  children: ReactNode[], 
-  className?: string,
-  staggerDelay?: number 
+  staggerDelay = 0.12,
+  viewportMargin = '-80px 0px',
+}: {
+  children: ReactNode[]
+  className?: string
+  staggerDelay?: number
+  viewportMargin?: string
 }) {
   return (
-    <div className={className}>
-      {Array.isArray(children) 
-        ? children.map((child, index) => (
-            <AnimatedSection
-              key={index}
-              animation="fadeIn"
-              delay={index * staggerDelay}
-              className="w-full"
+    <motion.div
+      className={className}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: viewportMargin }}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: staggerDelay } },
+      }}
+    >
+      {Array.isArray(children)
+        ? children.map((child, i) => (
+            <motion.div
+              key={i}
+              variants={{
+                hidden:  { opacity: 0, y: 28 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+              }}
             >
               {child}
-            </AnimatedSection>
+            </motion.div>
           ))
-        : children
-      }
-    </div>
+        : children}
+    </motion.div>
   )
-} 
+}
