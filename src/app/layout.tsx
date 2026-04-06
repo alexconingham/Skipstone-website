@@ -271,7 +271,7 @@ export default function RootLayout({
         <meta name="game:genre" content="Strategy" />
         <meta name="game:genre" content="Roguelike" />
       </head>
-      <body className="bg-[#0e0c0c] text-[#e8dcc8] antialiased">
+      <body className="bg-[#080808] text-[#e8e8e8] antialiased">
         {children}
         <SpeedInsights />
         <Analytics />

@@ -9,25 +9,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Atmospheric noir palette
-        'base':       '#0e0c0c',
-        'panel':      '#1a1614',
-        'lift':       '#241e1c',
-        'amber':      '#c4a35a',
-        'amber-dim':  '#8a6f3a',
-        'sepia':      '#8b7355',
-        'blood':      '#7a1c1c',
-        'text-warm':  '#e8dcc8',
-        'text-mid':   '#c9b99a',
-        'text-muted': '#7a6a58',
-        'text-ghost': '#4a3e35',
-        // Keep legacy
+        'bg-base':    '#080808',
+        'bg-panel':   '#0f0f0f',
+        'phosphor':   '#00ff41',
+        'vhs-cyan':   '#00e5ff',
+        'vhs-mag':    '#ff00ff',
+        'vhs-yellow': '#ffee00',
+        'vhs-red':    '#ff2200',
         background: 'var(--background)',
         foreground: 'var(--foreground)',
       },
       fontFamily: {
-        display: ['var(--font-display)', 'Playfair Display', 'Georgia', 'serif'],
-        body:    ['var(--font-body)',    'Lora',             'Georgia', 'serif'],
+        display: ['var(--font-display)', 'Bebas Neue', 'Impact', 'sans-serif'],
+        mono:    ['var(--font-mono)',    'VT323',      'Courier New', 'monospace'],
       },
       animation: {
         'scroll-left':  'scroll-left 40s linear infinite',

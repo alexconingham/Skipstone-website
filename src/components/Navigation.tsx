@@ -3,23 +3,19 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
-interface NavigationProps {
-  className?: string
-}
-
-export default function Navigation({ className = '' }: NavigationProps) {
+export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const navItems = [
-    { id: 'home',     label: 'Home',     href: '#home' },
-    { id: 'trailer',  label: 'Trailer',  href: '#trailer' },
-    { id: 'memories', label: 'Memories', href: '#memories' },
-    { id: 'enemies',  label: 'Enemies',  href: '#enemies' },
-    { id: 'arsenal',  label: 'Arsenal',  href: '#arsenal' },
-    { id: 'mementos', label: 'Mementos', href: '#mementos' },
-    { id: 'studio',   label: 'Skipstone Studio', href: 'https://skipstone.co.nz', external: true },
+    { id: 'home',     label: 'HOME',    href: '#home' },
+    { id: 'trailer',  label: 'TRAILER', href: '#trailer' },
+    { id: 'memories', label: 'WORLD',   href: '#memories' },
+    { id: 'enemies',  label: 'ENEMIES', href: '#enemies' },
+    { id: 'arsenal',  label: 'ARSENAL', href: '#arsenal' },
+    { id: 'mementos', label: 'LOOT',    href: '#mementos' },
+    { id: 'studio',   label: 'SKIPSTONE ↗', href: 'https://skipstone.co.nz', external: true },
   ]
 
   useEffect(() => {
@@ -51,64 +47,82 @@ export default function Navigation({ className = '' }: NavigationProps) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${className}`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       role="navigation"
       aria-label="Main navigation"
     >
       <div
-        className={`transition-all duration-500 border-b ${
-          isScrolled
-            ? 'bg-[#0e0c0c]/92 backdrop-blur-md border-[rgba(196,163,90,0.1)]'
-            : 'bg-transparent border-transparent'
-        }`}
+        style={{
+          background: isScrolled ? 'rgba(5,5,5,0.95)' : 'transparent',
+          backdropFilter: isScrolled ? 'blur(8px)' : 'none',
+          borderBottom: isScrolled ? '1px solid rgba(0,255,65,0.15)' : '1px solid transparent',
+          transition: 'all 0.3s ease',
+        }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <div className="flex items-center justify-between h-14">
 
             {/* Logo */}
             <button
               onClick={() => scrollTo('#home')}
-              className="flex-shrink-0 opacity-80 hover:opacity-100 transition-opacity duration-300"
+              className="flex-shrink-0 transition-opacity duration-200 hover:opacity-70"
               aria-label="Remember to Die — Home"
             >
               <Image
                 src="/Skipstone_logo.png"
                 alt="Skipstone Studios"
-                width={110}
-                height={22}
-                className="h-7 w-auto"
+                width={100}
+                height={20}
+                className="h-6 w-auto"
+                style={{ filter: 'grayscale(1) brightness(0.6)' }}
                 priority
               />
             </button>
 
             {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-0.5">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollTo(item.href, item.external)}
-                  className={`nav-link ${activeSection === item.id && !item.external ? 'active' : ''}`}
-                  aria-current={activeSection === item.id && !item.external ? 'page' : undefined}
-                >
-                  {item.label}
-                  {item.external && <span className="ml-1 opacity-40 text-[0.55rem]">↗</span>}
-                </button>
-              ))}
+            <div className="hidden md:flex items-center gap-0">
+              {navItems.map((item) => {
+                const isActive = activeSection === item.id && !item.external
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollTo(item.href, item.external)}
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.75rem',
+                      letterSpacing: '0.18em',
+                      color: isActive ? '#00ff41' : 'rgba(232,232,232,0.45)',
+                      textShadow: isActive ? '0 0 8px rgba(0,255,65,0.6)' : 'none',
+                      padding: '6px 10px',
+                      transition: 'all 0.2s ease',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                    }}
+                    onMouseEnter={e => { if (!isActive) (e.target as HTMLElement).style.color = 'rgba(232,232,232,0.85)' }}
+                    onMouseLeave={e => { if (!isActive) (e.target as HTMLElement).style.color = 'rgba(232,232,232,0.45)' }}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </button>
+                )
+              })}
             </div>
 
-            {/* Steam CTA — desktop */}
+            {/* Steam CTA */}
             <div className="hidden md:block">
               <button
                 onClick={() => scrollTo('#steam-cta')}
-                className="opacity-85 hover:opacity-100 transition-all duration-300 hover:scale-[1.03]"
+                className="opacity-75 hover:opacity-100 transition-opacity duration-200 hover:scale-[1.03]"
+                style={{ transform: 'scale(1)', transition: 'all 0.2s ease' }}
                 aria-label="Wishlist on Steam"
               >
                 <Image
                   src="/steam wishlist bw3.png"
                   alt="Wishlist on Steam"
-                  width={180}
-                  height={72}
-                  className="w-auto h-9"
+                  width={160}
+                  height={64}
+                  className="w-auto h-8"
                   quality={90}
                 />
               </button>
@@ -116,19 +130,12 @@ export default function Navigation({ className = '' }: NavigationProps) {
 
             {/* Mobile toggle */}
             <button
-              className="md:hidden text-[#7a6a58] hover:text-[#c4a35a] transition-colors duration-200 p-2"
+              className="md:hidden transition-colors duration-200 p-2"
+              style={{ fontFamily: 'var(--font-mono)', fontSize: '1.4rem', color: 'rgba(0,255,65,0.6)', background: 'none', border: 'none', cursor: 'pointer' }}
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-expanded={mobileOpen}
               aria-label="Toggle menu"
             >
-              <svg className="w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d={mobileOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
-                />
-              </svg>
+              {mobileOpen ? '✕' : '≡'}
             </button>
           </div>
         </div>
@@ -136,34 +143,44 @@ export default function Navigation({ className = '' }: NavigationProps) {
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="fixed inset-0 top-14 bg-[#0e0c0c]/97 backdrop-blur-lg md:hidden z-40 border-t border-[rgba(196,163,90,0.08)]">
+        <div
+          className="fixed inset-0 top-14 md:hidden z-40"
+          style={{ background: 'rgba(5,5,5,0.97)', borderTop: '1px solid rgba(0,255,65,0.15)' }}
+        >
           <div className="px-8 pt-8 pb-8 space-y-1">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => { scrollTo(item.href, item.external); setMobileOpen(false) }}
-                className={`block w-full text-left nav-link py-3 ${
-                  activeSection === item.id && !item.external ? 'active' : ''
-                }`}
-              >
-                {item.label}
-                {item.external && <span className="ml-2 opacity-40 text-[0.55rem]">↗</span>}
-              </button>
-            ))}
-            <div className="pt-6 mt-6 border-t border-[rgba(196,163,90,0.08)]">
+            {navItems.map((item) => {
+              const isActive = activeSection === item.id && !item.external
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => { scrollTo(item.href, item.external); setMobileOpen(false) }}
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    textAlign: 'left',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '1.1rem',
+                    letterSpacing: '0.2em',
+                    color: isActive ? '#00ff41' : 'rgba(232,232,232,0.5)',
+                    textShadow: isActive ? '0 0 8px rgba(0,255,65,0.5)' : 'none',
+                    padding: '12px 0',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    borderBottom: '1px solid rgba(0,255,65,0.06)',
+                  }}
+                >
+                  {item.label}
+                </button>
+              )
+            })}
+            <div className="pt-6">
               <button
                 onClick={() => { scrollTo('#steam-cta'); setMobileOpen(false) }}
-                className="opacity-85 hover:opacity-100 transition-opacity duration-200"
-                aria-label="Wishlist on Steam"
+                className="opacity-80"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
               >
-                <Image
-                  src="/steam wishlist bw3.png"
-                  alt="Wishlist on Steam"
-                  width={240}
-                  height={96}
-                  className="w-auto h-14"
-                  quality={90}
-                />
+                <Image src="/steam wishlist bw3.png" alt="Wishlist on Steam" width={220} height={88} className="w-auto h-12" quality={90} />
               </button>
             </div>
           </div>

@@ -12,26 +12,26 @@ import { getBaseUrl } from '@/utils/config'
 
 const gameAssets = {
   dungeons: [
-    { file: 'D1_bg.PNG',                      name: 'The Trunk' },
-    { file: 'D2_bg.PNG',                      name: 'Bullying' },
-    { file: 'D3_bg.PNG',                      name: 'Graduation' },
-    { file: 'D4_bg.PNG',                      name: 'The Pitch' },
-    { file: 'D5_bg.PNG',                      name: 'Fatherhood' },
-    { file: 'D6_bg.PNG',                      name: 'The Funeral' },
-    { file: 'D7_bg.PNG',                      name: 'Retirement' },
-    { file: 'D8_bg.PNG',                      name: 'Reconciliation' },
-    { file: 'D9_bg.PNG',                      name: 'The Family Album' },
-    { file: 'D10_bg.PNG',                     name: 'The Deathbed' },
-    { file: 'alt_heaven.PNG',                 name: 'Heaven' },
-    { file: 'alt_hell_bg.PNG',                name: 'Hell' },
-    { file: 'alt_purgatory_bg.PNG',           name: 'Purgatory' },
-    { file: 'alt_school_cafeteria_bg.PNG',    name: 'School Cafeteria' },
-    { file: 'alt_the_garage_bg.PNG',          name: 'The Garage' },
-    { file: 'alt_the_trunk_bg.PNG',           name: 'The Trunk Revisited' },
-    { file: 'alt_the_void_bg.PNG',            name: 'The Void' },
-    { file: 'title_char_bg.PNG',              name: 'Character' },
-    { file: 'transition_bg.png',              name: 'Transition' },
-    { file: 'seam_bg.png',                    name: 'Seam' },
+    { file: 'D1_bg.PNG',                   name: 'The Trunk' },
+    { file: 'D2_bg.PNG',                   name: 'Bullying' },
+    { file: 'D3_bg.PNG',                   name: 'Graduation' },
+    { file: 'D4_bg.PNG',                   name: 'The Pitch' },
+    { file: 'D5_bg.PNG',                   name: 'Fatherhood' },
+    { file: 'D6_bg.PNG',                   name: 'The Funeral' },
+    { file: 'D7_bg.PNG',                   name: 'Retirement' },
+    { file: 'D8_bg.PNG',                   name: 'Reconciliation' },
+    { file: 'D9_bg.PNG',                   name: 'The Family Album' },
+    { file: 'D10_bg.PNG',                  name: 'The Deathbed' },
+    { file: 'alt_heaven.PNG',              name: 'Heaven' },
+    { file: 'alt_hell_bg.PNG',             name: 'Hell' },
+    { file: 'alt_purgatory_bg.PNG',        name: 'Purgatory' },
+    { file: 'alt_school_cafeteria_bg.PNG', name: 'School Cafeteria' },
+    { file: 'alt_the_garage_bg.PNG',       name: 'The Garage' },
+    { file: 'alt_the_trunk_bg.PNG',        name: 'The Trunk Revisited' },
+    { file: 'alt_the_void_bg.PNG',         name: 'The Void' },
+    { file: 'title_char_bg.PNG',           name: 'Character' },
+    { file: 'transition_bg.png',           name: 'Transition' },
+    { file: 'seam_bg.png',                 name: 'Seam' },
   ],
   enemies:  getEnemyData(),
   dice:     getDiceData(),
@@ -58,78 +58,98 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
-      <main className="min-h-screen bg-[#0e0c0c] text-[#e8dcc8] relative overflow-x-hidden">
+      <main className="min-h-screen bg-[#080808] text-[#e8e8e8] relative overflow-x-hidden">
         <Navigation />
         <ImageProtection />
         <AudioPlayer />
         <PixelatedWakeBackground />
 
         {/* ══════════════════════════════════════
-            HERO — cinematic, full-viewport
+            HERO
         ══════════════════════════════════════ */}
         <section
           id="home"
-          className="relative min-h-screen flex flex-col items-center justify-end pb-28 px-4"
+          className="relative min-h-screen flex flex-col items-center justify-end pb-24 px-4"
           role="banner"
         >
-          {/* Full-bleed background */}
+          {/* Background */}
           <div className="absolute inset-0">
             <Image
               src="/backgrounds/title_char_bg.PNG"
               alt=""
               fill
               style={{ objectFit: 'cover', objectPosition: 'center top' }}
-              quality={90}
+              quality={85}
               priority
               sizes="100vw"
             />
-            {/* Layered vignette — heavy bottom weight so content is readable */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0e0c0c] via-[#0e0c0c]/60 to-[#0e0c0c]/20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0e0c0c]/50 via-transparent to-[#0e0c0c]/50" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/70 to-[#080808]/30" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#080808]/50 via-transparent to-[#080808]/50" />
           </div>
 
-          {/* Scanlines */}
+          {/* Scanlines + static sweep */}
           <div className="scanlines absolute inset-0 pointer-events-none z-[3]" />
+          <div className="vhs-static-sweep" />
 
-          {/* Hero content — lower-third positioning */}
-          <div className="relative z-20 w-full max-w-4xl mx-auto text-center space-y-7">
+          {/* REC indicator — top right */}
+          <div
+            className="absolute top-20 right-6 z-20 flex items-center gap-2"
+            style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', letterSpacing: '0.15em' }}
+          >
+            <span className="rec-dot" />
+            <span style={{ color: '#ff2200' }}>REC</span>
+          </div>
+
+          {/* VHS badge — top left */}
+          <div
+            className="absolute top-20 left-6 z-20"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.7rem',
+              letterSpacing: '0.2em',
+              color: 'rgba(0,255,65,0.6)',
+              border: '1px solid rgba(0,255,65,0.2)',
+              padding: '2px 8px',
+            }}
+          >
+            VHS SP • HI-FI STEREO
+          </div>
+
+          {/* Hero content */}
+          <div className="relative z-20 w-full max-w-4xl mx-auto text-center space-y-5">
 
             <AnimatedSection animation="scaleIn" delay={200}>
-              <div className="mb-3">
+              <div className="mb-2">
                 <Image
                   src="/title_logo.png"
                   alt="Remember to Die — Tactical Dice Combat Roguelike"
-                  width={540}
-                  height={280}
-                  className="mx-auto max-w-xs md:max-w-md lg:max-w-xl w-full h-auto float-gentle"
-                  style={{
-                    filter: 'drop-shadow(0 4px 32px rgba(196,163,90,0.2)) drop-shadow(0 0 80px rgba(196,163,90,0.07))',
-                  }}
+                  width={520}
+                  height={270}
+                  className="mx-auto max-w-xs md:max-w-md lg:max-w-xl w-full h-auto"
+                  style={{ filter: 'drop-shadow(0 0 30px rgba(0,255,65,0.2)) drop-shadow(0 4px 40px rgba(0,0,0,0.8))' }}
                   priority
                   quality={90}
-                  sizes="(max-width: 768px) 280px, 540px"
+                  sizes="(max-width: 768px) 280px, 520px"
                 />
               </div>
             </AnimatedSection>
 
             <AnimatedSection animation="fadeIn" delay={700}>
-              <div
-                className="space-y-1"
-                style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
-              >
-                <p className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#e8dcc8] tracking-wide leading-tight">
-                  Battle your demons.
+              <div style={{ fontFamily: 'var(--font-display)' }}>
+                <p className="text-3xl md:text-5xl lg:text-6xl tracking-widest text-[#e8e8e8] leading-tight vhs-glitch">
+                  BATTLE YOUR DEMONS.
                 </p>
-                <p className="text-2xl md:text-4xl lg:text-5xl font-bold italic text-[#c4a35a] tracking-wide leading-tight">
-                  Re-roll your destiny.
+                <p className="text-3xl md:text-5xl lg:text-6xl tracking-widest leading-tight"
+                  style={{ color: '#00ff41', textShadow: '0 0 20px rgba(0,255,65,0.5), 0 0 40px rgba(0,255,65,0.2)' }}>
+                  RE-ROLL YOUR DESTINY.
                 </p>
               </div>
             </AnimatedSection>
 
             <AnimatedSection animation="fadeIn" delay={1100}>
               <p
-                className="text-sm md:text-base text-[#7a6a58] leading-relaxed max-w-2xl mx-auto"
-                style={{ fontFamily: 'var(--font-body, Georgia, serif)' }}
+                className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
+                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.6)', letterSpacing: '0.03em' }}
               >
                 Remember to Die is a gritty, narrative-driven battle against time and broken memories,
                 wrapped in an intuitive and moreish dice strategy roguelike where every dice roll
@@ -138,23 +158,17 @@ export default function Home() {
             </AnimatedSection>
 
             <AnimatedSection animation="slideUp" delay={1500}>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-2">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-2">
                 <div className="text-center">
-                  <p
-                    className="text-xs tracking-[0.3em] uppercase text-[#c4a35a] mb-1"
-                    style={{ fontFamily: 'var(--font-body)' }}
-                  >
-                    Coming Soon
+                  <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', letterSpacing: '0.25em', color: '#00ff41' }}>
+                    COMING SOON
                   </p>
-                  <p
-                    className="text-[0.6rem] tracking-[0.2em] uppercase text-[#4a3e35]"
-                    style={{ fontFamily: 'var(--font-body)' }}
-                  >
-                    Steam Early Access
+                  <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.2em', color: 'rgba(0,255,65,0.4)' }}>
+                    STEAM EARLY ACCESS
                   </p>
                 </div>
 
-                <div className="hidden sm:block w-px h-8 bg-[rgba(196,163,90,0.15)]" />
+                <div className="hidden sm:block w-px h-8 bg-[rgba(0,255,65,0.15)]" />
 
                 <a
                   href="#steam-cta"
@@ -174,41 +188,45 @@ export default function Home() {
             </AnimatedSection>
           </div>
 
+          {/* Timestamp — camcorder style, bottom right */}
+          <div
+            className="absolute bottom-10 right-6 z-20 text-right"
+            style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em' }}
+          >
+            <div>04-06-94</div>
+            <div>11:42 PM</div>
+          </div>
+
           {/* Scroll indicator */}
           <AnimatedSection animation="fadeIn" delay={2400}>
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2.5 z-20">
-              <span
-                className="text-[0.55rem] tracking-[0.3em] text-[#4a3e35] uppercase"
-                style={{ fontFamily: 'var(--font-body)' }}
-              >
-                Scroll
-              </span>
-              <div className="scroll-chevron" />
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-20">
+              <span className="vhs-scroll-arrow">▼ FAST-FWD ▼</span>
             </div>
           </AnimatedSection>
         </section>
 
+        <hr className="vhs-divider" />
+
         {/* ══════════════════════════════════════
-            ABOUT — 2-column: copy + trailer
+            SCENE 01 — TRAILER / ABOUT
         ══════════════════════════════════════ */}
-        <section id="trailer" className="relative py-28 px-6 bg-[#0e0c0c]">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0e0c0c] via-[#121010] to-[#0e0c0c] pointer-events-none" />
+        <section id="trailer" className="relative py-20 px-6 bg-[#080808]">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
 
-          <div className="max-w-6xl mx-auto relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-              {/* Left: copy */}
               <AnimatedSection animation="slideRight" delay={200}>
                 <div>
-                  <span className="chapter-label">Official Trailer</span>
+                  <div className="vhs-chapter">SCENE 01 — OFFICIAL TRAILER</div>
                   <h2
-                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#e8dcc8] mb-6 leading-[1.05]"
-                    style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
+                    className="text-6xl md:text-7xl lg:text-8xl mb-5 vhs-glitch"
+                    style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.06em' }}
                   >
-                    Every roll counts.
+                    EVERY ROLL COUNTS.
                   </h2>
-                  <div className="section-rule section-rule-left" />
-                  <p className="text-[#7a6a58] text-base leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
+                  <p
+                    className="text-base leading-relaxed mb-6"
+                    style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.6)' }}
+                  >
                     Remember to Die is a gritty, narrative-driven battle against time and broken memories,
                     wrapped in an intuitive and moreish dice strategy roguelike where every dice roll
                     dredges up a fragmented memory and decides your fate.
@@ -216,276 +234,202 @@ export default function Home() {
                 </div>
               </AnimatedSection>
 
-              {/* Right: trailer */}
               <AnimatedSection animation="slideLeft" delay={400}>
                 <VideoTrailer src="/RTD_trailerv5.mp4" />
               </AnimatedSection>
             </div>
 
-            {/* Feature editorial callouts */}
+            {/* Feature callouts */}
             <AnimatedSection animation="fadeIn" delay={600}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-0 mt-24 border-b border-[rgba(196,163,90,0.08)]">
-
-                <div className="editorial-callout">
-                  <span className="editorial-callout__number">01</span>
-                  <span className="editorial-callout__title">Tactical Dice Combat</span>
-                  <span className="editorial-callout__body">
-                    Strategic dice-based battles with endless depth.
-                  </span>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-16">
+                <div className="vhs-callout">
+                  <span className="vhs-callout__num">TRACK 01</span>
+                  <span className="vhs-callout__title">TACTICAL DICE COMBAT</span>
+                  <span className="vhs-callout__body">Strategic dice-based battles with endless depth.</span>
                 </div>
-
-                <div className="editorial-callout md:border-l border-[rgba(196,163,90,0.08)]">
-                  <span className="editorial-callout__number">02</span>
-                  <span className="editorial-callout__title">Memory Fragments</span>
-                  <span className="editorial-callout__body">
-                    Unlock haunting memories that shape your destiny.
-                  </span>
+                <div className="vhs-callout">
+                  <span className="vhs-callout__num">TRACK 02</span>
+                  <span className="vhs-callout__title">MEMORY FRAGMENTS</span>
+                  <span className="vhs-callout__body">Unlock haunting memories that shape your destiny.</span>
                 </div>
-
-                <div className="editorial-callout md:border-l border-[rgba(196,163,90,0.08)]">
-                  <span className="editorial-callout__number">03</span>
-                  <span className="editorial-callout__title">Infinite Replayability</span>
-                  <span className="editorial-callout__body">
-                    Every run tells a different story.
-                  </span>
+                <div className="vhs-callout">
+                  <span className="vhs-callout__num">TRACK 03</span>
+                  <span className="vhs-callout__title">INFINITE REPLAYABILITY</span>
+                  <span className="vhs-callout__body">Every run tells a different story.</span>
                 </div>
-
               </div>
             </AnimatedSection>
           </div>
         </section>
 
+        <hr className="vhs-divider" />
+
         {/* ══════════════════════════════════════
-            MEMORIES / WORLD BACKGROUNDS
+            SCENE 02 — MEMORIES
         ══════════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
-          <section
-            id="memories"
-            className="py-24 px-6 relative overflow-hidden"
-            aria-labelledby="memories-heading"
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0e0c0c] via-[#110e0d] to-[#0e0c0c] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(196,163,90,0.12)] to-transparent" />
-
+          <section id="memories" className="py-20 px-6 relative overflow-hidden" aria-labelledby="memories-heading">
             <div className="max-w-6xl mx-auto relative z-10">
-              <div className="mb-14">
-                <span className="chapter-label">The World</span>
+              <div className="mb-12">
+                <div className="vhs-chapter">SCENE 02 — THE WORLD</div>
                 <h2
                   id="memories-heading"
-                  className="text-5xl md:text-6xl lg:text-7xl font-light text-[#e8dcc8] leading-[1.0] mb-3"
-                  style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
+                  className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch"
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  A lifetime of<br />
-                  <em className="italic text-[#c4a35a]">memories.</em>
+                  A LIFETIME OF MEMORIES
                 </h2>
-                <div className="section-rule section-rule-left" />
-                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)' }}>
+                <p style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.55)', fontSize: '1rem' }}>
                   Each fragment you unlock splinters the story into new fates; you choose which fantasies to pursue, and which truths to rewrite.
                 </p>
               </div>
-              <ImageGallery
-                items={gameAssets.dungeons}
-                folder="backgrounds"
-                direction="right"
-                size="massive"
-                galleryId="dungeons"
-                showTooltips={false}
-              />
+              <ImageGallery items={gameAssets.dungeons} folder="backgrounds" direction="right" size="massive" galleryId="dungeons" showTooltips={false} />
             </div>
           </section>
         </AnimatedSection>
 
+        <hr className="vhs-divider" />
+
         {/* ══════════════════════════════════════
-            ENEMIES — haunting faces
+            SCENE 03 — ENEMIES
         ══════════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
-          <section
-            id="enemies"
-            className="py-24 px-6 relative overflow-hidden"
-            aria-labelledby="enemies-heading"
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0e0c0c] via-[#130d0d] to-[#0e0c0c] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(122,28,28,0.2)] to-transparent" />
-
+          <section id="enemies" className="py-20 px-6 relative overflow-hidden" aria-labelledby="enemies-heading">
             <div className="max-w-6xl mx-auto relative z-10">
-              <div className="mb-14">
-                <span className="chapter-label" style={{ color: 'rgba(122,28,28,0.7)' }}>The Enemies</span>
+              <div className="mb-12">
+                <div className="vhs-chapter" style={{ color: '#ff2200' }}>
+                  <span style={{ color: '#ff2200' }}>■</span>
+                  SCENE 03 — ENEMIES
+                  <span style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, rgba(255,34,0,0.4), transparent)', maxWidth: '240px', display: 'block' }} />
+                </div>
                 <h2
                   id="enemies-heading"
-                  className="text-5xl md:text-6xl lg:text-7xl font-light text-[#e8dcc8] leading-[1.0] mb-3"
-                  style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
+                  className="text-6xl md:text-7xl lg:text-8xl mb-4"
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    textShadow: '2px 0 rgba(255,0,255,0.8), -2px 0 rgba(0,229,255,0.8)',
+                    animation: 'chroma-burst 9s step-end infinite',
+                  }}
                 >
-                  A string of<br />
-                  <em className="italic" style={{ color: '#9b3535' }}>haunting faces.</em>
+                  A STRING OF HAUNTING FACES
                 </h2>
-                <div className="section-rule section-rule-left" style={{ background: '#7a1c1c', opacity: 0.5 }} />
-                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)' }}>
+                <p style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.55)', fontSize: '1rem' }}>
                   Each enemy hints at more of the haunting truth.
                 </p>
               </div>
-              <ImageGallery
-                items={gameAssets.enemies}
-                folder="portraits"
-                direction="left"
-                size="extra-large"
-                galleryId="enemies"
-              />
+              <ImageGallery items={gameAssets.enemies} folder="portraits" direction="left" size="extra-large" galleryId="enemies" />
             </div>
           </section>
         </AnimatedSection>
 
+        <hr className="vhs-divider" />
+
         {/* ══════════════════════════════════════
-            ARSENAL / DICE
+            SCENE 04 — ARSENAL
         ══════════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
-          <section
-            id="arsenal"
-            className="py-24 px-6 relative overflow-hidden"
-            aria-labelledby="dice-heading"
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0e0c0c] via-[#0e100d] to-[#0e0c0c] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(74,100,74,0.15)] to-transparent" />
-
+          <section id="arsenal" className="py-20 px-6 relative overflow-hidden" aria-labelledby="dice-heading">
             <div className="max-w-6xl mx-auto relative z-10">
-              <div className="mb-14">
-                <span className="chapter-label" style={{ color: 'rgba(74,100,60,0.8)' }}>The Arsenal</span>
+              <div className="mb-12">
+                <div className="vhs-chapter">SCENE 04 — ARSENAL</div>
                 <h2
                   id="dice-heading"
-                  className="text-5xl md:text-6xl lg:text-7xl font-light text-[#e8dcc8] leading-[1.0] mb-3"
-                  style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
+                  className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch"
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  An evolving<br />
-                  <em className="italic" style={{ color: '#5a7a52' }}>arsenal.</em>
+                  AN EVOLVING ARSENAL
                 </h2>
-                <div className="section-rule section-rule-left" style={{ background: '#4a6444', opacity: 0.5 }} />
-                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)' }}>
+                <p style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.55)', fontSize: '1rem' }}>
                   Collect and refine powerful dice combinations.
                 </p>
               </div>
-              <ImageGallery
-                items={gameAssets.dice}
-                folder="dice"
-                direction="right"
-                size="medium"
-                galleryId="dice"
-              />
+              <ImageGallery items={gameAssets.dice} folder="dice" direction="right" size="medium" galleryId="dice" />
             </div>
           </section>
         </AnimatedSection>
 
+        <hr className="vhs-divider" />
+
         {/* ══════════════════════════════════════
-            MEMENTOS — a drawer of regrets
+            SCENE 05 — MEMENTOS
         ══════════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
-          <section
-            id="mementos"
-            className="py-24 px-6 relative overflow-hidden"
-            aria-labelledby="mementos-heading"
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0e0c0c] via-[#100d12] to-[#0e0c0c] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(100,74,122,0.15)] to-transparent" />
-
+          <section id="mementos" className="py-20 px-6 relative overflow-hidden" aria-labelledby="mementos-heading">
             <div className="max-w-6xl mx-auto relative z-10">
-              <div className="mb-14">
-                <span className="chapter-label" style={{ color: 'rgba(100,74,122,0.8)' }}>The Mementos</span>
+              <div className="mb-12">
+                <div className="vhs-chapter">SCENE 05 — COLLECTIBLES</div>
                 <h2
                   id="mementos-heading"
-                  className="text-5xl md:text-6xl lg:text-7xl font-light text-[#e8dcc8] leading-[1.0] mb-3"
-                  style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
+                  className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch"
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  And a bagful<br />
-                  <em className="italic" style={{ color: '#7a5a9b' }}>of tricks.</em>
+                  AND A BAGFUL OF TRICKS...
                 </h2>
-                <div className="section-rule section-rule-left" style={{ background: '#6a4a8a', opacity: 0.5 }} />
-                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)' }}>
+                <p style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.55)', fontSize: '1rem' }}>
                   Collect mementos drenched in heartbreaking lore, each with unique effects.
                 </p>
               </div>
-              <ImageGallery
-                items={gameAssets.mementos}
-                folder="mementos"
-                direction="left"
-                size="medium"
-                galleryId="mementos"
-              />
+              <ImageGallery items={gameAssets.mementos} folder="mementos" direction="left" size="medium" galleryId="mementos" />
             </div>
           </section>
         </AnimatedSection>
 
+        <hr className="vhs-divider" />
+
         {/* ══════════════════════════════════════
-            WATCHES — time is not on your side
+            SCENE 06 — WATCHES
         ══════════════════════════════════════ */}
         <AnimatedSection animation="slideUp" delay={200}>
-          <section
-            className="py-24 px-6 relative overflow-hidden"
-            aria-labelledby="watches-heading"
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0e0c0c] via-[#120f0a] to-[#0e0c0c] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(196,163,90,0.12)] to-transparent" />
-
+          <section className="py-20 px-6 relative overflow-hidden" aria-labelledby="watches-heading">
             <div className="max-w-6xl mx-auto relative z-10">
-              <div className="mb-14">
-                <span className="chapter-label">The Time</span>
+              <div className="mb-12">
+                <div className="vhs-chapter">SCENE 06 — TIME</div>
                 <h2
                   id="watches-heading"
-                  className="text-5xl md:text-6xl lg:text-7xl font-light text-[#e8dcc8] leading-[1.0] mb-3"
-                  style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
+                  className="text-6xl md:text-7xl lg:text-8xl mb-4 vhs-glitch"
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  But time is not<br />
-                  <em className="italic text-[#c4a35a]">on your side.</em>
+                  BUT TIME IS NOT ON YOUR SIDE...
                 </h2>
-                <div className="section-rule section-rule-left" />
-                <p className="text-[#7a6a58] text-sm leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-body)' }}>
+                <p style={{ fontFamily: 'var(--font-mono)', color: 'rgba(232,232,232,0.55)', fontSize: '1rem' }}>
                   Unique watches shift the odds.
                 </p>
               </div>
-              <ImageGallery
-                items={gameAssets.watches}
-                folder="watches"
-                direction="right"
-                size="medium"
-                galleryId="watches"
-              />
+              <ImageGallery items={gameAssets.watches} folder="watches" direction="right" size="medium" galleryId="watches" />
             </div>
           </section>
         </AnimatedSection>
+
+        <hr className="vhs-divider" />
 
         {/* CTA */}
         <CTASection />
 
-        {/* ══════════════════════════════════════
-            FOOTER
-        ══════════════════════════════════════ */}
+        {/* FOOTER */}
         <footer
-          className="relative py-16 px-6 border-t border-[rgba(196,163,90,0.07)]"
+          className="relative py-14 px-6 border-t"
+          style={{ borderColor: 'rgba(0,255,65,0.1)' }}
           role="contentinfo"
         >
-          <div className="max-w-4xl mx-auto text-center space-y-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center space-y-5 relative z-10">
             <AnimatedSection animation="fadeIn">
-              <div className="flex justify-center mb-6">
+              <div className="flex justify-center mb-4">
                 <Image
                   src="/Skipstone_logo.png"
-                  alt="Skipstone Studios — Indie Game Developer"
-                  width={380}
-                  height={60}
-                  className="w-auto h-12 opacity-40 hover:opacity-70 transition-opacity duration-500"
+                  alt="Skipstone Studios"
+                  width={360}
+                  height={58}
+                  className="w-auto h-10 opacity-30 hover:opacity-60 transition-opacity duration-500"
                   loading="lazy"
                   quality={80}
+                  style={{ filter: 'grayscale(1)' }}
                 />
               </div>
-              <p
-                className="text-[#4a3e35] text-xs tracking-[0.2em] uppercase"
-                style={{ fontFamily: 'var(--font-body)', fontWeight: 400 }}
-              >
-                © 2024{' '}
-                <span className="text-[#7a6a58]">Skipstone Studios</span>.
-                {' '}All rights reserved.
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', letterSpacing: '0.2em', color: 'rgba(232,232,232,0.25)' }}>
+                © 2024 SKIPSTONE STUDIOS. ALL RIGHTS RESERVED.
               </p>
-              <p
-                className="text-[#2a221e] text-sm tracking-widest mt-3"
-                style={{ fontFamily: 'var(--font-display, Georgia, serif)', fontStyle: 'italic' }}
-              >
-                Every roll counts, and death is just the beginning.
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.15em', color: 'rgba(0,255,65,0.2)', marginTop: '0.5rem' }}>
+                EVERY ROLL COUNTS, AND DEATH IS JUST THE BEGINNING.
               </p>
             </AnimatedSection>
           </div>

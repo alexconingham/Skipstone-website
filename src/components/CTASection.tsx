@@ -4,118 +4,130 @@ import { useState } from 'react'
 import Image from 'next/image'
 import AnimatedSection from './AnimatedSection'
 
-interface CTASectionProps {
-  className?: string
-}
+export default function CTASection({ className = '' }: { className?: string }) {
+  const [email, setEmail]           = useState('')
+  const [isSubscribed, setSubscribed] = useState(false)
+  const [isLoading, setLoading]     = useState(false)
+  const [error, setError]           = useState('')
 
-export default function CTASection({ className = '' }: CTASectionProps) {
-  const [email, setEmail] = useState('')
-  const [isSubscribed, setIsSubscribed] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || isLoading) return
-    setIsLoading(true)
-    setError('')
-
+    setLoading(true); setError('')
     try {
-      const response = await fetch('/api/subscribe', {
+      const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       })
-      const data = await response.json()
-      if (response.ok) {
-        setIsSubscribed(true)
-        setEmail('')
-      } else {
-        setError(data.error || 'Something went wrong. Please try again.')
-      }
+      const data = await res.json()
+      if (res.ok) { setSubscribed(true); setEmail('') }
+      else setError(data.error || 'Something went wrong. Please try again.')
     } catch {
       setError('Something went wrong. Please try again.')
     } finally {
-      setIsLoading(false)
+      setLoading(false)
     }
   }
+
+  const mono: React.CSSProperties = { fontFamily: 'VT323, Courier New, monospace' }
+  const display: React.CSSProperties = { fontFamily: 'Bebas Neue, Impact, sans-serif' }
+  const green = '#00ff41'
 
   return (
     <section
       id="steam-cta"
       className={`relative overflow-hidden ${className}`}
+      style={{ background: '#080808' }}
       aria-labelledby="cta-heading"
     >
-      {/* Background — world art behind dark scrim */}
+      {/* Background image with heavy vhs scrim */}
       <div className="absolute inset-0">
         <Image
           src="/backgrounds/alt_the_void_bg.PNG"
           alt=""
           fill
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-          quality={80}
+          style={{ objectFit: 'cover', objectPosition: 'center', filter: 'grayscale(0.8) brightness(0.3)' }}
+          quality={70}
         />
-        <div className="absolute inset-0 bg-[#0e0c0c]/88" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0e0c0c] via-transparent to-[#0e0c0c]" />
+        <div className="absolute inset-0" style={{ background: 'rgba(8,8,8,0.82)' }} />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.35) 0px, rgba(0,0,0,0.35) 1px, transparent 1px, transparent 3px)' }}
+        />
       </div>
 
-      <div className="scanlines absolute inset-0 pointer-events-none z-[2]" />
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-24">
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 py-28">
-
-        {/* Stats — earned, not boastful */}
+        {/* Stats — VHS spec stickers */}
         <AnimatedSection animation="fadeIn" delay={100}>
-          <div className="grid grid-cols-3 gap-0 border-t border-b border-[rgba(196,163,90,0.1)] mb-20 divide-x divide-[rgba(196,163,90,0.08)]">
-            <div className="stat-callout">
-              <span className="stat-callout__number">1000<span style={{ fontSize: '0.45em', verticalAlign: 'super', opacity: 0.5 }}>+</span></span>
-              <span className="stat-callout__label">Wishlists & counting</span>
-            </div>
-            <div className="stat-callout">
-              <span className="stat-callout__number">50<span style={{ fontSize: '0.45em', verticalAlign: 'super', opacity: 0.5 }}>+</span></span>
-              <span className="stat-callout__label">Hours of content</span>
-            </div>
-            <div className="stat-callout">
-              <span className="stat-callout__number" style={{ fontStyle: 'italic' }}>∞</span>
-              <span className="stat-callout__label">Replayability</span>
-            </div>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3,1fr)',
+              borderTop: '1px solid rgba(0,255,65,0.12)',
+              borderBottom: '1px solid rgba(0,255,65,0.12)',
+              marginBottom: '4rem',
+            }}
+          >
+            {[
+              { num: '1000+', label: 'WISHLISTS' },
+              { num: '50+',   label: 'HRS OF CONTENT' },
+              { num: '∞',     label: 'REPLAYABILITY' },
+            ].map((s, i) => (
+              <div
+                key={i}
+                className="vhs-stat"
+                style={{ borderRight: i < 2 ? '1px solid rgba(0,255,65,0.1)' : 'none' }}
+              >
+                <span className="vhs-stat__num">{s.num}</span>
+                <span className="vhs-stat__label">{s.label}</span>
+              </div>
+            ))}
           </div>
         </AnimatedSection>
 
         {/* Main CTA */}
         <div className="text-center">
           <AnimatedSection animation="fadeIn" delay={300}>
-            <span className="chapter-label">Join the Wishlist</span>
+            <div style={{ ...mono, fontSize: '0.8rem', letterSpacing: '0.25em', color: 'rgba(0,255,65,0.5)', marginBottom: '1rem' }}>
+              ■ PRESS PLAY TO BEGIN
+            </div>
             <h2
               id="cta-heading"
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#e8dcc8] leading-[1.05] mb-6"
-              style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
+              className="vhs-glitch"
+              style={{
+                ...display,
+                fontSize: 'clamp(3.5rem, 8vw, 7rem)',
+                letterSpacing: '0.06em',
+                lineHeight: 1.0,
+                color: '#e8e8e8',
+                marginBottom: '1.5rem',
+              }}
             >
-              Begin Your Journey
+              BEGIN YOUR JOURNEY
             </h2>
-            <div className="section-rule" />
-            <p
-              className="text-[#7a6a58] text-base max-w-xl mx-auto leading-relaxed mb-12 mt-6"
-              style={{ fontFamily: 'var(--font-body)' }}
-            >
+            <p style={{ ...mono, fontSize: '1rem', color: 'rgba(232,232,232,0.5)', maxWidth: '480px', margin: '0 auto 2.5rem', lineHeight: 1.6 }}>
               Wishlist Remember to Die on Steam and be the first to experience this haunting tactical roguelike.
             </p>
           </AnimatedSection>
 
-          {/* Steam wishlist button */}
+          {/* Steam button */}
           <AnimatedSection animation="slideUp" delay={500}>
-            <div className="mb-16">
+            <div style={{ marginBottom: '3.5rem' }}>
               <a
                 href="https://store.steampowered.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block opacity-90 hover:opacity-100 transition-all duration-300 hover:scale-[1.04]"
+                style={{ display: 'inline-block', opacity: 0.9 }}
+                className="hover:opacity-100 transition-opacity duration-200 hover:scale-[1.03]"
                 aria-label="Wishlist Remember to Die on Steam"
               >
                 <Image
                   src="/steam wishlist bw3.png"
                   alt="Wishlist on Steam"
-                  width={380}
-                  height={152}
+                  width={360}
+                  height={144}
                   className="w-auto h-20 md:h-24"
                   quality={90}
                 />
@@ -123,60 +135,73 @@ export default function CTASection({ className = '' }: CTASectionProps) {
             </div>
           </AnimatedSection>
 
-          {/* Newsletter */}
+          {/* Newsletter — VHS terminal style */}
           <AnimatedSection animation="fadeIn" delay={700}>
             <div
-              className="max-w-md mx-auto border border-[rgba(196,163,90,0.1)] p-8"
-              style={{ background: 'rgba(14,12,12,0.7)' }}
+              style={{
+                maxWidth: '380px',
+                margin: '0 auto',
+                border: '1px solid rgba(0,255,65,0.18)',
+                background: 'rgba(6,13,6,0.9)',
+                padding: '1.5rem',
+              }}
             >
-              <h3
-                className="text-xl font-bold text-[#c9b99a] mb-2"
-                style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
-              >
-                Stay Updated
-              </h3>
-              <p
-                className="text-[#4a3e35] text-sm mb-6 leading-relaxed"
-                style={{ fontFamily: 'var(--font-body)' }}
-              >
+              <div style={{ ...mono, fontSize: '0.75rem', color: green, letterSpacing: '0.2em', marginBottom: '0.35rem' }}>
+                ■ STAY UPDATED
+              </div>
+              <p style={{ ...mono, fontSize: '0.85rem', color: 'rgba(0,255,65,0.4)', marginBottom: '1rem', lineHeight: 1.5 }}>
                 Get exclusive updates, behind-the-scenes content, and early access opportunities.
               </p>
 
               {!isSubscribed ? (
-                <form onSubmit={handleNewsletterSubmit} className="space-y-3">
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your@email.com"
-                    className="w-full px-4 py-3 bg-transparent border border-[rgba(196,163,90,0.15)] text-[#c9b99a] placeholder-[#4a3e35] focus:outline-none focus:border-[rgba(196,163,90,0.4)] transition-colors duration-200 text-sm"
-                    style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="USER@EMAIL.COM"
                     required
                     disabled={isLoading}
+                    style={{
+                      ...mono,
+                      fontSize: '0.9rem',
+                      letterSpacing: '0.1em',
+                      background: 'rgba(0,255,65,0.04)',
+                      border: '1px solid rgba(0,255,65,0.2)',
+                      color: green,
+                      padding: '8px 12px',
+                      outline: 'none',
+                      width: '100%',
+                    }}
                   />
                   {error && (
-                    <p className="text-[#7a1c1c] text-xs" style={{ fontFamily: 'var(--font-body)' }}>
-                      {error}
-                    </p>
+                    <p style={{ ...mono, fontSize: '0.8rem', color: '#ff2200', letterSpacing: '0.1em' }}>{error}</p>
                   )}
                   <button
                     type="submit"
                     disabled={isLoading || !email}
-                    className="w-full py-3 border border-[rgba(196,163,90,0.25)] text-[#c4a35a] text-xs tracking-[0.2em] uppercase hover:border-[rgba(196,163,90,0.5)] hover:bg-[rgba(196,163,90,0.05)] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
-                    style={{ fontFamily: 'var(--font-body)', fontWeight: 500 }}
+                    style={{
+                      ...mono,
+                      fontSize: '0.85rem',
+                      letterSpacing: '0.2em',
+                      background: isLoading ? 'rgba(0,255,65,0.05)' : 'rgba(0,255,65,0.1)',
+                      border: '1px solid rgba(0,255,65,0.3)',
+                      color: isLoading ? 'rgba(0,255,65,0.3)' : green,
+                      padding: '8px 12px',
+                      cursor: isLoading ? 'not-allowed' : 'pointer',
+                      transition: 'all 0.2s ease',
+                      width: '100%',
+                    }}
                   >
-                    {isLoading ? 'Subscribing…' : 'Subscribe for Updates'}
+                    {isLoading ? 'LOADING...' : '► SUBSCRIBE'}
                   </button>
                 </form>
               ) : (
-                <div className="py-8 text-center">
-                  <p
-                    className="text-[#e8dcc8] text-xl font-bold mb-2"
-                    style={{ fontFamily: 'var(--font-display, Georgia, serif)' }}
-                  >
-                    Thank You!
+                <div style={{ textAlign: 'center', padding: '1rem 0' }}>
+                  <p style={{ ...mono, fontSize: '1rem', color: green, letterSpacing: '0.15em', textShadow: `0 0 10px ${green}` }}>
+                    ✓ SUBSCRIBED
                   </p>
-                  <p className="text-[#4a3e35] text-sm" style={{ fontFamily: 'var(--font-body)' }}>
+                  <p style={{ ...mono, fontSize: '0.8rem', color: 'rgba(0,255,65,0.4)', marginTop: '4px' }}>
                     You're now subscribed to our updates.
                   </p>
                 </div>
