@@ -72,7 +72,7 @@ export default function Home() {
         ══════════════════════════════════════ */}
         <section
           id="home"
-          className="relative min-h-screen flex flex-col items-center justify-end pb-24 px-4"
+          className="relative min-h-screen flex flex-col items-center justify-end pt-20 pb-24 px-4"
           role="banner"
         >
           {/* Parallax background layers */}
