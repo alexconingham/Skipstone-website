@@ -65,10 +65,10 @@ export default function Navigation() {
 
       <div
         style={{
-          background: isScrolled ? 'rgba(5,5,5,0.96)' : 'linear-gradient(to bottom, rgba(5,5,5,0.8) 0%, transparent 100%)',
-          backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-          borderBottom: isScrolled ? '1px solid rgba(0,255,65,0.1)' : '1px solid transparent',
-          transition: 'all 0.4s ease',
+          background: isScrolled ? 'rgba(5,5,5,0.98)' : 'rgba(5,5,5,0.82)',
+          backdropFilter: 'blur(14px)',
+          borderBottom: isScrolled ? '1px solid rgba(0,255,65,0.12)' : '1px solid rgba(0,255,65,0.05)',
+          transition: 'background 0.4s ease, border-color 0.4s ease',
         }}
       >
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
@@ -83,10 +83,9 @@ export default function Navigation() {
               <Image
                 src="/Skipstone_logo.png"
                 alt="Skipstone Studios"
-                width={200}
-                height={40}
-                className="h-10 w-auto"
-                style={{ filter: 'grayscale(1) brightness(0.65)' }}
+                width={260}
+                height={52}
+                style={{ height: '52px', width: 'auto', filter: 'brightness(0.9)', opacity: 0.9 }}
                 priority
               />
             </button>

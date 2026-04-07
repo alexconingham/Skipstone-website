@@ -409,19 +409,19 @@ export default function Home() {
                   alt="Skipstone Studios"
                   width={720}
                   height={116}
-                  className="w-auto h-20 opacity-55 hover:opacity-80 transition-opacity duration-500"
+                  className="opacity-75 hover:opacity-100 transition-opacity duration-500"
                   loading="lazy"
                   quality={80}
-                  style={{ filter: 'grayscale(1)' }}
+                  style={{ height: '80px', width: 'auto' }}
                 />
               </div>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', letterSpacing: '0.2em', color: 'rgba(232,232,232,0.55)' }}>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', letterSpacing: '0.2em', color: 'rgba(232,232,232,0.8)' }}>
                 © 2024 SKIPSTONE STUDIOS. ALL RIGHTS RESERVED.
               </p>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.15em', color: 'rgba(0,255,65,0.45)', marginTop: '0.5rem' }}>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.15em', color: 'rgba(0,255,65,0.7)', marginTop: '0.5rem' }}>
                 EVERY ROLL COUNTS, AND DEATH IS JUST THE BEGINNING.
               </p>
-              <a href="/privacy" className="inline-block text-[0.6rem] tracking-[0.2em] text-gray-500 hover:text-cyan-400 transition-colors duration-200 uppercase mt-3">
+              <a href="/privacy" className="inline-block text-[0.6rem] tracking-[0.2em] text-gray-400 hover:text-cyan-400 transition-colors duration-200 uppercase mt-3">
                 Privacy Policy
               </a>
             </AnimatedSection>
