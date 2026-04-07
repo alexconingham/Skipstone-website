@@ -158,10 +158,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-2">
                 <div className="text-center">
                   <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', letterSpacing: '0.22em', color: '#00ff41', textShadow: '0 0 10px rgba(0,255,65,0.4)' }}>
-                    COMING SOON
-                  </p>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.15em', color: 'rgba(0,255,65,0.4)', textTransform: 'uppercase' }}>
-                    Steam Early Access
+                    COMING SEPTEMBER 26TH
                   </p>
                 </div>
 
@@ -175,9 +172,9 @@ export default function Home() {
                   <Image
                     src="/steam wishlist bw3.png"
                     alt="Wishlist on Steam"
-                    width={260}
-                    height={104}
-                    className="w-auto h-14 md:h-16"
+                    width={400}
+                    height={160}
+                    className="w-auto h-20 md:h-24"
                     quality={90}
                   />
                 </a>
@@ -410,21 +407,21 @@ export default function Home() {
                 <Image
                   src="/Skipstone_logo.png"
                   alt="Skipstone Studios"
-                  width={360}
-                  height={58}
-                  className="w-auto h-10 opacity-30 hover:opacity-60 transition-opacity duration-500"
+                  width={720}
+                  height={116}
+                  className="w-auto h-20 opacity-55 hover:opacity-80 transition-opacity duration-500"
                   loading="lazy"
                   quality={80}
                   style={{ filter: 'grayscale(1)' }}
                 />
               </div>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', letterSpacing: '0.2em', color: 'rgba(232,232,232,0.25)' }}>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', letterSpacing: '0.2em', color: 'rgba(232,232,232,0.55)' }}>
                 © 2024 SKIPSTONE STUDIOS. ALL RIGHTS RESERVED.
               </p>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.15em', color: 'rgba(0,255,65,0.2)', marginTop: '0.5rem' }}>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.15em', color: 'rgba(0,255,65,0.45)', marginTop: '0.5rem' }}>
                 EVERY ROLL COUNTS, AND DEATH IS JUST THE BEGINNING.
               </p>
-              <a href="/privacy" className="inline-block text-[0.6rem] tracking-[0.2em] text-gray-700 hover:text-cyan-400 transition-colors duration-200 uppercase mt-3">
+              <a href="/privacy" className="inline-block text-[0.6rem] tracking-[0.2em] text-gray-500 hover:text-cyan-400 transition-colors duration-200 uppercase mt-3">
                 Privacy Policy
               </a>
             </AnimatedSection>

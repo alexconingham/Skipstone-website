@@ -70,9 +70,9 @@ export default function CTASection({ className = '' }: { className?: string }) {
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
         >
           {[
-            { num: '1000+', label: 'Wishlists' },
-            { num: '50+',   label: 'Hours of content' },
-            { num: '∞',     label: 'Replayability' },
+            { num: '32',  label: 'Dice' },
+            { num: '117', label: 'Mementos' },
+            { num: '∞',   label: 'Replayability' },
           ].map((s, i) => (
             <motion.div
               key={i}
@@ -161,9 +161,9 @@ export default function CTASection({ className = '' }: { className?: string }) {
                 <Image
                   src="/steam wishlist bw3.png"
                   alt="Wishlist on Steam"
-                  width={360}
-                  height={144}
-                  className="w-auto h-20 md:h-24"
+                  width={520}
+                  height={208}
+                  className="w-auto h-28 md:h-32"
                   quality={90}
                 />
               </a>

@@ -84,11 +84,11 @@ html {
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.38) 0px,
-    rgba(0, 0, 0, 0.38) 1px,
-    transparent 1px,
-    transparent 3px
+    180deg,
+    transparent          0px,
+    transparent          2px,
+    rgba(0, 0, 0, 0.22)  2px,
+    rgba(0, 0, 0, 0.22)  4px
   );
   pointer-events: none;
   z-index: 4;

@@ -65,14 +65,14 @@ export default function Navigation() {
 
       <div
         style={{
-          background: isScrolled ? 'rgba(5,5,5,0.96)' : 'transparent',
+          background: isScrolled ? 'rgba(5,5,5,0.96)' : 'linear-gradient(to bottom, rgba(5,5,5,0.8) 0%, transparent 100%)',
           backdropFilter: isScrolled ? 'blur(12px)' : 'none',
           borderBottom: isScrolled ? '1px solid rgba(0,255,65,0.1)' : '1px solid transparent',
           transition: 'all 0.4s ease',
         }}
       >
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div className="flex items-center justify-between h-14">
+          <div className="flex items-center justify-between h-16">
 
             {/* Logo */}
             <button
@@ -83,10 +83,10 @@ export default function Navigation() {
               <Image
                 src="/Skipstone_logo.png"
                 alt="Skipstone Studios"
-                width={100}
-                height={20}
-                className="h-5 w-auto"
-                style={{ filter: 'grayscale(1) brightness(0.55)' }}
+                width={200}
+                height={40}
+                className="h-10 w-auto"
+                style={{ filter: 'grayscale(1) brightness(0.65)' }}
                 priority
               />
             </button>
@@ -155,9 +155,9 @@ export default function Navigation() {
                 <Image
                   src="/steam wishlist bw3.png"
                   alt="Wishlist on Steam"
-                  width={160}
-                  height={64}
-                  className="w-auto h-7"
+                  width={260}
+                  height={104}
+                  className="w-auto h-12"
                   quality={90}
                 />
               </button>
@@ -187,7 +187,7 @@ export default function Navigation() {
       {/* Mobile drawer */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 top-14 md:hidden z-40"
+          className="fixed inset-0 top-16 md:hidden z-40"
           style={{
             background: 'rgba(5,5,5,0.98)',
             borderTop: '1px solid rgba(0,255,65,0.08)',
@@ -226,7 +226,7 @@ export default function Navigation() {
                 onClick={() => scrollTo('#steam-cta')}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, opacity: 0.7 }}
               >
-                <Image src="/steam wishlist bw3.png" alt="Wishlist on Steam" width={220} height={88} className="w-auto h-12" quality={90} />
+                <Image src="/steam wishlist bw3.png" alt="Wishlist on Steam" width={320} height={128} className="w-auto h-16" quality={90} />
               </button>
             </div>
           </div>

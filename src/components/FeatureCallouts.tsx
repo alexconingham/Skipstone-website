@@ -30,7 +30,10 @@ export default function FeatureCallouts() {
   return (
     <motion.div
       className="grid grid-cols-1 md:grid-cols-3 gap-0 mt-16"
-      style={{ border: '1px solid rgba(0,255,65,0.12)' }}
+      style={{
+        border: '1px solid rgba(0,255,65,0.22)',
+        boxShadow: '0 0 0 1px rgba(0,255,65,0.06), 0 0 60px rgba(0,255,65,0.05), inset 0 1px 0 rgba(0,255,65,0.12)',
+      }}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-60px 0px' }}
@@ -44,8 +47,8 @@ export default function FeatureCallouts() {
           key={t.num}
           style={{
             position: 'relative',
-            background: '#070707',
-            borderRight: i < 2 ? '1px solid rgba(0,255,65,0.12)' : 'none',
+            background: 'linear-gradient(160deg, rgba(0,255,65,0.025) 0%, #070707 60%)',
+            borderRight: i < 2 ? '1px solid rgba(0,255,65,0.18)' : 'none',
             overflow: 'hidden',
           }}
           variants={{
@@ -76,8 +79,8 @@ export default function FeatureCallouts() {
           {/* Header strip */}
           <div
             style={{
-              borderBottom: '1px solid rgba(0,255,65,0.1)',
-              background: 'rgba(0,255,65,0.04)',
+              borderBottom: '1px solid rgba(0,255,65,0.15)',
+              background: 'rgba(0,255,65,0.06)',
               padding: '7px 14px 7px 18px',
               display: 'flex',
               justifyContent: 'space-between',
@@ -140,11 +143,12 @@ export default function FeatureCallouts() {
               position: 'absolute',
               bottom: 0,
               right: 0,
-              width: 16,
-              height: 16,
-              borderBottom: '2px solid rgba(0,255,65,0.35)',
-              borderRight: '2px solid rgba(0,255,65,0.35)',
+              width: 20,
+              height: 20,
+              borderBottom: '2px solid rgba(0,255,65,0.5)',
+              borderRight: '2px solid rgba(0,255,65,0.5)',
               pointerEvents: 'none',
+              boxShadow: '4px 4px 8px rgba(0,255,65,0.08)',
             }}
           />
         </motion.div>
