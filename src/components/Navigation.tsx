@@ -16,6 +16,7 @@ export default function Navigation() {
     { id: 'enemies',  label: 'ENEMIES', href: '#enemies' },
     { id: 'arsenal',  label: 'ARSENAL', href: '#arsenal' },
     { id: 'mementos', label: 'LOOT',    href: '#mementos' },
+    { id: 'devlog',   label: 'DEVLOG',     href: '/blog' },
     { id: 'studio',   label: 'SKIPSTONE ↗', href: 'https://skipstone.co.nz', external: true },
   ]
 
@@ -44,6 +45,10 @@ export default function Navigation() {
   const scrollTo = (href: string, isExternal?: boolean) => {
     if (isExternal || href.startsWith('http')) {
       window.open(href, '_blank', 'noopener,noreferrer')
+      return
+    }
+    if (href.startsWith('/')) {
+      window.location.href = href
       return
     }
     const el = document.getElementById(href.replace('#', ''))
