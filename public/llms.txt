@@ -1,0 +1,31 @@
+# Remember to Die — Skipstone Studios
+
+> Tactical dice combat roguelike. Coming September 26th. Wishlist on Steam.
+
+Remember to Die is an indie roguelike game by Skipstone Studios (New Zealand) where death is a mechanic, not a failure state. Every run teaches you something new.
+
+## Core Gameplay
+
+- 32 unique dice with distinct combat abilities
+- 117 mementos that modify your run and playstyle
+- Turn-based tactical combat with deep build variety
+- Permadeath roguelike structure — every run is different
+- Rich narrative threading through each playthrough
+
+## Key Pages
+
+- [Home](https://skipstone.co.nz/): Game overview, features, Steam wishlist
+- [Devlog](https://skipstone.co.nz/blog): Development updates, design notes, behind-the-scenes
+- [Privacy Policy](https://skipstone.co.nz/privacy): Data handling and contact info
+
+## About Skipstone Studios
+
+Solo indie dev studio based in New Zealand. Building Remember to Die with a focus on replayability, narrative depth, and dark atmospheric aesthetics.
+
+Contact: alex@skipstone.co.nz
+
+## Links
+
+- Steam Wishlist: https://store.steampowered.com/app/3390530/Remember_to_Die/
+- Website: https://skipstone.co.nz
+- Devlog: https://skipstone.co.nz/blog

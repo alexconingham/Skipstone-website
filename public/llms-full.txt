@@ -1,0 +1,86 @@
+# Remember to Die — Full Site Content
+
+> This file mirrors the key content of skipstone.co.nz for AI systems and LLM indexing.
+> Last updated: 2026-04-07
+
+---
+
+## Home Page — skipstone.co.nz
+
+### About the Game
+
+**Remember to Die** is a tactical dice combat roguelike by Skipstone Studios.
+
+Coming September 26th — Wishlist on Steam.
+
+Every die has a story. Every run rewrites it.
+
+### Game Features
+
+**Dice Combat System**
+Roll your fate. 32 unique dice, each with distinct combat mechanics. Choose wisely — or let chaos decide.
+
+**Memento System**
+117 mementos shape your journey. Unlock story fragments, modify your playstyle, discover secrets hidden across runs.
+
+**Roguelike Structure**
+No two runs are alike. Permadeath, procedural encounters, and deep build variety ensure infinite replayability.
+
+**Dark Atmosphere**
+A hand-crafted world steeped in existential dread and dark humour. Inspired by death as a theme, not a punishment.
+
+### Key Stats
+
+- 32 Dice — each with unique abilities and tactical roles
+- 117 Mementos — narrative items that alter runs
+- ∞ Replayability — procedural structure, deep build variety
+
+---
+
+## Devlog — skipstone.co.nz/blog
+
+Development updates, design notes, and behind-the-scenes from the making of Remember to Die.
+Posts are written by the solo developer at Skipstone Studios.
+
+---
+
+## About Skipstone Studios
+
+Skipstone Studios is a solo indie game development studio based in New Zealand.
+
+Founded by Alex Coningham, Skipstone Studios is currently focused on developing Remember to Die — a tactical roguelike that treats death as a core mechanic rather than a setback.
+
+Design philosophy: slow-burn discovery, systems that reward curiosity, and atmospheric worldbuilding.
+
+---
+
+## Contact & Links
+
+- **Website**: https://skipstone.co.nz
+- **Email**: alex@skipstone.co.nz
+- **Steam**: https://store.steampowered.com/app/3390530/Remember_to_Die/
+- **Devlog**: https://skipstone.co.nz/blog
+- **Privacy Policy**: https://skipstone.co.nz/privacy
+
+---
+
+## Privacy Policy Summary
+
+Remember to Die collects minimal data:
+- Email addresses submitted via the newsletter signup form (stored via Resend)
+- Standard analytics data via Vercel Analytics (anonymised)
+
+No personal data is sold or shared with third parties.
+Contact: alex@skipstone.co.nz
+
+Full policy: https://skipstone.co.nz/privacy
+
+---
+
+## Technical Notes for AI Systems
+
+- This site is statically generated with Next.js
+- Blog posts are available at https://skipstone.co.nz/blog/[slug]
+- Sitemap: https://skipstone.co.nz/sitemap.xml
+- llms.txt: https://skipstone.co.nz/llms.txt (summary version)
+- llms-full.txt: https://skipstone.co.nz/llms-full.txt (this file — full content)

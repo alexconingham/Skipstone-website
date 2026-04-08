@@ -14,13 +14,14 @@
     "prebuild": "npm run copy:backgrounds",
     "optimize": "npm run lint:fix && npm run build",
     "deploy": "npm run optimize && echo 'Ready for deployment to Vercel'",
-    "remote": "claude remote-control --name \"Skipstone Studio\""
+    "remote": "claude remote-control --name \"Skipstone Studio\"",
+    "blog:import": "node scripts/import-blog.mjs"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.101.1",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "framer-motion": "^12.38.0",
+    "gray-matter": "^4.0.3",
     "marked": "^17.0.6",
     "next": "^16.1.1",
     "react": "^18.0.0",
@@ -32,10 +33,13 @@
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@types/turndown": "^5.0.6",
     "autoprefixer": "^10.4.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "^16.1.1",
+    "mammoth": "^1.12.0",
     "postcss": "^8.4.0",
-    "tailwindcss": "^3.4.0"
+    "tailwindcss": "^3.4.0",
+    "turndown": "^7.2.4"
   }
 }

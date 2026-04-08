@@ -58,8 +58,44 @@ Allow: /title_logo.png
 Allow: /backgrounds/
 Allow: /portraits/
 
+# AI / LLM crawlers — allow indexing, point to llms.txt
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /blog/
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /blog/
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /blog/
+
+User-agent: Applebot
+Allow: /
+Allow: /llms.txt
+
+User-agent: anthropic-ai
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: cohere-ai
+Allow: /
+Allow: /llms.txt
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Allow: /llms.txt
+
 # Sitemap location
 Sitemap: https://skipstone.co.nz/sitemap.xml
 
-# Additional sitemaps for rich content
-Sitemap: https://skipstone.co.nz/sitemap-images.xml 
+# AI content discovery
+LLMs: https://skipstone.co.nz/llms.txt

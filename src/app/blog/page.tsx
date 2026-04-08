@@ -1,12 +1,9 @@
-import { supabase } from '@/lib/supabase'
+import { getAllPosts } from '@/lib/blog'
 import type { PostSummary } from '@/types/blog'
 import Link from 'next/link'
 import Navigation from '@/components/Navigation'
-import ScrollProgress from '@/components/ScrollProgress'
 import AnimatedSection from '@/components/AnimatedSection'
 import type { Metadata } from 'next'
-
-export const revalidate = 3600 // re-check every hour for scheduled posts
 
 export const metadata: Metadata = {
   title: 'Devlog — Remember to Die | Skipstone Studios',
@@ -15,16 +12,13 @@ export const metadata: Metadata = {
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit',
+    year: 'numeric', month: 'short', day: '2-digit',
   }).toUpperCase()
 }
 
 function readingTime(excerpt: string | null) {
   if (!excerpt) return null
-  const words = excerpt.trim().split(/\s+/).length
-  const mins = Math.max(1, Math.round(words / 200))
+  const mins = Math.max(1, Math.round(excerpt.trim().split(/\s+/).length / 200))
   return `${mins} MIN READ`
 }
 
@@ -84,28 +78,13 @@ function PostCard({ post, index }: { post: PostSummary; index: number }) {
   )
 }
 
-export default async function BlogPage() {
-  let posts: PostSummary[] | null = null
-
-  if (supabase) {
-    const { data, error } = await supabase
-      .from('posts')
-      .select('id, title, slug, excerpt, cover_image, published_at')
-      .lte('published_at', new Date().toISOString())
-      .order('published_at', { ascending: false })
-
-    if (error) console.error('Blog fetch error:', error)
-    posts = data as PostSummary[] | null
-  }
+export default function BlogPage() {
+  const posts = getAllPosts()
 
   return (
     <main className="min-h-screen bg-black text-white relative overflow-x-hidden">
-      <ScrollProgress />
       <Navigation />
 
-      {/* Grain overlay inherited from globals */}
-
-      {/* ── Hero ── */}
       <section className="pt-32 pb-16 px-4 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-cyan-950/5 to-black pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -122,13 +101,12 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      {/* ── Post grid ── */}
       <section className="pb-24 px-4">
         <div className="max-w-6xl mx-auto">
-          {posts && posts.length > 0 ? (
+          {posts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {posts.map((post, i) => (
-                <PostCard key={post.id} post={post as PostSummary} index={i} />
+                <PostCard key={post.id} post={post} index={i} />
               ))}
             </div>
           ) : (
@@ -141,12 +119,8 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      {/* ── Footer ── */}
       <footer className="py-10 px-4 border-t border-white/[0.04] text-center space-y-3">
-        <Link
-          href="/"
-          className="text-xs tracking-[0.2em] text-gray-600 hover:text-cyan-400 transition-colors duration-200 uppercase"
-        >
+        <Link href="/" className="text-xs tracking-[0.2em] text-gray-600 hover:text-cyan-400 transition-colors duration-200 uppercase">
           ← Back to Remember to Die
         </Link>
         <div>
