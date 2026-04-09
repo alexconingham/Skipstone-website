@@ -150,10 +150,11 @@ export default function Navigation() {
 
             {/* Steam CTA */}
             <div className="hidden md:block">
-              <button
-                onClick={() => scrollTo('#steam-cta')}
-                className="opacity-60 hover:opacity-90 transition-opacity duration-200"
-                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+              <a
+                href="https://store.steampowered.com/app/4340400/Remember_to_Die/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-60 hover:opacity-90 transition-opacity duration-200 inline-block"
                 aria-label="Wishlist on Steam"
               >
                 <Image
@@ -164,7 +165,7 @@ export default function Navigation() {
                   className="w-auto h-12"
                   quality={90}
                 />
-              </button>
+              </a>
             </div>
 
             {/* Mobile toggle */}
@@ -226,12 +227,14 @@ export default function Navigation() {
               )
             })}
             <div className="pt-8">
-              <button
-                onClick={() => scrollTo('#steam-cta')}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, opacity: 0.7 }}
+              <a
+                href="https://store.steampowered.com/app/4340400/Remember_to_Die/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'inline-block', opacity: 0.7 }}
               >
                 <Image src="/steam wishlist bw3.png" alt="Wishlist on Steam" width={320} height={128} className="w-auto h-16" quality={90} />
-              </button>
+              </a>
             </div>
           </div>
         </div>

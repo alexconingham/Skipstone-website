@@ -53,7 +53,7 @@ export default function Home() {
     genre: ['Roguelike', 'Strategy', 'Tactical Combat', 'Horror', 'Indie'],
     gamePlatform: ['Steam', 'PC'],
     author: { '@type': 'Organization', name: 'Skipstone Studios', url: 'https://skipstone.co.nz' },
-    offers: { '@type': 'Offer', availability: 'https://schema.org/PreOrder', price: 'TBD', priceCurrency: 'USD' },
+    offers: { '@type': 'Offer', availability: 'https://schema.org/PreOrder', price: '6.99', priceCurrency: 'USD', url: 'https://store.steampowered.com/app/4340400/Remember_to_Die/' },
   }
 
   return (
@@ -165,7 +165,9 @@ export default function Home() {
                 <div className="hidden sm:block w-px h-8 bg-[rgba(0,255,65,0.15)]" />
 
                 <a
-                  href="#steam-cta"
+                  href="https://store.steampowered.com/app/4340400/Remember_to_Die/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="opacity-90 hover:opacity-100 transition-all duration-300 hover:scale-[1.04] inline-block"
                   aria-label="Wishlist Remember to Die on Steam"
                 >

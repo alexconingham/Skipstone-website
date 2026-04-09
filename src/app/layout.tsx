@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
     'msapplication-TileColor': '#000000',
     'msapplication-config': '/browserconfig.xml',
-    'steam-app': 'coming-soon',
+    'steam-app': '4340400',
   },
 }
 
@@ -266,7 +266,7 @@ export default function RootLayout({
         <meta property="og:locale:alternate" content="en_CA" />
         
         {/* Steam integration hints */}
-        <meta name="steam:app_id" content="coming_soon" />
+        <meta name="steam:app_id" content="4340400" />
         <meta name="game:platform" content="PC" />
         <meta name="game:genre" content="Strategy" />
         <meta name="game:genre" content="Roguelike" />

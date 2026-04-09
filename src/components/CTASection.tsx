@@ -151,7 +151,7 @@ export default function CTASection({ className = '' }: { className?: string }) {
           <AnimatedSection animation="slideUp" delay={500}>
             <div style={{ marginBottom: '3.5rem' }}>
               <a
-                href="https://store.steampowered.com/"
+                href="https://store.steampowered.com/app/4340400/Remember_to_Die/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ display: 'inline-block', opacity: 0.85 }}
