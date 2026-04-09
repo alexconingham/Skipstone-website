@@ -34,7 +34,6 @@ function PostCard({ post, index }: { post: PostSummary; index: number }) {
           <span className="terminal-dot dot-red" />
           <span className="terminal-dot dot-yellow" />
           <span className="terminal-dot dot-green" />
-          <span className="terminal-filename">DEVLOG_{String(index + 1).padStart(3, '0')}.md</span>
         </div>
 
         {post.cover_image && (

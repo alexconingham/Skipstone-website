@@ -68,7 +68,6 @@ export default async function PostPage({
             <span className="terminal-dot dot-red" />
             <span className="terminal-dot dot-yellow" />
             <span className="terminal-dot dot-green" />
-            <span className="terminal-filename">{slug}.md</span>
           </div>
 
           <div className="border border-white/[0.06] border-t-0 p-8 pb-10 bg-white/[0.02]">
