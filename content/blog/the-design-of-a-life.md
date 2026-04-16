@@ -1,7 +1,7 @@
 ---
 title: "The Design of a Life"
 slug: the-design-of-a-life
-date: 2026-06-10
+date: 2025-11-24
 excerpt: "Remember to Die started with a single idea, and that idea came from psychology, not game design."
 cover:
 ---

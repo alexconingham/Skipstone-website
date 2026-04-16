@@ -1,7 +1,7 @@
 ---
 title: "Building Something Nobody Asked For"
 slug: building-something-nobody-asked-for
-date: 2026-07-01
+date: 2026-01-05
 excerpt: "I want to talk about the part of development that nobody sees and that took longer than almost anything else: making the game fair."
 cover:
 ---

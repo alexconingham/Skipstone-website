@@ -1,7 +1,7 @@
 ---
 title: "The 40-Year Gap"
 slug: the-40-year-gap
-date: 2026-04-08
+date: 2025-08-18
 excerpt: "My mum rented Kid Chameleon on the Sega Mega Drive when I was a kid. I don't remember how old I was exactly, but I remember the feeling: the desperate wish that I could reach inside the cartridge and make my own levels."
 cover:
 ---

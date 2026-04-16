@@ -1,7 +1,7 @@
 ---
 title: "The Apprenticeship Nobody Saw"
 slug: the-apprenticeship-nobody-saw
-date: 2026-04-29
+date: 2025-09-22
 excerpt: "Before Remember to Die, I made four other games. Nobody played them. That was more or less the point."
 cover:
 ---

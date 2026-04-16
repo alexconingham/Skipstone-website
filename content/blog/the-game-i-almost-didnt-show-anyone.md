@@ -1,7 +1,7 @@
 ---
 title: "The Game I Almost Didn't Show Anyone"
 slug: the-game-i-almost-didnt-show-anyone
-date: 2026-07-22
+date: 2026-02-09
 excerpt: "For eighteen months, Remember to Die existed in a room that only I could see."
 cover:
 ---

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(npm install:*)",
+      "Skill(gstack)",
+      "Bash(ls src/app/sitemap*)",
+      "Bash(npm uninstall:*)",
+      "WebSearch"
+    ]
+  }
+}

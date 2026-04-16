@@ -3,7 +3,12 @@ import path from 'path'
 import matter from 'gray-matter'
 import type { Post, PostSummary } from '@/types/blog'
 
-const BLOG_DIR = path.join(process.cwd(), 'content/blog')
+/** Directory that contains `content/blog` — pinned in next.config env so cwd/Turbopack root mismatches do not hide posts. */
+const BLOG_DIR = path.join(
+  process.env.BLOG_CONTENT_ROOT ?? process.cwd(),
+  'content',
+  'blog',
+)
 
 function ensureDir() {
   if (!fs.existsSync(BLOG_DIR)) fs.mkdirSync(BLOG_DIR, { recursive: true })
@@ -33,13 +38,12 @@ function fileToPostSummary(filename: string): PostSummary | null {
 
 export function getAllPosts(): PostSummary[] {
   ensureDir()
-  const now = new Date()
 
   return fs
     .readdirSync(BLOG_DIR)
     .filter(f => f.endsWith('.md'))
     .map(fileToPostSummary)
-    .filter((p): p is PostSummary => p !== null && new Date(p.published_at) <= now)
+    .filter((p): p is PostSummary => p !== null)
     .sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime())
 }
 

@@ -1,7 +1,7 @@
 ---
 title: "What's Next (And What This Was)"
 slug: whats-next
-date: 2026-08-12
+date: 2026-03-16
 excerpt: "I've been thinking about what I want someone to feel when they finish Remember to Die for the first time."
 cover:
 ---
@@ -22,8 +22,8 @@ The mechanic I keep coming back to is Dante's lantern. A persistent item you car
 
 That game would need real artists. Real animation. A budget that RTD might, if I'm lucky, help create. It's not a solo AI project. It's the next stage of the same journey.
 
-For now though: RTD is three weeks from launch. It's the game I spent forty years wanting to make. Whatever happens after it releases, that part is already done.
+For now though: RTD is deep in the final stretch — systems locked, story in place, Steam page coming together. It's the game I spent forty years wanting to make. Whatever happens after it ships, that part is already in motion.
 
-Launch post next. Then it's your turn.
+Next post: what it felt like to put a wishlist button in front of the world. Then it's your turn.
 
 Wishlist [here](https://store.steampowered.com/app/3390530/Remember_to_Die/) if you haven't.

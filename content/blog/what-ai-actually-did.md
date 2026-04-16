@@ -1,7 +1,7 @@
 ---
 title: "What AI Actually Did (And Didn't Do)"
 slug: what-ai-actually-did
-date: 2026-05-20
+date: 2025-10-27
 excerpt: "I've been putting this post off. Not because I'm ashamed of the answer, but because the conversation around AI in games is loud and not always sensible, and I wanted to say this carefully."
 cover:
 ---
