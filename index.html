@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remember to Die — A Narrative Dice Roguelike by Skipstone Studios</title>
+  <meta name="description" content="A gritty, narrative-driven dice strategy roguelike where every roll dredges up a fragmented memory and decides your fate. Coming September 26th.">
+  <meta property="og:title" content="Remember to Die — A Narrative Dice Roguelike">
+  <meta property="og:description" content="Battle your demons. Re-roll your destiny. A narrative dice roguelike by Skipstone Studios.">
+  <meta property="og:image" content="https://rtd.skipstone.co.nz/title_logo.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================
+       DESIGN TOKENS
+       ======================================== */
+    :root {
+      --ink: #1a1410;
+      --paper: #f0e8d8;
+      --amber: #c4872a;
+      --rust: #8b2c1a;
+      --blood: #6b1515;
+      --bone: #e8dcc8;
+      --ash: #3d3530;
+      --fog: #7a6e65;
+
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Libre Baskerville', serif;
+      --font-mono: 'DM Mono', monospace;
+
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ========================================
+       RESET & BASE
+       ======================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: var(--amber);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    a:hover {
+      color: var(--bone);
+    }
+
+    /* Focus styles */
+    :focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 2px;
+    }
+
+    /* Skip to content */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      padding: 0.4rem 0.8rem;
+      background: var(--amber);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      z-index: 10000;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* ========================================
+       GRAIN OVERLAY
+       ======================================== */
+    .grain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    /* ========================================
+       NAVIGATION
+       ======================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: linear-gradient(to bottom, rgba(26, 20, 16, 0.97), transparent);
+      transition: background 0.25s ease, backdrop-filter 0.25s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(26, 20, 16, 0.97);
+      backdrop-filter: blur(2px);
+    }
+
+    .nav__logo img {
+      height: 28px;
+      width: auto;
+      filter: sepia(0.6) brightness(0.9);
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fog);
+      transition: color 0.25s ease;
+    }
+
+    .nav__links a:hover,
+    .nav__links a.active {
+      color: var(--amber);
+    }
+
+    .nav__cta {
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      background: var(--rust);
+      color: var(--bone);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 20px;
+      transition: background 0.25s ease;
+    }
+
+    .nav__cta:hover {
+      background: var(--blood);
+      color: var(--bone);
+    }
+
+    .nav__hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--bone);
+      margin: 4px 0;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    /* Mobile menu overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 20, 16, 0.98);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bone);
+    }
+
+    .mobile-menu a:hover {
+      color: var(--amber);
+    }
+
+    /* ========================================
+       SECTION UTILITIES
+       ======================================== */
+    .section {
+      padding: clamp(4rem, 8vw, 8rem) clamp(1.2rem, 4vw, 4rem);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section--full {
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .section__label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.8rem;
+    }
+
+    .section__heading {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--bone);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+
+    .section__body {
+      color: var(--fog);
+      max-width: 560px;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    /* ========================================
+       FADE-IN ANIMATION
+       ======================================== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========================================
+       HERO SECTION
+       ======================================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 8vh;
+      overflow: hidden;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: url('https://rtd.skipstone.co.nz/backgrounds/title_char_bg.PNG') center/cover no-repeat;
+      filter: sepia(0.4) brightness(0.55) contrast(1.1);
+      transform: scale(1.04);
+    }
+
+    /* Vignette overlays */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse at center, transparent 30%, var(--ink) 80%);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(to bottom, rgba(26, 20, 16, 0.3) 0%, transparent 30%, transparent 60%, var(--ink) 100%);
+    }
+
+    .hero__content {
+      text-align: center;
+      padding: 0 1.2rem;
+    }
+
+    .hero__logo {
+      max-width: 520px;
+      width: 80%;
+      margin: 0 auto 1.6rem;
+      filter: drop-shadow(0 4px 32px rgba(0, 0, 0, 0.7));
+    }
+
+    .hero__tagline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      color: var(--bone);
+      margin-bottom: 1rem;
+    }
+
+    .hero__subcopy {
+      color: var(--fog);
+      font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+
+    .hero__steam {
+      display: inline-block;
+      margin-bottom: 1.2rem;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .hero__steam img {
+      height: 48px;
+      width: auto;
+    }
+
+    .hero__steam:hover {
+      transform: scale(1.04);
+      filter: brightness(1.1);
+    }
+
+    .hero__release {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--amber);
+    }
+
+    /* ========================================
+       TRAILER SECTION
+       ======================================== */
+    .trailer {
+      display: grid;
+      grid-template-columns: 2fr 340px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .trailer__video-wrap {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #0a0807;
+      border: 1px solid var(--ash);
+      overflow: hidden;
+    }
+
+    .trailer__video-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+      );
+    }
+
+    .trailer__video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .trailer__tape-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.4rem 0.8rem;
+      background: rgba(26, 20, 16, 0.85);
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: var(--fog);
+      text-transform: uppercase;
+    }
+
+    .trailer__rec {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--rust);
+    }
+
+    .trailer__rec-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rust);
+    }
+
+    .trailer__copy {
+      padding-top: 1rem;
+    }
+
+    .trailer__features {
+      list-style: none;
+      margin-top: 1.6rem;
+    }
+
+    .trailer__features li {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--bone);
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--ash);
+    }
+
+    .trailer__features li::before {
+      content: '\2022';
+      color: var(--amber);
+      margin-right: 0.6rem;
+    }
+
+    /* ========================================
+       TICKER (World & Arsenal)
+       ======================================== */
+    .ticker {
+      overflow: hidden;
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    .ticker::before,
+    .ticker::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .ticker::before {
+      left: 0;
+      background: linear-gradient(to right, var(--ink), transparent);
+    }
+
+    .ticker::after {
+      right: 0;
+      background: linear-gradient(to left, var(--ink), transparent);
+    }
+
+    .ticker__track {
+      display: flex;
+      gap: 1.2rem;
+      width: max-content;
+    }
+
+    .ticker__track:hover {
+      animation-play-state: paused !important;
+    }
+
+    .ticker__card {
+      flex-shrink: 0;
+      width: 240px;
+      height: 160px;
+      border: 1px solid var(--ash);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ticker__card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: sepia(0.5) brightness(0.8);
+      image-rendering: auto;
+      transition: filter 0.25s ease;
+    }
+
+    .ticker__card:hover img {
+      filter: sepia(0.2) brightness(0.9);
+    }
+
+    /* Arsenal dice cards */
+    .dice-card {
+      flex-shrink: 0;
+      width: 88px;
+      text-align: center;
+    }
+
+    .dice-card__img {
+      width: 88px;
+      height: 88px;
+      object-fit: contain;
+      filter: sepia(0.4);
+      transition: filter 0.25s ease, transform 0.25s ease;
+    }
+
+    .dice-card:hover .dice-card__img {
+      filter: sepia(0);
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    .dice-card__name {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: var(--fog);
+      margin-top: 0.4rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ========================================
+       PORTRAIT GRID (Enemies)
+       ======================================== */
+    .portrait-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 2px;
+      margin-top: 2rem;
+    }
+
+    .portrait-cell {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .portrait-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      image-rendering: pixelated;
+      filter: sepia(0.4) brightness(0.8);
+      transition: filter 0.25s ease, transform 0.25s ease;
+    }
+
+    .portrait-cell:hover img {
+      filter: sepia(0) brightness(1);
+      transform: scale(1.05);
+    }
+
+    .portrait-cell::after {
+      content: attr(data-name);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.4rem;
+      background: linear-gradient(to top, rgba(26, 20, 16, 0.92), transparent);
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.08em;
+      color: var(--amber);
+      text-align: center;
+      transform: translateY(100%);
+      transition: transform 0.25s ease;
+    }
+
+    .portrait-cell:hover::after {
+      transform: translateY(0);
+    }
+
+    /* ========================================
+       MEMENTO & WATCH GRID
+       ======================================== */
+    .memento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+      gap: 4px;
+      margin-top: 2rem;
+    }
+
+    .memento-cell {
+      position: relative;
+      aspect-ratio: 1;
+      background: #141010;
+      border: 1px solid #2a2220;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10%;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .memento-cell:hover {
+      border-color: var(--amber);
+      box-shadow: 0 0 8px rgba(196, 135, 42, 0.2);
+    }
+
+    .memento-cell img {
+      width: 80%;
+      height: 80%;
+      object-fit: contain;
+      image-rendering: pixelated;
+      filter: sepia(0.4);
+      transition: filter 0.25s ease;
+    }
+
+    .memento-cell:hover img {
+      filter: sepia(0);
+    }
+
+    .memento-cell__lore {
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 16, 16, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      text-align: center;
+    }
+
+    .memento-cell:hover .memento-cell__lore {
+      opacity: 1;
+    }
+
+    .memento-cell__lore span {
+      font-family: var(--font-mono);
+      font-size: 0.45rem;
+      line-height: 1.4;
+      color: var(--amber);
+      letter-spacing: 0.02em;
+    }
+
+    /* ========================================
+       STATS BAR
+       ======================================== */
+    .stats {
+      background: #100d0a;
+      border-top: 1px solid var(--ash);
+      border-bottom: 1px solid var(--ash);
+      padding: clamp(2.4rem, 5vw, 4rem) clamp(1.2rem, 4vw, 4rem);
+    }
+
+    .stats__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .stats__item {
+      padding: 1rem;
+    }
+
+    .stats__value {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(3rem, 6vw, 5rem);
+      color: var(--amber);
+      line-height: 1;
+    }
+
+    .stats__label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fog);
+      margin-top: 0.4rem;
+    }
+
+    /* ========================================
+       CTA SECTION
+       ======================================== */
+    .cta {
+      position: relative;
+      padding: clamp(5rem, 10vw, 10rem) clamp(1.2rem, 4vw, 4rem);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .cta__bg {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: url('https://rtd.skipstone.co.nz/backgrounds/alt_the_void_bg.PNG') center/cover no-repeat;
+      filter: sepia(0.6) brightness(0.35);
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse at center, transparent 20%, var(--ink) 75%);
+    }
+
+    .cta__content {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .cta__steam {
+      display: inline-block;
+      margin: 2rem 0;
+      transition: transform 0.25s ease;
+    }
+
+    .cta__steam img {
+      height: 48px;
+      width: auto;
+    }
+
+    .cta__steam:hover {
+      transform: scale(1.04);
+    }
+
+    /* Newsletter form */
+    .newsletter {
+      display: flex;
+      gap: 0;
+      margin-top: 2rem;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .newsletter__input {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      background: rgba(26, 20, 16, 0.8);
+      border: 1px solid var(--ash);
+      border-right: none;
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+    }
+
+    .newsletter__input::placeholder {
+      color: var(--fog);
+    }
+
+    .newsletter__btn {
+      padding: 0.7rem 1.4rem;
+      background: var(--rust);
+      border: 1px solid var(--rust);
+      color: var(--bone);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+
+    .newsletter__btn:hover {
+      background: var(--blood);
+    }
+
+    .newsletter__success {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--amber);
+      margin-top: 1rem;
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .footer {
+      padding: 2.4rem clamp(1.2rem, 4vw, 4rem);
+      border-top: 1px solid var(--ash);
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer__logo img {
+      height: 22px;
+      width: auto;
+      filter: sepia(0.6) brightness(0.7);
+    }
+
+    .footer__copy {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: var(--fog);
+      letter-spacing: 0.08em;
+    }
+
+    .footer__links {
+      display: flex;
+      gap: 1.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+    }
+
+    .footer__links a {
+      color: var(--fog);
+    }
+
+    .footer__links a:hover {
+      color: var(--amber);
+    }
+
+    /* ========================================
+       ANIMATIONS
+       ======================================== */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero__bg {
+        animation: breathe 12s ease-in-out infinite;
+      }
+
+      @keyframes breathe {
+        0%, 100% { transform: scale(1.04); }
+        50% { transform: scale(1.07); }
+      }
+
+      .ticker__track--world {
+        animation: tickerScroll 40s linear infinite;
+      }
+
+      .ticker__track--arsenal {
+        animation: tickerScroll 45s linear infinite;
+      }
+
+      @keyframes tickerScroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      .trailer__rec-dot {
+        animation: recBlink 1.4s ease-in-out infinite;
+      }
+
+      @keyframes recBlink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.2; }
+      }
+
+      .hero__content {
+        animation: fadeUp 1.2s ease both;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 1023px) {
+      .trailer {
+        grid-template-columns: 1fr;
+      }
+
+      .trailer__copy {
+        padding-top: 0;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .nav__links {
+        display: none;
+      }
+
+      .nav__cta--desktop {
+        display: none;
+      }
+
+      .nav__hamburger {
+        display: block;
+      }
+
+      .portrait-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      }
+
+      .memento-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+      }
+
+      .footer__grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 1rem;
+      }
+
+      .footer__links {
+        justify-content: center;
+      }
+
+      .newsletter {
+        flex-direction: column;
+      }
+
+      .newsletter__input {
+        border-right: 1px solid var(--ash);
+        border-bottom: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip to content -->
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ========================================
+       NAVIGATION
+       ======================================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <a href="#" class="nav__logo" aria-label="Skipstone Studios home">
+      <img src="https://rtd.skipstone.co.nz/Skipstone_logo.png" alt="Skipstone Studios" width="100" height="28">
+    </a>
+
+    <ul class="nav__links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#trailer">Trailer</a></li>
+      <li><a href="#world">World</a></li>
+      <li><a href="#enemies">Enemies</a></li>
+      <li><a href="#arsenal">Arsenal</a></li>
+      <li><a href="#loot">Loot</a></li>
+    </ul>
+
+    <a href="https://store.steampowered.com/app/4340400/Remember_to_Die/" class="nav__cta nav__cta--desktop" target="_blank" rel="noopener noreferrer">Wishlist on Steam</a>
+
+    <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <a href="#hero">Home</a>
+    <a href="#trailer">Trailer</a>
+    <a href="#world">World</a>
+    <a href="#enemies">Enemies</a>
+    <a href="#arsenal">Arsenal</a>
+    <a href="#loot">Loot</a>
+    <a href="https://store.steampowered.com/app/4340400/Remember_to_Die/" target="_blank" rel="noopener noreferrer">Wishlist on Steam</a>
+  </div>
+
+  <!-- ========================================
+       HERO
+       ======================================== -->
+  <section class="hero" id="hero" aria-labelledby="hero-heading">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__content">
+      <h1 id="hero-heading" class="visually-hidden">Remember to Die</h1>
+      <img src="https://rtd.skipstone.co.nz/title_logo.png" alt="Remember to Die" class="hero__logo" width="520" height="200">
+      <p class="hero__tagline">Battle your demons. Re-roll your destiny.</p>
+      <p class="hero__subcopy">A gritty, narrative-driven battle against time and broken memories &mdash; an intuitive dice strategy roguelike where every roll dredges up a fragmented memory and decides your fate.</p>
+      <a href="https://store.steampowered.com/app/4340400/Remember_to_Die/" class="hero__steam" target="_blank" rel="noopener noreferrer">
+        <img src="https://rtd.skipstone.co.nz/steam%20wishlist%20bw3.png" alt="Wishlist on Steam" width="200" height="48">
+      </a>
+      <p class="hero__release">COMING SEPTEMBER 26TH</p>
+    </div>
+  </section>
+
+  <main id="main">
+    <!-- ========================================
+         TRAILER
+         ======================================== -->
+    <section id="trailer" class="section" aria-labelledby="trailer-heading">
+      <div class="trailer fade-in">
+        <div class="trailer__video-wrap">
+          <video class="trailer__video" controls preload="none" playsinline>
+            <source src="https://rtd.skipstone.co.nz/RTD_trailerv5.mp4" type="video/mp4">
+            Your browser does not support the video element.
+          </video>
+          <div class="trailer__tape-label">
+            <span>TRACK 01 &mdash; OFFICIAL TRAILER</span>
+            <span class="trailer__rec"><span class="trailer__rec-dot"></span> REC</span>
+          </div>
+        </div>
+        <div class="trailer__copy">
+          <p class="section__label">01 &mdash; The Trailer</p>
+          <h2 id="trailer-heading" class="section__heading">Every roll counts.</h2>
+          <p class="section__body">A lifetime of regret, distilled into a single throw of the dice. Watch the story unfold through fragmented memories, tactical encounters, and impossible choices.</p>
+          <ul class="trailer__features">
+            <li>Tactical Dice Combat</li>
+            <li>Memory Fragments</li>
+            <li>Infinite Replayability</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         WORLD
+         ======================================== -->
+    <section id="world" class="section section--full" aria-labelledby="world-heading">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.2rem, 4vw, 4rem);">
+        <p class="section__label fade-in">02 &mdash; The World</p>
+        <h2 id="world-heading" class="section__heading fade-in">A lifetime of memories.</h2>
+        <p class="section__body fade-in">Each fragment you unlock splinters the story into new fates. Ten dungeons, each a chapter from a life lived imperfectly.</p>
+      </div>
+      <div class="ticker" style="margin-top: 2rem;">
+        <div class="ticker__track ticker__track--world">
+          <!-- First set -->
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D1_bg.PNG" alt="The Bedroom" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D2_bg.PNG" alt="The Neighbourhood" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D3_bg.PNG" alt="The Factory" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D4_bg.PNG" alt="The Schoolyard" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D5_bg.PNG" alt="The Cafeteria" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D6_bg.PNG" alt="The Office" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D7_bg.PNG" alt="The Hospital" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D8_bg.PNG" alt="The Boardroom" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D9_bg.PNG" alt="The Courtroom" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D10_bg.PNG" alt="The Ward" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_heaven.PNG" alt="Heaven" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_hell_bg.PNG" alt="Hell" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_purgatory_bg.PNG" alt="Purgatory" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_school_cafeteria_bg.PNG" alt="School Cafeteria" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_the_garage_bg.PNG" alt="The Garage" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_the_trunk_bg.PNG" alt="The Trunk" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_the_void_bg.PNG" alt="The Void" loading="lazy" width="240" height="160"></div>
+          <!-- Duplicate set for seamless loop -->
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D1_bg.PNG" alt="The Bedroom" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D2_bg.PNG" alt="The Neighbourhood" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D3_bg.PNG" alt="The Factory" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D4_bg.PNG" alt="The Schoolyard" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D5_bg.PNG" alt="The Cafeteria" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D6_bg.PNG" alt="The Office" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D7_bg.PNG" alt="The Hospital" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D8_bg.PNG" alt="The Boardroom" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D9_bg.PNG" alt="The Courtroom" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/D10_bg.PNG" alt="The Ward" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_heaven.PNG" alt="Heaven" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_hell_bg.PNG" alt="Hell" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_purgatory_bg.PNG" alt="Purgatory" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_school_cafeteria_bg.PNG" alt="School Cafeteria" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_the_garage_bg.PNG" alt="The Garage" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_the_trunk_bg.PNG" alt="The Trunk" loading="lazy" width="240" height="160"></div>
+          <div class="ticker__card"><img src="https://rtd.skipstone.co.nz/backgrounds/alt_the_void_bg.PNG" alt="The Void" loading="lazy" width="240" height="160"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         ENEMIES
+         ======================================== -->
+    <section id="enemies" class="section" aria-labelledby="enemies-heading">
+      <p class="section__label fade-in">03 &mdash; Enemies</p>
+      <h2 id="enemies-heading" class="section__heading fade-in">A string of haunting faces.</h2>
+      <p class="section__body fade-in">Thirty souls from a fractured life. Each one remembers what you did.</p>
+      <div class="portrait-grid fade-in">
+        <div class="portrait-cell" data-name="Imaginary Friend"><img src="https://rtd.skipstone.co.nz/portraits/_D1_grunt.png" alt="Imaginary Friend" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="The Neighbour"><img src="https://rtd.skipstone.co.nz/portraits/D1_elite.png" alt="The Neighbour" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Factory Foreman"><img src="https://rtd.skipstone.co.nz/portraits/D1_boss.png" alt="Factory Foreman" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Schoolyard Bully"><img src="https://rtd.skipstone.co.nz/portraits/D2_grunt.png" alt="Schoolyard Bully" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Lunch Lady"><img src="https://rtd.skipstone.co.nz/portraits/D2_elite.png" alt="Lunch Lady" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Grief Counsellor"><img src="https://rtd.skipstone.co.nz/portraits/D2_boss.png" alt="Grief Counsellor" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Bottle Shop Attendant"><img src="https://rtd.skipstone.co.nz/portraits/D3_grunt.png" alt="Bottle Shop Attendant" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Graduation Twins"><img src="https://rtd.skipstone.co.nz/portraits/D3_elite.png" alt="Graduation Twins" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Headmaster Baird"><img src="https://rtd.skipstone.co.nz/portraits/D3_boss.png" alt="Headmaster Baird" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Nervous Intern"><img src="https://rtd.skipstone.co.nz/portraits/D4_grunt.png" alt="Nervous Intern" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Paranoid Colleague"><img src="https://rtd.skipstone.co.nz/portraits/D4_elite.png" alt="Paranoid Colleague" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="VP Calhoun"><img src="https://rtd.skipstone.co.nz/portraits/D4_boss.png" alt="VP Calhoun" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="The Doula"><img src="https://rtd.skipstone.co.nz/portraits/D5_grunt.png" alt="The Doula" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Babysitter"><img src="https://rtd.skipstone.co.nz/portraits/D5_elite.png" alt="Babysitter" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Micro Manager"><img src="https://rtd.skipstone.co.nz/portraits/D5_boss.png" alt="Micro Manager" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Strange Man"><img src="https://rtd.skipstone.co.nz/portraits/D6_grunt.png" alt="Strange Man" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Mortician"><img src="https://rtd.skipstone.co.nz/portraits/D6_elite.png" alt="Mortician" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Pastor"><img src="https://rtd.skipstone.co.nz/portraits/D6_boss.png" alt="Pastor" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="The Replacement"><img src="https://rtd.skipstone.co.nz/portraits/D7_grunt.png" alt="The Replacement" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="The CEO"><img src="https://rtd.skipstone.co.nz/portraits/D7_elite.png" alt="The CEO" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Divorce Lawyer"><img src="https://rtd.skipstone.co.nz/portraits/D7_boss.png" alt="Divorce Lawyer" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Toll Booth Operator"><img src="https://rtd.skipstone.co.nz/portraits/D8_grunt.png" alt="Toll Booth Operator" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Motel Clerk"><img src="https://rtd.skipstone.co.nz/portraits/D8_elite.png" alt="Motel Clerk" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Dad's Reflection"><img src="https://rtd.skipstone.co.nz/portraits/D8_boss.png" alt="Dad's Reflection" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Photographer"><img src="https://rtd.skipstone.co.nz/portraits/D9_grunt.png" alt="Photographer" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Dark Room Assistant"><img src="https://rtd.skipstone.co.nz/portraits/D9_elite.png" alt="Dark Room Assistant" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="The Missing Figure"><img src="https://rtd.skipstone.co.nz/portraits/D9_boss.png" alt="The Missing Figure" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Cruel Nurse"><img src="https://rtd.skipstone.co.nz/portraits/D10_grunt.png" alt="Cruel Nurse" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="Dr. Keller"><img src="https://rtd.skipstone.co.nz/portraits/D10_elite.png" alt="Dr. Keller" loading="lazy" width="100" height="100"></div>
+        <div class="portrait-cell" data-name="The Player"><img src="https://rtd.skipstone.co.nz/portraits/D10_boss.png" alt="The Player" loading="lazy" width="100" height="100"></div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         ARSENAL
+         ======================================== -->
+    <section id="arsenal" class="section section--full" aria-labelledby="arsenal-heading">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.2rem, 4vw, 4rem);">
+        <p class="section__label fade-in">04 &mdash; Arsenal</p>
+        <h2 id="arsenal-heading" class="section__heading fade-in">An evolving arsenal.</h2>
+        <p class="section__body fade-in">Twenty-nine dice forged in memory. Each one a weapon, a shield, or a desperate gamble.</p>
+      </div>
+      <div class="ticker" style="margin-top: 2rem;">
+        <div class="ticker__track ticker__track--arsenal">
+          <!-- First set -->
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_attack.png" alt="Simple Attack" loading="lazy" width="88" height="88"><p class="dice-card__name">Simple Attack</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_defence.png" alt="Simple Defence" loading="lazy" width="88" height="88"><p class="dice-card__name">Simple Defence</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_attack.png" alt="Improved Attack" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Attack</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_defence.png" alt="Improved Defence" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Defence</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/bleed_die.png" alt="Bleed Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Bleed Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/poison_die.png" alt="Poison Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Poison Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/knockback_die.png" alt="Knockback Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Knockback Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/shield_die.png" alt="Shield Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Shield Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/stagger_die.png" alt="Stagger Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Stagger Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/piercing_die.png" alt="Piercing Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Piercing Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/reflect_die.png" alt="Reflect Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Reflect Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/divinity_die.png" alt="Divinity Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Divinity Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/cleanse_die.png" alt="Cleanse Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Cleanse Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/renew_die.png" alt="Renew Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Renew Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/advanced_renew_die.png" alt="Adv. Renew" loading="lazy" width="88" height="88"><p class="dice-card__name">Adv. Renew</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/chrono_die.png" alt="Chrono Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Chrono Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/razor_die.png" alt="Razor Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Razor Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/thorn_die.png" alt="Thorn Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Thorn Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/burn_die.png" alt="Burn Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Burn Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/pain_die.png" alt="Pain Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Pain Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_heal.png" alt="Heal Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Heal Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_heal.png" alt="Improved Heal" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Heal</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/death_die.png" alt="Death Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Death Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/life_die.png" alt="Life Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Life Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/brave_heart_die.png" alt="Brave Heart" loading="lazy" width="88" height="88"><p class="dice-card__name">Brave Heart</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/gladiator_die.png" alt="Gladiator" loading="lazy" width="88" height="88"><p class="dice-card__name">Gladiator</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/collectors_d12.png" alt="Collector's D12" loading="lazy" width="88" height="88"><p class="dice-card__name">Collector's D12</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/lucky_d6.png" alt="Lucky D6" loading="lazy" width="88" height="88"><p class="dice-card__name">Lucky D6</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/the_centurion.png" alt="The Centurion" loading="lazy" width="88" height="88"><p class="dice-card__name">The Centurion</p></div>
+          <!-- Duplicate set for seamless loop -->
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_attack.png" alt="Simple Attack" loading="lazy" width="88" height="88"><p class="dice-card__name">Simple Attack</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_defence.png" alt="Simple Defence" loading="lazy" width="88" height="88"><p class="dice-card__name">Simple Defence</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_attack.png" alt="Improved Attack" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Attack</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_defence.png" alt="Improved Defence" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Defence</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/bleed_die.png" alt="Bleed Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Bleed Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/poison_die.png" alt="Poison Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Poison Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/knockback_die.png" alt="Knockback Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Knockback Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/shield_die.png" alt="Shield Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Shield Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/stagger_die.png" alt="Stagger Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Stagger Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/piercing_die.png" alt="Piercing Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Piercing Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/reflect_die.png" alt="Reflect Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Reflect Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/divinity_die.png" alt="Divinity Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Divinity Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/cleanse_die.png" alt="Cleanse Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Cleanse Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/renew_die.png" alt="Renew Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Renew Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/advanced_renew_die.png" alt="Adv. Renew" loading="lazy" width="88" height="88"><p class="dice-card__name">Adv. Renew</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/chrono_die.png" alt="Chrono Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Chrono Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/razor_die.png" alt="Razor Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Razor Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/thorn_die.png" alt="Thorn Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Thorn Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/burn_die.png" alt="Burn Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Burn Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/pain_die.png" alt="Pain Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Pain Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_heal.png" alt="Heal Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Heal Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_heal.png" alt="Improved Heal" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Heal</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/death_die.png" alt="Death Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Death Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/life_die.png" alt="Life Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Life Die</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/brave_heart_die.png" alt="Brave Heart" loading="lazy" width="88" height="88"><p class="dice-card__name">Brave Heart</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/gladiator_die.png" alt="Gladiator" loading="lazy" width="88" height="88"><p class="dice-card__name">Gladiator</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/collectors_d12.png" alt="Collector's D12" loading="lazy" width="88" height="88"><p class="dice-card__name">Collector's D12</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/lucky_d6.png" alt="Lucky D6" loading="lazy" width="88" height="88"><p class="dice-card__name">Lucky D6</p></div>
+          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/the_centurion.png" alt="The Centurion" loading="lazy" width="88" height="88"><p class="dice-card__name">The Centurion</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         COLLECTIBLES / MEMENTOS
+         ======================================== -->
+    <section id="loot" class="section" aria-labelledby="loot-heading">
+      <p class="section__label fade-in">05 &mdash; Collectibles</p>
+      <h2 id="loot-heading" class="section__heading fade-in">And a bagful of tricks.</h2>
+      <p class="section__body fade-in">Mementos of a life half-remembered. Each one changes how you fight, heal, or endure.</p>
+      <div class="memento-grid fade-in">
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/faded_photo.png" alt="Faded Photograph" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The only picture where everyone is smiling.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/broken_toy.png" alt="Broken Toy" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>No one came when you cried.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/dusty_locket.png" alt="Dusty Locket" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Reminds you of secrets kept.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/fathers_watch_memento.png" alt="Father's Watch" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>He was always too late.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/mums_perfume.png" alt="Mum's Perfume" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Comforting but fleeting.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/superpower_serum.png" alt="Superpower Serum" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>How quickly the truth weakens.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/bloodied_tenderizer.png" alt="Bloodied Tenderizer" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Some stains never wash off.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/empty_lunchbox.png" alt="Empty Lunchbox" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You were hungry for something food could not fill.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/juice_stained_yearbook.png" alt="Juice-Stained Yearbook" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Everyone signed it. Nobody knew you.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/intimidating_presence.png" alt="Intimidating Presence" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Strength is blinding when false.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/crumpled_program.png" alt="Crumpled Program" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Your name circled in faded ink.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/empty_flask.png" alt="Empty Flask" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>She said it was water.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/diploma_frame.png" alt="Diploma Frame" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>No one asks about the ceremony.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/valedictorian_medal.png" alt="Valedictorian Medal" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The cost of fragments feels lighter.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/engraved_pen.png" alt="Engraved Pen" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You missed her birthday for this.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/framed_memo.png" alt="Framed Memo" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The frame is cracked. It still hangs.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/stress_ball.png" alt="Stress Ball" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You kept it together. For now.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/hush_money.png" alt="Hush Money" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>No one talks about it.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/electric_blanket.png" alt="Electric Blanket" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You're warm now. Alone.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/baby_monitor.png" alt="Baby Monitor" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You were always listening. Or were you?</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/best_dad_certificate.png" alt="Best Dad Certificate" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>He made it himself. You were never there.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/empty_crib.png" alt="Empty Crib" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>No one wakes you.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/broken_flask.png" alt="Broken Flask" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Mother's escape outlived her.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/unsent_letter.png" alt="Unsent Letter" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Still folded in your jacket.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/family_bondo.png" alt="Family Bondo" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Held together with the wrong stuff.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/obituary_clipping.png" alt="Obituary Clipping" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>They wrote what they were told.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/gold_watch_memento.png" alt="Gold Watch" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Time finally weighs in your pocket.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/shifting_photo.png" alt="Shifting Photo" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Your son's face blurs when you look away.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/empty_chair.png" alt="Empty Chair" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Reserved for someone who never came.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/mended_ring.png" alt="Mended Ring" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The seam shows if you know where to look.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/namesake.png" alt="Namesake" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>He gave him my name.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/blank_name_badge.png" alt="Blank Name Badge" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>He never filled in the emergency contact line.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/gate_lock.png" alt="Gate Lock" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You never spoke again. But he remembered.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/silver_spoon.png" alt="Silver Spoon" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>We'll get together then, son.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/family_album.png" alt="Family Album" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>It's complete, and sobering.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/unusual_polaroid.png" alt="Unusual Polaroid" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Something seems off...</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/death_certificate.png" alt="Death Certificate" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The end?</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/flickering_halo.png" alt="Flickering Halo" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You were almost something greater.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/garage_key.png" alt="Garage Key" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The oil never runs out.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/cremation_ashes.png" alt="Cremation Ashes" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Warm to the touch with faded love.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/strange_key.png" alt="Strange Key" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Survival lingers in familiar spaces.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/reading_glasses.png" alt="Reading Glasses" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Cracked lenses reveal harsh truths.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/lucky_coin.png" alt="Lucky Coin" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Worn smooth by anxious fingers.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/paper_crown.png" alt="Paper Crown" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Glory without consequence.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/salt_shell.png" alt="Salt Shell" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>He brought the war home in ways we could not see.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/broken_stopwatch.png" alt="Broken Stopwatch" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>When time stops, opportunity begins.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/weighted_die.png" alt="Weighted Die" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Great fortune or great failure.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/expired_adderall.png" alt="Expired Adderall" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Focus that burns out fast and hard.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/rabbits_foot.png" alt="Rabbit's Foot" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Luck comes to those who believe.</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/dried_rose.png" alt="Dried Rose" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The one you missed for work.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         WATCHES / TIME
+         ======================================== -->
+    <section id="time" class="section" aria-labelledby="time-heading">
+      <p class="section__label fade-in">06 &mdash; Time</p>
+      <h2 id="time-heading" class="section__heading fade-in">But time is not on your side.</h2>
+      <p class="section__body fade-in">Each watch marks a different pace of decay. Choose wisely.</p>
+      <div class="memento-grid fade-in" style="max-width: 400px;">
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/watches/basic_casio.png" alt="Basic Casio" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Basic Casio</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/watches/silver_watch.png" alt="Silver Timepiece" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Silver Timepiece</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/watches/gold_watch.png" alt="Golden Chronometer" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Golden Chronometer</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/watches/dino_watch.png" alt="Dinosaur Watch" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Dinosaur Watch</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/watches/unicorn_watch.png" alt="Unicorn Watch" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Unicorn Watch</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/watches/calculator_watch.png" alt="Calculator Watch" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Calculator Watch</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/watches/martys_watch.png" alt="Marty's Watch" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Marty's Watch</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/watches/batteries_not_included.png" alt="Batteries Not Included" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Batteries Not Included</span></div></div>
+        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/watches/collectors_edition.png" alt="Collector's Edition" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Collector's Edition</span></div></div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         STATS BAR
+         ======================================== -->
+    <section class="stats" aria-label="Game statistics">
+      <div class="stats__grid fade-in">
+        <div class="stats__item">
+          <p class="stats__value">32</p>
+          <p class="stats__label">Unique Dice</p>
+        </div>
+        <div class="stats__item">
+          <p class="stats__value">117</p>
+          <p class="stats__label">Mementos</p>
+        </div>
+        <div class="stats__item">
+          <p class="stats__value">&infin;</p>
+          <p class="stats__label">Replayability</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         CTA
+         ======================================== -->
+    <section class="cta" aria-labelledby="cta-heading">
+      <div class="cta__bg" aria-hidden="true"></div>
+      <div class="cta__content fade-in">
+        <p class="section__label">Remember to Die</p>
+        <h2 id="cta-heading" class="section__heading">Begin your journey.</h2>
+        <p class="section__body" style="margin: 0 auto 1.6rem; text-align: center;">Add Remember to Die to your Steam wishlist and be the first to know when the dice fall.</p>
+        <a href="https://store.steampowered.com/app/4340400/Remember_to_Die/" class="cta__steam" target="_blank" rel="noopener noreferrer">
+          <img src="https://rtd.skipstone.co.nz/steam%20wishlist%20bw3.png" alt="Wishlist on Steam" width="200" height="48">
+        </a>
+        <form class="newsletter" id="newsletter-form" action="#">
+          <label for="newsletter-email" class="visually-hidden">Email address</label>
+          <input type="email" id="newsletter-email" class="newsletter__input" placeholder="your@email.com" required>
+          <button type="submit" class="newsletter__btn">Subscribe</button>
+        </form>
+        <p class="newsletter__success" id="newsletter-success" hidden>You're on the list. &#10003;</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="footer">
+    <div class="footer__grid">
+      <a href="#" class="footer__logo" aria-label="Skipstone Studios">
+        <img src="https://rtd.skipstone.co.nz/Skipstone_logo.png" alt="Skipstone Studios" width="80" height="22">
+      </a>
+      <p class="footer__copy">&copy; 2025 Skipstone Studios. All rights reserved.</p>
+      <div class="footer__links">
+        <a href="https://rtd.skipstone.co.nz/privacy">Privacy Policy</a>
+        <a href="https://store.steampowered.com/app/4340400/Remember_to_Die/" target="_blank" rel="noopener noreferrer">Steam</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Visually hidden utility -->
+  <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+
+  <!-- ========================================
+       JAVASCRIPT
+       ======================================== -->
+  <script>
+    (function() {
+      'use strict';
+
+      // Reduced motion check
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ---- Scroll-triggered fade-ins ----
+      const fadeElements = document.querySelectorAll('.fade-in');
+
+      if (prefersReducedMotion) {
+        fadeElements.forEach(function(el) { el.classList.add('visible'); });
+      } else {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+        fadeElements.forEach(function(el) { observer.observe(el); });
+      }
+
+      // ---- Nav scroll state ----
+      var nav = document.getElementById('nav');
+      window.addEventListener('scroll', function() {
+        nav.classList.toggle('scrolled', window.scrollY > 80);
+      }, { passive: true });
+
+      // ---- Smooth scroll for nav links ----
+      document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          var target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+            // Close mobile menu if open
+            mobileMenu.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
+      // ---- Mobile menu ----
+      var hamburger = document.querySelector('.nav__hamburger');
+      var mobileMenu = document.getElementById('mobile-menu');
+
+      hamburger.addEventListener('click', function() {
+        var isOpen = mobileMenu.classList.toggle('open');
+        this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      // Close mobile menu on Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+          mobileMenu.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          hamburger.focus();
+        }
+      });
+
+      // ---- Newsletter form ----
+      var form = document.getElementById('newsletter-form');
+      var success = document.getElementById('newsletter-success');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = form.querySelector('input[type="email"]');
+        if (email.value && email.validity.valid) {
+          form.style.display = 'none';
+          success.hidden = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
