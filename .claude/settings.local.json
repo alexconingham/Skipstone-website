@@ -6,7 +6,13 @@
       "Skill(gstack)",
       "Bash(ls src/app/sitemap*)",
       "Bash(npm uninstall:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(npx skills:*)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(len\\(d\\)\\); [print\\(e['id'],e['name'],e['portrait']\\) for e in d[:5]]\")",
+      "Bash(node -e \"const d=require\\('./data/enemy_data.json'\\); console.log\\(d.length\\); d.slice\\(0,5\\).forEach\\(e=>console.log\\(e.id,e.name,e.portrait\\)\\)\")",
+      "Bash(node -e \"const d=require\\('./data/memento_data.json'\\); console.log\\('Mementos:', d.length\\)\")",
+      "Bash(node -e \"const d=require\\('./data/dice_data.json'\\); console.log\\('Dice:', d.dice.length\\)\")",
+      "Bash(node -e ':*)"
     ]
   }
 }
