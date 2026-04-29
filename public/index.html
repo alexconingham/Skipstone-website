@@ -314,13 +314,10 @@
       --bg-image: url('https://rtd.skipstone.co.nz/backgrounds/D1_bg.PNG');
     }
 
-    body::after {
+    main::before {
       content: '';
       position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: calc(100vh + 100px);
+      inset: 0;
       z-index: 0;
       background: var(--bg-image);
       background-size: cover;
@@ -343,6 +340,8 @@
       padding: clamp(2.4rem, 4.8vw, 4.8rem) clamp(1.2rem, 4vw, 4rem);
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
     }
 
     .section--full {
@@ -1707,7 +1706,8 @@
       }
 
       // ---- Tape Player ----
-      var tracks = ['Neon Shadows (altmetal)', 'Neon Shadows (americana)', 'Neon Shadows (chippynumetal)', 'Neon Shadows (chiptune)', 'Neon Shadows (credits)', 'Neon Shadows (deathcore)', 'Neon Shadows (djent)', 'Neon Shadows (dnb1)', 'Neon Shadows (dnb2)', 'Neon Shadows (doomsynth)', 'Neon Shadows (electchill)', 'Neon Shadows (metalcore)', 'Neon Shadows (metalcore2)', 'Neon Shadows (midwest)', 'Neon Shadows (pink)', 'Neon Shadows (pink2)', 'Neon Shadows (post electronica)', 'Neon Shadows (synthpop)', 'Neon Shadows'];
+      var tracks = ['altmetal', 'americana', 'chippynumetal', 'chiptune', 'credits', 'deathcore', 'djent', 'dnb1', 'dnb2', 'doomsynth', 'electchill', 'metalcore', 'metalcore2', 'midwest', 'pink', 'pink2', 'post electronica', 'synthpop', 'main'];
+      var trackLabels = ['Neon Shadows (altmetal)', 'Neon Shadows (americana)', 'Neon Shadows (chippynumetal)', 'Neon Shadows (chiptune)', 'Neon Shadows (credits)', 'Neon Shadows (deathcore)', 'Neon Shadows (djent)', 'Neon Shadows (dnb1)', 'Neon Shadows (dnb2)', 'Neon Shadows (doomsynth)', 'Neon Shadows (electchill)', 'Neon Shadows (metalcore)', 'Neon Shadows (metalcore2)', 'Neon Shadows (midwest)', 'Neon Shadows (pink)', 'Neon Shadows (pink2)', 'Neon Shadows (post electronica)', 'Neon Shadows (synthpop)', 'Neon Shadows'];
       var currentTrack = 0;
       var isPlaying = false;
       var playBtn = document.getElementById('play-btn');
@@ -1716,12 +1716,15 @@
       var trackDisplay = document.getElementById('track-display');
       var audio = new Audio();
       audio.volume = 0.5;
+      audio.crossOrigin = 'anonymous';
 
       function loadTrack(index) {
-        currentTrack = index % tracks.length;
-        var trackName = tracks[currentTrack].replace(' (', '.').replace(')', '');
-        audio.src = 'https://rtd.skipstone.co.nz/audio/' + trackName + '.mp3';
-        if (trackDisplay) trackDisplay.textContent = tracks[currentTrack];
+        currentTrack = (index % tracks.length + tracks.length) % tracks.length;
+        var trackFile = 'Neon%20Shadows%20(' + encodeURIComponent(tracks[currentTrack]) + ').mp3';
+        if (tracks[currentTrack] === 'main') trackFile = 'Neon%20Shadows.mp3';
+        audio.src = 'https://rtd.skipstone.co.nz/audio/' + trackFile;
+        if (trackDisplay) trackDisplay.textContent = trackLabels[currentTrack];
+        console.log('Loading track:', audio.src);
       }
 
       if (playBtn) {
@@ -1732,9 +1735,7 @@
             playBtn.textContent = '▶';
             isPlaying = false;
           } else {
-            audio.play().catch(e => console.error('Play failed:', e));
-            playBtn.textContent = '⏸';
-            isPlaying = true;
+            audio.play().then(() => { playBtn.textContent = '⏸'; isPlaying = true; }).catch(e => console.error('Play failed:', e));
           }
         });
       }
