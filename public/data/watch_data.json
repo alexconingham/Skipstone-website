@@ -1,0 +1,139 @@
+[
+  {
+	"id": "basic_casio",
+	"name": "Basic Casio",
+	"description": "A simple digital watch. Reliable but unremarkable.",
+	"rarity": "common",
+	"image": "basic_casio.png",
+	"effect_description": "Just tells you the time",
+	"effect": {
+	  "type": "none",
+	  "value": 0
+	}
+  },
+  {
+	"id": "silver_watch",
+	"name": "Silver Timepiece",
+	"description": "An elegant silver watch that seems to catch more than just light.",
+	"rarity": "rare",
+	"image": "silver_watch.png",
+	"effect_description": "Increases resilience by 1.5x",
+	"effect": {
+	  "type": "dice_modifier",
+	  "modifier": "defence",
+	  "value": 1
+	}
+  },
+  {
+	"id": "gold_watch",
+	"name": "Golden Chronometer",
+	"description": "Time itself seems to bend around this ancient golden device.",
+	"rarity": "rare",
+	"image": "gold_watch.png",
+	"effect_description": "Increases life by 20 years",
+	"effect": {
+	  "type": "plus_life_expectancy",
+	  "value": 20
+	}
+  },
+  {
+	"id": "dino_watch",
+	"name": "Dinosaur Watch",
+	"description": "The dinosaurs always made you feel strong.",
+	"rarity": "relic",
+	"image": "dino_watch.png",
+	"effect_description": "Increases strength by 1.5x, and life by 5 years",
+	"effect": {
+	  "type": "stat_buff_multi",
+	  "stat": "strength",
+	  "value": 1.5
+	}
+  },
+  {
+	"id": "unicorn_watch",
+	"name": "Unicorn Watch",
+	"description": "It's pretty. And whispers secrets about your enemies.",
+	"rarity": "relic",
+	"image": "unicorn_watch.png",
+	"effect_description": "Increases insight by 1.5x, and life by 5 years",
+	"effect": {
+	  "type": "stat_buff_multi",
+	  "stat": "insight",
+	  "value": 1.5
+	}
+  },
+  {
+	"id": "calcu_watch",
+	"name": "Calculator Watch",
+	"description": "Sometimes the best offence is a calculated defence.",
+	"rarity": "relic",
+	"image": "calculator_watch.png",
+	"effect_description": "Increases resilience by 1.5x, and life by 5 years",
+	"effect": {
+	  "type": "stat_buff_multi",
+	  "stat": "resilience",
+	  "value": 1.5
+	}
+  },
+  {
+	"id": "martys_watch",
+	"name": "Marty's Watch",
+	"description": "A ticking timepiece that seems to slow the passage of years. Time saved is time earned.",
+	"rarity": "relic",
+	"image": "martys_watch.png",
+	"effect_description": "Reduces fragment costs by 25%",
+	"effect": {
+	  "type": "fragment_cost_reduction",
+	  "value": 25
+	}
+  },
+  {
+	"id": "batteries_not_included",
+	"name": "Batteries Not Included",
+	"description": "A watch that stopped ticking long ago. Memories cost nothing when time stands still.",
+	"rarity": "relic",
+	"image": "batteries_not_included.png",
+	"effect_description": "Reduces fragment costs by 50%",
+	"effect": {
+	  "type": "fragment_cost_reduction",
+	  "value": 50
+	}
+  },
+  {
+	"id": "collectors_edition",
+	"name": "Collector's Edition",
+	"description": "A limited edition watch that seems to attract rarer treasures. Higher tier drops become more common.",
+	"rarity": "relic",
+	"image": "collectors_edition.png",
+	"effect_description": "Increases drop chances for higher tiers by 15%",
+	"effect": {
+	  "type": "loot_rarity_modifier",
+	  "rarity": "rare",
+	  "modifier": 0.15
+	}
+  },
+  {
+	"id": "fractured_hourglass",
+	"name": "Fractured Hourglass",
+	"description": "Time leaked through the crack while you waited. What spilled out is yours to keep.",
+	"rarity": "relic",
+	"image": "fractured_hourglass.png",
+	"effect_description": "Reduces fragment costs by 30%",
+	"effect": {
+	  "type": "fragment_cost_reduction",
+	  "value": 30
+	}
+  },
+  {
+	"id": "void_chronometer",
+	"name": "Void Chronometer",
+	"description": "A watch from beyond the end of time. It does not tick. It simply knows.",
+	"rarity": "relic",
+	"image": "void_chronometer.png",
+	"effect_description": "Increases life by 30 years",
+	"effect": {
+	  "type": "plus_life_expectancy",
+	  "value": 30
+	}
+  }
+]
