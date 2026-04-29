@@ -310,23 +310,28 @@
     /* ========================================
        MAIN CONTENT BACKGROUND
        ======================================== */
-    main {
-      position: relative;
-      z-index: 1;
+    :root {
+      --bg-image: url('https://rtd.skipstone.co.nz/backgrounds/D1_bg.PNG');
     }
 
-    main::before {
+    body::after {
       content: '';
       position: fixed;
       inset: 0;
-      z-index: -1;
-      background: var(--bg-image, url('https://rtd.skipstone.co.nz/backgrounds/D1_bg.PNG'));
+      top: 100px;
+      z-index: 0;
+      background: var(--bg-image);
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
       filter: sepia(0.3) brightness(0.3) contrast(1.05);
       opacity: 0.4;
       pointer-events: none;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
     }
 
     /* ========================================
@@ -1625,10 +1630,7 @@
           'D6_bg.PNG', 'D7_bg.PNG', 'D8_bg.PNG', 'D9_bg.PNG', 'D10_bg.PNG'
         ];
         var randomBg = levelBgs[Math.floor(Math.random() * levelBgs.length)];
-        var mainEl = document.querySelector('main');
-        if (mainEl && mainEl.parentElement) {
-          mainEl.parentElement.style.setProperty('--bg-image', 'url(https://rtd.skipstone.co.nz/backgrounds/' + randomBg + ')');
-        }
+        document.documentElement.style.setProperty('--bg-image', 'url(https://rtd.skipstone.co.nz/backgrounds/' + randomBg + ')');
       }
 
       // ---- Populate dice grid ----
