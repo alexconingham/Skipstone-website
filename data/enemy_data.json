@@ -6,8 +6,8 @@
     "battle_type": "grunt",
     "dungeon_id": 1.0,
     "stats": {
-      "hp": 20.0,
-      "strength": 4.0,
+      "hp": 10.0,
+      "strength": 1.0,
       "resilience": 0.0,
       "insight": 0.0
     },
@@ -45,10 +45,10 @@
     "battle_type": "elite",
     "dungeon_id": 1.0,
     "stats": {
-      "hp": 26.0,
-      "strength": 3.0,
-      "resilience": 1.5,
-      "insight": 1.5
+      "hp": 12.0,
+      "strength": 1.0,
+      "resilience": 1,
+      "insight": 0
     },
     "dice": [
       "simple_d6_attack",
@@ -88,7 +88,7 @@
     "battle_type": "boss",
     "dungeon_id": 1.0,
     "stats": {
-      "hp": 22.0,
+      "hp": 15.0,
       "strength": 2.0,
       "resilience": 0.5,
       "insight": 0.5
@@ -129,8 +129,8 @@
     "battle_type": "grunt",
     "dungeon_id": 2.0,
     "stats": {
-      "hp": 22.0,
-      "strength": 4.0,
+      "hp": 12.0,
+      "strength": 1.0,
       "resilience": 0.0,
       "insight": 0.0
     },
@@ -171,8 +171,8 @@
     "battle_type": "elite",
     "dungeon_id": 2.0,
     "stats": {
-      "hp": 29.0,
-      "strength": 5.5,
+      "hp": 16.0,
+      "strength": 2.0,
       "resilience": 2.0,
       "insight": 2.0
     },
@@ -210,8 +210,8 @@
     "battle_type": "boss",
     "dungeon_id": 2.0,
     "stats": {
-      "hp": 37.0,
-      "strength": 7.0,
+      "hp": 22.0,
+      "strength": 2.0,
       "resilience": 3.0,
       "insight": 2.5
     },
@@ -256,8 +256,8 @@
     "battle_type": "grunt",
     "dungeon_id": 3.0,
     "stats": {
-      "hp": 25.0,
-      "strength": 4.0,
+      "hp": 16.0,
+      "strength": 1.0,
       "resilience": 2.0,
       "insight": 2.0
     },
@@ -299,8 +299,8 @@
     "battle_type": "elite",
     "dungeon_id": 3.0,
     "stats": {
-      "hp": 32.0,
-      "strength": 4.0,
+      "hp": 22.0,
+      "strength": 1.0,
       "resilience": 2.5,
       "insight": 2.5
     },
@@ -346,8 +346,8 @@
     "battle_type": "boss",
     "dungeon_id": 3.0,
     "stats": {
-      "hp": 41.0,
-      "strength": 6.5,
+      "hp": 25.0,
+      "strength": 2.0,
       "resilience": 5.0,
       "insight": 5.0
     },
@@ -369,7 +369,7 @@
     "xp_reward": 68.0,
     "loot_table_template": "boss_standard",
     "mementos": [
-      "expired_aderall",
+      "expired_adderall",
       "fathers_watch_memento"
     ],
     "ai_profile": {
@@ -393,8 +393,8 @@
     "battle_type": "grunt",
     "dungeon_id": 4.0,
     "stats": {
-      "hp": 27.0,
-      "strength": 8.5,
+      "hp": 18.0,
+      "strength": 3.0,
       "resilience": 3.0,
       "insight": 3.0
     },
@@ -437,8 +437,8 @@
     "battle_type": "elite",
     "dungeon_id": 4.0,
     "stats": {
-      "hp": 34.0,
-      "strength": 9.0,
+      "hp": 24.0,
+      "strength": 3.0,
       "resilience": 4.5,
       "insight": 4.5
     },
@@ -484,8 +484,8 @@
     "battle_type": "boss",
     "dungeon_id": 4.0,
     "stats": {
-      "hp": 44.0,
-      "strength": 10.5,
+      "hp": 27.0,
+      "strength": 3.0,
       "resilience": 6.0,
       "insight": 6.0
     },
@@ -507,8 +507,7 @@
     "xp_reward": 82.0,
     "loot_table_template": "boss_standard",
     "mementos": [
-      "engraved_pen",
-      "corrupted_amulet"
+      "engraved_pen"
     ],
     "ai_profile": {
       "intelligence": 0.74,
@@ -531,8 +530,8 @@
     "battle_type": "grunt",
     "dungeon_id": 5.0,
     "stats": {
-      "hp": 30.0,
-      "strength": 9.0,
+      "hp": 23.0,
+      "strength": 3.0,
       "resilience": 3.0,
       "insight": 3.0
     },
@@ -575,8 +574,8 @@
     "battle_type": "elite",
     "dungeon_id": 5.0,
     "stats": {
-      "hp": 37.0,
-      "strength": 10.0,
+      "hp": 29.0,
+      "strength": 3.0,
       "resilience": 5.0,
       "insight": 5.0
     },
@@ -622,8 +621,8 @@
     "battle_type": "boss",
     "dungeon_id": 5.0,
     "stats": {
-      "hp": 48.0,
-      "strength": 8.0,
+      "hp": 30.0,
+      "strength": 2.0,
       "resilience": 5.0,
       "insight": 5.0
     },
@@ -645,8 +644,7 @@
     "xp_reward": 98.0,
     "loot_table_template": "boss_standard",
     "mementos": [
-      "framed_memo",
-      "crystal_pendant"
+      "framed_memo"
     ],
     "ai_profile": {
       "intelligence": 0.77,
@@ -669,8 +667,8 @@
     "battle_type": "grunt",
     "dungeon_id": 6.0,
     "stats": {
-      "hp": 32.0,
-      "strength": 6.0,
+      "hp": 26.0,
+      "strength": 2.0,
       "resilience": 3.0,
       "insight": 3.0
     },
@@ -714,8 +712,8 @@
     "battle_type": "elite",
     "dungeon_id": 6.0,
     "stats": {
-      "hp": 40.0,
-      "strength": 8.0,
+      "hp": 32.0,
+      "strength": 2.0,
       "resilience": 4.5,
       "insight": 4.5
     },
@@ -762,8 +760,8 @@
     "battle_type": "boss",
     "dungeon_id": 6.0,
     "stats": {
-      "hp": 51.0,
-      "strength": 10.0,
+      "hp": 38.0,
+      "strength": 3.0,
       "resilience": 7.0,
       "insight": 4.0
     },
@@ -810,8 +808,8 @@
     "battle_type": "grunt",
     "dungeon_id": 7.0,
     "stats": {
-      "hp": 34.0,
-      "strength": 10.0,
+      "hp": 31.0,
+      "strength": 3.0,
       "resilience": 5.0,
       "insight": 5.0
     },
@@ -855,8 +853,8 @@
     "battle_type": "elite",
     "dungeon_id": 7.0,
     "stats": {
-      "hp": 43.0,
-      "strength": 10.0,
+      "hp": 33.0,
+      "strength": 3.0,
       "resilience": 6.0,
       "insight": 6.0
     },
@@ -902,8 +900,8 @@
     "battle_type": "boss",
     "dungeon_id": 7.0,
     "stats": {
-      "hp": 54.0,
-      "strength": 4.0,
+      "hp": 39.0,
+      "strength": 1.0,
       "resilience": 2.5,
       "insight": 2.5
     },
@@ -949,8 +947,8 @@
     "battle_type": "grunt",
     "dungeon_id": 8.0,
     "stats": {
-      "hp": 37.0,
-      "strength": 12.0,
+      "hp": 33.0,
+      "strength": 5.0,
       "resilience": 5.0,
       "insight": 5.0
     },
@@ -989,8 +987,8 @@
     "battle_type": "elite",
     "dungeon_id": 8.0,
     "stats": {
-      "hp": 46.0,
-      "strength": 14.5,
+      "hp": 39.0,
+      "strength": 6.0,
       "resilience": 7.0,
       "insight": 7.0
     },
@@ -1036,8 +1034,8 @@
     "battle_type": "boss",
     "dungeon_id": 8.0,
     "stats": {
-      "hp": 58.0,
-      "strength": 7.0,
+      "hp": 44.0,
+      "strength": 3.0,
       "resilience": 4.0,
       "insight": 4.0
     },
@@ -1059,8 +1057,7 @@
     "xp_reward": 142.0,
     "loot_table_template": "boss_standard",
     "mementos": [
-      "intimidating_presence",
-      "corrupted_amulet"
+      "intimidating_presence"
     ],
     "ai_profile": {
       "intelligence": 0.86,
@@ -1083,8 +1080,8 @@
     "battle_type": "grunt",
     "dungeon_id": 9.0,
     "stats": {
-      "hp": 39.0,
-      "strength": 13.0,
+      "hp": 36.0,
+      "strength": 5.0,
       "resilience": 8.0,
       "insight": 8.0
     },
@@ -1127,8 +1124,8 @@
     "battle_type": "elite",
     "dungeon_id": 9.0,
     "stats": {
-      "hp": 48.0,
-      "strength": 16.0,
+      "hp": 40.0,
+      "strength": 6.0,
       "resilience": 10.5,
       "insight": 10.5
     },
@@ -1150,7 +1147,6 @@
     "xp_reward": 82.0,
     "loot_table_template": "elite_standard",
     "mementos": [
-      "strange_polaroid",
       "fathers_watch_memento"
     ],
     "ai_profile": {
@@ -1174,8 +1170,8 @@
     "battle_type": "boss",
     "dungeon_id": 9.0,
     "stats": {
-      "hp": 61.0,
-      "strength": 13.0,
+      "hp": 48.0,
+      "strength": 5.0,
       "resilience": 9.0,
       "insight": 9.0
     },
@@ -1198,8 +1194,7 @@
     "xp_reward": 158.0,
     "loot_table_template": "boss_standard",
     "mementos": [
-      "bloodied_tenderizer",
-      "crystal_pendant"
+      "bloodied_tenderizer"
     ],
     "ai_profile": {
       "intelligence": 0.89,
@@ -1222,8 +1217,8 @@
     "battle_type": "grunt",
     "dungeon_id": 10.0,
     "stats": {
-      "hp": 42.0,
-      "strength": 15.0,
+      "hp": 40.0,
+      "strength": 6.0,
       "resilience": 7.5,
       "insight": 7.5
     },
@@ -1266,8 +1261,8 @@
     "battle_type": "elite",
     "dungeon_id": 10.0,
     "stats": {
-      "hp": 51.0,
-      "strength": 19.0,
+      "hp": 45.0,
+      "strength": 7.0,
       "resilience": 11.0,
       "insight": 11.0
     },
@@ -1313,8 +1308,8 @@
     "battle_type": "boss",
     "dungeon_id": 10.0,
     "stats": {
-      "hp": 65.0,
-      "strength": 8.0,
+      "hp": 52.0,
+      "strength": 2.0,
       "resilience": 5.0,
       "insight": 5.0
     },
@@ -2038,28 +2033,27 @@
   },
   {
     "id": "D16_grunt",
-    "name": "The Varnish Wraith",
-    "description": "In the trunk’s pitch-black air, it clings to your lungs—varnish, dust, and counted heartbeats.",
+    "name": "The Varnish Prince",
+    "description": "In the trunk’s pitch-black air it clings to your lungs... Varnish, dust, and counted heartbeats.",
     "battle_type": "grunt",
     "dungeon_id": 16.0,
     "stats": {
-      "hp": 56.0,
-      "strength": 9.0,
-      "resilience": 5.0,
-      "insight": 5.0
+      "hp": 16.0,
+      "strength": 2.0,
+      "resilience": 3.0,
+      "insight": 3.0
     },
     "dice": [
-      "simple_d6_attack",
       "poison_die"
     ],
     "portrait": "D16_grunt.png",
     "traits": {
       "weaknesses": [
-        "poison"
+        "burn"
       ],
-      "immunities": []
+      "immunities": ["poison"]
     },
-    "xp_reward": 35.0,
+    "xp_reward": 25.0,
     "loot_table_template": "grunt_standard",
     "mementos": [
       "broken_toy"
@@ -2080,19 +2074,18 @@
   },
   {
     "id": "D16_elite",
-    "name": "The Biscuit Siren",
-    "description": "A cool breeze carries perfume and fresh biscuits, coaxing you to stay perfectly still.",
+    "name": "The Lady in the Wardrobe",
+    "description": "Close air smells of stale perfume and decay, coaxing you to stay perfectly still.",
     "battle_type": "elite",
     "dungeon_id": 16.0,
     "stats": {
-      "hp": 68.0,
-      "strength": 10.0,
-      "resilience": 6.0,
-      "insight": 6.0
+      "hp": 18.0,
+      "strength": 4.0,
+      "resilience": 1.0,
+      "insight": 2.0
     },
     "dice": [
       "simple_d6_attack",
-      "simple_d6_defence",
       "reflect_die"
     ],
     "portrait": "D16_elite.png",
@@ -2102,7 +2095,7 @@
       ],
       "immunities": []
     },
-    "xp_reward": 48.0,
+    "xp_reward": 28.0,
     "loot_table_template": "elite_standard",
     "mementos": [
       "faded_photo"
@@ -2124,17 +2117,16 @@
   {
     "id": "D16_boss",
     "name": "Mother",
-    "description": "Her tear-streaked face swears it was “only a minute” before the darkness seals you in again.",
+    "description": "30 minutes of oxygen, 4 hours of drinking, a lifetime to remember.",
     "battle_type": "boss",
     "dungeon_id": 16.0,
     "stats": {
-      "hp": 85.0,
-      "strength": 11.0,
-      "resilience": 7.0,
+      "hp": 24.0,
+      "strength": 1.0,
+      "resilience": 1.0,
       "insight": 7.0
     },
     "dice": [
-      "simple_d6_attack",
       "simple_d6_defence",
       "poison_die",
       "bleed_die"
@@ -2146,7 +2138,7 @@
         "poison"
       ]
     },
-    "xp_reward": 80.0,
+    "xp_reward": 50.0,
     "loot_table_template": "boss_standard",
     "mementos": [
       "mums_perfume"
@@ -2168,13 +2160,13 @@
   {
     "id": "D17_grunt",
     "name": "The Hall Monitor",
-    "description": "He patrols empty corridors while the infirmary cot holds your silence.",
+    "description": "He'll be someone one day, then they'll see...",
     "battle_type": "grunt",
     "dungeon_id": 17.0,
     "stats": {
-      "hp": 58.0,
-      "strength": 9.0,
-      "resilience": 5.0,
+      "hp": 23.0,
+      "strength": 4.0,
+      "resilience": 1.0,
       "insight": 5.0
     },
     "dice": [
@@ -2212,18 +2204,18 @@
   {
     "id": "D17_elite",
     "name": "The Quiet Nurse",
-    "description": "She watches as you reread the note you still don't understand.",
+    "description": "She delights in watching you read the note you still don't understand.",
     "battle_type": "elite",
     "dungeon_id": 17.0,
     "stats": {
-      "hp": 71.0,
-      "strength": 10.0,
-      "resilience": 6.0,
-      "insight": 6.0
+      "hp": 28.0,
+      "strength": 4.0,
+      "resilience": 4.0,
+      "insight": 4.0
     },
     "dice": [
       "simple_d6_attack",
-      "simple_d6_defence",
+      "renew_die",
       "shield_die"
     ],
     "portrait": "D17_elite.png",
@@ -2257,14 +2249,13 @@
     "battle_type": "boss",
     "dungeon_id": 17.0,
     "stats": {
-      "hp": 88.0,
+      "hp": 33.0,
       "strength": 11.0,
       "resilience": 7.0,
       "insight": 7.0
     },
     "dice": [
-      "simple_d6_attack",
-      "simple_d6_defence",
+      "simple_d12_attack",
       "bleed_die",
       "shield_die"
     ],

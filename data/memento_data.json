@@ -141,7 +141,7 @@
       },
       {
         "type": "poison_duration_amp",
-        "value": 1,
+        "value": 2,
         "trigger": "always",
         "visual_on_proc": false
       }
@@ -149,7 +149,7 @@
     "lifespan_bonus": 15,
     "lifespan_gain_modifier": 0,
     "lifespan_loss_modifier": 0,
-    "tooltip": "Increases Strength by 3 \u2022 Critical hits inflict 3 poison for 4 turns \u2022 Increases poison duration by 1 turn"
+    "tooltip": "Increases Strength by 3 \u2022 Critical hits inflict 3 poison for 4 turns \u2022 Increases poison duration by 2 turns"
   },
   {
     "id": "bloodied_tenderizer",
@@ -758,13 +758,13 @@
     "id": "empty_chair",
     "name": "Empty Chair",
     "description": "Reserved for missing souls. Reserved for someone who never came.",
-    "rarity": "rare",
+    "rarity": "relic",
     "image": "empty_chair.png",
     "effects": [
       {
-        "type": "fragment_reroll",
+        "type": "loot_slot_reroll",
         "value": 1,
-        "frequency": "once_per_floor",
+        "frequency": "once_per_dungeon",
         "trigger": "always",
         "visual_on_proc": false
       },
@@ -776,10 +776,10 @@
         "visual_on_proc": false
       }
     ],
-    "lifespan_bonus": 10,
+    "lifespan_bonus": 25,
     "lifespan_gain_modifier": 0,
     "lifespan_loss_modifier": 0,
-    "tooltip": "Allows rerolling fragment selection 1 times \u2022 Increases Resilience by 2"
+    "tooltip": "Reroll victory rewards once per dungeon \u2022 Increases Resilience by 2"
   },
   {
     "id": "mended_ring",
@@ -940,6 +940,13 @@
     "image": "unusual_polaroid.png",
     "effects": [
       {
+        "type": "loot_slot_reroll",
+        "value": 1,
+        "frequency": "once_per_dungeon",
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
         "type": "stat_buff",
         "stat": "insight",
         "value": 4,
@@ -951,7 +958,7 @@
     "lifespan_bonus": 0,
     "lifespan_gain_modifier": 0,
     "lifespan_loss_modifier": 0,
-    "tooltip": "Increases Insight by 4"
+    "tooltip": "Reroll victory rewards once per dungeon \u2022 Increases Insight by 4 when one fragment is missing"
   },
   {
     "id": "unfilled_script",
@@ -1101,7 +1108,9 @@
     "image": "garage_key.png",
     "effects": [
       {
-        "type": "corrupted_level_access",
+        "type": "unlock_alternative_level_on_dungeon_completion",
+        "level_id": "GARAGE",
+        "source_dungeon": 10,
         "trigger": "always",
         "visual_on_proc": false
       },
@@ -1123,7 +1132,7 @@
     "lifespan_bonus": 25,
     "lifespan_gain_modifier": 0,
     "lifespan_loss_modifier": 0,
-    "tooltip": "Grants access to corrupted memory levels \u2022 Increases Strength by 2 \u2022 Increases Insight by 2"
+    "tooltip": "Unlocks The Garage when held through Dungeon 10 completion \u2022 Increases Strength by 2 \u2022 Increases Insight by 2"
   },
   {
     "id": "clean_slate",
@@ -1306,7 +1315,7 @@
     "effects": [
       {
         "type": "dot_duration_amp",
-        "value": 3,
+        "value": 1,
         "trigger": "always",
         "visual_on_proc": true
       }
@@ -1314,7 +1323,7 @@
     "lifespan_bonus": 0,
     "lifespan_gain_modifier": 0,
     "lifespan_loss_modifier": 0,
-    "tooltip": "Increases damage-over-time effect duration by 3 turns"
+    "tooltip": "Increases damage-over-time effect duration by 1 round"
   },
   {
     "id": "broken_inhaler",
@@ -2116,6 +2125,13 @@
     "image": "rabbit_ears.png",
     "effects": [
       {
+        "type": "loot_slot_reroll",
+        "value": 1,
+        "frequency": "once_per_dungeon",
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
         "type": "stat_buff",
         "stat": "insight",
         "value": 4,
@@ -2126,6 +2142,649 @@
     "lifespan_bonus": 0,
     "lifespan_gain_modifier": 0,
     "lifespan_loss_modifier": 0,
-    "tooltip": "Increases Insight by 4"
+    "tooltip": "Reroll victory rewards once per dungeon \u2022 Increases Insight by 4"
+  },
+  {
+    "id": "faded_halo",
+    "name": "Faded Halo",
+    "description": "It sits crooked when you stop looking. You earned it, mostly. That should be enough.",
+    "rarity": "rare",
+    "image": "faded_halo.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "resilience",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "insight",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "combat_start_shield",
+        "value": 2,
+        "trigger": "combat_start",
+        "visual_on_proc": true
+      }
+    ],
+    "lifespan_bonus": 15,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Resilience by 2 \u2022 Increases Insight by 2 \u2022 Grants 2 shield at combat start"
+  },
+  {
+    "id": "cracked_harp",
+    "name": "Cracked Harp",
+    "description": "Three strings are gone. It still carries a tune, in its way. Some beauty requires imperfection to remain.",
+    "rarity": "rare",
+    "image": "cracked_harp.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "resilience",
+        "value": 3,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "damage_reduction_pct",
+        "value": 0.15,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 10,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Resilience by 3 \u2022 Reduces incoming damage by 15%"
+  },
+  {
+    "id": "saints_mask",
+    "name": "Saint's Mask",
+    "description": "Knows all the prayers and none of the virtues. Worn long enough, the mask becomes the face.",
+    "rarity": "relic",
+    "image": "saints_mask.png",
+    "effects": [
+      {
+        "type": "attack_flat",
+        "value": 4,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "strength",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "damage_dealt_self_pct",
+        "value": 0.15,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 20,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases attack damage by 4 \u2022 Increases Strength by 2 \u2022 Deals 15% of damage dealt as self-damage"
+  },
+  {
+    "id": "unfinished_prayer",
+    "name": "Unfinished Prayer",
+    "description": "The words trail off somewhere in the middle. Not because faith ran out \u2014 because time did. It still counts.",
+    "rarity": "rare",
+    "image": "unfinished_prayer.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "insight",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "fragment_cost_reduction",
+        "value": 25,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 12,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Insight by 2 \u2022 Reduces fragment costs by 25%"
+  },
+  {
+    "id": "hollow_penance",
+    "name": "Hollow Penance",
+    "description": "Every last coin, paid. Whether it was enough is still being decided somewhere. It probably wasn't.",
+    "rarity": "common",
+    "image": "hollow_penance.png",
+    "effects": [
+      {
+        "type": "damage_reduction_pct",
+        "value": 0.2,
+        "trigger": "on_low_hp",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 5,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Reduces incoming damage by 20% when health is low"
+  },
+  {
+    "id": "borrowed_sentence",
+    "name": "Borrowed Sentence",
+    "description": "Not redemption. A delay. The paperwork is still being processed. You won\u2019t like what you signed.",
+    "rarity": "relic",
+    "image": "borrowed_sentence.png",
+    "effects": [
+      {
+        "type": "attack_flat",
+        "value": 3,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "strength",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 20,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": -1,
+    "tooltip": "Increases attack damage by 3 \u2022 Increases Strength by 2"
+  },
+  {
+    "id": "ash_pendant",
+    "name": "Ash Pendant",
+    "description": "Forged from what the fire left behind. You endured what should have ended you. It remembers.",
+    "rarity": "relic",
+    "image": "ash_pendant.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "resilience",
+        "value": 3,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "strength",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "thorns_flat",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 22,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Resilience by 3 \u2022 Increases Strength by 2 \u2022 Deals 2 thorns damage to attackers"
+  },
+  {
+    "id": "scorched_bible",
+    "name": "Scorched Bible",
+    "description": "The passages about mercy burned first. What remains are the ones about wrath. Funny which parts survived.",
+    "rarity": "rare",
+    "image": "scorched_bible.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "insight",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "resilience",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "attack_flat",
+        "value": 1,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 12,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Insight by 2 \u2022 Increases Resilience by 2 \u2022 Increases attack damage by 1"
+  },
+  {
+    "id": "chains_unbound",
+    "name": "Chains Unbound",
+    "description": "Carried long enough, any weight becomes familiar. You never learned if leaving was harder than staying.",
+    "rarity": "rare",
+    "image": "chains_unbound.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "strength",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "resilience",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "crit_band",
+        "value": 1,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 10,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Strength by 2 \u2022 Increases Resilience by 2 \u2022 Expands critical hit range by 1"
+  },
+  {
+    "id": "deal_made",
+    "name": "Deal Made",
+    "description": "You\u2019ll never remember signing. That was part of the deal. The other part is worse.",
+    "rarity": "relic",
+    "image": "deal_made.png",
+    "effects": [
+      {
+        "type": "attack_flat",
+        "value": 5,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "strength",
+        "value": 3,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 30,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": -2,
+    "tooltip": "Increases attack damage by 5 \u2022 Increases Strength by 3"
+  },
+  {
+    "id": "childhood_clarity",
+    "name": "Childhood Clarity",
+    "description": "When you were seven, everything was sharp. The smell of carpet, the sound of rain on the window. Before the fog.",
+    "rarity": "relic",
+    "image": "childhood_clarity.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "insight",
+        "value": 3,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "guaranteed_first_crit",
+        "trigger": "combat_start",
+        "visual_on_proc": true
+      }
+    ],
+    "lifespan_bonus": 18,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Insight by 3 \u2022 Guarantees the first dice roll each battle is a critical hit"
+  },
+  {
+    "id": "broken_latch",
+    "name": "Broken Latch",
+    "description": "It snapped the summer before secondary school. Everything stayed in the box anyway. Some things need no lock.",
+    "rarity": "common",
+    "image": "broken_latch.png",
+    "effects": [
+      {
+        "type": "damage_reduction_pct",
+        "value": 0.15,
+        "trigger": "on_low_hp",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 0,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Reduces incoming damage by 15% when health is low"
+  },
+  {
+    "id": "varnish_stains",
+    "name": "Varnish Stains",
+    "description": "Yellow rings on his workbench. He never asked how they got there. You never told. The wood remembers.",
+    "rarity": "rare",
+    "image": "varnish_stains.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "strength",
+        "value": 3,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "insight",
+        "value": -2,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 8,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Strength by 3 \u2022 Decreases Insight by 2"
+  },
+  {
+    "id": "fallen_wrench",
+    "name": "Fallen Wrench",
+    "description": "He dropped it the day you asked to help. You held it carefully, both hands. He let you keep it.",
+    "rarity": "relic",
+    "image": "fallen_wrench.png",
+    "effects": [
+      {
+        "type": "attack_flat",
+        "value": 3,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "resilience",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 22,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases attack damage by 3 \u2022 Increases Resilience by 2"
+  },
+  {
+    "id": "radio_static",
+    "name": "Radio Static",
+    "description": "He tuned it for twenty years, looking for something. You always assumed he was listening. He wasn\u2019t.",
+    "rarity": "rare",
+    "image": "radio_static.png",
+    "effects": [
+      {
+        "type": "dice_reroll_chance",
+        "value": 0.2,
+        "target": "enemy",
+        "trigger": "always",
+        "visual_on_proc": true
+      },
+      {
+        "type": "stat_buff",
+        "stat": "insight",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 10,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Gives 20% chance to force enemy dice rerolls \u2022 Increases Insight by 2"
+  },
+  {
+    "id": "oil_stains",
+    "name": "Oil Stains",
+    "description": "Rings on the concrete where he worked. The shape of patience. You stepped over them for years without looking down.",
+    "rarity": "common",
+    "image": "oil_stains.png",
+    "effects": [
+      {
+        "type": "thorns_flat",
+        "value": 3,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 5,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Deals 3 thorns damage to attackers"
+  },
+  {
+    "id": "obsidian_truth",
+    "name": "Obsidian Truth",
+    "description": "Older than the dungeon. It shows you what is, not what you wished were true. You look anyway.",
+    "rarity": "relic",
+    "image": "obsidian_truth.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "insight",
+        "value": 4,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "attack_flat",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 30,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Insight by 4 \u2022 Increases attack damage by 2"
+  },
+  {
+    "id": "starless_echo",
+    "name": "Starless Echo",
+    "description": "A sound from before the stars. It finds you in the dark and keeps finding you. You stop minding.",
+    "rarity": "rare",
+    "image": "starless_echo.png",
+    "effects": [
+      {
+        "type": "passive_healing",
+        "value": 5,
+        "trigger": "turn_start",
+        "visual_on_proc": true
+      },
+      {
+        "type": "stat_buff",
+        "stat": "insight",
+        "value": 2,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 12,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Heals 5 HP at the start of each turn \u2022 Increases Insight by 2"
+  },
+  {
+    "id": "cosmic_debris",
+    "name": "Cosmic Debris",
+    "description": "What remains when everything burns. Not nothing \u2014 the dust of what was. Still matter. Still here.",
+    "rarity": "rare",
+    "image": "cosmic_debris.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "strength",
+        "value": 1,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "resilience",
+        "value": 1,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "insight",
+        "value": 1,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 10,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Strength by 1 \u2022 Increases Resilience by 1 \u2022 Increases Insight by 1"
+  },
+  {
+    "id": "fathers_note",
+    "name": "Father's Note",
+    "description": "Dog-eared and water-stained. You've read it so many times the words are worn smooth. He wrote it the morning of the fight.",
+    "rarity": "relic",
+    "image": "fathers_note.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "insight",
+        "value": 3,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "max_hp",
+        "value": 5,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 15,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Insight by 3 \u2022 Increases Max HP by 5"
+  },
+  {
+    "id": "ice_pack",
+    "name": "Ice Pack",
+    "description": "Still cold. You press it to your jaw where Callahan hit you. By the bell, you'll be back in the corridor.",
+    "rarity": "common",
+    "image": "ice_pack.png",
+    "effects": [
+      {
+        "type": "combat_start_shield",
+        "value": 5,
+        "duration": 1,
+        "trigger": "combat_start",
+        "visual_on_proc": true
+      }
+    ],
+    "lifespan_bonus": 0,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Grants 5 shield at combat start"
+  },
+  {
+    "id": "empty_corridors",
+    "name": "Empty Corridors",
+    "description": "The hall stretches long and silent behind you. No one looks. No one asks. You have learned to move without being seen.",
+    "rarity": "common",
+    "image": "empty_corridors.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "resilience",
+        "value": 1,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "insight",
+        "value": 1,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 0,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Resilience by 1 \u2022 Increases Insight by 1"
+  },
+  {
+    "id": "military_badge",
+    "name": "Military Badge",
+    "description": "It wasn't earned in any war you'd recognise. But he wore it every day anyway. You took it from the box after the last bell.",
+    "rarity": "rare",
+    "image": "military_badge.png",
+    "effects": [
+      {
+        "type": "stat_buff",
+        "stat": "strength",
+        "value": 3,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "resilience",
+        "value": -1,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 0,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": 0,
+    "tooltip": "Increases Strength by 3 \u2022 Decreases Resilience by 1"
+  },
+  {
+    "id": "abyss_bargain",
+    "name": "Abyss Bargain",
+    "description": "You looked long enough that it looked back. You blinked first. It remembers that.",
+    "rarity": "relic",
+    "image": "abyss_bargain.png",
+    "effects": [
+      {
+        "type": "attack_flat",
+        "value": 4,
+        "trigger": "always",
+        "visual_on_proc": false
+      },
+      {
+        "type": "stat_buff",
+        "stat": "strength",
+        "value": 3,
+        "trigger": "always",
+        "visual_on_proc": false
+      }
+    ],
+    "lifespan_bonus": 30,
+    "lifespan_gain_modifier": 0,
+    "lifespan_loss_modifier": -2,
+    "tooltip": "Increases attack damage by 4 \u2022 Increases Strength by 3"
   }
 ]

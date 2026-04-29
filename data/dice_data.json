@@ -165,14 +165,14 @@
 		"status",
 		"bleed"
 	  ],
-	  "effect_description": "Roll 4-6: Apply bleed (1) to enemy for 3 rounds.",
+	  "effect_description": "Roll 4-6: Apply bleed (1) to enemy for 2 rounds.",
 	  "damage": "roll_value",
 	  "effects": [
 		{
 		  "type": "bleed",
 		  "min_value": 4.0,
 		  "potency": 1.0,
-		  "duration": 4.0,
+		  "duration": 2.0,
 		  "target": "enemy",
 		  "effect_log_text": "The enemy is bleeding, taking {potency} damage per round!",
 		  "stats_modifier": [
@@ -208,7 +208,7 @@
 		  "type": "poison",
 		  "min_value": 4.0,
 		  "potency": 2.0,
-		  "duration": 3.0,
+		  "duration": 2.0,
 		  "target": "enemy",
 		  "effect_log_text": "The enemy is poisoned, taking {potency} damage per round!",
 		  "stats_modifier": [
@@ -498,13 +498,13 @@
 		"heal",
 		"renew"
 	  ],
-	  "effect_description": "Roll 4-6: Apply renew (2) to self for 3 rounds.",
+	  "effect_description": "Roll 4-6: Apply renew (2) to self for 2 rounds.",
 	  "effects": [
 		{
 		  "type": "renew",
 		  "min_value": 4.0,
 		  "potency": 2.0,
-		  "duration": 3.0,
+		  "duration": 2.0,
 		  "target": "self",
 		  "effect_log_text": "You feel renewed, healing {potency} health per round!",
 		  "stats_modifier": [
@@ -534,13 +534,13 @@
 		"heal",
 		"renew"
 	  ],
-	  "effect_description": "Roll 3-6: Apply renew (2) to self for 3 rounds.",
+	  "effect_description": "Roll 3-6: Apply renew (2) to self for 2 rounds.",
 	  "effects": [
 		{
 		  "type": "renew",
 		  "min_value": 3.0,
 		  "potency": 4.0,
-		  "duration": 3.0,
+		  "duration": 2.0,
 		  "target": "self",
 		  "effect_log_text": "You feel extra renewed, healing {potency} health per round!",
 		  "stats_modifier": [
@@ -673,13 +673,13 @@
 		"attack",
 		"burn"
 	  ],
-	  "effect_description": "Roll 4-6: Apply burn (2) for 3 rounds, reducing shield effectiveness.",
+	  "effect_description": "Roll 4-6: Apply burn (2) for 2 rounds, reducing shield effectiveness.",
 	  "effects": [
 		{
 		  "type": "burn",
 		  "min_value": 4.0,
 		  "potency": 2.0,
-		  "duration": 3.0,
+		  "duration": 2.0,
 		  "target": "enemy",
 		  "effect_log_text": "The enemy is Burned, reducing shield effectiveness by {potency} for {duration} rounds!",
 		  "stats_modifier": [
@@ -1231,6 +1231,129 @@
 	  ],
 	  "display_name": "The Centurion",
 	  "color": "rainbow"
+	},
+	{
+	  "id": "fuzzy_die",
+	  "name": "Fuzzy Dice",
+	  "type": "attack",
+	  "min_result": 2.0,
+	  "max_result": 12.0,
+	  "crit_threshold": 8.0,
+	  "crit_multiplier": 4.0,
+	  "rarity": "legendary",
+	  "quality": "basic",
+	  "qual_trigger": true,
+	  "qual_potency": true,
+	  "roll_sfx": "roll_1d6",
+	  "tags": ["attack", "shield", "luck", "legendary"],
+	  "effect_description": "2x: Rolls value as damage and shield. Critical (8-12): also restores 2 years.",
+	  "effects": [
+		{
+		  "type": "attack",
+		  "target": "enemy",
+		  "use_roll_value": true,
+		  "min_value": 2.0,
+		  "potency": "roll_value",
+		  "duration": 0.0,
+		  "effect_log_text": "The fuzzy dice swings for {potency} damage!",
+		  "stats_modifier": ["strength"],
+		  "icon": "res://assets/images/icons/attack.png"
+		},
+		{
+		  "type": "shield",
+		  "target": "self",
+		  "min_value": 2.0,
+		  "potency": "roll_value",
+		  "duration": 2.0,
+		  "effect_log_text": "Lucky charm absorbs {potency} damage!",
+		  "stats_modifier": ["resilience"],
+		  "icon": "res://assets/images/icons/shield_icon.png"
+		},
+		{
+		  "type": "chrono",
+		  "target": "self",
+		  "min_value": 8.0,
+		  "potency": 2.0,
+		  "duration": 0.0,
+		  "effect_log_text": "The road stretches out a little longer...",
+		  "stats_modifier": [],
+		  "icon": "res://assets/images/icons/chrono_icon.png"
+		}
+	  ],
+	  "display_name": "Fuzzy Dice",
+	  "color": "yellow"
+	},
+	{
+	  "id": "truth_revelation_die",
+	  "name": "Die of Truth",
+	  "type": "utility",
+	  "min_result": 1.0,
+	  "max_result": 10.0,
+	  "crit_threshold": 8.0,
+	  "crit_multiplier": 2.0,
+	  "rarity": "relic",
+	  "quality": "basic",
+	  "qual_trigger": true,
+	  "qual_potency": true,
+	  "roll_sfx": "roll_1d10",
+	  "tags": ["utility", "pierce", "insight"],
+	  "effect_description": "Roll 4-7: Pierce through enemy defence for 1 turn. Roll 8-10: Pierce and deal 8 bonus damage.",
+	  "effects": [
+		{
+		  "type": "pierce",
+		  "target": "enemy",
+		  "min_value": 4.0,
+		  "max_value": 7.0,
+		  "potency": 1.0,
+		  "duration": 1.0,
+		  "effect_log_text": "Truth cuts through — enemy defence pierced!",
+		  "stats_modifier": ["insight"],
+		  "icon": "res://assets/images/icons/pierce_icon.png"
+		},
+		{
+		  "type": "attack",
+		  "target": "enemy",
+		  "min_value": 8.0,
+		  "potency": 8.0,
+		  "duration": 0.0,
+		  "effect_log_text": "Revelation strikes for {potency} damage!",
+		  "stats_modifier": ["insight"],
+		  "icon": "res://assets/images/icons/attack.png"
+		}
+	  ],
+	  "display_name": "Die of Truth",
+	  "color": "black"
+	},
+	{
+	  "id": "memory_rewrite_die",
+	  "name": "Memory Rewrite Die",
+	  "type": "attack",
+	  "min_result": 1.0,
+	  "max_result": 15.0,
+	  "crit_threshold": 14.0,
+	  "crit_multiplier": 2.0,
+	  "rarity": "relic",
+	  "quality": "basic",
+	  "qual_trigger": true,
+	  "qual_potency": true,
+	  "roll_sfx": "roll_1d20",
+	  "tags": ["attack", "relic"],
+	  "effect_description": "Rolls 1-15 damage, insight-modified. High risk, high reward.",
+	  "effects": [
+		{
+		  "type": "attack",
+		  "target": "enemy",
+		  "use_roll_value": true,
+		  "min_value": 1.0,
+		  "potency": "roll_value",
+		  "duration": 0.0,
+		  "effect_log_text": "Memory rewritten — {potency} damage dealt!",
+		  "stats_modifier": ["insight"],
+		  "icon": "res://assets/images/icons/attack.png"
+		}
+	  ],
+	  "display_name": "Memory Rewrite Die",
+	  "color": "purple"
 	}
   ]
 }

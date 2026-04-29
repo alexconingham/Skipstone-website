@@ -245,8 +245,7 @@
 	  "description": "It smells of sweet petrol and oil. The truck sits unfinished on the jacks while his watch stops ticking on the bench.",
 	  "background": "alt_the_garage_bg.PNG",
 	  "unlock_condition": {
-		"type": "memento_required",
-		"required_memento": "garage_key"
+		"type": "manual_unlock"
 	  },
 	  "encounters": {
 		"grunt": {

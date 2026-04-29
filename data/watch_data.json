@@ -58,7 +58,7 @@
 	"effect_description": "Increases insight by 1.5x, and life by 5 years",
 	"effect": {
 	  "type": "stat_buff_multi",
-	  "stat": "Insight",
+	  "stat": "insight",
 	  "value": 1.5
 	}
   },
@@ -71,7 +71,7 @@
 	"effect_description": "Increases resilience by 1.5x, and life by 5 years",
 	"effect": {
 	  "type": "stat_buff_multi",
-	  "stat": "Resilience",
+	  "stat": "resilience",
 	  "value": 1.5
 	}
   },
@@ -110,6 +110,30 @@
 	  "type": "loot_rarity_modifier",
 	  "rarity": "rare",
 	  "modifier": 0.15
+	}
+  },
+  {
+	"id": "fractured_hourglass",
+	"name": "Fractured Hourglass",
+	"description": "Time leaked through the crack while you waited. What spilled out is yours to keep.",
+	"rarity": "relic",
+	"image": "fractured_hourglass.png",
+	"effect_description": "Reduces fragment costs by 30%",
+	"effect": {
+	  "type": "fragment_cost_reduction",
+	  "value": 30
+	}
+  },
+  {
+	"id": "void_chronometer",
+	"name": "Void Chronometer",
+	"description": "A watch from beyond the end of time. It does not tick. It simply knows.",
+	"rarity": "relic",
+	"image": "void_chronometer.png",
+	"effect_description": "Increases life by 30 years",
+	"effect": {
+	  "type": "plus_life_expectancy",
+	  "value": 30
 	}
   }
 ]

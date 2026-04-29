@@ -538,16 +538,44 @@
     }
 
     .dice-card__img {
-      width: 88px;
-      height: 88px;
+      width: 70px;
+      height: 70px;
       object-fit: contain;
       filter: sepia(0.4);
-      transition: filter 0.25s ease, transform 0.25s ease;
+      transition: filter 0.25s ease, transform 0.25s ease, drop-shadow 0.25s ease;
     }
 
     .dice-card:hover .dice-card__img {
-      filter: sepia(0);
+      filter: sepia(0) drop-shadow(0 0 8px rgba(196, 135, 42, 0.4));
       transform: scale(1.08) rotate(-2deg);
+    }
+
+    .dice-card__tooltip {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-0.5rem);
+      background: rgba(26, 20, 16, 0.95);
+      border: 1px solid rgba(196, 135, 42, 0.3);
+      border-radius: 4px;
+      padding: 0.5rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      color: var(--bone);
+      max-width: 120px;
+      text-align: center;
+      line-height: 1.3;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      white-space: normal;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .dice-card:hover .dice-card__tooltip {
+      opacity: 1;
     }
 
     .dice-card__name {
@@ -1114,39 +1142,8 @@
     <section id="enemies" class="section" aria-labelledby="enemies-heading">
       <p class="section__label fade-in">03 &mdash; Enemies</p>
       <h2 id="enemies-heading" class="section__heading fade-in">A string of haunting faces.</h2>
-      <p class="section__body fade-in">Thirty souls from a fractured life. Each one remembers what you did.</p>
-      <div class="portrait-grid fade-in">
-        <div class="portrait-cell" data-name="Imaginary Friend"><img src="https://rtd.skipstone.co.nz/portraits/_D1_grunt.png" alt="Imaginary Friend" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="The Neighbour"><img src="https://rtd.skipstone.co.nz/portraits/D1_elite.png" alt="The Neighbour" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Factory Foreman"><img src="https://rtd.skipstone.co.nz/portraits/D1_boss.png" alt="Factory Foreman" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Schoolyard Bully"><img src="https://rtd.skipstone.co.nz/portraits/D2_grunt.png" alt="Schoolyard Bully" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Lunch Lady"><img src="https://rtd.skipstone.co.nz/portraits/D2_elite.png" alt="Lunch Lady" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Grief Counsellor"><img src="https://rtd.skipstone.co.nz/portraits/D2_boss.png" alt="Grief Counsellor" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Bottle Shop Attendant"><img src="https://rtd.skipstone.co.nz/portraits/D3_grunt.png" alt="Bottle Shop Attendant" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Graduation Twins"><img src="https://rtd.skipstone.co.nz/portraits/D3_elite.png" alt="Graduation Twins" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Headmaster Baird"><img src="https://rtd.skipstone.co.nz/portraits/D3_boss.png" alt="Headmaster Baird" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Nervous Intern"><img src="https://rtd.skipstone.co.nz/portraits/D4_grunt.png" alt="Nervous Intern" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Paranoid Colleague"><img src="https://rtd.skipstone.co.nz/portraits/D4_elite.png" alt="Paranoid Colleague" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="VP Calhoun"><img src="https://rtd.skipstone.co.nz/portraits/D4_boss.png" alt="VP Calhoun" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="The Doula"><img src="https://rtd.skipstone.co.nz/portraits/D5_grunt.png" alt="The Doula" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Babysitter"><img src="https://rtd.skipstone.co.nz/portraits/D5_elite.png" alt="Babysitter" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Micro Manager"><img src="https://rtd.skipstone.co.nz/portraits/D5_boss.png" alt="Micro Manager" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Strange Man"><img src="https://rtd.skipstone.co.nz/portraits/D6_grunt.png" alt="Strange Man" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Mortician"><img src="https://rtd.skipstone.co.nz/portraits/D6_elite.png" alt="Mortician" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Pastor"><img src="https://rtd.skipstone.co.nz/portraits/D6_boss.png" alt="Pastor" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="The Replacement"><img src="https://rtd.skipstone.co.nz/portraits/D7_grunt.png" alt="The Replacement" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="The CEO"><img src="https://rtd.skipstone.co.nz/portraits/D7_elite.png" alt="The CEO" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Divorce Lawyer"><img src="https://rtd.skipstone.co.nz/portraits/D7_boss.png" alt="Divorce Lawyer" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Toll Booth Operator"><img src="https://rtd.skipstone.co.nz/portraits/D8_grunt.png" alt="Toll Booth Operator" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Motel Clerk"><img src="https://rtd.skipstone.co.nz/portraits/D8_elite.png" alt="Motel Clerk" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Dad's Reflection"><img src="https://rtd.skipstone.co.nz/portraits/D8_boss.png" alt="Dad's Reflection" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Photographer"><img src="https://rtd.skipstone.co.nz/portraits/D9_grunt.png" alt="Photographer" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Dark Room Assistant"><img src="https://rtd.skipstone.co.nz/portraits/D9_elite.png" alt="Dark Room Assistant" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="The Missing Figure"><img src="https://rtd.skipstone.co.nz/portraits/D9_boss.png" alt="The Missing Figure" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Cruel Nurse"><img src="https://rtd.skipstone.co.nz/portraits/D10_grunt.png" alt="Cruel Nurse" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="Dr. Keller"><img src="https://rtd.skipstone.co.nz/portraits/D10_elite.png" alt="Dr. Keller" loading="lazy" width="100" height="100"></div>
-        <div class="portrait-cell" data-name="The Player"><img src="https://rtd.skipstone.co.nz/portraits/D10_boss.png" alt="The Player" loading="lazy" width="100" height="100"></div>
-      </div>
+      <p class="section__body fade-in">Fifty-one souls from a fractured life. Each one remembers what you did.</p>
+      <div class="portrait-grid fade-in" id="enemies-grid"></div>
     </section>
 
     <!-- ========================================
@@ -1156,71 +1153,10 @@
       <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.2rem, 4vw, 4rem);">
         <p class="section__label fade-in">04 &mdash; Arsenal</p>
         <h2 id="arsenal-heading" class="section__heading fade-in">An evolving arsenal.</h2>
-        <p class="section__body fade-in">Twenty-nine dice forged in memory. Each one a weapon, a shield, or a desperate gamble.</p>
+        <p class="section__body fade-in">Thirty-two dice forged in memory. Each one a weapon, a shield, or a desperate gamble.</p>
       </div>
-      <div class="ticker" style="margin-top: 2rem;">
-        <div class="ticker__track ticker__track--arsenal">
-          <!-- First set -->
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_attack.png" alt="Simple Attack" loading="lazy" width="88" height="88"><p class="dice-card__name">Simple Attack</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_defence.png" alt="Simple Defence" loading="lazy" width="88" height="88"><p class="dice-card__name">Simple Defence</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_attack.png" alt="Improved Attack" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Attack</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_defence.png" alt="Improved Defence" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Defence</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/bleed_die.png" alt="Bleed Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Bleed Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/poison_die.png" alt="Poison Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Poison Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/knockback_die.png" alt="Knockback Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Knockback Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/shield_die.png" alt="Shield Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Shield Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/stagger_die.png" alt="Stagger Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Stagger Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/piercing_die.png" alt="Piercing Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Piercing Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/reflect_die.png" alt="Reflect Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Reflect Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/divinity_die.png" alt="Divinity Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Divinity Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/cleanse_die.png" alt="Cleanse Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Cleanse Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/renew_die.png" alt="Renew Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Renew Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/advanced_renew_die.png" alt="Adv. Renew" loading="lazy" width="88" height="88"><p class="dice-card__name">Adv. Renew</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/chrono_die.png" alt="Chrono Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Chrono Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/razor_die.png" alt="Razor Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Razor Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/thorn_die.png" alt="Thorn Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Thorn Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/burn_die.png" alt="Burn Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Burn Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/pain_die.png" alt="Pain Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Pain Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_heal.png" alt="Heal Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Heal Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_heal.png" alt="Improved Heal" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Heal</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/death_die.png" alt="Death Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Death Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/life_die.png" alt="Life Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Life Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/brave_heart_die.png" alt="Brave Heart" loading="lazy" width="88" height="88"><p class="dice-card__name">Brave Heart</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/gladiator_die.png" alt="Gladiator" loading="lazy" width="88" height="88"><p class="dice-card__name">Gladiator</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/collectors_d12.png" alt="Collector's D12" loading="lazy" width="88" height="88"><p class="dice-card__name">Collector's D12</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/lucky_d6.png" alt="Lucky D6" loading="lazy" width="88" height="88"><p class="dice-card__name">Lucky D6</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/the_centurion.png" alt="The Centurion" loading="lazy" width="88" height="88"><p class="dice-card__name">The Centurion</p></div>
-          <!-- Duplicate set for seamless loop -->
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_attack.png" alt="Simple Attack" loading="lazy" width="88" height="88"><p class="dice-card__name">Simple Attack</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_defence.png" alt="Simple Defence" loading="lazy" width="88" height="88"><p class="dice-card__name">Simple Defence</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_attack.png" alt="Improved Attack" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Attack</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_defence.png" alt="Improved Defence" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Defence</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/bleed_die.png" alt="Bleed Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Bleed Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/poison_die.png" alt="Poison Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Poison Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/knockback_die.png" alt="Knockback Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Knockback Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/shield_die.png" alt="Shield Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Shield Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/stagger_die.png" alt="Stagger Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Stagger Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/piercing_die.png" alt="Piercing Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Piercing Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/reflect_die.png" alt="Reflect Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Reflect Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/divinity_die.png" alt="Divinity Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Divinity Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/cleanse_die.png" alt="Cleanse Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Cleanse Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/renew_die.png" alt="Renew Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Renew Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/advanced_renew_die.png" alt="Adv. Renew" loading="lazy" width="88" height="88"><p class="dice-card__name">Adv. Renew</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/chrono_die.png" alt="Chrono Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Chrono Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/razor_die.png" alt="Razor Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Razor Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/thorn_die.png" alt="Thorn Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Thorn Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/burn_die.png" alt="Burn Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Burn Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/pain_die.png" alt="Pain Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Pain Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d6_heal.png" alt="Heal Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Heal Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/simple_d12_heal.png" alt="Improved Heal" loading="lazy" width="88" height="88"><p class="dice-card__name">Improved Heal</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/death_die.png" alt="Death Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Death Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/life_die.png" alt="Life Die" loading="lazy" width="88" height="88"><p class="dice-card__name">Life Die</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/brave_heart_die.png" alt="Brave Heart" loading="lazy" width="88" height="88"><p class="dice-card__name">Brave Heart</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/gladiator_die.png" alt="Gladiator" loading="lazy" width="88" height="88"><p class="dice-card__name">Gladiator</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/collectors_d12.png" alt="Collector's D12" loading="lazy" width="88" height="88"><p class="dice-card__name">Collector's D12</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/lucky_d6.png" alt="Lucky D6" loading="lazy" width="88" height="88"><p class="dice-card__name">Lucky D6</p></div>
-          <div class="dice-card"><img class="dice-card__img" src="https://rtd.skipstone.co.nz/dice/the_centurion.png" alt="The Centurion" loading="lazy" width="88" height="88"><p class="dice-card__name">The Centurion</p></div>
-        </div>
+      <div style="max-width: 1200px; margin: 2rem auto 0; padding: 0 clamp(1.2rem, 4vw, 4rem);">
+        <div id="dice-grid" class="fade-in" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1.5rem; justify-items: center;"></div>
       </div>
     </section>
 
@@ -1230,59 +1166,8 @@
     <section id="loot" class="section" aria-labelledby="loot-heading">
       <p class="section__label fade-in">05 &mdash; Collectibles</p>
       <h2 id="loot-heading" class="section__heading fade-in">And a bagful of tricks.</h2>
-      <p class="section__body fade-in">Mementos of a life half-remembered. Each one changes how you fight, heal, or endure.</p>
-      <div class="memento-grid fade-in">
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/faded_photo.png" alt="Faded Photograph" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The only picture where everyone is smiling.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/broken_toy.png" alt="Broken Toy" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>No one came when you cried.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/dusty_locket.png" alt="Dusty Locket" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Reminds you of secrets kept.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/fathers_watch_memento.png" alt="Father's Watch" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>He was always too late.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/mums_perfume.png" alt="Mum's Perfume" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Comforting but fleeting.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/superpower_serum.png" alt="Superpower Serum" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>How quickly the truth weakens.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/bloodied_tenderizer.png" alt="Bloodied Tenderizer" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Some stains never wash off.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/empty_lunchbox.png" alt="Empty Lunchbox" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You were hungry for something food could not fill.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/juice_stained_yearbook.png" alt="Juice-Stained Yearbook" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Everyone signed it. Nobody knew you.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/intimidating_presence.png" alt="Intimidating Presence" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Strength is blinding when false.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/crumpled_program.png" alt="Crumpled Program" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Your name circled in faded ink.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/empty_flask.png" alt="Empty Flask" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>She said it was water.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/diploma_frame.png" alt="Diploma Frame" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>No one asks about the ceremony.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/valedictorian_medal.png" alt="Valedictorian Medal" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The cost of fragments feels lighter.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/engraved_pen.png" alt="Engraved Pen" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You missed her birthday for this.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/framed_memo.png" alt="Framed Memo" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The frame is cracked. It still hangs.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/stress_ball.png" alt="Stress Ball" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You kept it together. For now.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/hush_money.png" alt="Hush Money" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>No one talks about it.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/electric_blanket.png" alt="Electric Blanket" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You're warm now. Alone.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/baby_monitor.png" alt="Baby Monitor" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You were always listening. Or were you?</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/best_dad_certificate.png" alt="Best Dad Certificate" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>He made it himself. You were never there.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/empty_crib.png" alt="Empty Crib" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>No one wakes you.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/broken_flask.png" alt="Broken Flask" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Mother's escape outlived her.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/unsent_letter.png" alt="Unsent Letter" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Still folded in your jacket.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/family_bondo.png" alt="Family Bondo" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Held together with the wrong stuff.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/obituary_clipping.png" alt="Obituary Clipping" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>They wrote what they were told.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/gold_watch_memento.png" alt="Gold Watch" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Time finally weighs in your pocket.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/shifting_photo.png" alt="Shifting Photo" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Your son's face blurs when you look away.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/empty_chair.png" alt="Empty Chair" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Reserved for someone who never came.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/mended_ring.png" alt="Mended Ring" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The seam shows if you know where to look.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/namesake.png" alt="Namesake" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>He gave him my name.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/blank_name_badge.png" alt="Blank Name Badge" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>He never filled in the emergency contact line.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/gate_lock.png" alt="Gate Lock" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You never spoke again. But he remembered.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/silver_spoon.png" alt="Silver Spoon" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>We'll get together then, son.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/family_album.png" alt="Family Album" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>It's complete, and sobering.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/unusual_polaroid.png" alt="Unusual Polaroid" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Something seems off...</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/death_certificate.png" alt="Death Certificate" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The end?</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/flickering_halo.png" alt="Flickering Halo" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>You were almost something greater.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/garage_key.png" alt="Garage Key" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The oil never runs out.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/cremation_ashes.png" alt="Cremation Ashes" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Warm to the touch with faded love.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/strange_key.png" alt="Strange Key" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Survival lingers in familiar spaces.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/reading_glasses.png" alt="Reading Glasses" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Cracked lenses reveal harsh truths.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/lucky_coin.png" alt="Lucky Coin" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Worn smooth by anxious fingers.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/paper_crown.png" alt="Paper Crown" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Glory without consequence.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/salt_shell.png" alt="Salt Shell" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>He brought the war home in ways we could not see.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/broken_stopwatch.png" alt="Broken Stopwatch" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>When time stops, opportunity begins.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/weighted_die.png" alt="Weighted Die" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Great fortune or great failure.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/expired_adderall.png" alt="Expired Adderall" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Focus that burns out fast and hard.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/rabbits_foot.png" alt="Rabbit's Foot" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>Luck comes to those who believe.</span></div></div>
-        <div class="memento-cell"><img src="https://rtd.skipstone.co.nz/mementos/dried_rose.png" alt="Dried Rose" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>The one you missed for work.</span></div></div>
-      </div>
+      <p class="section__body fade-in">One hundred and eleven mementos of a life half-remembered. Each one changes how you fight, heal, or endure.</p>
+      <div class="memento-grid fade-in" id="mementos-grid"></div>
     </section>
 
     <!-- ========================================
@@ -1306,6 +1191,39 @@
     </section>
 
     <!-- ========================================
+         TAPE PLAYER
+         ======================================== -->
+    <section class="section" aria-labelledby="player-heading">
+      <div style="max-width: 600px; margin: 0 auto; padding: 0 clamp(1.2rem, 4vw, 4rem);">
+        <p class="section__label fade-in">06 &mdash; The Soundtrack</p>
+        <h2 id="player-heading" class="section__heading fade-in">Memories in motion.</h2>
+      </div>
+      <div class="tape-player fade-in">
+        <div class="tape-player__cassette">
+          <div class="tape-player__reels">
+            <div class="tape-player__reel tape-player__reel--left" id="reel-left"></div>
+            <div class="tape-player__tape"></div>
+            <div class="tape-player__reel tape-player__reel--right" id="reel-right"></div>
+          </div>
+          <div class="tape-player__label">
+            <div class="tape-player__label-text">REMEMBER TO DIE</div>
+            <div class="tape-player__label-artist">Original Soundtrack</div>
+          </div>
+        </div>
+        <div class="tape-player__controls">
+          <button class="tape-player__btn" id="prev-btn" aria-label="Previous track">◀◀</button>
+          <button class="tape-player__btn tape-player__btn--play" id="play-btn" aria-label="Play/Pause">▶</button>
+          <button class="tape-player__btn" id="next-btn" aria-label="Next track">▶▶</button>
+          <div class="tape-player__volume">
+            <label for="volume-slider" class="visually-hidden">Volume</label>
+            <input type="range" id="volume-slider" class="tape-player__slider" min="0" max="100" value="70" aria-label="Volume control">
+          </div>
+        </div>
+        <div class="tape-player__display" id="track-display">Track 01</div>
+      </div>
+    </section>
+
+    <!-- ========================================
          STATS BAR
          ======================================== -->
     <section class="stats" aria-label="Game statistics">
@@ -1315,7 +1233,7 @@
           <p class="stats__label">Unique Dice</p>
         </div>
         <div class="stats__item">
-          <p class="stats__value">117</p>
+          <p class="stats__value">111</p>
           <p class="stats__label">Mementos</p>
         </div>
         <div class="stats__item">
@@ -1363,7 +1281,7 @@
     </div>
   </footer>
 
-  <!-- Visually hidden utility -->
+  <!-- Visually hidden utility & Tape Player Styles -->
   <style>
     .visually-hidden {
       position: absolute;
@@ -1376,6 +1294,196 @@
       white-space: nowrap;
       border: 0;
     }
+
+    .tape-player {
+      max-width: 500px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      border: 2px solid rgba(184, 134, 11, 0.5);
+      border-radius: 12px;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 8px 32px rgba(184, 134, 11, 0.1);
+    }
+
+    .tape-player__cassette {
+      background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+      border: 1px solid rgba(184, 134, 11, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .tape-player__reels {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      height: 60px;
+      gap: 1rem;
+    }
+
+    .tape-player__reel {
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle at 30% 30%, #444, #111);
+      border-radius: 50%;
+      border: 2px solid rgba(184, 134, 11, 0.4);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(184, 134, 11, 0.2);
+      position: relative;
+    }
+
+    .tape-player__reel::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      background: radial-gradient(circle at 40% 40%, #555, #000);
+      border-radius: 50%;
+      border: 1px solid rgba(184, 134, 11, 0.3);
+    }
+
+    .tape-player__reel--left.playing {
+      animation: spin-left 2s linear infinite;
+    }
+
+    .tape-player__reel--right.playing {
+      animation: spin-right 2s linear infinite;
+    }
+
+    @keyframes spin-left {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes spin-right {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+
+    .tape-player__tape {
+      flex: 1;
+      height: 8px;
+      background: repeating-linear-gradient(
+        90deg,
+        #333 0px,
+        #333 2px,
+        #444 2px,
+        #444 4px
+      );
+      border-radius: 4px;
+      border: 1px solid rgba(184, 134, 11, 0.3);
+    }
+
+    .tape-player__label {
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.1) 0%, rgba(255, 69, 0, 0.05) 100%);
+      border: 1px solid rgba(184, 134, 11, 0.2);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      text-align: center;
+    }
+
+    .tape-player__label-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #b8860b;
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .tape-player__label-artist {
+      font-size: 0.75rem;
+      color: #999;
+      letter-spacing: 1px;
+    }
+
+    .tape-player__controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tape-player__btn {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #b8860b 0%, #8b6914 100%);
+      border: 1px solid rgba(255, 69, 0, 0.4);
+      border-radius: 6px;
+      color: #1a1a1a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tape-player__btn:hover {
+      background: linear-gradient(135deg, #d4a520 0%, #a67c00 100%);
+      box-shadow: 0 6px 12px rgba(184, 134, 11, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .tape-player__btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .tape-player__btn--play {
+      width: 50px;
+      height: 50px;
+      font-size: 1.25rem;
+    }
+
+    .tape-player__volume {
+      flex: 0 1 120px;
+    }
+
+    .tape-player__slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #333 0%, #444 100%);
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .tape-player__slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #b8860b 0%, #8b6914 100%);
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .tape-player__slider::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #b8860b 0%, #8b6914 100%);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .tape-player__display {
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      color: #b8860b;
+      letter-spacing: 1px;
+      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(184, 134, 11, 0.2);
+      border-radius: 4px;
+    }
   </style>
 
   <!-- ========================================
@@ -1386,13 +1494,13 @@
       'use strict';
 
       // ============ GAME DATA ============
-      const diceData = {"dice": [{"id": "simple_d6_attack", "name": "Simple Attack Die", "effect_description": "Rolls 1-6 damage."}, {"id": "simple_d6_defence", "name": "Simple Defence Die", "effect_description": "Blocks 1-6 damage."}, {"id": "simple_d12_attack", "name": "Improved Attack Die", "effect_description": "Rolls 1-12 damage."}, {"id": "simple_d12_defence", "name": "Improved Defence Die", "effect_description": "Blocks 1-12 damage."}, {"id": "bleed_die", "name": "Bleed Die", "effect_description": "Roll 4-6: Apply bleed (1) to enemy for 2 rounds."}, {"id": "poison_die", "name": "Poison Die", "effect_description": "Roll 4-6: Apply poison (2) to enemy for 2 rounds."}, {"id": "knockback_die", "name": "Knockback Die", "effect_description": "Roll 5-6: Reduce enemy attack by 5% per stack for 2 rounds."}, {"id": "shield_die", "name": "Shield Die", "effect_description": "Roll 3-6: Increase max and current HP by roll value for 2 rounds."}, {"id": "stagger_die", "name": "Stagger Die", "effect_description": "Roll 6: Stun the enemy for 1 turn."}, {"id": "piercing_die", "name": "Piercing Die", "effect_description": "Roll 5-6: Attack ignores defence."}, {"id": "reflect_die", "name": "Reflect Die", "effect_description": "Roll 8-10: Reflect all damage taken this round."}, {"id": "divinity_die", "name": "Divinity Die", "effect_description": "Roll 5-10: Become immune to negative effects for 1 round."}, {"id": "cleanse_die", "name": "Cleanse Die", "effect_description": "Roll 2-5: Cleanse one random negative effect. Roll 6: Cleanse ALL!"}, {"id": "renew_die", "name": "Renew Die", "effect_description": "Roll 4-6: Apply renew (2) to self for 2 rounds."}, {"id": "advanced_renew_die", "name": "Advanced Renew Die", "effect_description": "Roll 3-6: Apply renew (2) to self for 2 rounds."}, {"id": "chrono_die", "name": "Chrono Die", "effect_description": "Roll 20 to wind the clock back 2 years permanently."}, {"id": "razor_die", "name": "Razor Die", "effect_description": "High damage potential. Extended crit range."}, {"id": "thorn_die", "name": "Thorn Die", "effect_description": "Gain thorns equal to roll."}, {"id": "burn_die", "name": "Burn Die", "effect_description": "Roll 4-6: Apply burn (2) for 2 rounds, reducing shield effectiveness."}, {"id": "pain_die", "name": "Pain Die", "effect_description": "Roll 8-12: Take pain equal to roll for 1 turn, gain Strength for 3 turns."}, {"id": "simple_d6_heal", "name": "Simple Heal Die", "effect_description": "Heals 1-6 HP."}, {"id": "simple_d12_heal", "name": "Improved Heal Die", "effect_description": "Heals 1-12 HP."}, {"id": "death_die", "name": "Death Die", "effect_description": "Roll 1: Death claims you. Roll 18-20: Death claims your enemy."}, {"id": "life_die", "name": "Life Die", "effect_description": "Roll 18-20 to fully heal."}, {"id": "brave_heart_die", "name": "Brave Heart Die", "effect_description": "Attack die (1-6). Rolling 5-6 grants courage, empowering strength by 1.5x for 3 rounds."}, {"id": "gladiator_die", "name": "Gladiator Die", "effect_description": "Relic attack die (1-12). Rolling 10-12 grants 2x strength for 3 rounds."}, {"id": "collectors_d12", "name": "Collector's D12", "effect_description": "Roll 1-3: Shield equal to roll. Roll 4-6: Heal equal to roll. Roll 7-9: Attack equal to roll. Roll 10-12: All effects + +3 Strength/Resilience for 3 turns."}, {"id": "lucky_d6", "name": "Lucky D6", "effect_description": "Rolls 1-6 damage. Crits on 4+ (50% chance!). Critical hits deal 3x damage and grant +2 to all stats for 2 turns."}, {"id": "the_centurion", "name": "The Centurion", "effect_description": "Rolls 1-100 damage. A century of memories condensed into a single die."}]};
+      const diceData = {"dice": [{"id": "simple_d6_attack", "name": "Simple Attack Die", "effect_description": "Rolls 1-6 damage."}, {"id": "simple_d6_defence", "name": "Simple Defence Die", "effect_description": "Blocks 1-6 damage."}, {"id": "simple_d12_attack", "name": "Improved Attack Die", "effect_description": "Rolls 1-12 damage."}, {"id": "simple_d12_defence", "name": "Improved Defence Die", "effect_description": "Blocks 1-12 damage."}, {"id": "bleed_die", "name": "Bleed Die", "effect_description": "Roll 4-6: Apply bleed (1) to enemy for 2 rounds."}, {"id": "poison_die", "name": "Poison Die", "effect_description": "Roll 4-6: Apply poison (2) to enemy for 2 rounds."}, {"id": "knockback_die", "name": "Knockback Die", "effect_description": "Roll 5-6: Reduce enemy attack by 5% per stack for 2 rounds."}, {"id": "shield_die", "name": "Shield Die", "effect_description": "Roll 3-6: Increase max and current HP by roll value for 2 rounds."}, {"id": "stagger_die", "name": "Stagger Die", "effect_description": "Roll 6: Stun the enemy for 1 turn."}, {"id": "piercing_die", "name": "Piercing Die", "effect_description": "Roll 5-6: Attack ignores defence."}, {"id": "reflect_die", "name": "Reflect Die", "effect_description": "Roll 8-10: Reflect all damage taken this round."}, {"id": "divinity_die", "name": "Divinity Die", "effect_description": "Roll 5-10: Become immune to negative effects for 1 round."}, {"id": "cleanse_die", "name": "Cleanse Die", "effect_description": "Roll 2-5: Cleanse one random negative effect. Roll 6: Cleanse ALL!"}, {"id": "renew_die", "name": "Renew Die", "effect_description": "Roll 4-6: Apply renew (2) to self for 2 rounds."}, {"id": "advanced_renew_die", "name": "Advanced Renew Die", "effect_description": "Roll 3-6: Apply renew (2) to self for 2 rounds."}, {"id": "chrono_die", "name": "Chrono Die", "effect_description": "Roll 20 to wind the clock back 2 years permanently."}, {"id": "razor_die", "name": "Razor Die", "effect_description": "High damage potential. Extended crit range."}, {"id": "thorn_die", "name": "Thorn Die", "effect_description": "Gain thorns equal to roll."}, {"id": "burn_die", "name": "Burn Die", "effect_description": "Roll 4-6: Apply burn (2) for 2 rounds, reducing shield effectiveness."}, {"id": "pain_die", "name": "Pain Die", "effect_description": "Roll 8-12: Take pain equal to roll for 1 turn, gain Strength for 3 turns."}, {"id": "simple_d6_heal", "name": "Simple Heal Die", "effect_description": "Heals 1-6 HP."}, {"id": "simple_d12_heal", "name": "Improved Heal Die", "effect_description": "Heals 1-12 HP."}, {"id": "death_die", "name": "Death Die", "effect_description": "Roll 1: Death claims you. Roll 18-20: Death claims your enemy."}, {"id": "life_die", "name": "Life Die", "effect_description": "Roll 18-20 to fully heal."}, {"id": "brave_heart_die", "name": "Brave Heart Die", "effect_description": "Attack die (1-6). Rolling 5-6 grants courage, empowering strength by 1.5x for 3 rounds."}, {"id": "gladiator_die", "name": "Gladiator Die", "effect_description": "Relic attack die (1-12). Rolling 10-12 grants 2x strength for 3 rounds."}, {"id": "collectors_d12", "name": "Collector's D12", "effect_description": "Roll 1-3: Shield equal to roll. Roll 4-6: Heal equal to roll. Roll 7-9: Attack equal to roll. Roll 10-12: All effects + +3 Strength/Resilience for 3 turns."}, {"id": "lucky_d6", "name": "Lucky D6", "effect_description": "Rolls 1-6 damage. Crits on 4+ (50% chance!). Critical hits deal 3x damage and grant +2 to all stats for 2 turns."}, {"id": "the_centurion", "name": "The Centurion", "effect_description": "Rolls 1-100 damage. A century of memories condensed into a single die."}, {"id": "fuzzy_die", "name": "Fuzzy Dice", "effect_description": "2x: Rolls value as damage and shield. Critical (8-12): also restores 2 years."}, {"id": "truth_revelation_die", "name": "Die of Truth", "effect_description": "Roll 4-7: Pierce through enemy defence for 1 turn. Roll 8-10: Pierce and deal 8 bonus damage."}, {"id": "memory_rewrite_die", "name": "Memory Rewrite Die", "effect_description": "Rolls 1-15 damage, insight-modified. High risk, high reward."}]};
 
-      const watchData = [{"id": "basic_casio", "name": "Basic Casio", "image": "basic_casio.png", "effect_description": "Just tells you the time"}, {"id": "silver_watch", "name": "Silver Timepiece", "image": "silver_watch.png", "effect_description": "Increases resilience by 1.5x"}, {"id": "gold_watch", "name": "Golden Chronometer", "image": "gold_watch.png", "effect_description": "Increases life by 20 years"}, {"id": "dino_watch", "name": "Dinosaur Watch", "image": "dino_watch.png", "effect_description": "Increases strength by 1.5x, and life by 5 years"}, {"id": "unicorn_watch", "name": "Unicorn Watch", "image": "unicorn_watch.png", "effect_description": "Increases insight by 1.5x, and life by 5 years"}, {"id": "calcu_watch", "name": "Calculator Watch", "image": "calculator_watch.png", "effect_description": "Increases resilience by 1.5x, and life by 5 years"}, {"id": "martys_watch", "name": "Marty's Watch", "image": "martys_watch.png", "effect_description": "Reduces fragment costs by 25%"}, {"id": "batteries_not_included", "name": "Batteries Not Included", "image": "batteries_not_included.png", "effect_description": "Reduces fragment costs by 50%"}, {"id": "collectors_edition", "name": "Collector's Edition", "image": "collectors_edition.png", "effect_description": "Increases drop chances for higher tiers by 15%"}, {"id": "fractured_hourglass", "name": "Fractured Hourglass", "image": "fractured_hourglass.png", "effect_description": "Reduces fragment costs by 30%"}, {"id": "void_chronometer", "name": "Void Chronometer", "image": "void_chronometer.png", "effect_description": "Increases life by 30 years"}];
+      const watchData = [{"id": "basic_casio", "name": "Basic Casio", "image": "basic_casio.png", "effect_description": "Just tells you the time"}, {"id": "silver_watch", "name": "Silver Timepiece", "image": "silver_watch.png", "effect_description": "Increases resilience by 1.5x"}, {"id": "gold_watch", "name": "Golden Chronometer", "image": "gold_watch.png", "effect_description": "Increases life by 20 years"}, {"id": "dino_watch", "name": "Dinosaur Watch", "image": "dino_watch.png", "effect_description": "Increases strength by 1.5x, and life by 5 years"}, {"id": "unicorn_watch", "name": "Unicorn Watch", "image": "unicorn_watch.png", "effect_description": "Increases insight by 1.5x, and life by 5 years"}, {"id": "calcu_watch", "name": "Calculator Watch", "image": "calculator_watch.png", "effect_description": "Increases resilience by 1.5x, and life by 5 years"}, {"id": "martys_watch", "name": "Marty's Watch", "image": "martys_watch.png", "effect_description": "Reduces fragment costs by 25%"}, {"id": "batteries_not_included", "name": "Batteries Not Included", "image": "batteries_not_included.png", "effect_description": "Reduces fragment costs by 50%"}, {"id": "collectors_edition", "name": "Collector's Edition", "image": "collectors_edition.png", "effect_description": "Increases drop chances for higher tiers by 15%"}];
 
-      const enemyData = [{"id": "D1_grunt", "name": "Imaginary Friend", "stats": {"hp": 10.0, "strength": 1.0, "resilience": 0.0, "insight": 0.0}, "traits": {"weaknesses": ["poison"], "immunities": []}}, {"id": "D1_elite", "name": "The Neighbour", "stats": {"hp": 12.0, "strength": 1.0, "resilience": 1, "insight": 0}, "traits": {"weaknesses": ["bleed"], "immunities": []}}, {"id": "D1_boss", "name": "Factory Foreman", "stats": {"hp": 15.0, "strength": 2.0, "resilience": 0.5, "insight": 0.5}, "traits": {"weaknesses": [], "immunities": ["poison"]}}, {"id": "D2_grunt", "name": "Schoolyard Bully", "stats": {"hp": 12.0, "strength": 1.0, "resilience": 0.0, "insight": 0.0}, "traits": {"weaknesses": ["bleed"], "immunities": ["poison"]}}, {"id": "D2_elite", "name": "Lunch Lady", "stats": {"hp": 16.0, "strength": 2.0, "resilience": 2.0, "insight": 2.0}, "traits": {"weaknesses": [], "immunities": []}}, {"id": "D2_boss", "name": "Grief Counsellor", "stats": {"hp": 22.0, "strength": 2.0, "resilience": 3.0, "insight": 2.5}, "traits": {"weaknesses": [], "immunities": ["poison", "bleed"]}}, {"id": "D3_grunt", "name": "Bottle Shop Attendant", "stats": {"hp": 16.0, "strength": 1.0, "resilience": 2.0, "insight": 2.0}, "traits": {"weaknesses": ["bleed"], "immunities": ["poison"]}}, {"id": "D3_elite", "name": "Graduation Twins", "stats": {"hp": 22.0, "strength": 1.0, "resilience": 2.5, "insight": 2.5}, "traits": {"weaknesses": ["poison"], "immunities": ["bleed"]}}, {"id": "D3_boss", "name": "Headmaster Baird", "stats": {"hp": 25.0, "strength": 2.0, "resilience": 5.0, "insight": 5.0}, "traits": {"weaknesses": ["bleed"], "immunities": ["poison"]}}, {"id": "D4_grunt", "name": "Nervous Intern", "stats": {"hp": 18.0, "strength": 3.0, "resilience": 3.0, "insight": 3.0}, "traits": {"weaknesses": ["poison"], "immunities": []}}, {"id": "D4_elite", "name": "Paranoid Colleague", "stats": {"hp": 24.0, "strength": 3.0, "resilience": 4.5, "insight": 4.5}, "traits": {"weaknesses": ["bleed"], "immunities": ["poison"]}}, {"id": "D4_boss", "name": "VP Calhoun", "stats": {"hp": 27.0, "strength": 3.0, "resilience": 6.0, "insight": 6.0}, "traits": {"weaknesses": [], "immunities": ["bleed"]}}];
+      fetch('https://rtd.skipstone.co.nz/data/enemy_data.json').then(r => r.json()).then(d => { window.allEnemies = d; }).catch(() => { window.allEnemies = []; });
 
-      const mementoData = {"faded_photo": "The only picture where everyone is smiling.", "broken_toy": "No one came when you cried.", "dusty_locket": "Reminds you of secrets kept.", "fathers_watch_memento": "He was always too late.", "mums_perfume": "Comforting but fleeting.", "superpower_serum": "How quickly the truth weakens.", "bloodied_tenderizer": "Some stains never wash off.", "empty_lunchbox": "You were hungry for something food could not fill.", "juice_stained_yearbook": "Everyone signed it. Nobody knew you.", "intimidating_presence": "Strength is blinding when false.", "crumpled_program": "Your name circled in faded ink.", "empty_flask": "She said it was water.", "diploma_frame": "No one asks about the ceremony.", "valedictorian_medal": "The cost of fragments feels lighter.", "engraved_pen": "You missed her birthday for this.", "framed_memo": "The frame is cracked. It still hangs.", "stress_ball": "You kept it together. For now.", "hush_money": "No one talks about it.", "electric_blanket": "You're warm now. Alone.", "baby_monitor": "You were always listening. Or were you?", "best_dad_certificate": "He made it himself. You were never there.", "empty_crib": "No one wakes you.", "broken_flask": "Mother's escape outlived her.", "unsent_letter": "Still folded in your jacket.", "family_bondo": "Held together with the wrong stuff.", "obituary_clipping": "They wrote what they were told.", "gold_watch_memento": "Time finally weighs in your pocket.", "shifting_photo": "Your son's face blurs when you look away.", "empty_chair": "Reserved for someone who never came.", "mended_ring": "The seam shows if you know where to look.", "namesake": "He gave him my name.", "blank_name_badge": "He never filled in the emergency contact line.", "gate_lock": "You never spoke again. But he remembered.", "silver_spoon": "We'll get together then, son.", "family_album": "It's complete, and sobering.", "unusual_polaroid": "Something seems off...", "death_certificate": "The end?", "flickering_halo": "You were almost something greater.", "garage_key": "The oil never runs out.", "cremation_ashes": "Warm to the touch with faded love.", "strange_key": "Survival lingers in familiar spaces.", "reading_glasses": "Cracked lenses reveal harsh truths.", "lucky_coin": "Worn smooth by anxious fingers.", "paper_crown": "Glory without consequence.", "salt_shell": "He brought the war home in ways we could not see.", "broken_stopwatch": "When time stops, opportunity begins.", "weighted_die": "Great fortune or great failure.", "expired_adderall": "Focus that burns out fast and hard.", "rabbits_foot": "Luck comes to those who believe.", "dried_rose": "The one you missed for work."};
+      const mementoData = {"faded_photo": "Increases Resilience by 3", "broken_toy": "Deals 20% of damage dealt as self-damage", "dusty_locket": "Increases Resilience by 2 • Grants 1 shield at combat start", "fathers_watch_memento": "Increases Max HP by 5 • Increases chance of perfect dice by 10%", "mums_perfume": "Increases Insight by 2 • Grants 3 shield at combat start", "superpower_serum": "Increases Strength by 3 • Critical hits inflict 3 poison for 4 turns", "bloodied_tenderizer": "Increases attack damage by 3 • Critical hits inflict 2 bleed for 3 turns", "empty_lunchbox": "Increases Max HP by 5 • Gives 15% chance to force enemy dice rerolls", "juice_stained_yearbook": "Increases Resilience by 2 • Increases Insight by 2", "intimidating_presence": "Increases attack damage by 2 • Expands critical hit range by 1", "crumpled_program": "Increases Insight by 2 • Increases Resilience by 2", "empty_flask": "20% chance to inflict 2 poison for 3 turns on attack • Increases Insight by 2", "diploma_frame": "Increases Resilience by 4 • Decreases Insight by 2", "valedictorian_medal": "Reduces fragment costs by 50% • Increases Strength by 2", "engraved_pen": "Guarantees the first dice roll each battle is a critical hit", "framed_memo": "Increases chance of relic loot by 0.05% • Increases Insight by 2", "stress_ball": "Increases Insight by 3 • Decreases Resilience by 2", "hush_money": "Reduces fragment costs by 1% • Increases Strength by 2", "electric_blanket": "Increases Resilience by 3 • Increases defense by 1", "baby_monitor": "Grants 2 shield at combat start • Increases chance of rare loot by 0.1%", "best_dad_certificate": "Reduces enemy dice results by 1 • Increases Insight by 2", "empty_crib": "Heals 25% Max HP at the start of each round", "broken_flask": "Reduces fragment costs by 1% • Increases Resilience by 2", "unsent_letter": "Increases Insight by 2 • Increases Strength by -1", "family_bondo": "Reduces incoming damage by 15% when below 30% HP", "obituary_clipping": "Increases Strength by 2", "gold_watch_memento": "Increases chance of rare loot by 0.2% • Increases Insight by 2", "shifting_photo": "Increases Insight by 2 • Expands critical hit range by 1", "empty_chair": "Reroll victory rewards once per dungeon • Increases Resilience by 2", "mended_ring": "Reduces fragment costs by 1% • Increases Max HP by 8", "namesake": "Increases chance of rare loot by 0.15% • Increases Insight by 3", "blank_name_badge": "Increases Insight by 5", "gate_lock": "30% chance to reduce incoming damage by 25%", "silver_spoon": "Increases Strength by 2", "family_album": "Increases Resilience by 3 • Increases Insight by 2", "unusual_polaroid": "Reroll victory rewards once per dungeon", "unfilled_script": "Allows skipping fragment selection 1 times • Increases Insight by 2", "key_to_the_city": "Increases Strength by 4 • Increases Max HP by 10", "death_certificate": "Reduces fragment costs by 1% • Increases Insight by 3", "flickering_halo": "Increases Insight by 10 at full HP • Grants 2 shield at combat start", "reunion_tour_ticket": "Grants 3 shield at combat start • Increases Resilience by 2", "garage_key": "Unlocks The Garage when held through Dungeon 10", "clean_slate": "Increases Resilience by 3 • Removes 1 negative status effect at combat start", "cremation_ashes": "Increases poison potency by 2 • Increases Insight by 2", "strange_key": "Increases Max HP by 5 • Heals 25% Max HP at round start when below 30% HP", "reading_glasses": "Expands critical hit range by 1 • Increases defense by -1", "lucky_coin": "10% chance to inflict 1 bleed for 2 turns on attack", "paper_crown": "Increases critical hit damage multiplier by 25%", "salt_shells": "Increases crowd control effect duration by 1 turns", "broken_stopwatch": "Grants an extra die next turn when enemy is stunned", "weighted_die": "Makes your rolls more extreme", "expired_adderall": "Increases focus but damages health over time", "rabbits_foot": "Increases luck with loot drops", "dried_rose": "Increases Insight by 1 • A bittersweet reminder", "tourniquet": "Increases damage-over-time effect potency by 2 • Decreases attack damage by 1", "moldy_bandage": "Increases damage-over-time effect duration by 1 round", "broken_inhaler": "Damage-over-time effects deal instant damage when applied", "heavy_keychain": "Increases crowd control effect duration by 1 turn", "thick_bandage": "Increases healing received by 1", "beauty_mirror": "Increases insight when looking into the past", "empty_wallet": "Reduces fragment costs", "razor_blade": "A dangerous memento", "black_eyeliner": "A mark of identity", "empty_wallet": "Financially spent but spiritually richer"};
 
       // Create lookup maps for faster access
       const diceMap = {};
@@ -1403,6 +1511,106 @@
 
       // Reduced motion check
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ---- Populate dice grid ----
+      function populateDiceGrid() {
+        var grid = document.getElementById('dice-grid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        diceData.dice.forEach(function(dice) {
+          var card = document.createElement('div');
+          card.className = 'dice-card';
+          card.innerHTML = '<div class="dice-card__img-wrap"><img src="https://rtd.skipstone.co.nz/dice/' + dice.id + '.png" alt="' + dice.name + '" class="dice-card__img" width="70" height="70" loading="lazy"></div><div class="dice-card__name">' + dice.name + '</div>';
+          var img = card.querySelector('.dice-card__img');
+          img.addEventListener('mouseenter', function() {
+            var tooltip = document.createElement('div');
+            tooltip.className = 'dice-tooltip';
+            tooltip.textContent = dice.effect_description;
+            tooltip.style.cssText = 'position:absolute;background:rgba(20,20,20,0.95);border:1px solid rgba(184,134,11,0.5);color:#b8860b;padding:0.75rem;border-radius:6px;font-size:0.8rem;max-width:200px;z-index:1000;white-space:normal;backdrop-filter:blur(4px);box-shadow:0 4px 16px rgba(0,0,0,0.6);pointer-events:none;';
+            img.parentElement.style.position = 'relative';
+            img.parentElement.appendChild(tooltip);
+            var rect = img.getBoundingClientRect();
+            tooltip.style.left = '50%';
+            tooltip.style.top = '100%';
+            tooltip.style.transform = 'translateX(-50%) translateY(0.5rem)';
+          });
+          img.addEventListener('mouseleave', function() {
+            var tooltip = img.parentElement.querySelector('.dice-tooltip');
+            if (tooltip) tooltip.remove();
+          });
+          grid.appendChild(card);
+        });
+      }
+
+      // ---- Populate enemies grid ----
+      function populateEnemiesGrid() {
+        var grid = document.getElementById('enemies-grid');
+        if (!grid || !window.allEnemies || window.allEnemies.length === 0) return;
+        grid.innerHTML = '';
+        window.allEnemies.forEach(function(enemy) {
+          var cell = document.createElement('div');
+          cell.className = 'portrait-cell';
+          cell.setAttribute('data-name', enemy.name);
+          cell.innerHTML = '<img src="https://rtd.skipstone.co.nz/portraits/' + enemy.portrait + '" alt="' + enemy.name + '" loading="lazy" width="88" height="88">';
+          var stats = enemy.stats;
+          var traits = enemy.traits;
+          var statsText = 'HP: ' + Math.round(stats.hp) + ' | STR: ' + stats.strength + ' | RES: ' + stats.resilience + ' | INS: ' + stats.insight;
+          if (traits && traits.weaknesses && traits.weaknesses.length > 0) {
+            statsText += ' | Weak: ' + traits.weaknesses.join(', ');
+          }
+          if (traits && traits.immunities && traits.immunities.length > 0) {
+            statsText += ' | Immune: ' + traits.immunities.join(', ');
+          }
+          cell.title = statsText;
+          cell.style.cursor = 'help';
+          grid.appendChild(cell);
+        });
+      }
+
+      // ---- Populate mementos grid ----
+      function populateMementosGrid() {
+        var grid = document.getElementById('mementos-grid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        var mementoIds = Object.keys(mementoData);
+        mementoIds.forEach(function(id) {
+          var cell = document.createElement('div');
+          cell.className = 'memento-cell';
+          cell.innerHTML = '<img src="https://rtd.skipstone.co.nz/mementos/' + id + '.png" alt="' + id + '" loading="lazy" width="72" height="72"><div class="memento-cell__lore"><span>' + mementoData[id] + '</span></div>';
+          grid.appendChild(cell);
+        });
+      }
+
+      // ---- Tape Player ----
+      var currentTrack = 0;
+      var isPlaying = false;
+      var playBtn = document.getElementById('play-btn');
+      var prevBtn = document.getElementById('prev-btn');
+      var nextBtn = document.getElementById('next-btn');
+      var trackDisplay = document.getElementById('track-display');
+      var reelLeft = document.getElementById('reel-left');
+      var reelRight = document.getElementById('reel-right');
+
+      if (playBtn) {
+        playBtn.addEventListener('click', function() {
+          isPlaying = !isPlaying;
+          playBtn.textContent = isPlaying ? '⏸' : '▶';
+          if (isPlaying) {
+            reelLeft.classList.add('playing');
+            reelRight.classList.add('playing');
+          } else {
+            reelLeft.classList.remove('playing');
+            reelRight.classList.remove('playing');
+          }
+        });
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function() { currentTrack = (currentTrack - 1 + 99) % 99; updateTrackDisplay(); });
+      if (nextBtn) nextBtn.addEventListener('click', function() { currentTrack = (currentTrack + 1) % 99; updateTrackDisplay(); });
+
+      function updateTrackDisplay() {
+        if (trackDisplay) trackDisplay.textContent = 'Track ' + String(currentTrack + 1).padStart(2, '0');
+      }
 
       // ---- Scroll-triggered fade-ins ----
       const fadeElements = document.querySelectorAll('.fade-in');
@@ -1435,7 +1643,6 @@
           if (target) {
             e.preventDefault();
             target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
-            // Close mobile menu if open
             mobileMenu.classList.remove('open');
             hamburger.setAttribute('aria-expanded', 'false');
           }
@@ -1451,7 +1658,6 @@
         this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       });
 
-      // Close mobile menu on Escape
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
           mobileMenu.classList.remove('open');
@@ -1473,66 +1679,11 @@
         }
       });
 
-      // ---- Dynamic dice card tooltips ----
-      document.querySelectorAll('.dice-card').forEach(function(card) {
-        var img = card.querySelector('.dice-card__img');
-        var name = card.querySelector('.dice-card__name');
-        var src = img.src;
-        var fileName = src.split('/').pop().replace('.png', '');
-        var diceId = fileName;
-        var dice = diceMap[diceId];
-        if (dice) {
-          name.title = dice.effect_description;
-          name.style.cursor = 'help';
-        }
-      });
-
-      // ---- Dynamic memento cell tooltips ----
-      document.querySelectorAll('.memento-cell').forEach(function(cell) {
-        var img = cell.querySelector('img');
-        var loreDiv = cell.querySelector('.memento-cell__lore');
-        if (loreDiv && loreDiv.querySelector('span')) {
-          var src = img.src;
-          var fileName = src.split('/').pop().replace('.png', '');
-          var memento = mementoData[fileName];
-          if (memento) {
-            loreDiv.querySelector('span').textContent = memento;
-          }
-        }
-      });
-
-      // ---- Dynamic watch cell tooltips ----
-      document.querySelectorAll('#time .memento-cell').forEach(function(cell) {
-        var img = cell.querySelector('img');
-        var loreDiv = cell.querySelector('.memento-cell__lore');
-        if (loreDiv && loreDiv.querySelector('span')) {
-          var src = img.src;
-          var fileName = src.split('/').pop().replace('.png', '');
-          var watch = watchMap[fileName];
-          if (watch) {
-            loreDiv.querySelector('span').textContent = watch.effect_description;
-          }
-        }
-      });
-
-      // ---- Dynamic enemy portrait stats ----
-      document.querySelectorAll('.portrait-cell').forEach(function(cell) {
-        var name = cell.getAttribute('data-name');
-        var enemy = enemyData.find(function(e) { return e.name === name; });
-        if (enemy) {
-          var stats = enemy.stats;
-          var traits = enemy.traits;
-          var statsText = 'HP: ' + Math.round(stats.hp) + ' | STR: ' + stats.strength + ' | RES: ' + stats.resilience + ' | INS: ' + stats.insight;
-          if (traits.weaknesses && traits.weaknesses.length > 0) {
-            statsText += ' | Weak to: ' + traits.weaknesses.join(', ');
-          }
-          if (traits.immunities && traits.immunities.length > 0) {
-            statsText += ' | Immune: ' + traits.immunities.join(', ');
-          }
-          cell.title = statsText;
-          cell.style.cursor = 'help';
-        }
-      });
+      // ---- Initialize grids on load ----
+      populateDiceGrid();
+      populateMementosGrid();
+      window.addEventListener('load', function() { populateEnemiesGrid(); });
+      if (document.readyState === 'interactive' || document.readyState === 'complete') populateEnemiesGrid();
     })();
   </script>
 </body>
