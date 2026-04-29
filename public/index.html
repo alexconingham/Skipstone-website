@@ -190,6 +190,77 @@
       background: none;
     }
 
+    .nav__player {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-right: 1.5rem;
+    }
+
+    .ticket-tape {
+      background: repeating-linear-gradient(
+        45deg,
+        var(--ash),
+        var(--ash) 10px,
+        rgba(184, 134, 11, 0.1) 10px,
+        rgba(184, 134, 11, 0.1) 12px
+      );
+      border: 1px solid var(--amber);
+      border-radius: 3px;
+      padding: 0.35rem 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      white-space: nowrap;
+      min-width: 80px;
+      text-align: center;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    }
+
+    .console-controls {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .console-btn {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--amber) 0%, #8b6914 100%);
+      border: 1px solid rgba(255, 69, 0, 0.5);
+      border-radius: 4px;
+      color: var(--ink);
+      font-weight: bold;
+      font-size: 0.65rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .console-btn:hover {
+      background: linear-gradient(135deg, #d4a82a 0%, #a67f1a 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+    }
+
+    .console-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .console-btn--play {
+      background: linear-gradient(135deg, #ff6b35 0%, #c4420a 100%);
+      border-color: rgba(255, 107, 53, 0.5);
+    }
+
+    .console-btn--play:hover {
+      background: linear-gradient(135deg, #ff8a52 0%, #e65820 100%);
+    }
+
     .nav__hamburger {
       display: none;
       background: none;
@@ -1028,6 +1099,15 @@
       <li><a href="#loot">Loot</a></li>
     </ul>
 
+    <div class="nav__player" id="player-controls">
+      <div class="ticket-tape" id="track-display">Track 01</div>
+      <div class="console-controls">
+        <button class="console-btn" id="prev-btn" aria-label="Previous track">◀</button>
+        <button class="console-btn console-btn--play" id="play-btn" aria-label="Play/Pause">▶</button>
+        <button class="console-btn" id="next-btn" aria-label="Next track">▶</button>
+      </div>
+    </div>
+
     <a href="https://store.steampowered.com/app/4340400/Remember_to_Die/" class="nav__cta nav__cta--desktop" target="_blank" rel="noopener noreferrer">
       <img src="https://rtd.skipstone.co.nz/steam%20wishlist%20bw3.png" alt="Wishlist on Steam" width="160" height="40" style="height: 32px; width: auto;">
     </a>
@@ -1202,39 +1282,6 @@
     </section>
 
     <!-- ========================================
-         TAPE PLAYER
-         ======================================== -->
-    <section class="section" aria-labelledby="player-heading">
-      <div style="max-width: 600px; margin: 0 auto; padding: 0 clamp(1.2rem, 4vw, 4rem);">
-        <p class="section__label fade-in">07 &mdash; The Soundtrack</p>
-        <h2 id="player-heading" class="section__heading fade-in">Memories in motion.</h2>
-      </div>
-      <div class="tape-player fade-in">
-        <div class="tape-player__cassette">
-          <div class="tape-player__reels">
-            <div class="tape-player__reel tape-player__reel--left" id="reel-left"></div>
-            <div class="tape-player__tape"></div>
-            <div class="tape-player__reel tape-player__reel--right" id="reel-right"></div>
-          </div>
-          <div class="tape-player__label">
-            <div class="tape-player__label-text">REMEMBER TO DIE</div>
-            <div class="tape-player__label-artist">Original Soundtrack</div>
-          </div>
-        </div>
-        <div class="tape-player__controls">
-          <button class="tape-player__btn" id="prev-btn" aria-label="Previous track">◀◀</button>
-          <button class="tape-player__btn tape-player__btn--play" id="play-btn" aria-label="Play/Pause">▶</button>
-          <button class="tape-player__btn" id="next-btn" aria-label="Next track">▶▶</button>
-          <div class="tape-player__volume">
-            <label for="volume-slider" class="visually-hidden">Volume</label>
-            <input type="range" id="volume-slider" class="tape-player__slider" min="0" max="100" value="70" aria-label="Volume control">
-          </div>
-        </div>
-        <div class="tape-player__display" id="track-display">Track 01</div>
-      </div>
-    </section>
-
-    <!-- ========================================
          STATS BAR
          ======================================== -->
     <section class="stats" aria-label="Game statistics">
@@ -1306,7 +1353,9 @@
       border: 0;
     }
 
+    /* Tape player CSS removed */
     .tape-player {
+      display: none;
       position: fixed;
       top: 20px;
       right: 20px;
