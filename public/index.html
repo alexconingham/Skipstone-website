@@ -1675,7 +1675,7 @@
           var cell = document.createElement('div');
           cell.className = 'portrait-cell';
           cell.setAttribute('data-name', enemy.name);
-          cell.innerHTML = '<img src="https://rtd.skipstone.co.nz/portraits/' + enemy.portrait + '" alt="' + enemy.name + '" loading="lazy" width="88" height="88">';
+          cell.innerHTML = '<img src="/portraits/' + enemy.portrait + '" alt="' + enemy.name + '" loading="lazy" width="88" height="88" onerror="this.style.opacity=0.3;this.src=\'/favicon.ico\';">';
           var stats = enemy.stats;
           var traits = enemy.traits;
           var statsText = 'HP: ' + Math.round(stats.hp) + ' | STR: ' + stats.strength + ' | RES: ' + stats.resilience + ' | INS: ' + stats.insight;
