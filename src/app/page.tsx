@@ -1,6 +1,4 @@
-// Minimal page to satisfy Next.js build requirement
-// Static HTML is served from public/index.html via Vercel
-
+// Root is rewritten to /api/root via next.config.js rewrites
 export default function Home() {
   return null
 }
