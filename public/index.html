@@ -989,7 +989,9 @@
       <li><a href="#loot">Loot</a></li>
     </ul>
 
-    <a href="https://store.steampowered.com/app/4340400/Remember_to_Die/" class="nav__cta nav__cta--desktop" target="_blank" rel="noopener noreferrer">Wishlist on Steam</a>
+    <a href="https://store.steampowered.com/app/4340400/Remember_to_Die/" class="nav__cta nav__cta--desktop" target="_blank" rel="noopener noreferrer">
+      <img src="https://rtd.skipstone.co.nz/steam%20wishlist%20bw3.png" alt="Wishlist on Steam" width="160" height="40" style="height: 32px; width: auto;">
+    </a>
 
     <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span>
@@ -1383,6 +1385,22 @@
     (function() {
       'use strict';
 
+      // ============ GAME DATA ============
+      const diceData = {"dice": [{"id": "simple_d6_attack", "name": "Simple Attack Die", "effect_description": "Rolls 1-6 damage."}, {"id": "simple_d6_defence", "name": "Simple Defence Die", "effect_description": "Blocks 1-6 damage."}, {"id": "simple_d12_attack", "name": "Improved Attack Die", "effect_description": "Rolls 1-12 damage."}, {"id": "simple_d12_defence", "name": "Improved Defence Die", "effect_description": "Blocks 1-12 damage."}, {"id": "bleed_die", "name": "Bleed Die", "effect_description": "Roll 4-6: Apply bleed (1) to enemy for 2 rounds."}, {"id": "poison_die", "name": "Poison Die", "effect_description": "Roll 4-6: Apply poison (2) to enemy for 2 rounds."}, {"id": "knockback_die", "name": "Knockback Die", "effect_description": "Roll 5-6: Reduce enemy attack by 5% per stack for 2 rounds."}, {"id": "shield_die", "name": "Shield Die", "effect_description": "Roll 3-6: Increase max and current HP by roll value for 2 rounds."}, {"id": "stagger_die", "name": "Stagger Die", "effect_description": "Roll 6: Stun the enemy for 1 turn."}, {"id": "piercing_die", "name": "Piercing Die", "effect_description": "Roll 5-6: Attack ignores defence."}, {"id": "reflect_die", "name": "Reflect Die", "effect_description": "Roll 8-10: Reflect all damage taken this round."}, {"id": "divinity_die", "name": "Divinity Die", "effect_description": "Roll 5-10: Become immune to negative effects for 1 round."}, {"id": "cleanse_die", "name": "Cleanse Die", "effect_description": "Roll 2-5: Cleanse one random negative effect. Roll 6: Cleanse ALL!"}, {"id": "renew_die", "name": "Renew Die", "effect_description": "Roll 4-6: Apply renew (2) to self for 2 rounds."}, {"id": "advanced_renew_die", "name": "Advanced Renew Die", "effect_description": "Roll 3-6: Apply renew (2) to self for 2 rounds."}, {"id": "chrono_die", "name": "Chrono Die", "effect_description": "Roll 20 to wind the clock back 2 years permanently."}, {"id": "razor_die", "name": "Razor Die", "effect_description": "High damage potential. Extended crit range."}, {"id": "thorn_die", "name": "Thorn Die", "effect_description": "Gain thorns equal to roll."}, {"id": "burn_die", "name": "Burn Die", "effect_description": "Roll 4-6: Apply burn (2) for 2 rounds, reducing shield effectiveness."}, {"id": "pain_die", "name": "Pain Die", "effect_description": "Roll 8-12: Take pain equal to roll for 1 turn, gain Strength for 3 turns."}, {"id": "simple_d6_heal", "name": "Simple Heal Die", "effect_description": "Heals 1-6 HP."}, {"id": "simple_d12_heal", "name": "Improved Heal Die", "effect_description": "Heals 1-12 HP."}, {"id": "death_die", "name": "Death Die", "effect_description": "Roll 1: Death claims you. Roll 18-20: Death claims your enemy."}, {"id": "life_die", "name": "Life Die", "effect_description": "Roll 18-20 to fully heal."}, {"id": "brave_heart_die", "name": "Brave Heart Die", "effect_description": "Attack die (1-6). Rolling 5-6 grants courage, empowering strength by 1.5x for 3 rounds."}, {"id": "gladiator_die", "name": "Gladiator Die", "effect_description": "Relic attack die (1-12). Rolling 10-12 grants 2x strength for 3 rounds."}, {"id": "collectors_d12", "name": "Collector's D12", "effect_description": "Roll 1-3: Shield equal to roll. Roll 4-6: Heal equal to roll. Roll 7-9: Attack equal to roll. Roll 10-12: All effects + +3 Strength/Resilience for 3 turns."}, {"id": "lucky_d6", "name": "Lucky D6", "effect_description": "Rolls 1-6 damage. Crits on 4+ (50% chance!). Critical hits deal 3x damage and grant +2 to all stats for 2 turns."}, {"id": "the_centurion", "name": "The Centurion", "effect_description": "Rolls 1-100 damage. A century of memories condensed into a single die."}]};
+
+      const watchData = [{"id": "basic_casio", "name": "Basic Casio", "image": "basic_casio.png", "effect_description": "Just tells you the time"}, {"id": "silver_watch", "name": "Silver Timepiece", "image": "silver_watch.png", "effect_description": "Increases resilience by 1.5x"}, {"id": "gold_watch", "name": "Golden Chronometer", "image": "gold_watch.png", "effect_description": "Increases life by 20 years"}, {"id": "dino_watch", "name": "Dinosaur Watch", "image": "dino_watch.png", "effect_description": "Increases strength by 1.5x, and life by 5 years"}, {"id": "unicorn_watch", "name": "Unicorn Watch", "image": "unicorn_watch.png", "effect_description": "Increases insight by 1.5x, and life by 5 years"}, {"id": "calcu_watch", "name": "Calculator Watch", "image": "calculator_watch.png", "effect_description": "Increases resilience by 1.5x, and life by 5 years"}, {"id": "martys_watch", "name": "Marty's Watch", "image": "martys_watch.png", "effect_description": "Reduces fragment costs by 25%"}, {"id": "batteries_not_included", "name": "Batteries Not Included", "image": "batteries_not_included.png", "effect_description": "Reduces fragment costs by 50%"}, {"id": "collectors_edition", "name": "Collector's Edition", "image": "collectors_edition.png", "effect_description": "Increases drop chances for higher tiers by 15%"}, {"id": "fractured_hourglass", "name": "Fractured Hourglass", "image": "fractured_hourglass.png", "effect_description": "Reduces fragment costs by 30%"}, {"id": "void_chronometer", "name": "Void Chronometer", "image": "void_chronometer.png", "effect_description": "Increases life by 30 years"}];
+
+      const enemyData = [{"id": "D1_grunt", "name": "Imaginary Friend", "stats": {"hp": 10.0, "strength": 1.0, "resilience": 0.0, "insight": 0.0}, "traits": {"weaknesses": ["poison"], "immunities": []}}, {"id": "D1_elite", "name": "The Neighbour", "stats": {"hp": 12.0, "strength": 1.0, "resilience": 1, "insight": 0}, "traits": {"weaknesses": ["bleed"], "immunities": []}}, {"id": "D1_boss", "name": "Factory Foreman", "stats": {"hp": 15.0, "strength": 2.0, "resilience": 0.5, "insight": 0.5}, "traits": {"weaknesses": [], "immunities": ["poison"]}}, {"id": "D2_grunt", "name": "Schoolyard Bully", "stats": {"hp": 12.0, "strength": 1.0, "resilience": 0.0, "insight": 0.0}, "traits": {"weaknesses": ["bleed"], "immunities": ["poison"]}}, {"id": "D2_elite", "name": "Lunch Lady", "stats": {"hp": 16.0, "strength": 2.0, "resilience": 2.0, "insight": 2.0}, "traits": {"weaknesses": [], "immunities": []}}, {"id": "D2_boss", "name": "Grief Counsellor", "stats": {"hp": 22.0, "strength": 2.0, "resilience": 3.0, "insight": 2.5}, "traits": {"weaknesses": [], "immunities": ["poison", "bleed"]}}, {"id": "D3_grunt", "name": "Bottle Shop Attendant", "stats": {"hp": 16.0, "strength": 1.0, "resilience": 2.0, "insight": 2.0}, "traits": {"weaknesses": ["bleed"], "immunities": ["poison"]}}, {"id": "D3_elite", "name": "Graduation Twins", "stats": {"hp": 22.0, "strength": 1.0, "resilience": 2.5, "insight": 2.5}, "traits": {"weaknesses": ["poison"], "immunities": ["bleed"]}}, {"id": "D3_boss", "name": "Headmaster Baird", "stats": {"hp": 25.0, "strength": 2.0, "resilience": 5.0, "insight": 5.0}, "traits": {"weaknesses": ["bleed"], "immunities": ["poison"]}}, {"id": "D4_grunt", "name": "Nervous Intern", "stats": {"hp": 18.0, "strength": 3.0, "resilience": 3.0, "insight": 3.0}, "traits": {"weaknesses": ["poison"], "immunities": []}}, {"id": "D4_elite", "name": "Paranoid Colleague", "stats": {"hp": 24.0, "strength": 3.0, "resilience": 4.5, "insight": 4.5}, "traits": {"weaknesses": ["bleed"], "immunities": ["poison"]}}, {"id": "D4_boss", "name": "VP Calhoun", "stats": {"hp": 27.0, "strength": 3.0, "resilience": 6.0, "insight": 6.0}, "traits": {"weaknesses": [], "immunities": ["bleed"]}}];
+
+      const mementoData = {"faded_photo": "The only picture where everyone is smiling.", "broken_toy": "No one came when you cried.", "dusty_locket": "Reminds you of secrets kept.", "fathers_watch_memento": "He was always too late.", "mums_perfume": "Comforting but fleeting.", "superpower_serum": "How quickly the truth weakens.", "bloodied_tenderizer": "Some stains never wash off.", "empty_lunchbox": "You were hungry for something food could not fill.", "juice_stained_yearbook": "Everyone signed it. Nobody knew you.", "intimidating_presence": "Strength is blinding when false.", "crumpled_program": "Your name circled in faded ink.", "empty_flask": "She said it was water.", "diploma_frame": "No one asks about the ceremony.", "valedictorian_medal": "The cost of fragments feels lighter.", "engraved_pen": "You missed her birthday for this.", "framed_memo": "The frame is cracked. It still hangs.", "stress_ball": "You kept it together. For now.", "hush_money": "No one talks about it.", "electric_blanket": "You're warm now. Alone.", "baby_monitor": "You were always listening. Or were you?", "best_dad_certificate": "He made it himself. You were never there.", "empty_crib": "No one wakes you.", "broken_flask": "Mother's escape outlived her.", "unsent_letter": "Still folded in your jacket.", "family_bondo": "Held together with the wrong stuff.", "obituary_clipping": "They wrote what they were told.", "gold_watch_memento": "Time finally weighs in your pocket.", "shifting_photo": "Your son's face blurs when you look away.", "empty_chair": "Reserved for someone who never came.", "mended_ring": "The seam shows if you know where to look.", "namesake": "He gave him my name.", "blank_name_badge": "He never filled in the emergency contact line.", "gate_lock": "You never spoke again. But he remembered.", "silver_spoon": "We'll get together then, son.", "family_album": "It's complete, and sobering.", "unusual_polaroid": "Something seems off...", "death_certificate": "The end?", "flickering_halo": "You were almost something greater.", "garage_key": "The oil never runs out.", "cremation_ashes": "Warm to the touch with faded love.", "strange_key": "Survival lingers in familiar spaces.", "reading_glasses": "Cracked lenses reveal harsh truths.", "lucky_coin": "Worn smooth by anxious fingers.", "paper_crown": "Glory without consequence.", "salt_shell": "He brought the war home in ways we could not see.", "broken_stopwatch": "When time stops, opportunity begins.", "weighted_die": "Great fortune or great failure.", "expired_adderall": "Focus that burns out fast and hard.", "rabbits_foot": "Luck comes to those who believe.", "dried_rose": "The one you missed for work."};
+
+      // Create lookup maps for faster access
+      const diceMap = {};
+      diceData.dice.forEach(function(d) { diceMap[d.id] = d; });
+
+      const watchMap = {};
+      watchData.forEach(function(w) { watchMap[w.id] = w; });
+
       // Reduced motion check
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1452,6 +1470,67 @@
         if (email.value && email.validity.valid) {
           form.style.display = 'none';
           success.hidden = false;
+        }
+      });
+
+      // ---- Dynamic dice card tooltips ----
+      document.querySelectorAll('.dice-card').forEach(function(card) {
+        var img = card.querySelector('.dice-card__img');
+        var name = card.querySelector('.dice-card__name');
+        var src = img.src;
+        var fileName = src.split('/').pop().replace('.png', '');
+        var diceId = fileName;
+        var dice = diceMap[diceId];
+        if (dice) {
+          name.title = dice.effect_description;
+          name.style.cursor = 'help';
+        }
+      });
+
+      // ---- Dynamic memento cell tooltips ----
+      document.querySelectorAll('.memento-cell').forEach(function(cell) {
+        var img = cell.querySelector('img');
+        var loreDiv = cell.querySelector('.memento-cell__lore');
+        if (loreDiv && loreDiv.querySelector('span')) {
+          var src = img.src;
+          var fileName = src.split('/').pop().replace('.png', '');
+          var memento = mementoData[fileName];
+          if (memento) {
+            loreDiv.querySelector('span').textContent = memento;
+          }
+        }
+      });
+
+      // ---- Dynamic watch cell tooltips ----
+      document.querySelectorAll('#time .memento-cell').forEach(function(cell) {
+        var img = cell.querySelector('img');
+        var loreDiv = cell.querySelector('.memento-cell__lore');
+        if (loreDiv && loreDiv.querySelector('span')) {
+          var src = img.src;
+          var fileName = src.split('/').pop().replace('.png', '');
+          var watch = watchMap[fileName];
+          if (watch) {
+            loreDiv.querySelector('span').textContent = watch.effect_description;
+          }
+        }
+      });
+
+      // ---- Dynamic enemy portrait stats ----
+      document.querySelectorAll('.portrait-cell').forEach(function(cell) {
+        var name = cell.getAttribute('data-name');
+        var enemy = enemyData.find(function(e) { return e.name === name; });
+        if (enemy) {
+          var stats = enemy.stats;
+          var traits = enemy.traits;
+          var statsText = 'HP: ' + Math.round(stats.hp) + ' | STR: ' + stats.strength + ' | RES: ' + stats.resilience + ' | INS: ' + stats.insight;
+          if (traits.weaknesses && traits.weaknesses.length > 0) {
+            statsText += ' | Weak to: ' + traits.weaknesses.join(', ');
+          }
+          if (traits.immunities && traits.immunities.length > 0) {
+            statsText += ' | Immune: ' + traits.immunities.join(', ');
+          }
+          cell.title = statsText;
+          cell.style.cursor = 'help';
         }
       });
     })();
