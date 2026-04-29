@@ -308,6 +308,28 @@
     }
 
     /* ========================================
+       MAIN CONTENT BACKGROUND
+       ======================================== */
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    main::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: var(--bg-image, url('https://rtd.skipstone.co.nz/backgrounds/D1_bg.PNG'));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      filter: sepia(0.3) brightness(0.3) contrast(1.05);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* ========================================
        SECTION UTILITIES
        ======================================== */
     .section {
@@ -372,6 +394,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
+      padding-top: 100px;
       padding-bottom: 8vh;
       overflow: hidden;
     }
@@ -1595,6 +1618,19 @@
       // Reduced motion check
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+      // ---- Initialize random level backgrounds ----
+      function initializeBackgrounds() {
+        var levelBgs = [
+          'D1_bg.PNG', 'D2_bg.PNG', 'D3_bg.PNG', 'D4_bg.PNG', 'D5_bg.PNG',
+          'D6_bg.PNG', 'D7_bg.PNG', 'D8_bg.PNG', 'D9_bg.PNG', 'D10_bg.PNG'
+        ];
+        var randomBg = levelBgs[Math.floor(Math.random() * levelBgs.length)];
+        var mainEl = document.querySelector('main');
+        if (mainEl && mainEl.parentElement) {
+          mainEl.parentElement.style.setProperty('--bg-image', 'url(https://rtd.skipstone.co.nz/backgrounds/' + randomBg + ')');
+        }
+      }
+
       // ---- Populate dice grid ----
       function populateDiceGrid() {
         var grid = document.getElementById('dice-grid');
@@ -1762,7 +1798,8 @@
         }
       });
 
-      // ---- Initialize grids on load ----
+      // ---- Initialize backgrounds and grids on load ----
+      initializeBackgrounds();
       populateDiceGrid();
       populateMementosGrid();
       window.addEventListener('load', function() { populateEnemiesGrid(); });
