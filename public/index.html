@@ -13,25 +13,32 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Major+Mono+Display&family=IBM+Plex+Mono:wght@300;400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
 
   <style>
     /* ========================================
-       DESIGN TOKENS
+       DESIGN TOKENS — VHS DARK MYSTERY
        ======================================== */
     :root {
-      --ink: #1a1410;
-      --paper: #f0e8d8;
-      --amber: #c4872a;
-      --rust: #8b2c1a;
-      --blood: #6b1515;
-      --bone: #e8dcc8;
-      --ash: #3d3530;
-      --fog: #7a6e65;
+      --ink:       #0a0808;       /* deeper analog black */
+      --tape:      #15110e;       /* mid panel */
+      --paper:     #f3ead6;       /* warmer readable */
+      --bone:      #ece1c8;       /* primary text */
+      --fog:       #b3a899;       /* secondary text — lifted for contrast */
+      --ash:       #463c34;       /* hairline borders */
 
-      --font-display: 'Playfair Display', serif;
-      --font-body: 'Libre Baskerville', serif;
-      --font-mono: 'DM Mono', monospace;
+      --amber:     #ffb547;       /* analog warm accent */
+      --rust:      #d34a2c;       /* warning / cta */
+      --blood:     #8a1f1f;
+      --phosphor:  #7cf279;       /* crt phosphor green */
+      --vhs-cyan:  #5ae6ff;       /* chromatic shift cyan */
+      --vhs-mag:   #ff48a3;       /* chromatic shift magenta */
+
+      --font-display: 'VT323', 'Courier New', monospace;
+      --font-mega:    'Major Mono Display', 'VT323', monospace;
+      --font-body:    'IBM Plex Mono', 'Consolas', monospace;
+      --font-mono:    'IBM Plex Mono', 'Consolas', monospace;
+      --font-type:    'Special Elite', 'Courier New', monospace;
 
       --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -51,10 +58,12 @@
 
     body {
       background: var(--ink);
-      color: var(--paper);
+      color: var(--bone);
       font-family: var(--font-body);
-      font-size: 1rem;
-      line-height: 1.7;
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.65;
+      letter-spacing: 0.01em;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
@@ -100,19 +109,65 @@
     }
 
     /* ========================================
-       GRAIN OVERLAY
+       VHS SCANLINE + NOISE OVERLAYS
        ======================================== */
     .grain {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      opacity: 0.06;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    /* CRT scanlines — thin horizontal lines over everything */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
       z-index: 9999;
       pointer-events: none;
-      opacity: 0.08;
-      mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.18) 3px,
+        transparent 4px
+      );
+      mix-blend-mode: multiply;
+      opacity: 0.55;
+    }
+
+    /* Slow drifting tracking glitch bar */
+    body::after {
+      content: '';
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 80px;
+      z-index: 9997;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(124, 242, 121, 0.04) 20%,
+        rgba(255, 255, 255, 0.06) 50%,
+        rgba(90, 230, 255, 0.04) 80%,
+        transparent 100%
+      );
+      animation: vhs-tracking 14s linear infinite;
+    }
+
+    @keyframes vhs-tracking {
+      0%   { top: -10%; opacity: 0; }
+      8%   { opacity: 0.9; }
+      92%  { opacity: 0.6; }
+      100% { top: 110%; opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::after { display: none; }
     }
 
     /* ========================================
@@ -128,19 +183,20 @@
       align-items: center;
       justify-content: space-between;
       padding: 1rem 2rem;
-      background: linear-gradient(to bottom, rgba(26, 20, 16, 0.97), transparent);
+      background: linear-gradient(to bottom, rgba(10, 8, 8, 0.92), transparent);
       transition: background 0.25s ease, backdrop-filter 0.25s ease;
     }
 
     .nav.scrolled {
-      background: rgba(26, 20, 16, 0.97);
-      backdrop-filter: blur(2px);
+      background: rgba(10, 8, 8, 0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(124, 242, 121, 0.15);
     }
 
     .nav__logo img {
       height: 56px;
       width: auto;
-      filter: sepia(0.6) brightness(0.9);
+      filter: brightness(1.05) contrast(1.05);
     }
 
     .nav__links {
@@ -151,16 +207,20 @@
 
     .nav__links a {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--fog);
-      transition: color 0.25s ease;
+      color: var(--bone);
+      opacity: 0.7;
+      transition: color 0.2s ease, opacity 0.2s ease, text-shadow 0.2s ease;
     }
 
     .nav__links a:hover,
     .nav__links a.active {
-      color: var(--amber);
+      color: var(--phosphor);
+      opacity: 1;
+      text-shadow: 0 0 8px rgba(124, 242, 121, 0.5);
     }
 
     .nav__cta {
@@ -324,9 +384,21 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      filter: sepia(0.2) brightness(0.7) contrast(1.05);
-      opacity: 0.55;
+      filter: hue-rotate(-8deg) saturate(0.6) brightness(0.55) contrast(1.1);
+      opacity: 0.35;
       pointer-events: none;
+    }
+
+    /* color wash for analog horror feel */
+    main::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 20% 0%,  rgba(255, 72, 163, 0.05), transparent 55%),
+        radial-gradient(ellipse at 80% 100%, rgba(90, 230, 255, 0.05), transparent 55%);
     }
 
     main {
@@ -353,27 +425,45 @@
 
     .section__label {
       font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
+      color: var(--phosphor);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 8px rgba(124, 242, 121, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section__label::before {
+      content: '▸';
       color: var(--amber);
-      margin-bottom: 0.8rem;
+      font-size: 0.8rem;
     }
 
     .section__heading {
       font-family: var(--font-display);
-      font-weight: 900;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400;
+      font-size: clamp(2.4rem, 5.2vw, 3.8rem);
       color: var(--bone);
-      line-height: 1.2;
-      margin-bottom: 1.2rem;
+      line-height: 1.05;
+      margin-bottom: 1.4rem;
+      letter-spacing: 0.01em;
+      text-shadow:
+        2px 0 rgba(255, 72, 163, 0.35),
+        -2px 0 rgba(90, 230, 255, 0.35);
     }
 
     .section__body {
-      color: var(--fog);
-      max-width: 560px;
+      color: var(--bone);
+      opacity: 0.82;
+      max-width: 600px;
+      font-family: var(--font-mono);
       font-size: 0.95rem;
-      line-height: 1.8;
+      line-height: 1.75;
+      letter-spacing: 0.01em;
     }
 
     /* ========================================
@@ -411,17 +501,17 @@
       inset: 0;
       z-index: -2;
       background: url('https://rtd.skipstone.co.nz/backgrounds/title_char_bg.PNG') center/cover no-repeat;
-      filter: sepia(0.25) brightness(0.78) contrast(1.05);
+      filter: brightness(0.92) contrast(1.05) saturate(0.85);
       transform: scale(1.04);
     }
 
-    /* Vignette overlays */
+    /* Soft vignette — only edges, not center */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: radial-gradient(ellipse at center, transparent 45%, var(--ink) 95%);
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(10, 8, 8, 0.85) 100%);
     }
 
     .hero::after {
@@ -429,7 +519,7 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: linear-gradient(to bottom, rgba(26, 20, 16, 0.15) 0%, transparent 25%, transparent 70%, var(--ink) 100%);
+      background: linear-gradient(to bottom, transparent 60%, var(--ink) 100%);
     }
 
     .hero__content {
@@ -445,19 +535,32 @@
 
     .hero__tagline {
       font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 700;
-      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 400;
+      font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+      letter-spacing: 0.04em;
       color: var(--bone);
       margin-bottom: 1rem;
+      text-shadow:
+        2px 0 rgba(255, 72, 163, 0.55),
+        -2px 0 rgba(90, 230, 255, 0.55),
+        0 0 18px rgba(255, 181, 71, 0.18);
     }
 
     .hero__subcopy {
-      color: var(--fog);
-      font-size: clamp(0.85rem, 1.5vw, 0.95rem);
-      max-width: 520px;
+      color: var(--bone);
+      opacity: 0.82;
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+      max-width: 560px;
       margin: 0 auto 2rem;
-      line-height: 1.8;
+      line-height: 1.75;
+      letter-spacing: 0.02em;
+    }
+
+    .hero__release {
+      font-family: var(--font-mono) !important;
+      color: var(--phosphor) !important;
+      text-shadow: 0 0 10px rgba(124, 242, 121, 0.45);
     }
 
     .hero__steam {
@@ -566,17 +669,21 @@
 
     .trailer__features li {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
       color: var(--bone);
-      padding: 0.6rem 0;
-      border-bottom: 1px solid var(--ash);
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(124, 242, 121, 0.12);
+      display: flex;
+      align-items: center;
     }
 
     .trailer__features li::before {
-      content: '\2022';
-      color: var(--amber);
-      margin-right: 0.6rem;
+      content: '▌';
+      color: var(--phosphor);
+      margin-right: 0.7rem;
+      text-shadow: 0 0 6px rgba(124, 242, 121, 0.5);
     }
 
     /* ========================================
@@ -628,17 +735,26 @@
       position: relative;
     }
 
+    .ticker__card {
+      border-color: rgba(124, 242, 121, 0.18);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.6) inset;
+    }
     .ticker__card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: sepia(0.5) brightness(0.8);
+      filter: brightness(0.95) saturate(0.85) contrast(1.05);
       image-rendering: auto;
-      transition: filter 0.25s ease;
+      transition: filter 0.25s ease, transform 0.4s ease;
     }
 
+    .ticker__card:hover {
+      border-color: var(--phosphor);
+      box-shadow: 0 0 20px rgba(124, 242, 121, 0.25);
+    }
     .ticker__card:hover img {
-      filter: sepia(0.2) brightness(0.9);
+      filter: brightness(1.08) saturate(1) contrast(1.1);
+      transform: scale(1.03);
     }
 
     /* Arsenal dice cards */
@@ -652,13 +768,13 @@
       width: 70px;
       height: 70px;
       object-fit: contain;
-      filter: sepia(0.4);
-      transition: filter 0.25s ease, transform 0.25s ease, drop-shadow 0.25s ease;
+      filter: brightness(1) drop-shadow(0 0 2px rgba(0,0,0,0.6));
+      transition: filter 0.25s ease, transform 0.25s ease;
     }
 
     .dice-card:hover .dice-card__img {
-      filter: sepia(0) drop-shadow(0 0 8px rgba(196, 135, 42, 0.4));
-      transform: scale(1.08) rotate(-2deg);
+      filter: brightness(1.15) drop-shadow(0 0 12px rgba(255, 181, 71, 0.55));
+      transform: scale(1.12) rotate(-3deg);
     }
 
     .dice-card__tooltip {
@@ -666,23 +782,24 @@
       bottom: 100%;
       left: 50%;
       transform: translateX(-50%) translateY(-0.5rem);
-      background: rgba(26, 20, 16, 0.95);
-      border: 1px solid rgba(196, 135, 42, 0.3);
-      border-radius: 4px;
-      padding: 0.5rem 0.8rem;
+      background: rgba(2, 8, 2, 0.95);
+      border: 1px solid rgba(124, 242, 121, 0.5);
+      border-radius: 0;
+      padding: 0.6rem 0.85rem;
       font-family: var(--font-mono);
-      font-size: 0.5rem;
-      color: var(--bone);
-      max-width: 120px;
+      font-size: 0.6rem;
+      color: var(--phosphor);
+      text-shadow: 0 0 4px rgba(124, 242, 121, 0.4);
+      max-width: 140px;
       text-align: center;
-      line-height: 1.3;
+      line-height: 1.4;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.2s ease;
       backdrop-filter: blur(4px);
       z-index: 100;
       white-space: normal;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 18px rgba(124, 242, 121, 0.15), 0 4px 12px rgba(0, 0, 0, 0.7);
     }
 
     .dice-card:hover .dice-card__tooltip {
@@ -691,10 +808,12 @@
 
     .dice-card__name {
       font-family: var(--font-mono);
-      font-size: 0.55rem;
-      color: var(--fog);
-      margin-top: 0.4rem;
-      letter-spacing: 0.05em;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--bone);
+      margin-top: 0.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     /* ========================================
@@ -716,18 +835,25 @@
       cursor: pointer;
     }
 
+    .portrait-cell {
+      border: 1px solid rgba(124, 242, 121, 0.08);
+    }
     .portrait-cell img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       image-rendering: pixelated;
-      filter: sepia(0.4) brightness(0.8);
+      filter: brightness(1) contrast(1.05) saturate(0.92);
       transition: filter 0.25s ease, transform 0.25s ease;
     }
 
+    .portrait-cell:hover {
+      border-color: var(--phosphor);
+      z-index: 5;
+    }
     .portrait-cell:hover img {
-      filter: sepia(0) brightness(1);
-      transform: scale(1.05);
+      filter: brightness(1.15) contrast(1.1) saturate(1.05);
+      transform: scale(1.06);
     }
 
     .portrait-cell::after {
@@ -736,13 +862,16 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 0.4rem;
-      background: linear-gradient(to top, rgba(26, 20, 16, 0.92), transparent);
+      padding: 0.45rem 0.4rem;
+      background: linear-gradient(to top, rgba(10, 8, 8, 0.95) 30%, transparent);
       font-family: var(--font-mono);
-      font-size: 0.5rem;
-      letter-spacing: 0.08em;
-      color: var(--amber);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--phosphor);
+      text-transform: uppercase;
       text-align: center;
+      text-shadow: 0 0 8px rgba(124, 242, 121, 0.5);
       transform: translateY(100%);
       transition: transform 0.25s ease;
     }
@@ -785,12 +914,13 @@
       height: 80%;
       object-fit: contain;
       image-rendering: pixelated;
-      filter: sepia(0.4);
-      transition: filter 0.25s ease;
+      filter: brightness(1.05) contrast(1.05);
+      transition: filter 0.25s ease, transform 0.25s ease;
     }
 
     .memento-cell:hover img {
-      filter: sepia(0);
+      filter: brightness(1.2) drop-shadow(0 0 8px rgba(255, 181, 71, 0.4));
+      transform: scale(1.05);
     }
 
     .memento-cell__lore {
@@ -812,20 +942,24 @@
 
     .memento-cell__lore span {
       font-family: var(--font-mono);
-      font-size: 0.45rem;
+      font-size: 0.55rem;
+      font-weight: 500;
       line-height: 1.4;
-      color: var(--amber);
-      letter-spacing: 0.02em;
+      color: var(--phosphor);
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 6px rgba(124, 242, 121, 0.3);
     }
 
     /* ========================================
        STATS BAR
        ======================================== */
     .stats {
-      background: #100d0a;
-      border-top: 1px solid var(--ash);
-      border-bottom: 1px solid var(--ash);
+      background: linear-gradient(180deg, #0a0707 0%, #100d0a 50%, #0a0707 100%);
+      border-top: 1px solid rgba(124, 242, 121, 0.2);
+      border-bottom: 1px solid rgba(124, 242, 121, 0.2);
       padding: clamp(2.4rem, 5vw, 4rem) clamp(1.2rem, 4vw, 4rem);
+      position: relative;
+      z-index: 3;
     }
 
     .stats__grid {
@@ -842,19 +976,25 @@
 
     .stats__value {
       font-family: var(--font-display);
-      font-weight: 900;
-      font-size: clamp(3rem, 6vw, 5rem);
-      color: var(--amber);
+      font-weight: 400;
+      font-size: clamp(3.6rem, 7vw, 6rem);
+      color: var(--phosphor);
       line-height: 1;
+      text-shadow:
+        0 0 14px rgba(124, 242, 121, 0.55),
+        2px 0 rgba(255, 72, 163, 0.25),
+        -2px 0 rgba(90, 230, 255, 0.25);
     }
 
     .stats__label {
       font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--fog);
-      margin-top: 0.4rem;
+      color: var(--bone);
+      opacity: 0.7;
+      margin-top: 0.6rem;
     }
 
     /* ========================================
@@ -872,7 +1012,7 @@
       inset: 0;
       z-index: -2;
       background: url('https://rtd.skipstone.co.nz/backgrounds/alt_the_void_bg.PNG') center/cover no-repeat;
-      filter: sepia(0.6) brightness(0.35);
+      filter: brightness(0.65) saturate(0.7);
     }
 
     .cta::before {
@@ -880,7 +1020,7 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: radial-gradient(ellipse at center, transparent 20%, var(--ink) 75%);
+      background: radial-gradient(ellipse at center, transparent 35%, rgba(10,8,8,0.85) 85%);
     }
 
     .cta__content {
@@ -915,41 +1055,50 @@
 
     .newsletter__input {
       flex: 1;
-      padding: 0.7rem 1rem;
-      background: rgba(26, 20, 16, 0.8);
-      border: 1px solid var(--ash);
+      padding: 0.8rem 1rem;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(124, 242, 121, 0.25);
       border-right: none;
-      color: var(--paper);
+      color: var(--phosphor);
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      caret-color: var(--phosphor);
+    }
+    .newsletter__input:focus {
+      outline: none;
+      border-color: var(--phosphor);
+      box-shadow: 0 0 12px rgba(124, 242, 121, 0.25);
     }
 
     .newsletter__input::placeholder {
-      color: var(--fog);
+      color: rgba(124, 242, 121, 0.45);
     }
 
     .newsletter__btn {
-      padding: 0.7rem 1.4rem;
+      padding: 0.8rem 1.4rem;
       background: var(--rust);
       border: 1px solid var(--rust);
-      color: var(--bone);
+      color: #fff;
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background 0.25s ease;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
     }
 
     .newsletter__btn:hover {
       background: var(--blood);
+      box-shadow: 0 0 16px rgba(211, 74, 44, 0.45);
     }
 
     .newsletter__success {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--amber);
+      font-size: 0.85rem;
+      color: var(--phosphor);
+      text-shadow: 0 0 8px rgba(124, 242, 121, 0.4);
       margin-top: 1rem;
     }
 
@@ -973,15 +1122,16 @@
     .footer__logo img {
       height: 22px;
       width: auto;
-      filter: sepia(0.6) brightness(0.7);
+      opacity: 0.7;
     }
 
     .footer__copy {
       text-align: center;
       font-family: var(--font-mono);
-      font-size: 0.55rem;
-      color: var(--fog);
-      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      color: var(--bone);
+      opacity: 0.6;
+      letter-spacing: 0.1em;
     }
 
     .footer__links {
@@ -1650,7 +1800,7 @@
             var tooltip = document.createElement('div');
             tooltip.className = 'dice-tooltip';
             tooltip.textContent = dice.effect_description;
-            tooltip.style.cssText = 'position:absolute;background:rgba(20,20,20,0.95);border:1px solid rgba(184,134,11,0.5);color:#b8860b;padding:0.75rem;border-radius:6px;font-size:0.75rem;width:180px;height:180px;display:flex;align-items:center;justify-content:center;text-align:center;z-index:1000;word-wrap:break-word;overflow:hidden;backdrop-filter:blur(4px);box-shadow:0 4px 16px rgba(0,0,0,0.6);pointer-events:none;';
+            tooltip.style.cssText = 'position:absolute;background:rgba(2,8,2,0.95);border:1px solid rgba(124,242,121,0.5);color:#7cf279;padding:0.75rem;font-family:IBM Plex Mono,monospace;font-size:0.7rem;width:180px;height:180px;display:flex;align-items:center;justify-content:center;text-align:center;z-index:1000;word-wrap:break-word;overflow:hidden;backdrop-filter:blur(4px);box-shadow:0 0 18px rgba(124,242,121,0.15),0 4px 16px rgba(0,0,0,0.7);pointer-events:none;text-shadow:0 0 4px rgba(124,242,121,0.4);';
             img.parentElement.style.position = 'relative';
             img.parentElement.appendChild(tooltip);
             var rect = img.getBoundingClientRect();
